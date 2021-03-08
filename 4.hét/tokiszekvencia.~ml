@@ -6846,7 +6846,7 @@
 <XPD:REF name="Model">BAom1YIoJUeRGLqVN7zWPwAA</XPD:REF>
 <XPD:REF name="ContainerView">JTV5x3twlkaL3iJhggJzDQAA</XPD:REF>
 <XPD:OBJ name="GuardLabel" type="LabelView" guid="XJC08gHctECsPohTv276ggAA">
-<XPD:ATTR name="Text" type="string">[core == null]</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">[core == null &amp;&amp; layer == 0]</XPD:ATTR>
 </XPD:OBJ>
 </XPD:OBJ>
 </XPD:OBJ>
@@ -7022,7 +7022,7 @@
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="LineStyle" type="LineStyleKind">lsRectilinear</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">349,245;379,245;379,265;356,265</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">349,287;379,287;379,307;356,307</XPD:ATTR>
 <XPD:REF name="Model">MLJVRpR9W06P3FmBngtY6AAA</XPD:REF>
 <XPD:REF name="Head">mBYMrlIQ9kmE3vOETVP68gAA</XPD:REF>
 <XPD:REF name="Tail">mBYMrlIQ9kmE3vOETVP68gAA</XPD:REF>
@@ -7049,7 +7049,7 @@
 </XPD:OBJ>
 <XPD:OBJ name="Activation" type="UMLActivationView" guid="/gPorKXIGkGRtYlO6fZAsQAA">
 <XPD:ATTR name="Left" type="integer">343</XPD:ATTR>
-<XPD:ATTR name="Top" type="integer">265</XPD:ATTR>
+<XPD:ATTR name="Top" type="integer">307</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">14</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">29</XPD:ATTR>
 </XPD:OBJ>
@@ -7160,7 +7160,7 @@
 <XPD:ATTR name="#Operands" type="integer">1</XPD:ATTR>
 <XPD:OBJ name="Operands[0]" type="UMLInteractionOperand" guid="BAom1YIoJUeRGLqVN7zWPwAA">
 <XPD:ATTR name="Name" type="string">InteractionOperand1</XPD:ATTR>
-<XPD:ATTR name="Guard" type="string">core == null</XPD:ATTR>
+<XPD:ATTR name="Guard" type="string">core == null &amp;&amp; layer == 0</XPD:ATTR>
 <XPD:REF name="CombinedFragment">CsjKbp79pkKvxbmtRX8AyAAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">1</XPD:ATTR>
 <XPD:REF name="Views[0]">TfLJqT2V+kaCKufexLgjKAAA</XPD:REF>
