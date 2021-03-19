@@ -10,8 +10,6 @@
 //
 
 
-
-
 public class Asteroid extends Thing {
 	private int layer;
 	private boolean nearBySun;
