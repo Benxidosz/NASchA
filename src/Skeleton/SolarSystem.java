@@ -1,6 +1,5 @@
 package Skeleton;
 
-
 public class SolarSystem {
 	private Robot robots;
 	private Settler settlers;

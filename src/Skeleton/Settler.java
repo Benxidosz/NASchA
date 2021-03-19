@@ -1,8 +1,5 @@
 package Skeleton;
 
-
-
-
 public class Settler extends Entity {
 	private TeleportGate gates;
 	private SolarSystem mySystem;

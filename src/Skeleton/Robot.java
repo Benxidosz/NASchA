@@ -1,8 +1,5 @@
 package Skeleton;
 
-
-
-
 public class Robot extends Entity {
 	private SolarSystem mySystem;
 
