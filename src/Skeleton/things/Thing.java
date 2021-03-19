@@ -4,11 +4,14 @@ import Skeleton.controllers.SolarSystem;
 import Skeleton.entities.Entity;
 import Skeleton.materials.Material;
 
+import java.util.ArrayList;
+
 public abstract class Thing {
-	protected Thing neighbour;
-	protected Entity entities;
+	protected ArrayList<Thing> neighbour = new ArrayList<>();
+	protected ArrayList<Entity> entities = new ArrayList<>();
 	private SolarSystem mySystem;
 	public void addEntity(Entity entity) {
+		entities.add(entity);
 	}
 	
 	public void removeEntity(Entity entity) {

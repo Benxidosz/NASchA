@@ -18,9 +18,9 @@ public class Settler extends Entity {
 	public void mine() {
 		Main.printTabs();
 		System.out.println(" " + Main.call++ + " die()");
-		Main.tabs++;
+		Main.increaseTab();
 		die();
-		Main.tabs--;
+		Main.decreaseTab();
 	}
 	
 	public void buildBase() {
@@ -50,17 +50,21 @@ public class Settler extends Entity {
 	@Override
 	public void die() {
 		Main.printTabs();
-		System.out.println(name + " " + Main.call++ + " die()");
-		Main.tabs--;;
+
+		System.out.println(Main.call++ + " " + name +  " die()");
+
+		Main.decreaseTab();;
 	}
 
 	@Override
 	public void explode() {
 		Main.printTabs();
-		System.out.println(name + " " + Main.call++ + " explode()");
-		Main.tabs++;
+		System.out.println(Main.call++ + " " + name + " explode()");
+
+		Main.increaseTab();
 		die();
-		Main.tabs--;;
+
+		Main.decreaseTab();;
 	}
 
 }
