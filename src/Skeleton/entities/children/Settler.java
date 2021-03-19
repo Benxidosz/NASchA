@@ -1,4 +1,9 @@
-package Skeleton;
+package Skeleton.entities.children;
+
+import Skeleton.controllers.SolarSystem;
+import Skeleton.things.gate.TeleportGate;
+import Skeleton.entities.Entity;
+import Skeleton.materials.Material;
 
 public class Settler extends Entity {
 	private TeleportGate gates;

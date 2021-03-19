@@ -1,4 +1,6 @@
-package Skeleton;
+package Skeleton.entities;
+
+import Skeleton.things.Thing;
 
 public abstract class Entity {
 	protected Thing location;

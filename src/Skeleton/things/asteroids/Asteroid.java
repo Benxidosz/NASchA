@@ -1,4 +1,7 @@
-package Skeleton;
+package Skeleton.things.asteroids;
+
+import Skeleton.materials.Material;
+import Skeleton.things.Thing;
 
 public class Asteroid extends Thing {
 	private int layer;

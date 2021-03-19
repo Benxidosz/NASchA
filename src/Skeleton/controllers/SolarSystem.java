@@ -1,4 +1,8 @@
-package Skeleton;
+package Skeleton.controllers;
+
+import Skeleton.entities.children.Robot;
+import Skeleton.entities.children.Settler;
+import Skeleton.things.Thing;
 
 public class SolarSystem {
 	private Robot robots;

@@ -1,4 +1,6 @@
-package Skeleton;
+package Skeleton.materials;
+
+import Skeleton.things.asteroids.Asteroid;
 
 public class Material {
 	private Asteroid myAsteroid;

@@ -1,6 +1,8 @@
-package Skeleton;
+package Skeleton.things;
 
-package Skeleton;
+import Skeleton.controllers.SolarSystem;
+import Skeleton.entities.Entity;
+import Skeleton.materials.Material;package Skeleton;
 
 public abstract class Thing {
 	protected Thing neighbour;
