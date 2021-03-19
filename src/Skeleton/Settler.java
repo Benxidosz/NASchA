@@ -33,12 +33,16 @@ public class Settler extends Entity {
 	
 	public void rmMaterial(Material m) {
 	}
-
-	@Override
+	
 	public void die() {
 	}
-
-	@Override
+	
+	public void explode() {
+	}
+	
+	public void die() {
+	}
+	
 	public void explode() {
 	}
 }

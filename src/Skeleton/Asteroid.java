@@ -5,6 +5,8 @@ public class Asteroid extends Thing {
 	private boolean nearBySun;
 	protected Material core;
 	public void explode() {
+
+		System.out.println("Asteroid explode()");
 	}
 	
 	public Material excavate() {

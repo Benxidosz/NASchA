@@ -20,7 +20,7 @@ public abstract class Entity {
 	
 	public void move(Thing destination) {
 	}
-	
+
 	public void wait() {
 
 	}
