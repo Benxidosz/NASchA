@@ -2,7 +2,7 @@ package Skeleton.things;
 
 import Skeleton.controllers.SolarSystem;
 import Skeleton.entities.Entity;
-import Skeleton.materials.Material;package Skeleton;
+import Skeleton.materials.Material;
 
 public abstract class Thing {
 	protected Thing neighbour;
@@ -27,6 +27,7 @@ public abstract class Thing {
 	}
 	
 	public Material excavate() {
+		return null;
 	}
 	
 	public void placeMaterial(Material m) {
@@ -36,5 +37,6 @@ public abstract class Thing {
 	}
 	
 	public Thing randomNeighbour() {
+		return null;
 	}
 }

@@ -11,18 +11,25 @@ public class Asteroid extends Thing {
 	private int layer;
 	private boolean nearBySun;
 	protected Material core;
-	protected ArrayList<Entity> etities = new ArrayList<>();
+	public ArrayList<Entity> etities = new ArrayList<>();
 	private String name;
+
+	public Asteroid(String name) {
+		this.name = name;
+	}
+
 	public void explode() {
 		Main.printTabs();
-		System.out.println(" " + Main.call++ + " explode()");
-		Main.tabs++;
-		etities.forEach(Entity::explode);
+		System.out.println(name + " " + Main.call++ + " explode()");
+		etities.forEach((e) -> {
+			Main.tabs++;
+			e.explode();
+		});
 		Main.tabs--;
 	}
 	
 	public Material excavate() {
-
+		return null;
 	}
 	
 	public void placeMaterial(Material m) {

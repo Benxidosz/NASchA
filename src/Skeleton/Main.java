@@ -1,6 +1,7 @@
 package Skeleton;
 
 import Skeleton.entities.children.Settler;
+import Skeleton.things.asteroids.Asteroid;
 
 public class Main {
     static public int tabs = 0;
@@ -12,8 +13,10 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Settler alma = new Settler();
-        alma.mine();
+        Asteroid asteroid = new Asteroid("a1");
+        for (int i = 0; i < 10; ++i)
+            asteroid.etities.add(new Settler("S" + i));
 
+        asteroid.explode();
     }
 }

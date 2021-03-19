@@ -10,6 +10,11 @@ public class Settler extends Entity {
 	private TeleportGate gates;
 	private SolarSystem mySystem;
 	private Material materials;
+
+	public Settler(String name) {
+		super(name);
+	}
+
 	public void mine() {
 		Main.printTabs();
 		System.out.println(" " + Main.call++ + " die()");
@@ -41,14 +46,21 @@ public class Settler extends Entity {
 	
 	public void rmMaterial(Material m) {
 	}
-	
+
+	@Override
 	public void die() {
 		Main.printTabs();
-		System.out.println(" " + Main.call++ + " die()");
+		System.out.println(name + " " + Main.call++ + " die()");
 		Main.tabs--;;
 	}
-	
+
+	@Override
 	public void explode() {
+		Main.printTabs();
+		System.out.println(name + " " + Main.call++ + " explode()");
+		Main.tabs++;
+		die();
+		Main.tabs--;;
 	}
 
 }
