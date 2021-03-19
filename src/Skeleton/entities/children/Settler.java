@@ -1,5 +1,6 @@
 package Skeleton.entities.children;
 
+import Skeleton.Main;
 import Skeleton.controllers.SolarSystem;
 import Skeleton.things.gate.TeleportGate;
 import Skeleton.entities.Entity;
@@ -10,6 +11,11 @@ public class Settler extends Entity {
 	private SolarSystem mySystem;
 	private Material materials;
 	public void mine() {
+		Main.printTabs();
+		System.out.println(" " + Main.call++ + " die()");
+		Main.tabs++;
+		die();
+		Main.tabs--;
 	}
 	
 	public void buildBase() {
@@ -37,14 +43,12 @@ public class Settler extends Entity {
 	}
 	
 	public void die() {
+		Main.printTabs();
+		System.out.println(" " + Main.call++ + " die()");
+		Main.tabs--;;
 	}
 	
 	public void explode() {
 	}
-	
-	public void die() {
-	}
-	
-	public void explode() {
-	}
+
 }
