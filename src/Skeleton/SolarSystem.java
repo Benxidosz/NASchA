@@ -9,7 +9,7 @@
 //
 //
 
-
+package Skeleton;
 
 
 public class SolarSystem {
