@@ -22,6 +22,7 @@ public abstract class Entity {
 	}
 	
 	public void wait() {
+
 	}
 	
 	public abstract void die();
