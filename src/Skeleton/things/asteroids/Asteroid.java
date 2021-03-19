@@ -11,16 +11,15 @@ public class Asteroid extends Thing {
 	protected int layer;
 	protected boolean nearBySun;
 	protected Material core;
-	protected String name;
 
 	public Asteroid(int layer, boolean nearBySun, Material core, String name) {
+		super(name);
 		Main.printTabs();
 		System.out.println(Main.call++ + " " + name + " created.");
 
 		this.layer = layer;
 		this.nearBySun = nearBySun;
 		this.core = core;
-		this.name = name;
 
 		Main.decreaseTab();
 	}
