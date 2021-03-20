@@ -19,6 +19,8 @@ public abstract class Entity {
 		System.out.println(Main.call + " " + name + " drill()");
 		Main.increaseTab();
 
+		location.drill();
+
 		Main.decreaseTab();
 	}
 	
@@ -27,7 +29,8 @@ public abstract class Entity {
 		System.out.println(Main.call + " " + name + " move() to " /*+ destination.getName()*/);
 		Main.increaseTab();
 
-		this.location = destination;
+		destination.addEntity(this);
+		location.removeEntity(this);
 
 		Main.decreaseTab();
 	}

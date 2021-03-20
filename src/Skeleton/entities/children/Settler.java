@@ -2,6 +2,8 @@ package Skeleton.entities.children;
 
 import Skeleton.Main;
 import Skeleton.controllers.SolarSystem;
+import Skeleton.materials.children.Coal;
+import Skeleton.materials.children.Uran;
 import Skeleton.things.Thing;
 import Skeleton.things.gate.TeleportGate;
 import Skeleton.entities.Entity;
@@ -10,8 +12,7 @@ import Skeleton.materials.Material;
 import java.util.ArrayList;
 
 public class Settler extends Entity {
-	private TeleportGate gate1;
-	private TeleportGate gate2;
+	private TeleportGate[] gates;
 	private SolarSystem mySystem;
 	private ArrayList<Material> materials;
 
@@ -36,8 +37,13 @@ public class Settler extends Entity {
 		System.out.println(Main.call + " " + name + " buildBase()");
 		Main.increaseTab();
 
-		for(int i = 0; i < materials.size(); ++i) {
-			location.buildBase(materials.get(i));
+		for(int i = 0; i < materials.size(); ++i){
+			if(materials.get(i) instanceof Uran)
+				location.buildBase(materials.get(i));
+
+			if(materials.get(i) instanceof Coal){
+				location.buildBase(materials.get(i));
+			}
 		}
 
 		Main.decreaseTab();
@@ -48,14 +54,13 @@ public class Settler extends Entity {
 		System.out.println(Main.call + " " + name + " buildGate()");
 		Main.increaseTab();
 
-		for(int i = 0; i < materials.size(); ++i){
-			rmMaterial(materials.get(i));
-		}
 
-		gate1 = new TeleportGate("firstGate");
-		gate2 = new TeleportGate( "secondGate");
+		TeleportGate gate1 = new TeleportGate("firstGate");
+		TeleportGate gate2 = new TeleportGate( "secondGate");
 		gate1.setPair(gate2);
 		gate2.setPair(gate1);
+		addGate(gate1);
+		addGate(gate2);
 
 		Main.decreaseTab();
 	}
@@ -68,6 +73,9 @@ public class Settler extends Entity {
 		for(int i = 0; i < materials.size(); ++i){
 			rmMaterial(materials.get(i));
 		}
+
+		Robot r = new Robot("robot", this.location);
+		mySystem.addRobot(r);
 
 		Main.decreaseTab();
 	}
@@ -97,19 +105,26 @@ public class Settler extends Entity {
 		Main.decreaseTab();
 	}
 	
-	/*public void addGate(TeleportGate g) {
+	public void addGate(TeleportGate g) {
 		Main.printTabs();
 		System.out.println(Main.call + " " + name + " addGate()");
 		Main.increaseTab();
 
+		if(gates[0] == null)
+			gates[0] = g;
+		else
+			gates[1] = g;
+
 
 		Main.decreaseTab();
-	}*/
+	}
 	
 	public void addMaterial(Material m) {
 		Main.printTabs();
 		System.out.println(Main.call + " " + name + " addMaterial()");
 		Main.increaseTab();
+
+		materials.add(m);
 
 		Main.decreaseTab();
 	}
@@ -118,6 +133,8 @@ public class Settler extends Entity {
 		Main.printTabs();
 		System.out.println(Main.call + " " + name + " rmMaterial()");
 		Main.increaseTab();
+
+		materials.remove(m);
 
 		Main.decreaseTab();
 	}
