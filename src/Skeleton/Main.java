@@ -24,10 +24,10 @@ public class Main {
 
     public static void main(String[] args) {
         MainAsteroid ma = new MainAsteroid(2, false, null, "MainAsteroid");
-        ma.addEntity(new Settler("S0"));
-        ma.addEntity(new Settler("S1"));
-        ma.addEntity(new Settler("S2"));
-        ma.addEntity(new Settler("S3"));
         ma.applySunEruption();
+        Settler test = new Settler("SettlerTest", ma);
+        test.mine();
+        test.buildGate();
+
     }
 }

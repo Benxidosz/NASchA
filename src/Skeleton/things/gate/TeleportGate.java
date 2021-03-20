@@ -11,9 +11,18 @@ public class TeleportGate extends Thing {
 		super(name);
 	}
 
-	public void applySunEruption() {
+
+    public void applySunEruption() {
 	}
-	
+
 	public void activate() {
+	}
+
+	public TeleportGate getPair() {
+		return pair;
+	}
+
+	public void setPair(TeleportGate pair) {
+		this.pair = pair;
 	}
 }
