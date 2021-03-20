@@ -56,8 +56,6 @@ public class Settler extends Entity {
 		gate2 = new TeleportGate( "secondGate");
 		gate1.setPair(gate2);
 		gate2.setPair(gate1);
-		addGate(gate1);
-		addGate(gate2);
 
 		Main.decreaseTab();
 	}
@@ -99,14 +97,14 @@ public class Settler extends Entity {
 		Main.decreaseTab();
 	}
 	
-	public void addGate(TeleportGate g) {
+	/*public void addGate(TeleportGate g) {
 		Main.printTabs();
 		System.out.println(Main.call + " " + name + " addGate()");
 		Main.increaseTab();
 
 
 		Main.decreaseTab();
-	}
+	}*/
 	
 	public void addMaterial(Material m) {
 		Main.printTabs();
@@ -137,8 +135,8 @@ public class Settler extends Entity {
 	public void explode() {
 		Main.printTabs();
 		System.out.println(Main.call++ + " " + name + " explode()");
-
 		Main.increaseTab();
+
 		die();
 
 		Main.decreaseTab();;

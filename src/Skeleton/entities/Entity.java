@@ -15,15 +15,29 @@ public abstract class Entity {
 	}
 
 	public void drill() {
+		Main.printTabs();
+		System.out.println(Main.call + " " + name + " drill()");
+		Main.increaseTab();
+
+		Main.decreaseTab();
 	}
 	
 	public void move(Thing destination) {
 		Main.printTabs();
-		System.out.println();
+		System.out.println(Main.call + " " + name + " move() to " /*+ destination.getName()*/);
+		Main.increaseTab();
+
+		this.location = destination;
+
+		Main.decreaseTab();
 	}
 
 	public void waitEntity() {
+		Main.printTabs();
+		System.out.println(Main.call + " " + name + " waitEntity()");
+		Main.increaseTab();
 
+		Main.decreaseTab();
 	}
 	
 	public abstract void die();
