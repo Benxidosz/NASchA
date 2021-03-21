@@ -4,5 +4,6 @@ import Skeleton.materials.Material;
 
 public class WaterIce extends Material {
 	public void nearSun() {
+		myAsteroid.setCore(null);
 	}
 }
