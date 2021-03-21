@@ -27,11 +27,6 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        MainAsteroid ma = new MainAsteroid(2, false, null, "MainAsteroid");
-        ma.applySunEruption();
-        Settler test = new Settler("SettlerTest", ma);
-        test.mine();
-        test.buildGate();
 
     }
 }

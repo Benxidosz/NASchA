@@ -24,7 +24,7 @@ public abstract class Thing {
 
 		Main.decreaseTab();
 	}
-	
+
 	public void removeEntity(Entity entity) {
 		Main.printTabs();
 		System.out.println(Main.call++ + " " + name + " removeEntity() void.");
@@ -32,7 +32,7 @@ public abstract class Thing {
 
 		Main.decreaseTab();
 	}
-	
+
 	public void addNeighbour(Thing nei) {
 		Main.printTabs();
 		System.out.println(Main.call++ + " " + name + " addNeighbour() void.");
@@ -40,7 +40,7 @@ public abstract class Thing {
 
 		Main.decreaseTab();
 	}
-	
+
 	public void removeNeighbour(Thing nei) {
 		Main.printTabs();
 		System.out.println(Main.call++ + " " + name + " removeNeighbour() void.");
@@ -48,24 +48,24 @@ public abstract class Thing {
 
 		Main.decreaseTab();
 	}
-	
+
 	public void applySunEruption() {
 	}
-	
+
 	public void drill() {
 	}
-	
+
 	public Material excavate() {
 		return null;
 	}
-	
+
 	public void placeMaterial(Material m) {
 	}
-	
+
 	public void buildBase(Material m) {
 
 	}
-	
+
 	public Thing randomNeighbour() {
 		Main.printTabs();
 		System.out.println(Main.call++ + " " + name + " randomNeighbour() void.");

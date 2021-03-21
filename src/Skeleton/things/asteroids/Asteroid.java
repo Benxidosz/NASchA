@@ -37,7 +37,7 @@ public class Asteroid extends Thing {
 
 		Main.decreaseTab();
 	}
-	
+
 	public Material excavate() {
 		Main.printTabs();
 		System.out.println(Main.call++ + " " + name + " explode() " + core + ".");
@@ -45,7 +45,7 @@ public class Asteroid extends Thing {
 		Main.decreaseTab();
 		return core;
 	}
-	
+
 	public void placeMaterial(Material m) {
 		Main.printTabs();
 		System.out.print(Main.call++ + " " + name + " placeMaterial() void ");
@@ -66,7 +66,7 @@ public class Asteroid extends Thing {
 
 		Main.decreaseTab();
 	}
-	
+
 	public void drill() {
 		Main.printTabs();
 		System.out.print(Main.call++ + " " + name + " drill() void ");
@@ -87,7 +87,7 @@ public class Asteroid extends Thing {
 
 		Main.decreaseTab();
 	}
-	
+
 	public void applySunEruption() {
 		Main.printTabs();
 		System.out.print(Main.call++ + " " + name + " applySunEruption() void ");
@@ -112,7 +112,7 @@ public class Asteroid extends Thing {
 
 		Main.decreaseTab();
 	}
-	
+
 	public void buildBase(Material m) {
 		Main.printTabs();
 		System.out.println(Main.call++ + " " + name + " buildBase() void (it does nothing)");
