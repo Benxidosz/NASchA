@@ -4,6 +4,7 @@ import Skeleton.Main;
 import Skeleton.controllers.SolarSystem;
 import Skeleton.entities.Entity;
 import Skeleton.materials.Material;
+import Skeleton.things.gate.TeleportGate;
 
 import java.util.ArrayList;
 
@@ -72,5 +73,9 @@ public abstract class Thing {
 
 		Main.decreaseTab();
 		return null;
+	}
+
+	public void setPair(TeleportGate gate2) {
+
 	}
 }

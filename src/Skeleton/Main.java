@@ -1,6 +1,8 @@
 package Skeleton;
 
 import Skeleton.entities.children.Settler;
+import Skeleton.simulator.Simulation;
+import Skeleton.simulator.SimulationProcess;
 import Skeleton.things.asteroids.Asteroid;
 import Skeleton.things.asteroids.MainAsteroid;
 

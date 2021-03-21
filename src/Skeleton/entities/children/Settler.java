@@ -97,7 +97,7 @@ public class Settler extends Entity {
 		Main.increaseTab();
 
 		g.addNeighbour(location);
-		g.getPair().addNeighbour(location);
+		//g.getPair().addNeighbour(location); ToDo: Miert?????
 		mySystem.addThing(g);
 		g.activate();
 		g.removeEntity(this);
