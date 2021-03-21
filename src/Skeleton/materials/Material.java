@@ -1,5 +1,8 @@
 package Skeleton.materials;
 
+import Skeleton.Main;
+import Skeleton.simulator.SimulationObject;
+import Skeleton.simulator.Step;
 import Skeleton.things.asteroids.Asteroid;
 
 public abstract class Material {

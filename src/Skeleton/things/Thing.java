@@ -4,6 +4,7 @@ import Skeleton.Main;
 import Skeleton.controllers.SolarSystem;
 import Skeleton.entities.Entity;
 import Skeleton.materials.Material;
+import Skeleton.simulator.Step;
 import Skeleton.things.gate.TeleportGate;
 
 import java.util.ArrayList;
@@ -20,7 +21,10 @@ public abstract class Thing {
 
 	public void addEntity(Entity entity) {
 		Main.printTabs();
-		System.out.println(Main.call++ + " " + name + " addEntity() void.");
+
+		Step step = new Step(Main.call++ + " " + name + " addEntity(" + entity.getName() + ") void.");
+		Main.activeSimulation.addStep(step);
+
 		entities.add(entity);
 
 		Main.decreaseTab();
@@ -77,5 +81,9 @@ public abstract class Thing {
 
 	public void setPair(TeleportGate gate2) {
 
+	}
+
+	public String getName() {
+		return name;
 	}
 }

@@ -3,6 +3,7 @@ package Skeleton.controllers;
 import Skeleton.Main;
 import Skeleton.entities.children.Robot;
 import Skeleton.entities.children.Settler;
+import Skeleton.simulator.Step;
 import Skeleton.things.Thing;
 
 import java.util.ArrayList;
@@ -16,8 +17,8 @@ public class SolarSystem {
 	SolarSystem(String name) { this.name = name; }
 
 	public void win() {
-		Main.printTabs();
-		System.out.println(Main.call++ + " " + name + " win() void.");
+		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " win() void.");
+		Main.activeSimulation.addStep(step);
 
 		Main.decreaseTab();
 	}

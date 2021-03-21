@@ -6,4 +6,9 @@ public class Uran extends Material {
 	public void nearSun() {
 		myAsteroid.explode();
 	}
+
+	@Override
+	public String printName() {
+		return null;
+	}
 }

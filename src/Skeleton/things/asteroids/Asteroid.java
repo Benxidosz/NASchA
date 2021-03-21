@@ -3,21 +3,26 @@ package Skeleton.things.asteroids;
 import Skeleton.Main;
 import Skeleton.entities.Entity;
 import Skeleton.materials.Material;
+import Skeleton.simulator.SimulationObject;
+import Skeleton.simulator.Step;
 import Skeleton.things.Thing;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Locale;
 
-public class Asteroid extends Thing {
+public class Asteroid extends Thing implements SimulationObject {
 	protected int layer;
 	protected boolean nearBySun;
 	protected Material core;
 
 	public Asteroid(int layer, boolean nearBySun, Material core, String name) {
 		super(name);
-		Main.printTabs();
-		System.out.println(Main.call++ + " " + name + " created.");
+
+		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " created.");
+		step.addObject(this);
+
+		Main.activeSimulation.addStep(step);
 
 		this.layer = layer;
 		this.nearBySun = nearBySun;
@@ -27,8 +32,7 @@ public class Asteroid extends Thing {
 	}
 
 	public void explode() {
-		Main.printTabs();
-		System.out.println(Main.call++ + " " + name + " explode() void.");
+		System.out.println(Main.printTabs() + Main.call++ + " " + name + " explode() void.");
 
 		entities.forEach((e) -> {
 			Main.increaseTab();
@@ -89,16 +93,23 @@ public class Asteroid extends Thing {
 	}
 
 	public void applySunEruption() {
-		Main.printTabs();
-		System.out.print(Main.call++ + " " + name + " applySunEruption() void ");
+		StringBuilder builder = new StringBuilder();
+
+		builder.append(Main.printTabs()).append(Main.call++).append(" ").append(name).append(" applySunEruption() void ");
 
 		System.out.println("Is the Asteroid safe? [Y/N]");
 		try {
 			String input = Main.scanner.nextLine().toUpperCase();
 			if (input.equals("Y")) {
-				System.out.println("eruption not applied.");
+				builder.append("eruption not applied.");
+				Step step = new Step(builder.toString());
+				Main.activeSimulation.addStep(step);
+
 			} else if (input.equals("N")) {
-				System.out.println("eruption applied.");
+				builder.append("eruption applied.");
+				Step step = new Step(builder.toString());
+				Main.activeSimulation.addStep(step);
+
 				entities.forEach((e) -> {
 					Main.increaseTab();
 					e.die();
@@ -118,5 +129,19 @@ public class Asteroid extends Thing {
 		System.out.println(Main.call++ + " " + name + " buildBase() void (it does nothing)");
 
 		Main.decreaseTab();
+	}
+
+	public void setCore(Object o) {
+	}
+
+	@Override
+	public void listParameters() {
+		System.out.println(name + ":\n" +
+				"layer: " + layer + "\n");
+	}
+
+	@Override
+	public String printName() {
+		return name;
 	}
 }

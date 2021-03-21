@@ -46,4 +46,8 @@ public abstract class Entity {
 	public abstract void die();
 	
 	public abstract void explode();
+
+	public String getName() {
+		return name;
+	}
 }

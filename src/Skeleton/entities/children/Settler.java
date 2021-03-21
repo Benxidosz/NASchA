@@ -4,6 +4,8 @@ import Skeleton.Main;
 import Skeleton.controllers.SolarSystem;
 import Skeleton.materials.children.Coal;
 import Skeleton.materials.children.Uran;
+import Skeleton.simulator.SimulationObject;
+import Skeleton.simulator.Step;
 import Skeleton.things.Thing;
 import Skeleton.things.gate.TeleportGate;
 import Skeleton.entities.Entity;
@@ -23,7 +25,8 @@ public class Settler extends Entity {
 
 	public void mine() {
 		Main.printTabs();
-		System.out.println(Main.call++ + " " + name + " mine()");
+		Step step = new Step(Main.printTabs() + Main.call + " " + name + " mine() return void.");
+		Main.activeSimulation.addStep(step);
 		Main.increaseTab();
 
 		Material m = location.excavate();
@@ -141,11 +144,10 @@ public class Settler extends Entity {
 
 	@Override
 	public void die() {
-		Main.printTabs();
+		Step step = new Step(Main.printTabs() + Main.call++ + " " + name +  " die()");
+		Main.activeSimulation.addStep(step);
 
-		System.out.println(Main.call++ + " " + name +  " die()");
-
-		Main.decreaseTab();;
+		Main.decreaseTab();
 	}
 
 	@Override
@@ -159,4 +161,14 @@ public class Settler extends Entity {
 		Main.decreaseTab();;
 	}
 
+
+	@Override
+	public void listParameters() {
+
+	}
+
+	@Override
+	public String printName() {
+		return name;
+	}
 }
