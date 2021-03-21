@@ -12,7 +12,7 @@ import Skeleton.materials.Material;
 import java.util.ArrayList;
 
 public class Settler extends Entity {
-	private TeleportGate[] gates;
+	private ArrayList<TeleportGate> gates;
 	private SolarSystem mySystem;
 	private ArrayList<Material> materials;
 
@@ -97,7 +97,6 @@ public class Settler extends Entity {
 		Main.increaseTab();
 
 		g.addNeighbour(location);
-		g.getPair().addNeighbour(location);
 		mySystem.addThing(g);
 		g.activate();
 		g.removeEntity(this);
@@ -110,11 +109,7 @@ public class Settler extends Entity {
 		System.out.println(Main.call + " " + name + " addGate()");
 		Main.increaseTab();
 
-		if(gates[0] == null)
-			gates[0] = g;
-		else
-			gates[1] = g;
-
+		gates.add(g);
 
 		Main.decreaseTab();
 	}
