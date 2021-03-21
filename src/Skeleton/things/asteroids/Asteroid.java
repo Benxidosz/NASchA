@@ -6,6 +6,8 @@ import Skeleton.materials.Material;
 import Skeleton.things.Thing;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.Locale;
 
 public class Asteroid extends Thing {
 	protected int layer;
@@ -48,11 +50,19 @@ public class Asteroid extends Thing {
 		Main.printTabs();
 		System.out.print(Main.call++ + " " + name + " placeMaterial() void ");
 
-		if (core == null && layer == 0) {
-			core = m;
-			System.out.println("core set.");
-		} else
-			System.out.println("core not set.");
+		System.out.println("All condition set? [Y/N]");
+		try {
+			String input = Main.scanner.nextLine().toUpperCase();
+			if (input.equals("Y")) {
+				System.out.println("core set.");
+			} else if (input.equals("N")) {
+				System.out.println("core not set.");
+			} else {
+				throw new InputMismatchException("Wrong Input!");
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 
 		Main.decreaseTab();
 	}
@@ -61,11 +71,18 @@ public class Asteroid extends Thing {
 		Main.printTabs();
 		System.out.print(Main.call++ + " " + name + " drill() void ");
 
-		if (layer == 0) {
-			System.out.println("layer not drilled.");
-		} else {
-			--layer;
-			System.out.println("layer drilled");
+		System.out.println("Is there any layer left? [Y/N]");
+		try {
+			String input = Main.scanner.nextLine().toUpperCase();
+			if (input.equals("Y")) {
+				System.out.println("layer drilled.");
+			} else if (input.equals("N")) {
+				System.out.println("layer not drilled.");
+			} else {
+				throw new InputMismatchException("Wrong Input!");
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
 
 		Main.decreaseTab();
@@ -75,14 +92,22 @@ public class Asteroid extends Thing {
 		Main.printTabs();
 		System.out.print(Main.call++ + " " + name + " applySunEruption() void ");
 
-		if (layer == 0 && core == null) {
-			System.out.println("eruption not applied (Asteroid is safe).");
-		} else {
-			System.out.println("eruption applied (Asteroid is not safe).");
-			entities.forEach((e) -> {
-				Main.increaseTab();
-				e.die();
-			});
+		System.out.println("Is the Asteroid safe? [Y/N]");
+		try {
+			String input = Main.scanner.nextLine().toUpperCase();
+			if (input.equals("Y")) {
+				System.out.println("eruption not applied.");
+			} else if (input.equals("N")) {
+				System.out.println("eruption applied.");
+				entities.forEach((e) -> {
+					Main.increaseTab();
+					e.die();
+				});
+			} else {
+				throw new InputMismatchException("Wrong Input!");
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
 
 		Main.decreaseTab();
