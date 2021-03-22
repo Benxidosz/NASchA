@@ -1,6 +1,7 @@
 package Skeleton;
 
 import Skeleton.controllers.SolarSystem;
+import Skeleton.entities.children.Robot;
 import Skeleton.entities.children.Settler;
 import Skeleton.materials.children.Coal;
 import Skeleton.materials.children.Uran;
@@ -45,14 +46,6 @@ public class Main {
     public static void main(String[] args) {
         Simulator simulator = new Simulator();
 
-        simulator.addSimulation(new Simulation("Asteroid Eruption.", () -> {
-            Asteroid a = new Asteroid("A1");
-            a.addEntity(new Settler("S0"));
-            a.addEntity(new Settler("S1"));
-            a.addEntity(new Settler("S2"));
-            a.applySunEruption();
-        }));
-
         simulator.addSimulation(new Simulation("Build robot, all condition set.", () -> {
             Settler s = new Settler("S0");
             s.addMaterial(new Uran( "u"));
@@ -79,7 +72,7 @@ public class Main {
             try {
                 simulator.runSimulation(command);
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                e.printStackTrace();
             }
             tabs = 0;
             call = 1;

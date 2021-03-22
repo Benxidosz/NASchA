@@ -26,8 +26,10 @@ public class Robot extends Entity {
 		Main.printTabs();
 		System.out.println(Main.call + " " + name + " explode()");
 		Main.increaseTab();
+		Thing dest = location.randomNeighbour();
 
-		die();
+		Main.increaseTab();
+		move(dest);
 
 		Main.decreaseTab();
 	}

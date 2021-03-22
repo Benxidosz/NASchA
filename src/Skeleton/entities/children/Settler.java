@@ -35,13 +35,35 @@ public class Settler extends Entity {
 	}
 
 	public void mine() {
-		Main.printTabs();
-		Step step = new Step(Main.printTabs() + Main.call + " " + name + " mine() return void.");
-		Main.activeSimulation.addStep(step);
-		Main.increaseTab();
+		StringBuilder builder = new StringBuilder();
+		builder.append(Main.printTabs() + Main.call++ + " " + name + " mine()");
 
-		Material m = location.excavate();
-		addMaterial(m);
+		System.out.println("Can the settler store more? [Y/N]");
+		try{
+			Step step;
+			String input = Main.scanner.nextLine().toUpperCase();
+			if (input.equals("Y")) {
+				builder.append("asteroid mined.");
+				step = new Step(builder.toString());
+				addAllObject(step);
+				Main.activeSimulation.addStep(step);
+
+				Main.increaseTab();
+				Material m = location.excavate();
+
+				Main.increaseTab();
+				addMaterial(m);
+			} else if (input.equals("N")) {
+				builder.append("asteroid was not mined.");
+				step = new Step(builder.toString());
+				addAllObject(step);
+				Main.activeSimulation.addStep(step);
+			} else {
+				throw new InputMismatchException("Wrong Input!");
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		Main.decreaseTab();
 	}
@@ -67,16 +89,25 @@ public class Settler extends Entity {
 		Main.printTabs();
 		System.out.println(Main.call + " " + name + " buildGate()");
 		Main.increaseTab();
-
-
 		TeleportGate gate1 = new TeleportGate("firstGate");
+
+		Main.increaseTab();
 		TeleportGate gate2 = new TeleportGate( "secondGate");
+
+		Main.increaseTab();
 		gate1.setPair(gate2);
+
+		Main.increaseTab();
 		gate2.setPair(gate1);
+
+		Main.increaseTab();
 		addGate(gate1);
+
+		Main.increaseTab();
 		addGate(gate2);
 
 		addAllObject(step);
+
 		step.addObject(gate1);
 		step.addObject(gate2);
 
@@ -94,7 +125,7 @@ public class Settler extends Entity {
 			rmMaterial(material);
 		}
 		Main.increaseTab();
-		Robot r = new Robot("robot");
+		Robot r = new Robot("R0");
 		mySystem.addRobot(r);
 
 		Main.decreaseTab();
@@ -105,8 +136,8 @@ public class Settler extends Entity {
 		System.out.println(Main.call + " " + name + " placeMaterial()");
 		Main.increaseTab();
 
-		location.placeMaterial(m);
-		rmMaterial(m);
+		if(location.placeMaterial(m))
+			rmMaterial(m);
 
 		Main.decreaseTab();
 	}
@@ -115,11 +146,14 @@ public class Settler extends Entity {
 		Main.printTabs();
 		System.out.println(Main.call + " " + name + " putGateDown()");
 		Main.increaseTab();
-
 		g.addNeighbour(location);
 		//g.getPair().addNeighbour(location); ToDo: Miert?????
 		mySystem.addThing(g);
+
+		Main.increaseTab();
 		g.activate();
+
+		Main.increaseTab();
 		g.removeEntity(this);
 
 		Main.decreaseTab();

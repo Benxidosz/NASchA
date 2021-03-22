@@ -39,7 +39,6 @@ public class TeleportGate extends Thing {
 	@Override
 	public void addEntity(Entity entity){
 		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " addEntity(" + entity.getName() + ")");
-
 		addAllObject(step);
 
 		Main.activeSimulation.addStep(step);
@@ -62,11 +61,24 @@ public class TeleportGate extends Thing {
 	}
 
 	public void setPair(TeleportGate gate2) {
+		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " addEntity(" + gate2.getName() + ")");
+		addAllObject(step);
+		step.addObject(gate2);
+		Main.activeSimulation.addStep(step);
+
 		pair = gate2;
+
+		Main.decreaseTab();
 	}
 
 	public void setActive(boolean act){
+		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " setActive(" + (act ? "true" : "false") + ")");
+		addAllObject(step);
+		Main.activeSimulation.addStep(step);
+
 		active = act;
+
+		Main.decreaseTab();
 	}
 
 	@Override

@@ -23,15 +23,17 @@ public class Step {
 		System.out.println("--------");
 		System.out.println("Objects:");
 		for (int i = 0; i < objects.size(); ++i) {
-			System.out.println(i + ": " + objects.get(i).printName());
+			if (objects.get(i) != null)
+				System.out.println(i + ": " + objects.get(i).printName());
 		}
 		System.out.println("--------");
 	}
 
 	public void listObjectParam(int i) throws Exception {
-		if (i < objects.size())
-			objects.get(i).listParameters();
-		else
+		if (i < objects.size()) {
+			if (objects.get(i) != null)
+				objects.get(i).listParameters();
+		} else
 			throw new Exception("Wrong command!");
 	}
 }

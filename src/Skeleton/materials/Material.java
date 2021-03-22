@@ -29,7 +29,9 @@ public abstract class Material implements SimulationObject {
 	 * The asteroid that contains the material is near sun and its last layer was drilled.
 	 */
 	public void nearSun() {
-
+		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " nearSun()");
+		Main.activeSimulation.addStep(step);
+		Main.decreaseTab();
 	}
 
 	public String getName(){
@@ -40,5 +42,16 @@ public abstract class Material implements SimulationObject {
 	public void listParameters() {
 		System.out.println(name + ":\n" +
 				"Asteroid: " + myAsteroid.getName());
+	}
+
+	public void setMyAsteroid(Asteroid myAsteroid) {
+		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " setMyAsteroid(" + myAsteroid.getName() + ")");
+		this.myAsteroid = myAsteroid;
+		addAllObject(step);
+		step.addObject(myAsteroid);
+
+		Main.activeSimulation.addStep(step);
+
+		Main.decreaseTab();
 	}
 }

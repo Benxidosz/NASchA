@@ -43,23 +43,73 @@ public class Asteroid extends Thing implements SimulationObject {
 		Main.decreaseTab();
 	}
 
+	/**
+	 * Calls explode for all entities on it.
+	 */
 	public void explode() {
-		System.out.println(Main.printTabs() + Main.call++ + " " + name + " explode() void.");
+		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " explode()");
 
-		entities.forEach((e) -> {
+		addAllObject(step);
+
+		Main.activeSimulation.addStep(step);
+
+		ArrayList<Entity> tmp = new ArrayList<>(entities);
+
+		tmp.forEach((e) -> {
 			Main.increaseTab();
 			e.explode();
+		});
+
+		neighbour.forEach(nei -> {
+			for (Thing nei2 : neighbour) {
+				Main.increaseTab();
+				nei.addNeighbour(nei2);
+			}
+			Main.increaseTab();
+			nei.removeNeighbour(this);
 		});
 
 		Main.decreaseTab();
 	}
 
+	/**
+	 * The asteroid gets excavated and sets it's core to null.
+	 * @return The core Material.
+	 */
+	@Override
 	public Material excavate() {
-		Main.printTabs();
-		System.out.println(Main.call++ + " " + name + " explode() " + core + ".");
+		Material ret = core;
+		StringBuilder builder = new StringBuilder();
+		builder.append(Main.printTabs() + Main.call++ + " " + name + " excavate() return " + core.getName());
+
+		System.out.println("Is the core reachable? [Y/N]");
+		try{
+			Step step;
+			String input = Main.scanner.nextLine().toUpperCase();
+			if (input.equals("Y")) {
+				builder.append(" core was mined");
+				step = new Step(builder.toString());
+				addAllObject(step);
+				Main.activeSimulation.addStep(step);
+
+				Main.increaseTab();
+				setCore(null);
+			} else if (input.equals("N")) {
+				builder.append(" core was not mined.");
+				step = new Step(builder.toString());
+				addAllObject(step);
+				Main.activeSimulation.addStep(step);
+			} else {
+				throw new InputMismatchException("Wrong Input!");
+			}
+
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+
 
 		Main.decreaseTab();
-		return core;
+		return ret;
 	}
 
 	/**
@@ -72,51 +122,100 @@ public class Asteroid extends Thing implements SimulationObject {
 		StringBuilder builder = new StringBuilder();
 		boolean ret = false;
 
-		builder.append(Main.printTabs()).append(Main.call++).append(" ").append(name).append(" placeMaterial()");
+		builder.append(Main.printTabs()).append(Main.call++).append(" ").append(name).append(" placeMaterial(" + m.getName() + ")");
 
 		System.out.println("All condition set for placement? [Y/N]");
 		try {
+			Step step;
 			String input = Main.scanner.nextLine().toUpperCase();
 			if (input.equals("Y")) {
-				System.out.println("core set.");
+				ret = true;
+				layer = 0;
+				core = null;
+
+				builder.append(" core set.");
+				builder.append(" return true");
+				step = new Step(builder.toString());
+				step.addObject(m);
+				addAllObject(step);
+				Main.activeSimulation.addStep(step);
+
+				Main.increaseTab();
+				setCore(m);
+
+				System.out.println("Is sun near? [Y/N]");
+				input = Main.scanner.nextLine().toUpperCase();
+				if (input.equals("Y")) {
+					nearBySun = true;
+					Main.increaseTab();
+					m.nearSun();
+				} else if (input.equals("N")) {
+					nearBySun = false;
+				} else {
+					throw new InputMismatchException("Wrong Input!");
+				}
 			} else if (input.equals("N")) {
-				System.out.println("core not set.");
+				builder.append(" core not set.");
+				builder.append(" return false");
+				step = new Step(builder.toString());
+				step.addObject(m);
+				addAllObject(step);
+				Main.activeSimulation.addStep(step);
 			} else {
 				throw new InputMismatchException("Wrong Input!");
 			}
+
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 
 		Main.decreaseTab();
 		return ret;
 	}
 
+	@Override
 	public void drill() {
-		Main.printTabs();
-		System.out.print(Main.call++ + " " + name + " drill() void ");
+		StringBuilder builder = new StringBuilder();
 
-		System.out.println("Is there any layer left? [Y/N]");
+		builder.append(Main.printTabs()).append(Main.call++).append(" ").append(name).append(" drill()");
+
+		System.out.println("Is it the last layer? [Y/N]");
 		try {
+			Step step;
 			String input = Main.scanner.nextLine().toUpperCase();
 			if (input.equals("Y")) {
-				System.out.println("layer drilled.");
+				builder.append(" last layer drilled.");
+				System.out.println("Is it near sun? [Y/N]");
+				input = Main.scanner.nextLine().toUpperCase();
+				if(input.equals("Y")){
+					step = new Step(builder.toString());
+					addAllObject(step);
+					Main.activeSimulation.addStep(step);
+					Main.increaseTab();
+					core.nearSun();
+				}else if(!input.equals("N")) {
+					throw new InputMismatchException("Wrong Input!");
+				}
 			} else if (input.equals("N")) {
-				System.out.println("layer not drilled.");
+				builder.append(" not the last layer not drilled.");
+				step = new Step(builder.toString());
+				addAllObject(step);
+				Main.activeSimulation.addStep(step);
 			} else {
 				throw new InputMismatchException("Wrong Input!");
 			}
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 
 		Main.decreaseTab();
 	}
 
+	@Override
 	public void applySunEruption() {
 		StringBuilder builder = new StringBuilder();
 
-		builder.append(Main.printTabs()).append(Main.call++).append(" ").append(name).append(" applySunEruption() void ");
+		builder.append(Main.printTabs()).append(Main.call++).append(" ").append(name).append(" applySunEruption()");
 
 		System.out.println("Is the Asteroid safe? [Y/N]");
 		try {
@@ -140,26 +239,56 @@ public class Asteroid extends Thing implements SimulationObject {
 
 			addAllObject(step);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 
 		Main.decreaseTab();
 	}
 
+	@Override
 	public void buildBase(Material m) {
-		Main.printTabs();
-		System.out.println(Main.call++ + " " + name + " buildBase() void (it does nothing)");
+		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " buildBase() (it does nothing)");
+
+		addAllObject(step);
+		step.addObject(m);
+
+		Main.activeSimulation.addStep(step);
 
 		Main.decreaseTab();
 	}
 
-	public void setCore(Object o) {
+	public void setCore(Material m) {
+		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " setCore(" + (m != null? m.getName() : "null") + ")");
+
+		addAllObject(step);
+		step.addObject(m);
+
+		Main.activeSimulation.addStep(step);
+
+		core = m;
+		if (m != null) {
+			Main.increaseTab();
+			m.setMyAsteroid(this);
+		}
+		Main.decreaseTab();
 	}
 
 	@Override
 	public void listParameters() {
 		System.out.println(name + ":\n" +
-				"layer: " + layer + "\n");
+				"layer: " + layer + "\n" +
+				"core: " + core.getName() + "\n" +
+				"near by sun: ");
+		if(nearBySun)
+			System.out.println("true");
+		else
+			System.out.println("false");
+		System.out.println("Neighbours: " );
+		for(int i=0; i<neighbour.size(); ++i)
+			System.out.println(neighbour.get(i).getName() + " ");
+		System.out.println("Entities: ");
+		for(int i=0; i<entities.size(); ++i)
+			System.out.println(entities.get(i).getName() + " ");
 	}
 
 	@Override

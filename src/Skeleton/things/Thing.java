@@ -59,10 +59,16 @@ public abstract class Thing implements SimulationObject {
 	}
 
 	public void removeNeighbour(Thing nei) {
-		Main.printTabs();
-		System.out.println(Main.call++ + " " + name + " removeNeighbour() void.");
-		neighbour.remove(nei);
+		if (!(nei == this || neighbour.contains(nei))) {
+			Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " removeNeighbour(" + nei.getName() + ")");
 
+			addAllObject(step);
+			step.addObject(nei);
+
+			Main.activeSimulation.addStep(step);
+
+			neighbour.remove(nei);
+		}
 		Main.decreaseTab();
 	}
 

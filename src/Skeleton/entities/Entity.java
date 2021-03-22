@@ -33,10 +33,12 @@ public abstract class Entity {
 		Main.printTabs();
 		System.out.println(Main.call + " " + name + " move() to " /*+ destination.getName()*/);
 		Main.increaseTab();
-
 		destination.addEntity(this);
-		if (location != null)
+
+		if (location != null) {
+			Main.increaseTab();
 			location.removeEntity(this);
+		}
 
 		location = destination;
 		Main.decreaseTab();
