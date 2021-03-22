@@ -15,9 +15,12 @@ public class Simulation {
 	 */
 	private final SimulationProcess initialization;
 	/**
-	 *
+	 * Stored steps.
 	 */
 	private final ArrayList<Step> steps;
+	/**
+	 * The next index of step.
+	 */
 	private int next;
 
 	public Simulation(String title, SimulationProcess initialization) {
@@ -26,6 +29,9 @@ public class Simulation {
 		steps = new ArrayList<>();
 	}
 
+	/**
+	 * Run the simulation.
+	 */
 	public void runProcess() {
 		Main.activeSimulation = this;
 		initialization.run();
@@ -47,22 +53,38 @@ public class Simulation {
 		steps.add(step);
 	}
 
+	/**
+	 * Print the next step.
+	 */
 	private void printStep() {
 		steps.get(next).print();
 	}
 
+	/**
+	 * List the next step's objects.
+	 */
 	private void listObjects() {
 		steps.get(next).listObjects();
 	}
 
+	/**
+	 * List one of the step's object.
+	 * @param i
+	 */
 	private void listObjectParam(int i) throws Exception {
 		steps.get(next).listObjectParam(i);
 	}
 
+	/**
+	 * Increase the next.
+	 */
 	private void nextStep() {
 		next++;
 	}
 
+	/**
+	 * Print the user's options for steps.
+	 */
 	private void printOps() {
 		System.out.println("--------");
 		System.out.println("1. Next.");
