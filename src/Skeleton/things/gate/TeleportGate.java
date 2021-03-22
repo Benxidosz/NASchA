@@ -83,7 +83,7 @@ public class TeleportGate extends Thing implements SimulationObject {
 		System.out.println("Entities: ");
 		for(int i=0; i<entities.size(); ++i)
 			System.out.println(entities.get(i).getName() + " ");
-		System.out.println("Pair: " + pair.getName());
+		System.out.println("Pair: " + pair.getName() + "\nActive: ");
 		if(active)
 			System.out.println("true");
 		else
