@@ -27,6 +27,9 @@ public class SolarSystem implements SimulationObject {
 			step.addObject(o);
 	}
 
+	/**
+	 * The players win the game.
+	 */
 	public void win() {
 		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " win()");
 
@@ -36,7 +39,10 @@ public class SolarSystem implements SimulationObject {
 
 		Main.decreaseTab();
 	}
-	
+
+	/**
+	 * The players lose the game.
+	 */
 	public void lose() {
 		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " lose()");
 
@@ -46,7 +52,11 @@ public class SolarSystem implements SimulationObject {
 
 		Main.decreaseTab();
 	}
-	
+
+	/**
+	 * Removes a thing from the SolarSystem
+	 * @param t The thing that is removed.
+	 */
 	public void removeThing(Thing t) {
 		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " removeThing(" + t.getName() + ")");
 
@@ -59,7 +69,11 @@ public class SolarSystem implements SimulationObject {
 
 		Main.decreaseTab();
 	}
-	
+
+	/**
+	 * Add a thing from the SolarSystem
+	 * @param t The thing that is added.
+	 */
 	public void addThing(Thing t) {
 		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " addThing(" + t.getName() + ")");
 
@@ -72,7 +86,11 @@ public class SolarSystem implements SimulationObject {
 
 		Main.decreaseTab();
 	}
-	
+
+	/**
+	 * Removes a robot from the SolarSystem
+	 * @param r The robot that is removed.
+	 */
 	public void removeRobot(Robot r) {
 		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " removeRobot(" + r.getName() + ")");
 
@@ -85,7 +103,11 @@ public class SolarSystem implements SimulationObject {
 
 		Main.decreaseTab();
 	}
-	
+
+	/**
+	 * Add a robot from the SolarSystem
+	 * @param r The robot that is added.
+	 */
 	public void addRobot(Robot r) {
 		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " addRobot(" + r.getName() + ")");
 
@@ -98,7 +120,11 @@ public class SolarSystem implements SimulationObject {
 
 		Main.decreaseTab();
 	}
-	
+
+	/**
+	 * Removes a settler from the SolarSystem
+	 * @param s The robot that is removed.
+	 */
 	public void removeSettler(Settler s) {
 		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " removeSettler(" + s.getName() + ")");
 
@@ -111,7 +137,10 @@ public class SolarSystem implements SimulationObject {
 
 		Main.decreaseTab();
 	}
-	
+
+	/**
+	 * Makes a solar eruption.
+	 */
 	public void makeSolarEruption() {
 		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " makeSolarEruption()");
 
@@ -125,7 +154,10 @@ public class SolarSystem implements SimulationObject {
 
 		Main.decreaseTab();
 	}
-	
+
+	/**
+	 * Starts the game.
+	 */
 	public void startGame() {
 		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " startGame()");
 
