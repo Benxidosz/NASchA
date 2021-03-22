@@ -114,8 +114,8 @@ public class Asteroid extends Thing implements SimulationObject {
 
 	/**
 	 * Place a Material in it's core
-	 * @param m
-	 * @return
+	 * @param m The material player wants place.
+	 * @return The material can placed.
 	 */
 	@Override
 	public boolean placeMaterial(Material m) {

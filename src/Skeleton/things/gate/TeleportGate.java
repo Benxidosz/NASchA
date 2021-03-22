@@ -33,7 +33,10 @@ public class TeleportGate extends Thing implements SimulationObject {
 
 		Main.decreaseTab();
 	}
-	
+
+	/**
+	 * Activates the gates pair when this gate is placed.
+	 */
 	public void activate() {
 		Step step = new Step(Main.call + " " + name + " activate()");
 		Main.activeSimulation.addStep(step);
@@ -54,6 +57,10 @@ public class TeleportGate extends Thing implements SimulationObject {
 		Main.decreaseTab();
 	}
 
+	/**
+	 * Teleport entity to the gates pair.
+	 * @param entity the entity that is teleoprted.
+	 */
 	public void passEntity(Entity entity){
 		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " passEntity(" + entity.getName() + ")");
 

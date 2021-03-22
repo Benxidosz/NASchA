@@ -19,6 +19,10 @@ public class MainAsteroid extends Asteroid {
 
 	}
 
+	/**
+	 * A player build base with a material.
+	 * @param m the material.
+	 */
 	@Override
 	public void buildBase(Material m) {
 		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " buildBase()");
