@@ -14,10 +14,12 @@ public class Simulator {
 	}
 
 	public void printSimulations() {
+		System.out.println("--------");
 		for (int i = 0; i < simulations.size(); i++) {
-			System.out.println(i + ": " + simulations.get(i).getTitle() + ".");
+			System.out.println(i + ": " + simulations.get(i).getTitle());
 		}
 		System.out.println("-1: quit.");
+		System.out.println("--------");
 	}
 
 	public void runSimulation(int i) throws Exception {

@@ -9,8 +9,8 @@ public class Silicon extends Material {
 	 * @param myAsteroid The asteroid that contains the material.
 	 * @param name The name of the object.
 	 */
-	public Silicon(Asteroid myAsteroid, String name){
-		super(myAsteroid, name);
+	public Silicon(String name){
+		super(name);
 	}
 
 	@Override

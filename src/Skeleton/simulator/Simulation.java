@@ -25,6 +25,8 @@ public class Simulation {
 			printOps();
 		}
 		steps.forEach(Step::print);
+		Main.scanner.nextLine();
+		Main.scanner.nextLine();
 	}
 
 	public String getTitle() {
@@ -52,9 +54,12 @@ public class Simulation {
 	}
 
 	private void printOps() {
+		System.out.println("--------");
 		System.out.println("1. Next.");
 		System.out.println("2. List objs.");
 		System.out.println("3. List obj params.");
+		System.out.println("4. Skip.");
+		System.out.println("--------");
 		int command = Main.scanner.nextInt();
 		switch(command) {
 			case 1: nextStep(); break;
@@ -67,6 +72,9 @@ public class Simulation {
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
 				}
+				break;
+			case 4:
+				next = steps.size();
 				break;
 			default: break;
 		}

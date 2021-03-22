@@ -4,25 +4,37 @@ import Skeleton.Main;
 import Skeleton.controllers.SolarSystem;
 import Skeleton.entities.Entity;
 import Skeleton.materials.Material;
+import Skeleton.simulator.SimulationObject;
 import Skeleton.simulator.Step;
 import Skeleton.things.gate.TeleportGate;
 
 import java.util.ArrayList;
+import java.util.Random;
 
-public abstract class Thing {
+public abstract class Thing implements SimulationObject {
 	protected ArrayList<Thing> neighbour = new ArrayList<>();
 	protected ArrayList<Entity> entities = new ArrayList<>();
-	private SolarSystem mySystem;
+	protected SolarSystem mySystem;
 	protected String name;
 
 	public Thing(String name) {
 		this.name = name;
 	}
 
-	public void addEntity(Entity entity) {
-		Main.printTabs();
+	protected void addAllObject(Step step) {
+		step.addObject(this);
+		step.addObject(mySystem);
+		for (Thing t : neighbour)
+			step.addObject(t);
+		for (Entity e : entities)
+			step.addObject(e);
+	}
 
-		Step step = new Step(Main.call++ + " " + name + " addEntity(" + entity.getName() + ") void.");
+	public void addEntity(Entity entity) {
+		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " addEntity(" + entity.getName() + ")");
+
+		addAllObject(step);
+
 		Main.activeSimulation.addStep(step);
 
 		entities.add(entity);
@@ -64,7 +76,8 @@ public abstract class Thing {
 		return null;
 	}
 
-	public void placeMaterial(Material m) {
+	public boolean placeMaterial(Material m) {
+		return false;
 	}
 
 	public void buildBase(Material m) {

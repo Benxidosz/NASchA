@@ -14,6 +14,11 @@ public abstract class Entity {
 		this.location = location;
 	}
 
+	protected void addAllObject(Step step) {
+		step.addObject(this);
+		step.addObject(location);
+	}
+
 	public void drill() {
 		Main.printTabs();
 		System.out.println(Main.call + " " + name + " drill()");
@@ -30,8 +35,10 @@ public abstract class Entity {
 		Main.increaseTab();
 
 		destination.addEntity(this);
-		location.removeEntity(this);
+		if (location != null)
+			location.removeEntity(this);
 
+		location = destination;
 		Main.decreaseTab();
 	}
 
@@ -42,9 +49,9 @@ public abstract class Entity {
 
 		Main.decreaseTab();
 	}
-	
+
 	public abstract void die();
-	
+
 	public abstract void explode();
 
 	public String getName() {

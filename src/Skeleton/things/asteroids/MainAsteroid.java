@@ -6,8 +6,14 @@ import Skeleton.materials.Material;
 public class MainAsteroid extends Asteroid {
 	private Material builtIn;
 
-	public MainAsteroid(int layer, boolean nearBySun, Material core, String name) {
-		super(layer, nearBySun, core, name);
+	public MainAsteroid(String name) {
+		super(name);
+	}
+
+	@Override
+	protected void addAllObject(Step step) {
+		super.addAllObject(step);
+
 	}
 
 	@Override

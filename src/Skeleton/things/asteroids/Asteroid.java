@@ -9,18 +9,30 @@ import Skeleton.things.Thing;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.Locale;
 
 public class Asteroid extends Thing implements SimulationObject {
 	protected int layer;
 	protected boolean nearBySun;
 	protected Material core;
 
-	public Asteroid(int layer, boolean nearBySun, Material core, String name) {
+	/**
+	 * Adds all objects to a step.
+	 * @param step
+	 */
+	@Override
+	protected void addAllObject(Step step) {
+		super.addAllObject(step);
+		step.addObject(core);
+	}
+
+	/**
+	 * The constructor of the Asteroid class. Sets it's attributes.
+	 * @param name The name of the object
+	 */
+	public Asteroid(String name) {
 		super(name);
 
 		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " created.");
-		step.addObject(this);
 
 		Main.activeSimulation.addStep(step);
 
@@ -50,11 +62,19 @@ public class Asteroid extends Thing implements SimulationObject {
 		return core;
 	}
 
-	public void placeMaterial(Material m) {
-		Main.printTabs();
-		System.out.print(Main.call++ + " " + name + " placeMaterial() void ");
+	/**
+	 * Place a Material in it's core
+	 * @param m
+	 * @return
+	 */
+	@Override
+	public boolean placeMaterial(Material m) {
+		StringBuilder builder = new StringBuilder();
+		boolean ret = false;
 
-		System.out.println("All condition set? [Y/N]");
+		builder.append(Main.printTabs()).append(Main.call++).append(" ").append(name).append(" placeMaterial()");
+
+		System.out.println("All condition set for placement? [Y/N]");
 		try {
 			String input = Main.scanner.nextLine().toUpperCase();
 			if (input.equals("Y")) {
@@ -69,6 +89,7 @@ public class Asteroid extends Thing implements SimulationObject {
 		}
 
 		Main.decreaseTab();
+		return ret;
 	}
 
 	public void drill() {
@@ -99,17 +120,16 @@ public class Asteroid extends Thing implements SimulationObject {
 
 		System.out.println("Is the Asteroid safe? [Y/N]");
 		try {
+			Step step;
 			String input = Main.scanner.nextLine().toUpperCase();
 			if (input.equals("Y")) {
 				builder.append("eruption not applied.");
-				Step step = new Step(builder.toString());
+				step = new Step(builder.toString());
 				Main.activeSimulation.addStep(step);
-
 			} else if (input.equals("N")) {
 				builder.append("eruption applied.");
-				Step step = new Step(builder.toString());
+				step = new Step(builder.toString());
 				Main.activeSimulation.addStep(step);
-
 				entities.forEach((e) -> {
 					Main.increaseTab();
 					e.die();
@@ -117,6 +137,8 @@ public class Asteroid extends Thing implements SimulationObject {
 			} else {
 				throw new InputMismatchException("Wrong Input!");
 			}
+
+			addAllObject(step);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

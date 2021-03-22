@@ -23,6 +23,17 @@ public class Settler extends Entity {
 		materials = new ArrayList<Material>();
 	}
 
+	@Override
+	protected void addAllObject(Step step) {
+		super.addAllObject(step);
+
+		for (Material m : materials)
+			step.addObject(m);
+		step.addObject(gates[0]);
+		step.addObject(gates[1]);
+		step.addObject(mySystem);
+	}
+
 	public void mine() {
 		Main.printTabs();
 		Step step = new Step(Main.printTabs() + Main.call + " " + name + " mine() return void.");
@@ -65,19 +76,25 @@ public class Settler extends Entity {
 		addGate(gate1);
 		addGate(gate2);
 
+		addAllObject(step);
+		step.addObject(gate1);
+		step.addObject(gate2);
+
+
 		Main.decreaseTab();
 	}
 	
 	public void buildRobot() {
-		Main.printTabs();
-		System.out.println(Main.call + " " + name + " buildRobot()");
-		Main.increaseTab();
+		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " buildRobot()");
+		Main.activeSimulation.addStep(step);
+		addAllObject(step);
 
-		for(int i = 0; i < materials.size(); ++i){
-			rmMaterial(materials.get(i));
+		for (Material material : materials) {
+			Main.increaseTab();
+			rmMaterial(material);
 		}
-
-		Robot r = new Robot("robot", this.location);
+		Main.increaseTab();
+		Robot r = new Robot("robot");
 		mySystem.addRobot(r);
 
 		Main.decreaseTab();
@@ -133,11 +150,8 @@ public class Settler extends Entity {
 	}
 	
 	public void rmMaterial(Material m) {
-		Main.printTabs();
-		System.out.println(Main.call + " " + name + " rmMaterial()");
-		Main.increaseTab();
-
-		materials.remove(m);
+		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " rmMaterial(" + m.getName() + ")");
+		Main.activeSimulation.addStep(step);
 
 		Main.decreaseTab();
 	}

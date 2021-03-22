@@ -1,6 +1,12 @@
 package Skeleton;
 
+import Skeleton.controllers.SolarSystem;
 import Skeleton.entities.children.Settler;
+import Skeleton.materials.children.Coal;
+import Skeleton.materials.children.Uran;
+import Skeleton.materials.children.Iron;
+import Skeleton.materials.children.WaterIce;
+import Skeleton.materials.children.Silicon;
 import Skeleton.simulator.Simulation;
 import Skeleton.simulator.SimulationProcess;
 import Skeleton.simulator.Simulator;
@@ -12,6 +18,8 @@ import java.util.Scanner;
 public class Main {
     static private int tabs = 0;
     static public int call = 1;
+
+    static public SolarSystem system = new SolarSystem("MainSystem");
 
     static public Scanner scanner = new Scanner(System.in);
 
@@ -38,11 +46,28 @@ public class Main {
         Simulator simulator = new Simulator();
 
         simulator.addSimulation(new Simulation("Asteroid Eruption.", () -> {
-            Asteroid a = new Asteroid(2, true, null, "A1");
-            a.addEntity(new Settler("S0", a));
-            a.addEntity(new Settler("S1", a));
-            a.addEntity(new Settler("S2", a));
+            Asteroid a = new Asteroid("A1");
+            a.addEntity(new Settler("S0"));
+            a.addEntity(new Settler("S1"));
+            a.addEntity(new Settler("S2"));
             a.applySunEruption();
+        }));
+
+        simulator.addSimulation(new Simulation("Build robot, all condition set.", () -> {
+            Settler s = new Settler("S0");
+            s.addMaterial(new Uran( "u"));
+            s.addMaterial(new Coal("c"));
+            s.addMaterial(new Iron("i"));
+            s.buildRobot();
+        }));
+
+        simulator.addSimulation(new Simulation("Build gate, all condition set.", () -> {
+            Settler s = new Settler("S0");
+            s.addMaterial(new Uran("u"));
+            s.addMaterial(new WaterIce("w"));
+            s.addMaterial(new Iron("i1"));
+            s.addMaterial(new Iron("i2"));
+            s.buildGate();
         }));
 
         while (true) {

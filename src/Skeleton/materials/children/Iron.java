@@ -9,8 +9,8 @@ public class Iron extends Material {
 	 * @param myAsteroid The asteroid that contains the material.
 	 * @param name The name of the object.
 	 */
-	public Iron(Asteroid myAsteroid, String name){
-		super(myAsteroid, name);
+	public Iron(String name){
+		super(name);
 	}
 
 	@Override
