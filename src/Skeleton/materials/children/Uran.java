@@ -26,6 +26,6 @@ public class Uran extends Material {
 
 	@Override
 	public String printName() {
-		return null;
+		return name;
 	}
 }

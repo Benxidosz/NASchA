@@ -139,6 +139,7 @@ public class Main {
             Settler s = new Settler("S0");
             Asteroid a = new Asteroid("A0");
             Silicon sil = new Silicon("s");
+            s.addMaterial(sil);
             s.move(a);
             s.placeMaterial(sil);
         }));

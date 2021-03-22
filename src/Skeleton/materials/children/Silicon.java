@@ -15,6 +15,6 @@ public class Silicon extends Material {
 
 	@Override
 	public String printName() {
-		return null;
+		return name;
 	}
 }

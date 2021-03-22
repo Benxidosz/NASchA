@@ -166,9 +166,10 @@ public class Settler extends Entity {
 		Main.activeSimulation.addStep(step);
 		Main.increaseTab();
 
-		if(location.placeMaterial(m))
+		if(location.placeMaterial(m)) {
+			Main.increaseTab();
 			rmMaterial(m);
-
+		}
 		Main.decreaseTab();
 	}
 
