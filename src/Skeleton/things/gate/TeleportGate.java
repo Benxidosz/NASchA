@@ -1,26 +1,31 @@
 package Skeleton.things.gate;
 
 import Skeleton.Main;
+import Skeleton.entities.Entity;
 import Skeleton.entities.children.Settler;
+import Skeleton.materials.Material;
+import Skeleton.simulator.Step;
+import Skeleton.simulator.SimulationObject;
 import Skeleton.things.Thing;
 
-public class TeleportGate extends Thing {
-	public Settler Unnamed1;
+public class TeleportGate extends Thing implements SimulationObject {
 	private TeleportGate pair;
+	private boolean active;
 
 	public TeleportGate(String name) {
 		super(name);
-		Main.printTabs();
-		System.out.println(Main.call++ + " " + name + " created.");
+
+		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " created.");
+		step.addObject(this);
+
+		Main.activeSimulation.addStep(step);
 
 		Main.decreaseTab();
 	}
 
 	public void applySunEruption() {
-		Main.printTabs();
-		System.out.print(Main.call++ + " " + name + " applySunEruption() void ");
-
-		System.out.println("eruption applied (TeleportGate is not safe).");
+		Step step = new Step(Main.call + " " + name + " applySunEruption()");
+		Main.activeSimulation.addStep(step);
 		entities.forEach((e) -> {
 			Main.increaseTab();
 			e.die();
@@ -30,15 +35,16 @@ public class TeleportGate extends Thing {
 	}
 	
 	public void activate() {
-		Main.printTabs();
-		System.out.println(Main.call++ + " " + name + " activate() void ");
-
+		Step step = new Step(Main.call + " " + name + " activate()");
+		Main.activeSimulation.addStep(step);
+		pair.setActive(true);
 		Main.decreaseTab();
 	}
 
 	@Override
 	public void addEntity(Entity entity){
 		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " addEntity(" + entity.getName() + ")");
+
 		addAllObject(step);
 
 		Main.activeSimulation.addStep(step);
@@ -61,24 +67,11 @@ public class TeleportGate extends Thing {
 	}
 
 	public void setPair(TeleportGate gate2) {
-		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " addEntity(" + gate2.getName() + ")");
-		addAllObject(step);
-		step.addObject(gate2);
-		Main.activeSimulation.addStep(step);
-
 		pair = gate2;
-
-		Main.decreaseTab();
 	}
 
 	public void setActive(boolean act){
-		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " setActive(" + (act ? "true" : "false") + ")");
-		addAllObject(step);
-		Main.activeSimulation.addStep(step);
-
 		active = act;
-
-		Main.decreaseTab();
 	}
 
 	@Override

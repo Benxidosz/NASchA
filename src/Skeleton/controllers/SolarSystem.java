@@ -38,55 +38,86 @@ public class SolarSystem implements SimulationObject {
 	}
 	
 	public void lose() {
-		Main.printTabs();
-		System.out.println(Main.call++ + " " + name + " lose() void.");
+		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " lose()");
+
+		addAllObject(step);
+
+		Main.activeSimulation.addStep(step);
 
 		Main.decreaseTab();
 	}
 	
 	public void removeThing(Thing t) {
-		Main.printTabs();
-		System.out.println(Main.call++ + " " + name + " removeThing() void.");
+		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " removeThing(" + t.getName() + ")");
+
+		addAllObject(step);
+		step.addObject(t);
+
+		Main.activeSimulation.addStep(step);
+
 		things.remove(t);
 
 		Main.decreaseTab();
 	}
 	
 	public void addThing(Thing t) {
-		Main.printTabs();
-		System.out.println(Main.call++ + " " + name + " addThing() void.");
+		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " addThing(" + t.getName() + ")");
+
+		addAllObject(step);
+		step.addObject(t);
+
+		Main.activeSimulation.addStep(step);
+
 		things.add(t);
 
 		Main.decreaseTab();
 	}
 	
 	public void removeRobot(Robot r) {
-		Main.printTabs();
-		System.out.println(Main.call++ + " " + name + " removeRobot() void.");
+		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " removeRobot(" + r.getName() + ")");
+
+		addAllObject(step);
+		step.addObject(r);
+
+		Main.activeSimulation.addStep(step);
+
 		robots.remove(r);
 
 		Main.decreaseTab();
 	}
 	
 	public void addRobot(Robot r) {
-		Main.printTabs();
-		System.out.println(Main.call++ + " " + name + " addRobot() void.");
+		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " addRobot(" + r.getName() + ")");
+
+		addAllObject(step);
+		step.addObject(r);
+
+		Main.activeSimulation.addStep(step);
+
 		robots.add(r);
 
 		Main.decreaseTab();
 	}
 	
 	public void removeSettler(Settler s) {
-		Main.printTabs();
-		System.out.println(Main.call++ + " " + name + " removeSettler() void.");
+		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " removeSettler(" + s.getName() + ")");
+
+		addAllObject(step);
+		step.addObject(s);
+
+		Main.activeSimulation.addStep(step);
+
 		settlers.remove(s);
 
 		Main.decreaseTab();
 	}
 	
 	public void makeSolarEruption() {
-		Main.printTabs();
-		System.out.println(Main.call++ + " " + name + " makeSolarErruption() void.");
+		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " makeSolarEruption()");
+
+		addAllObject(step);
+
+		Main.activeSimulation.addStep(step);
 		things.forEach((e) -> {
 			Main.increaseTab();
 			e.applySunEruption();
@@ -96,8 +127,11 @@ public class SolarSystem implements SimulationObject {
 	}
 	
 	public void startGame() {
-		Main.printTabs();
-		System.out.println(Main.call++ + " " + name + " startGame() void.");
+		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " startGame()");
+
+		addAllObject(step);
+
+		Main.activeSimulation.addStep(step);
 
 		Main.decreaseTab();
 	}

@@ -43,18 +43,29 @@ public abstract class Thing implements SimulationObject {
 	}
 
 	public void removeEntity(Entity entity) {
-		Main.printTabs();
-		System.out.println(Main.call++ + " " + name + " removeEntity() void.");
+		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " removeEntity(" + entity.getName() + ")");
+
+		addAllObject(step);
+		step.addObject(entity);
+
+		Main.activeSimulation.addStep(step);
+
 		entities.remove(entity);
 
 		Main.decreaseTab();
 	}
 
 	public void addNeighbour(Thing nei) {
-		Main.printTabs();
-		System.out.println(Main.call++ + " " + name + " addNeighbour() void.");
-		neighbour.add(nei);
+		if (!(nei == this || neighbour.contains(nei))) {
+			Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " addNeighbour(" + nei.getName() + ")");
 
+			addAllObject(step);
+			step.addObject(nei);
+
+			Main.activeSimulation.addStep(step);
+
+			neighbour.add(nei);
+		}
 		Main.decreaseTab();
 	}
 
@@ -72,8 +83,7 @@ public abstract class Thing implements SimulationObject {
 		Main.decreaseTab();
 	}
 
-	public void applySunEruption() {
-	}
+	public abstract void applySunEruption();
 
 	public void drill() {
 	}
@@ -87,20 +97,16 @@ public abstract class Thing implements SimulationObject {
 	}
 
 	public void buildBase(Material m) {
-
 	}
 
 	public Thing randomNeighbour() {
-		Main.printTabs();
-		System.out.println(Main.call++ + " " + name + " randomNeighbour() void.");
+		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " randomNeighbour() return " + neighbour.get(0).getName());
+		Main.activeSimulation.addStep(step);
 
 		Main.decreaseTab();
-		return null;
+		return neighbour.get(0);
 	}
 
-	public void setPair(TeleportGate gate2) {
-
-	}
 
 	public String getName() {
 		return name;
