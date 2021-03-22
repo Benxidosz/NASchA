@@ -1,6 +1,7 @@
 package Skeleton.simulator;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 
 public class Step {
 	private ArrayList<SimulationObject> objects;
@@ -34,6 +35,6 @@ public class Step {
 			if (objects.get(i) != null)
 				objects.get(i).listParameters();
 		} else
-			throw new Exception("Wrong command!");
+			throw new InputMismatchException("Wrong command!");
 	}
 }

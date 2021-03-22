@@ -3,10 +3,20 @@ package Skeleton.simulator;
 import Skeleton.Main;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 
 public class Simulation {
+	/**
+	 * The title what will be printed.
+	 */
 	private final String title;
+	/**
+	 * A process what will initialize and run the simulation.
+	 */
 	private final SimulationProcess initialization;
+	/**
+	 *
+	 */
 	private final ArrayList<Step> steps;
 	private int next;
 
@@ -69,6 +79,8 @@ public class Simulation {
 				try {
 					listObjectParam(arg);
 
+				} catch (InputMismatchException e) {
+					System.err.println(e.getMessage());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
