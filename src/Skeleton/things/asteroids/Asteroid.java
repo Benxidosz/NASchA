@@ -277,7 +277,7 @@ public class Asteroid extends Thing implements SimulationObject {
 	public void listParameters() {
 		System.out.println(name + ":\n" +
 				"layer: " + layer + "\n" +
-				"core: " + core.getName() + "\n" +
+				"core: " + (core != null ? core.getName() + "\n" : "") +
 				"near by sun: ");
 		if(nearBySun)
 			System.out.println("true");
