@@ -1480,7 +1480,7 @@
 </XPD:OBJ>
 </XPD:OBJ>
 </XPD:OBJ>
-<XPD:ATTR name="#OwnedElements" type="integer">17</XPD:ATTR>
+<XPD:ATTR name="#OwnedElements" type="integer">18</XPD:ATTR>
 <XPD:OBJ name="OwnedElements[0]" type="UMLModel" guid="Vt9MUngVtUSm/pLtTe9ISgAA">
 <XPD:ATTR name="Name" type="string">nascha</XPD:ATTR>
 <XPD:REF name="Namespace">+AuvyiMWm0CuTfXIHo++cQAA</XPD:REF>
@@ -2754,6 +2754,10 @@
 <XPD:ATTR name="#Instances" type="integer">2</XPD:ATTR>
 <XPD:REF name="Instances[0]">aDWmIzXjEUqBMxzhwB0+qAAA</XPD:REF>
 <XPD:REF name="Instances[1]">MMWnErVERUmA0tNfOv+RlQAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="OwnedElements[17]" type="UMLPackage" guid="7vo+H/5McE6FyVgmYL98fgAA">
+<XPD:ATTR name="Name" type="string">AsteroidExplode</XPD:ATTR>
+<XPD:REF name="Namespace">+AuvyiMWm0CuTfXIHo++cQAA</XPD:REF>
 </XPD:OBJ>
 <XPD:ATTR name="#OwnedCollaborationInstanceSets" type="integer">22</XPD:ATTR>
 <XPD:OBJ name="OwnedCollaborationInstanceSets[0]" type="UMLCollaborationInstanceSet" guid="txuGRidJF0aNgtCkEScrRQAA">
