@@ -3776,7 +3776,7 @@
 </XPD:OBJ>
 <XPD:ATTR name="#Attributes" type="integer">1</XPD:ATTR>
 <XPD:OBJ name="Attributes[0]" type="UMLAttribute" guid="oRn/S8/860qE3VoQegJtbAAA">
-<XPD:ATTR name="Name" type="string">countExposicion</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">countExposition</XPD:ATTR>
 <XPD:ATTR name="Visibility" type="UMLVisibilityKind">vkPrivate</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">int</XPD:ATTR>
 <XPD:REF name="Owner">FmbpkMhqZ06dmifVdwSz1gAA</XPD:REF>
