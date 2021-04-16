@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 
 public class Settler extends Entity {
-	private TeleportGate[] gates;
+	private ArrayList<TeleportGate> gates;
 	private SolarSystem mySystem;
 	private ArrayList<Material> materials;
 
@@ -207,11 +207,7 @@ public class Settler extends Entity {
 
 		Main.activeSimulation.addStep(step);
 
-		if(gates[0] == null)
-			gates[0] = g;
-		else
-			gates[1] = g;
-
+		gates.add(g);
 
 		Main.decreaseTab();
 	}
