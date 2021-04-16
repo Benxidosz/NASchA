@@ -1,15 +1,13 @@
-package Proto.entities.children;
+package Proto.entity.entities;
 
 import Proto.Main;
-import Proto.controllers.SolarSystem;
-import Proto.materials.children.Coal;
-import Proto.materials.children.Uran;
-import Proto.simulator.SimulationObject;
+import Proto.controller.controllers.SolarSystem;
+import Proto.material.materials.Coal;
+import Proto.material.materials.Uran;
 import Proto.simulator.Step;
-import Proto.things.Thing;
 import Proto.things.gate.TeleportGate;
-import Proto.entities.Entity;
-import Proto.materials.Material;
+import Proto.entity.Entity;
+import Proto.material.Material;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;

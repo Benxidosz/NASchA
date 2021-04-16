@@ -1,4 +1,4 @@
-package Proto.materials;
+package Proto.material;
 
 import Proto.Main;
 import Proto.simulator.SimulationObject;

@@ -1,10 +1,7 @@
-package Proto.entities.children;
+package Proto.entity.entities;
 
 import Proto.Main;
-import Proto.controllers.SolarSystem;
-import Proto.entities.Entity;
-import Proto.materials.Material;
-import Proto.simulator.SimulationObject;
+import Proto.entity.Entity;
 import Proto.simulator.Step;
 import Proto.things.Thing;
 

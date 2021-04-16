@@ -1,8 +1,8 @@
 package Proto.things.asteroids;
 
 import Proto.Main;
-import Proto.entities.Entity;
-import Proto.materials.Material;
+import Proto.entity.Entity;
+import Proto.material.Material;
 import Proto.simulator.SimulationObject;
 import Proto.simulator.Step;
 import Proto.things.Thing;

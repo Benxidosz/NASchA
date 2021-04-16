@@ -1,7 +1,6 @@
-package Proto.materials.children;
+package Proto.material.materials;
 
-import Proto.materials.Material;
-import Proto.things.asteroids.Asteroid;
+import Proto.material.Material;
 
 public class Coal extends Material {
 

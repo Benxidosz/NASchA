@@ -1,9 +1,8 @@
-package Proto.materials.children;
+package Proto.material.materials;
 
 import Proto.Main;
-import Proto.materials.Material;
+import Proto.material.Material;
 import Proto.simulator.Step;
-import Proto.things.asteroids.Asteroid;
 
 public class Uran extends Material {
 
