@@ -88,8 +88,10 @@ public class Main {
 
         simulator.addSimulation(new Simulation("Settler move to Asteroid.", () -> {
             Asteroid a = new Asteroid("A0");
+            Asteroid a2 = new Asteroid("A1");
             Settler s = new Settler("S0");
             s.move(a);
+            s.move(a2);
         }));
 
         simulator.addSimulation(new Simulation("Settler move to active TeleportGate.", () -> {
@@ -107,6 +109,7 @@ public class Main {
             Asteroid a = new Asteroid("A0");
             Uran u = new Uran("u");
             s.move(a);
+            s.addMaterial(u);
             s.placeMaterial(u);
         }));
 
@@ -115,6 +118,7 @@ public class Main {
             Asteroid a = new Asteroid("A0");
             WaterIce w = new WaterIce("w");
             s.move(a);
+            s.addMaterial(w);
             s.placeMaterial(w);
 
         }));
@@ -124,6 +128,7 @@ public class Main {
             Asteroid a = new Asteroid("A0");
             Coal c = new Coal("c");
             s.move(a);
+            s.addMaterial(c);
             s.placeMaterial(c);
         }));
 
@@ -132,6 +137,7 @@ public class Main {
             Asteroid a = new Asteroid("A0");
             Iron i = new Iron("i");
             s.move(a);
+            s.addMaterial(i);
             s.placeMaterial(i);
         }));
 
@@ -141,6 +147,7 @@ public class Main {
             Silicon sil = new Silicon("s");
             s.addMaterial(sil);
             s.move(a);
+            s.addMaterial(sil);
             s.placeMaterial(sil);
         }));
 

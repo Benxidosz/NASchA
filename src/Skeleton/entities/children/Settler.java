@@ -62,7 +62,8 @@ public class Settler extends Entity {
 				Material m = location.excavate();
 
 				Main.increaseTab();
-				addMaterial(m);
+				if (m != null)
+					addMaterial(m);
 			} else if (input.equals("N")) {
 				builder.append("asteroid was not mined.");
 				step = new Step(builder.toString());
@@ -268,6 +269,24 @@ public class Settler extends Entity {
 
 	@Override
 	public void listParameters() {
+		System.out.println(name + ":\n");
+		if(gates != null) {
+			System.out.println("Gates: ");
+			if(gates[0] != null)
+				System.out.println(gates[0].getName() + " ");
+			if(gates[1] != null)
+				System.out.println(gates[1].getName() + " ");
+		}
+
+		if(mySystem != null)
+			System.out.println("Solar system: " + mySystem.getName());
+
+		if(materials != null){
+			System.out.println("Materials: ");
+			for(int i = 0; i < materials.size(); i++){
+				System.out.println(materials.get(i).getName() + " ");
+			}
+		}
 
 	}
 

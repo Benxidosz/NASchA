@@ -44,6 +44,7 @@ public class TeleportGate extends Thing implements SimulationObject {
 		Main.decreaseTab();
 	}
 
+
 	@Override
 	public void addEntity(Entity entity){
 		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " addEntity(" + entity.getName() + ")");

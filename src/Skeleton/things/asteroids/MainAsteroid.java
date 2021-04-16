@@ -36,6 +36,9 @@ public class MainAsteroid extends Asteroid {
 		Main.decreaseTab();
 	}
 
+	/**
+	 * list the main asteroid parameters
+	 */
 	@Override
 	public void listParameters() {
 		System.out.println(name + ":\n" +

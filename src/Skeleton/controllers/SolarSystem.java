@@ -168,6 +168,10 @@ public class SolarSystem implements SimulationObject {
 		Main.decreaseTab();
 	}
 
+	public String getName(){
+		return name;
+	}
+
 	@Override
 	public void listParameters() {
 		System.out.println("--------");

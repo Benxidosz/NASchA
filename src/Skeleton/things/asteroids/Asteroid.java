@@ -80,13 +80,14 @@ public class Asteroid extends Thing implements SimulationObject {
 	public Material excavate() {
 		Material ret = core;
 		StringBuilder builder = new StringBuilder();
-		builder.append(Main.printTabs() + Main.call++ + " " + name + " excavate() return " + core.getName());
+		builder.append(Main.printTabs() + Main.call++);
 
 		System.out.println("Is the core reachable? [Y/N]");
 		try{
 			Step step;
 			String input = Main.scanner.nextLine().toUpperCase();
 			if (input.equals("Y")) {
+				builder.append(" ").append(name).append(" excavate() return ").append(core.getName());
 				builder.append(" core was mined");
 				step = new Step(builder.toString());
 				addAllObject(step);
@@ -95,6 +96,8 @@ public class Asteroid extends Thing implements SimulationObject {
 				Main.increaseTab();
 				setCore(null);
 			} else if (input.equals("N")) {
+				ret = null;
+				builder.append(" ").append(name).append(" excavate() return null");
 				builder.append(" core was not mined.");
 				step = new Step(builder.toString());
 				addAllObject(step);
@@ -173,6 +176,9 @@ public class Asteroid extends Thing implements SimulationObject {
 		return ret;
 	}
 
+	/**
+	 * Settler drill asteroid layer
+	 */
 	@Override
 	public void drill() {
 		StringBuilder builder = new StringBuilder();
@@ -211,6 +217,9 @@ public class Asteroid extends Thing implements SimulationObject {
 		Main.decreaseTab();
 	}
 
+	/**
+	 * Simulate the sun eruption on string
+	 */
 	@Override
 	public void applySunEruption() {
 		StringBuilder builder = new StringBuilder();
@@ -245,6 +254,10 @@ public class Asteroid extends Thing implements SimulationObject {
 		Main.decreaseTab();
 	}
 
+	/**
+	 * Settler build the base with material.
+	 * @param m
+	 */
 	@Override
 	public void buildBase(Material m) {
 		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " buildBase() (it does nothing)");
@@ -257,6 +270,10 @@ public class Asteroid extends Thing implements SimulationObject {
 		Main.decreaseTab();
 	}
 
+	/**
+	 * Settler set the asteroid core
+	 * @param m
+	 */
 	public void setCore(Material m) {
 		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " setCore(" + (m != null? m.getName() : "null") + ")");
 
@@ -273,6 +290,9 @@ public class Asteroid extends Thing implements SimulationObject {
 		Main.decreaseTab();
 	}
 
+	/**
+	 * list the objects parameters
+	 */
 	@Override
 	public void listParameters() {
 		System.out.println(name + ":\n" +
@@ -291,6 +311,10 @@ public class Asteroid extends Thing implements SimulationObject {
 			System.out.println(entities.get(i).getName() + " ");
 	}
 
+	/**
+	 * print the object name
+	 * @return
+	 */
 	@Override
 	public String printName() {
 		return name;
