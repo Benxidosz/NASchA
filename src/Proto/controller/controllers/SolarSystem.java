@@ -1,15 +1,16 @@
-package Proto.controllers;
+package Proto.controller.controllers;
 
 import Proto.Main;
-import Proto.entities.children.Robot;
-import Proto.entities.children.Settler;
+import Proto.controller.Controller;
+import Proto.entity.entities.Robot;
+import Proto.entity.entities.Settler;
 import Proto.simulator.SimulationObject;
 import Proto.simulator.Step;
 import Proto.things.Thing;
 
 import java.util.ArrayList;
 
-public class SolarSystem implements SimulationObject {
+public class SolarSystem extends Controller implements SimulationObject {
 	private ArrayList<Robot> robots = new ArrayList<>();
 	private ArrayList<Settler> settlers = new ArrayList<>();
 	private ArrayList<Thing> things = new ArrayList<>();

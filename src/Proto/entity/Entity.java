@@ -1,11 +1,10 @@
-package Proto.entities;
+package Proto.entity;
 
 import Proto.Main;
 import Proto.simulator.SimulationObject;
 import Proto.simulator.Step;
 import Proto.things.Thing;
 
-import java.sql.SQLOutput;
 import java.util.InputMismatchException;
 
 public abstract class Entity implements SimulationObject {

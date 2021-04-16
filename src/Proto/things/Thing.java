@@ -1,15 +1,13 @@
 package Proto.things;
 
 import Proto.Main;
-import Proto.controllers.SolarSystem;
-import Proto.entities.Entity;
-import Proto.materials.Material;
+import Proto.controller.controllers.SolarSystem;
+import Proto.entity.Entity;
+import Proto.material.Material;
 import Proto.simulator.SimulationObject;
 import Proto.simulator.Step;
-import Proto.things.gate.TeleportGate;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public abstract class Thing implements SimulationObject {
 	protected ArrayList<Thing> neighbour = new ArrayList<>();

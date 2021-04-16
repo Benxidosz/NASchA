@@ -1,9 +1,7 @@
 package Proto.things.gate;
 
 import Proto.Main;
-import Proto.entities.Entity;
-import Proto.entities.children.Settler;
-import Proto.materials.Material;
+import Proto.entity.Entity;
 import Proto.simulator.Step;
 import Proto.simulator.SimulationObject;
 import Proto.things.Thing;

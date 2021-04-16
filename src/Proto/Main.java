@@ -1,19 +1,17 @@
 package Proto;
 
-import Proto.controllers.SolarSystem;
-import Proto.entities.children.Robot;
-import Proto.entities.children.Settler;
-import Proto.materials.children.Coal;
-import Proto.materials.children.Uran;
-import Proto.materials.children.Iron;
-import Proto.materials.children.WaterIce;
-import Proto.materials.children.Silicon;
+import Proto.controller.controllers.SolarSystem;
+import Proto.entity.entities.Robot;
+import Proto.entity.entities.Settler;
+import Proto.material.materials.Coal;
+import Proto.material.materials.Uran;
+import Proto.material.materials.Iron;
+import Proto.material.materials.WaterIce;
+import Proto.material.materials.Silicon;
 import Proto.simulator.Simulation;
-import Proto.simulator.SimulationProcess;
 import Proto.simulator.Simulator;
 import Proto.things.asteroids.Asteroid;
 import Proto.things.gate.TeleportGate;
-import Proto.things.asteroids.MainAsteroid;
 
 import java.util.Scanner;
 
