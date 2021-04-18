@@ -1,5 +1,6 @@
 package Proto.things.asteroids;
 
+import Proto.GameManager;
 import Proto.Main;
 import Proto.material.Material;
 import Proto.simulator.Step;
@@ -11,6 +12,7 @@ public class MainAsteroid extends Asteroid {
 
 	public MainAsteroid(String name) {
 		super(name);
+		requirements = GameManager.ref.recipes.get("Base");
 	}
 
 	/**
