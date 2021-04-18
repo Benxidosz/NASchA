@@ -1,7 +1,7 @@
 package Proto.things.asteroids;
 
 import Proto.Main;
-import Proto.materials.Material;
+import Proto.material.Material;
 import Proto.simulator.Step;
 
 import java.util.ArrayList;
@@ -41,22 +41,6 @@ public class MainAsteroid extends Asteroid {
 	 */
 	@Override
 	public void listParameters() {
-		System.out.println(name + ":\n" +
-				"layer: " + layer + "\n" +
-				"core: " + core.getName() + "\n" +
-				"near by sun: ");
-		if(nearBySun)
-			System.out.println("true");
-		else
-			System.out.println("false");
-		System.out.println("Neighbours: " );
-		for(int i=0; i<neighbour.size(); ++i)
-			System.out.println(neighbour.get(i).getName() + " ");
-		System.out.println("Entities: ");
-		for(int i=0; i<entities.size(); ++i)
-			System.out.println(entities.get(i).getName() + " ");
-		System.out.println("materials built in: ");
-		for(int i=0; i<builtIn.size(); ++i)
-			System.out.println(builtIn.get(i).getName() + " ");
+
 	}
 }

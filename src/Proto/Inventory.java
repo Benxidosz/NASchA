@@ -6,17 +6,15 @@ import Proto.material.materials.*;
 import java.util.LinkedList;
 
 public class Inventory {
-	private final LinkedList<Material> materials;
+	private final LinkedList<Material> materials = new LinkedList<>();
 	private final int maxSpace;
 
 	public Inventory() {
 		maxSpace = -1;
-		materials = new LinkedList<>();
 	}
 
 	public Inventory(int space) {
 		maxSpace = space;
-		materials = new LinkedList<>();
 	}
 
 	public boolean compareMaterial(Material m1, Material m2) {
