@@ -42,7 +42,8 @@ public class Inventory {
 	}
 
 	public void addMaterial(Material m) {
-		materials.add(m);
+		if (materials.size() < maxSpace || maxSpace == -1)
+			materials.add(m);
 	}
 
 	public void rmMaterial(Material m) {

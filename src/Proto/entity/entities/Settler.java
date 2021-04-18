@@ -16,6 +16,7 @@ public class Settler extends Entity {
 	private TeleportGate[] gates;
 	private SolarSystem mySystem;
 	private ArrayList<Material> materials;
+	private boolean active;
 
 	/**
 	 * Constructor of the Settler class. Gets name and location from the base-class.
@@ -25,7 +26,6 @@ public class Settler extends Entity {
 		super(name);
 		gates = new TeleportGate[2];
 		materials = new ArrayList<>();
-		mySystem = Main.system;
 	}
 
 	@Override
@@ -36,7 +36,6 @@ public class Settler extends Entity {
 			step.addObject(m);
 		step.addObject(gates[0]);
 		step.addObject(gates[1]);
-		step.addObject(mySystem);
 	}
 
 	/**
@@ -291,5 +290,9 @@ public class Settler extends Entity {
 	@Override
 	public String printName() {
 		return name;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 }

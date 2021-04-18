@@ -11,12 +11,13 @@ import Proto.things.Thing;
 
 import java.util.ArrayList;
 
-public class SolarSystem extends Controller {
+public class SolarSystem implements Controller {
+	public static SolarSystem ref;
 	private String name;
 
-	public SolarSystem(GameManager gm, String name) {
-		super(gm);
+	public SolarSystem(String name) {
 		this.name = name;
+		ref = this;
 	}
 
 	/**

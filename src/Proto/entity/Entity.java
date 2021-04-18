@@ -107,4 +107,8 @@ public abstract class Entity implements SimulationObject {
 	public String getName() {
 		return name;
 	}
+
+	public Thing getLocation() {
+		return location;
+	}
 }

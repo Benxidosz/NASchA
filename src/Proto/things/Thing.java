@@ -21,7 +21,6 @@ public abstract class Thing implements SimulationObject {
 
 	protected void addAllObject(Step step) {
 		step.addObject(this);
-		step.addObject(mySystem);
 		for (Thing t : neighbour)
 			step.addObject(t);
 		for (Entity e : entities)
@@ -95,6 +94,10 @@ public abstract class Thing implements SimulationObject {
 	}
 
 	public void buildBase(Material m) {
+	}
+
+	public boolean isDrillable() {
+		return false;
 	}
 
 	public Thing randomNeighbour() {

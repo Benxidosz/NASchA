@@ -1,13 +1,5 @@
 package Proto.controller;
 
-import Proto.GameManager;
-
-public abstract class Controller {
-	protected final GameManager manager;
-
-	public Controller(GameManager gm) {
-		manager = gm;
-	}
-
+public interface Controller {
 	public abstract void makeTurn();
 }
