@@ -108,6 +108,17 @@ public abstract class Thing implements SimulationObject {
 		return neighbour.get(0);
 	}
 
+	public Thing getNeiByName(String name) {
+		Thing ret = null;
+		for (Thing nei : neighbour) {
+			if (nei.getName().equals(name)) {
+				ret = nei;
+				break;
+			}
+		}
+
+		return ret;
+	}
 
 	public String getName() {
 		return name;

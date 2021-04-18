@@ -16,7 +16,6 @@ public class GameManager {
 	}
 
 	public void jobsDone() {
-
 	}
 
 	public void newTurn() {

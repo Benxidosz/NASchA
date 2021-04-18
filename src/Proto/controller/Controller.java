@@ -1,5 +1,6 @@
 package Proto.controller;
 
 public interface Controller {
-	public abstract void makeTurn();
+	void makeTurn();
+	void handleCommand(String line);
 }

@@ -4,6 +4,7 @@ import Proto.GameManager;
 import Proto.Main;
 import Proto.controller.Controller;
 import Proto.entity.entities.Settler;
+import Proto.things.Thing;
 
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -21,6 +22,29 @@ public class SettlerController implements Controller {
 	public void handleCommand(String command) {
 		String[] args = command.split(" ");
 
+		Settler selected = null;
+		for (Settler settler : settlers) {
+			if (settler.getName().equals(args[1])) {
+				selected = settler;
+				break;
+			}
+		}
+
+		if (selected == null)
+			return;
+
+		if ("Move".equals(args[0])) {
+			if (selected.getLocation() != null) {
+				Thing dest = selected.getLocation().getNeiByName(args[1]);
+				selected.move(dest);
+			}
+		} else if ("Drill".equals(args[0])) {
+			selected.drill();
+		} else if ("Mine".equals(args[0])) {
+			selected.mine();
+		} else if ("Buildrobot".equals(args[0])) {
+			
+		}
 	}
 
 	public void done() {

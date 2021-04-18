@@ -1,6 +1,5 @@
 package Proto.controller.controllers;
 
-import Proto.GameManager;
 import Proto.controller.Controller;
 
 public class UfoController implements Controller {
@@ -9,5 +8,10 @@ public class UfoController implements Controller {
 	@Override
 	public void makeTurn() {
 		ref = this;
+	}
+
+	@Override
+	public void handleCommand(String line) {
+
 	}
 }

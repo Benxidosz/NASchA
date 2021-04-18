@@ -37,4 +37,9 @@ public class RobotController implements Controller {
 	public void makeTurn() {
 		robots.forEach(this::calculateStep);
 	}
+
+	@Override
+	public void handleCommand(String line) {
+
+	}
 }
