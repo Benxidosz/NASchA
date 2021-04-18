@@ -12,7 +12,7 @@ public class MainAsteroid extends Asteroid {
 
 	public MainAsteroid(String name) {
 		super(name);
-		requirements = GameManager.ref.recipes.get("Base");
+		//requirements = GameManager.ref.recipes.get("Base");
 	}
 
 	/**
