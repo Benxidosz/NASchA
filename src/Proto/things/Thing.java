@@ -20,7 +20,6 @@ public abstract class Thing {
 		this.name = name;
 	}
 
-
 	/**
 	 * Adds the paramater to the entities array.
 	 * @param entity the entity that is added.
@@ -108,5 +107,13 @@ public abstract class Thing {
 	 */
 	public String getName() {
 		return name;
+	}
+
+	/**
+	 * Returns the neighbours of the Thing
+	 * @return
+	 */
+	public ArrayList<Thing> getNeighbour() {
+		return neighbour;
 	}
 }
