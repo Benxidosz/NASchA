@@ -8,104 +8,104 @@ import Proto.simulator.SimulationObject;
 import Proto.simulator.Step;
 
 import java.util.ArrayList;
+import java.util.Random;
 
-public abstract class Thing implements SimulationObject {
-	protected ArrayList<Thing> neighbour = new ArrayList<>();
-	protected ArrayList<Entity> entities = new ArrayList<>();
-	protected SolarSystem mySystem;
-	protected String name;
+public abstract class Thing {
+	protected ArrayList<Thing> neighbour = new ArrayList<>();	//The Thing's neighbour Thing objects
+	protected ArrayList<Entity> entities = new ArrayList<>();	//The Entities on the Thing
+	private SolarSystem mySystem;								//The SolarSystem which contains this Thing
+	protected String name;										//The name of the Thing
 
 	public Thing(String name) {
 		this.name = name;
 	}
 
-	protected void addAllObject(Step step) {
-		step.addObject(this);
-		step.addObject(mySystem);
-		for (Thing t : neighbour)
-			step.addObject(t);
-		for (Entity e : entities)
-			step.addObject(e);
-	}
 
+	/**
+	 * Adds the paramater to the entities array.
+	 * @param entity the entity that is added.
+	 */
 	public void addEntity(Entity entity) {
-		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " addEntity(" + entity.getName() + ")");
-
-		addAllObject(step);
-
-		Main.activeSimulation.addStep(step);
-
 		entities.add(entity);
-
-		Main.decreaseTab();
 	}
 
+	/**
+	 * Removes the Entity got as a parameter from the entities array.
+	 * @param entity the Entity which is removed.
+	 */
 	public void removeEntity(Entity entity) {
-		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " removeEntity(" + entity.getName() + ")");
-
-		addAllObject(step);
-		step.addObject(entity);
-
-		Main.activeSimulation.addStep(step);
-
 		entities.remove(entity);
-
-		Main.decreaseTab();
 	}
 
+	/**
+	 * Adds a Thing, got as a parameter, as the neighbour of this Thing.
+	 * @param nei the Thing which is added.
+	 */
 	public void addNeighbour(Thing nei) {
-		if (!(nei == this || neighbour.contains(nei))) {
-			Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " addNeighbour(" + nei.getName() + ")");
-
-			addAllObject(step);
-			step.addObject(nei);
-
-			Main.activeSimulation.addStep(step);
-
+		if (!(nei == this || neighbour.contains(nei)))
 			neighbour.add(nei);
-		}
-		Main.decreaseTab();
 	}
 
+	/**
+	 * Removes a Thing, got as a paramater, from the neighbours array.
+	 * @param nei the Thing which is removed.
+	 */
 	public void removeNeighbour(Thing nei) {
-		if (!(nei == this || neighbour.contains(nei))) {
-			Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " removeNeighbour(" + nei.getName() + ")");
-
-			addAllObject(step);
-			step.addObject(nei);
-
-			Main.activeSimulation.addStep(step);
-
+		if (!(nei == this || neighbour.contains(nei)))
 			neighbour.remove(nei);
-		}
-		Main.decreaseTab();
 	}
 
+	/**
+	 * Abstract function of the sun eruption.
+	 */
 	public abstract void applySunEruption();
 
+	/**
+	 * Its overridden in the children classes.
+	 */
 	public void drill() {
 	}
 
+	/**
+	 * Its overridden in the children classes.
+	 * @return
+	 */
 	public Material excavate() {
 		return null;
 	}
 
+	/**
+	 * Its overridden in the children classes.
+	 * @param m
+	 * @return
+	 */
 	public boolean placeMaterial(Material m) {
 		return false;
 	}
 
-	public void buildBase(Material m) {
+	/**
+	 * Its overridden in the children classes.
+	 * @param m
+	 */
+	public boolean buildBase(Material m) {
+		return false;
 	}
 
+	/**
+	 * Finds a random neighbour of the Thing.
+	 * @return the random neighbour.
+	 */
 	public Thing randomNeighbour() {
-		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " randomNeighbour() return " + neighbour.get(0).getName());
-		Main.activeSimulation.addStep(step);
+		Random rand = new Random();
+		int random = rand.nextInt(neighbour.size());
 
-		Main.decreaseTab();
-		return neighbour.get(0);
+		return neighbour.get(random);
 	}
 
-
+	/**
+	 * Returns the name of the object.
+	 * @return the of the object.
+	 */
 	public String getName() {
 		return name;
 	}
