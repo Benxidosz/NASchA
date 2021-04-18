@@ -42,9 +42,12 @@ public class GameManager {
     }
 
     /**
-     *
+     * Asks the user the number of settlers and asteroids and creates the entities.
      */
     public void newGame(){
+        turnNum = 0;
+        doneControllers = 0;
+
         System.out.println("How many settlers do you want? ");
         String input = Main.scanner.nextLine().toUpperCase();
         int settlernum = Integer.parseInt(input);
@@ -99,15 +102,33 @@ public class GameManager {
      */
     public void win(){
         System.out.println("Victory!");
+        System.out.println("Play again? [Y/N]");
+        try{
+            String input = Main.scanner.nextLine().toUpperCase();
+            if(input == "Y")
+                newGame();
+            if(input == "N")
+                System.exit(0);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Notificates the user the loss and calls newGame().
      */
     public void lose(){
-        turnNum = 0;
-        doneControllers = 0;
         System.out.println("Defeat!");
+        System.out.println("Play again? [Y/N]");
+        try{
+            String input = Main.scanner.nextLine().toUpperCase();
+            if(input == "Y")
+                newGame();
+            if(input == "N")
+                System.exit(0);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
