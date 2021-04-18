@@ -23,23 +23,23 @@ public class Inventory {
 		return false;
 	}
 
-	public boolean compareMaterial(Coal m1, Coal m2) {
+	private boolean compareMaterial(Coal m1, Coal m2) {
 		return true;
 	}
 
-	public boolean compareMaterial(Iron m1, Iron m2) {
+	private boolean compareMaterial(Iron m1, Iron m2) {
 		return true;
 	}
 
-	public boolean compareMaterial(Silicon m1, Silicon m2) {
+	private boolean compareMaterial(Silicon m1, Silicon m2) {
 		return true;
 	}
 
-	public boolean compareMaterial(Uran m1, Uran m2) {
+	private boolean compareMaterial(Uran m1, Uran m2) {
 		return true;
 	}
 
-	public boolean compareMaterial(WaterIce m1, WaterIce m2) {
+	private boolean compareMaterial(WaterIce m1, WaterIce m2) {
 		return true;
 	}
 
