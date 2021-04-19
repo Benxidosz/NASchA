@@ -125,4 +125,8 @@ public abstract class Thing {
 		}
 		return null;
 	}
+
+	public Material getCore() {
+		return null;
+	}
 }

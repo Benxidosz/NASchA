@@ -4,6 +4,7 @@ import Proto.controller.Controller;
 import Proto.entity.entities.Settler;
 import Proto.entity.entities.Ufo;
 import Proto.material.Material;
+import Proto.things.Thing;
 import Proto.things.asteroids.Asteroid;
 import Proto.things.asteroids.MainAsteroid;
 
@@ -13,9 +14,10 @@ import java.util.Random;
 
 public class GameManager {
     private ArrayList<Controller> controllers = new ArrayList<>();      //The controllers of the game
-    public HashMap<String, Material> recipes = new HashMap<>();         //The recipes for building
+    public HashMap<String, Inventory> recipes = new HashMap<>();         //The recipes for building
     private int doneControllers;                                        //The number of Controller which are done in this turn
     private int turnNum;                                                //Number of turns.
+    public static GameManager ref;
 
     /**
      * The constructor of this class.
@@ -23,6 +25,7 @@ public class GameManager {
     public GameManager(){
         doneControllers = 0;
         turnNum = 0;
+        ref = this;
     }
 
     /**
@@ -84,14 +87,13 @@ public class GameManager {
             main.addNeighbour(asteroids.get(i));
 
         for(int i = 0; i < settlernum; i++){
-            Settler s = new Settler("s" + i);
+            Settler s = new Settler(main, "s" + i);
             s.move(main);
         }
 
         for(int i = 0; i < rand.nextInt(5); i++){
-            Ufo u = new Ufo("u" + i);
-            Random ran1 = new Random();
-            u.move(asteroids.get(ran1.nextInt(asteroids.size())));
+            Thing loc = asteroids.get(rand.nextInt(asteroids.size()));
+            Ufo u = new Ufo(loc,"u" + i);
         }
 
         newTurn();

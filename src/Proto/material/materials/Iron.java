@@ -11,9 +11,4 @@ public class Iron extends Material {
 	public Iron (String name) {
 		super(name);
 	}
-
-	@Override
-	public String printName() {
-		return name;
-	}
 }

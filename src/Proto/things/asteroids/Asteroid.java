@@ -108,4 +108,9 @@ public class Asteroid extends Thing{
 	public boolean isDrillable(){
 		return (layer != 0);
 	}
+
+	@Override
+	public Material getCore() {
+		return core;
+	}
 }
