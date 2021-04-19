@@ -3,15 +3,34 @@ package Proto.things;
 import Proto.controller.controllers.SolarSystem;
 import Proto.entity.Entity;
 import Proto.material.Material;
+import Proto.simulator.listableObj;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public abstract class Thing {
-	protected ArrayList<Thing> neighbour = new ArrayList<>();	//The Thing's neighbour Thing objects
-	protected ArrayList<Entity> entities = new ArrayList<>();	//The Entities on the Thing
-	private SolarSystem mySystem;								//The SolarSystem which contains this Thing
-	protected String name;										//The name of the Thing
+/**
+ * Represents the places where the entities can move to.
+ * It's the parent class of the Asteroid and TeleportGate classes.
+ * Stores the neighbours of the thing, the entities on the thing
+ * and the solar system which contains it.
+ */
+public abstract class Thing implements listableObj {
+	/**
+	 * The Thing's neighbour Thing objects
+	 */
+	protected ArrayList<Thing> neighbour = new ArrayList<>();
+	/**
+	 * The Entities on the Thing
+	 */
+	protected ArrayList<Entity> entities = new ArrayList<>();
+	/**
+	 * The SolarSystem which contains this Thing
+	 */
+	private SolarSystem mySystem;
+	/**
+	 * The name of the Thing
+	 */
+	protected String name;
 
 	public Thing(String name) {
 		this.name = name;
@@ -104,6 +123,14 @@ public abstract class Thing {
 	 */
 	public String getName() {
 		return name;
+	}
+
+	/**
+	 * Get the number of the layer and returns.
+	 * @return 0.
+	 */
+	public int getLayer() {
+		return 0;
 	}
 
 	/**

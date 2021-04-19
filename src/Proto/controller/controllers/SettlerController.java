@@ -11,27 +11,92 @@ import Proto.things.gate.TeleportGate;
 import java.util.LinkedList;
 
 public class SettlerController implements Controller {
-	public static SettlerController ref;
+	/**
+	 * A reference for the class.
+	 */
+	private static SettlerController ref;
+	/**
+	 * The id of the settler.
+	 * Used for the name of the object.
+	 */
+	private static int settlerId;
 
+	/**
+	 * Returns the reference.
+	 * @return
+	 */
+	public static SettlerController getInstance() {
+		return ref;
+	}
+
+	/**
+	 * Sets the reference and the id.
+	 */
+	public static void init() {
+		ref = new SettlerController();
+		settlerId = 0;
+	}
+
+	/**
+	 * Stores the settlers in the Solar System in a list.
+	 */
 	private final LinkedList<Settler> settlers = new LinkedList<>();
 	private int doneSettlers = 0;
 
-	public SettlerController() {
-		ref = this;
+	/**
+	 * The constructor of the class
+	 */
+	private SettlerController() {
+
+	}
+
+	public Settler getSettlerByName(String name) {
+		for (Settler settler : settlers) {
+			if (settler.getName().equals(name)) {
+				return settler;
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the id of the settler.
+	 * @return
+	 */
+	public static String  getSettlerId() {
+		return "s" + settlerId++;
 	}
 
 	public void handleCommand(String command) {
 		String[] args = command.split(" ");
 
 		Settler selected = null;
-		for (Settler settler : settlers) {
-			if (settler.getName().equals(args[1])) {
-				selected = settler;
-				break;
+		if (args.length > 1)
+			selected = getSettlerByName(args[1]);
+
+		if ("List".equals(args[0])) {
+			if (args.length < 2) {
+				settlers.forEach(s -> System.out.println(s.getName()));
+			} else {
+				if (selected != null) {
+					System.out.println(selected.getName() + ": " + (selected.isActive() ? "Ready" : "Worked"));
+					System.out.println("Location and its neighbours:");
+					System.out.println("\tLocation: " + selected.getLocation().getName());
+					System.out.println("\tLocation layer: " + selected.getLocation().getLayer());
+					if (selected.getLocation().getLayer() == 0)
+						System.out.println("\tLocation core: " + selected.getLocation().getCore());
+					System.out.println("\t Neis:");
+					selected.getLocation().getNeighbour().forEach(nei -> System.out.println("\t\t" + nei.getName()));
+					System.out.println("\tGates:");
+					selected.getGates().forEach(g -> System.out.println("\t\t" + g.getName()));
+					System.out.println("\tMaterials:");
+					selected.getMyInventory().getMaterials().forEach(m -> System.out.println("\t\t" + m.getName()));
+				}
 			}
 		}
 
-		if (selected == null)
+		if (selected == null || !selected.isActive())
 			return;
 
 		if ("Move".equals(args[0])) {
@@ -84,8 +149,13 @@ public class SettlerController implements Controller {
 
 			if (line.equals("endTurn") && doneSettlers == settlers.size())
 				ended = true;
+
+			if (line.equals("quit")) {
+				GameManager.getInstance().makeQuit();
+				ended = true;
+			}
 		}
 
-		GameManager.ref.jobsDone();
+		GameManager.getInstance().jobsDone();
 	}
 }

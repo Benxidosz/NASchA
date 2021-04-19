@@ -12,16 +12,24 @@ public class MainAsteroid extends Asteroid {
 		//requirements = GameManager.ref.recipes.get("Base");
 	}
 
+	public MainAsteroid(String name, int layer, Material core, boolean nearBySun) {
+		super(name, layer, core, nearBySun);
+	}
+
 	/**
 	 * A player build base with a material.
 	 * @param m the material.
 	 */
 	@Override
 	public boolean buildBase(Material m) {
-		if(requirements.size() == 0) return true;
+		if (requirements.containsMaterial(m)) {
+			requirements.rmMaterial(m);
 
-		requirements.remove(m);
+			if(requirements.isEmpty())
+				GameManager.getInstance().win();
+
+			return true;
+		}
 		return false;
 	}
-
 }

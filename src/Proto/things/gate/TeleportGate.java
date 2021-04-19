@@ -29,6 +29,7 @@ public class TeleportGate extends Thing {
 	 * Activates the gates pair when this gate is placed.
 	 */
 	public void activate() {
+		setted = true;
 		pair.setActive(true);
 	}
 
@@ -80,4 +81,33 @@ public class TeleportGate extends Thing {
 		active = act;
 	}
 
+	/**
+	 * Lists the attributes of the object.
+	 * @return the attributes as a string.
+	 */
+	@Override
+	public String List() {
+		StringBuilder result = new StringBuilder("+------------------+\n");
+
+		result.append("name: " + getName());
+
+		result.append("\nneighbours: ");
+		if (neighbour.size() == 0)
+			result.append("null");
+		else
+			for (Thing nei : neighbour)
+				result.append(nei.getName() + " ");
+
+		result.append("\nentities: ");
+		if (entities.size() == 0)
+			result.append("null");
+		else
+			for (Entity ent : entities)
+				result.append(ent.getName() + " ");
+
+		result.append("\npair: " + ((pair != null) ? pair.getName() : "null"));
+		result.append("\nsetted: " + (setted ? "true" : "false"));
+		result.append("\nactive: " + (active ? "true" : "false"));
+		return result.toString();
+	}
 }

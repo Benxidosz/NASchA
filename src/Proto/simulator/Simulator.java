@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 /**
@@ -10,8 +11,9 @@ import java.util.Scanner;
  */
 public class Simulator {
 
-	Scanner sc;
 	ArrayList<String> commands;
+	LinkedList<Material> materials;
+	LinkedList<TeleportGate> gates;
 	boolean random = false;
 
 	public Simulator(Scanner sc){
@@ -19,166 +21,336 @@ public class Simulator {
 		commands = new ArrayList<>();
 	}
 
-	public void Read(){
+	private Material getMaterialByName(String name) {
+		for (Material m : materials)
+			if (m.getName().equals(name))
+				return m;
 
-		while (sc.hasNext()){
-			String stringTmp = sc.nextLine();
-			commands.add(stringTmp);
+		return null;
+	}
+
+	private TeleportGate getGateByName(String name) {
+		for (TeleportGate m : gates)
+			if (m.getName().equals(name))
+				return m;
+
+		return null;
+	}
+
+	public void Read(File in, File out){
+		try {
+			Scanner sc = null;
+			sc = new Scanner(in);
+			while (sc.hasNext()){
+				String stringTmp = sc.nextLine();
+				commands.add(stringTmp);
+			}
+			Execute(out);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 		}
 		//System.out.println(commands);
 	}
 
-	public void Execute(){
-		boolean setup = false;
-		boolean progress = false;
-		int readboard = 0;
-		int readnei = 0;
-		for (String curent : commands) {
-			String splittedCommand[] = curent.split(" ");
-			if (readboard > 0){
-				String tmp[] = curent.split(";");
-				System.out.println(tmp[0]);
-				readboard--;
-				continue;
-			}
+	public void run() {
+		boolean quit = false;
+		while (!quit) {
+			String line = Main.scanner.nextLine();
+			String[] args = line.split(" ");
+			File input = null;
+			File output = null;
+			if (args[0].equals("load"))
+				for (int i = 1; i < args.length - 1; ++i) {
+					if (args[i].equals("-i") && i + 1 < args.length)
+						input = new File(args[++i]);
 
-			if (readnei > 0){
-				String tmp[] = curent.split(";");
-				System.out.println(tmp[0]);
-				readnei--;
-				continue;
-			}
+					if (args[i].equals("-o") && i + 1 < args.length)
+						output = new File(args[++i]);
+				}
 
-			switch (splittedCommand[0]){
-				case "<SETUP>":
-					if (!progress)
-						setup = true;
-					break;
-				case "</SETUP>":
-					if (setup)
-						setup = false;
-					break;
-				case "Setboard":
-					if (setup){
-						readboard = Integer.parseInt(splittedCommand[1]);
-						System.out.println("Setboard -> " + readboard);
-					}
-					break;
-				case "Makegate":
-					if (setup){
-						System.out.println("kapu1: " + splittedCommand[1] + " kapu2: " + splittedCommand[2]);
-					}
-					break;
-				case "Setnei":
-					if (setup){
-						readnei = Integer.parseInt(splittedCommand[1]);
-						System.out.println("Setnei -> " + readboard);
-					}
-					break;
-				case "Settler":
-					if (setup){
-						System.out.println("nev: " + splittedCommand[1] + " aszteroid: " + splittedCommand[2]);
-					}
-					break;
-				case "Makematerial":
-					if (setup) {
-						if (splittedCommand[1].equals("-u")) {
-							System.out.println("nev: " + splittedCommand[2] + " napkoz: " + splittedCommand[3]);
-							break;
+			if (input != null && output != null)
+				Read(input, output);
+
+			if (args[0].equals("quit"))
+				quit = true;
+		}
+	}
+
+	public void Execute(File out) {
+		BufferedWriter writer;
+		try {
+			writer = new BufferedWriter(new FileWriter(out.getName()));
+
+			boolean setup = false;
+			boolean progress = false;
+			int readboard = 0;
+			int readnei = 0;
+
+			SolarSystem.init();
+			SettlerController.init();
+			RobotController.init();
+			UfoController.init();
+
+			for (String curent : commands) {
+				writer.write(curent + "\n");
+				String splittedCommand[] = curent.split(" ");
+				if (readboard > 0) {
+					String tmp[] = curent.split(";");
+					if (tmp[tmp.length - 1].equals("1")) {
+						MainAsteroid main = null;
+						if (tmp[2].equals("-e")) {
+							main = new MainAsteroid(tmp[0], Integer.parseInt(tmp[1]), null, tmp[2].equals("1"));
+						} else {
+							Material core = null;
+							switch(tmp[2]){
+								case "-c":
+									core = new Coal(tmp[3]);
+									break;
+								case "-i":
+									core = new Iron(tmp[3]);
+									break;
+								case "-s":
+									core = new Silicon(tmp[3]);
+									break;
+								case "-u":
+									core = new Uran(tmp[3]);
+									break;
+								case "-w":
+									core = new WaterIce(tmp[3]);
+									break;
+								default:
+									core = null;
+							}
+							main = new MainAsteroid(tmp[0], Integer.parseInt(tmp[1]), core, tmp[3].equals("1"));
 						}
-						System.out.println("nev: " + splittedCommand[2]);
+						SolarSystem.getInstance().addThing(main);
+					} else {
+						Asteroid asteroid = null;
+						if (tmp[2].equals("-e")) {
+							asteroid = new MainAsteroid(tmp[0], Integer.parseInt(tmp[1]), null, tmp[2].equals("1"));
+						} else {
+							Material core = null;
+							switch(tmp[2]){
+								case "-c":
+									core = new Coal(tmp[3]);
+									break;
+								case "-i":
+									core = new Iron(tmp[3]);
+									break;
+								case "-s":
+									core = new Silicon(tmp[3]);
+									break;
+								case "-u":
+									core = new Uran(tmp[3]);
+									break;
+								case "-w":
+									core = new WaterIce(tmp[3]);
+									break;
+								default:
+									core = null;
+							}
+							asteroid = new MainAsteroid(tmp[0], Integer.parseInt(tmp[1]), core, tmp[3].equals("1"));
+						}
+						SolarSystem.getInstance().addThing(asteroid);
 					}
-					break;
-				case "Setinventory":
-					if (setup){
-						System.out.println("des: " + splittedCommand[1] + " sour: " + splittedCommand[2]);
+//					System.out.println(tmp[0]);
+					readboard--;
+					continue;
+				}
+
+				if (readnei > 0){
+					String tmp[] = curent.split(";");
+					Thing t1 = null;
+					Thing t2 = null;
+
+					t1 = getGateByName(tmp[0]);
+					t2 = getGateByName(tmp[1]);
+
+					if (t1 == null)
+						t1 = SolarSystem.getInstance().getThingByName(tmp[0]);
+					else {
+						TeleportGate tg = (TeleportGate) t1;
+						tg.activate();
+						SolarSystem.getInstance().addThing(tg);
 					}
-					break;
-				case "Robot":
-					if (setup){
-						System.out.println("nev: " + splittedCommand[1] + " aszteroid: " + splittedCommand[2]);
+
+					if (t2 == null)
+						t2 = SolarSystem.getInstance().getThingByName(tmp[1]);
+					else {
+						TeleportGate tg = (TeleportGate) t2;
+						tg.activate();
+						SolarSystem.getInstance().addThing(tg);
 					}
-					break;
-				case "UFO":
-					if (setup){
-						System.out.println("nev: " + splittedCommand[1] + " aszteroid: " + splittedCommand[2]);
+
+					if (t1 != null && t2 != null) {
+						t1.addNeighbour(t2);
+						t2.addNeighbour(t1);
 					}
-					break;
-				case "Setrandom":
-					if (setup){
-						System.out.println("ertek: " + splittedCommand[1]);
-					}
-					break;
-				case "<PROGRESS>":
-					if (!setup)
-						progress = true;
-					break;
-				case "</PROGRESS>":
-					if (progress)
-						progress = false;
-					break;
-				case "Move":
-					if (progress){
-						System.out.println("nev: " + splittedCommand[1] + " des: " + splittedCommand[2]);
-					}
-					break;
-				case "Drill":
-					if (progress){
-						System.out.println("nev: " + splittedCommand[1]);
-					}
-					break;
-				case "Mine":
-					if (progress){
-						System.out.println("nev: " + splittedCommand[1]);
-					}
-					break;
-				case "Buildrobot":
-					if (progress){
-						System.out.println("robot: " + splittedCommand[1] + " telepes: " + splittedCommand[2]);
-					}
-					break;
-				case "Buildgate":
-					if (progress){
-						System.out.println("kapu: " + splittedCommand[1] + " telepes: " + splittedCommand[2]);
-					}
-					break;
-				case "Buildbase":
-					if (progress){
+
+					System.out.println(tmp[0]);
+					readnei--;
+					continue;
+				}
+
+				switch (splittedCommand[0]){
+					case "<SETUP>":
+						if (!progress)
+							setup = true;
+						break;
+					case "</SETUP>":
+						if (setup)
+							setup = false;
+						break;
+					case "Setboard":
+						if (setup){
+							readboard = Integer.parseInt(splittedCommand[1]);
+							//System.out.println("Setboard -> " + readboard);
+						}
+						break;
+					case "Makegate":
+						if (setup){
+							//System.out.println("kapu1: " + splittedCommand[1] + " kapu2: " + splittedCommand[2]);
+							gates.add(new TeleportGate(splittedCommand[1]));
+							gates.add(new TeleportGate(splittedCommand[2]));
+						}
+						break;
+					case "Setnei":
+						if (setup){
+							readnei = Integer.parseInt(splittedCommand[1]);
+							//System.out.println("Setnei -> " + readboard);
+						}
+						break;
+					case "Settler":
+						if (setup){
+//							System.out.println("nev: " + splittedCommand[1] + " aszteroid: " + splittedCommand[2]);
+							Thing loc = SolarSystem.getInstance().getThingByName(splittedCommand[2]);
+							SettlerController.getInstance().addSettler(new Settler(loc, splittedCommand[1]));
+						}
+						break;
+					case "Makematerial":
+						if (setup) {
+							if (splittedCommand[1].equals("-u")) {
+								//System.out.println("nev: " + splittedCommand[2] + " napkoz: " + splittedCommand[3]);
+								materials.add(new Uran(splittedCommand[2], Integer.parseInt(splittedCommand[3])));
+								break;
+							}
+							switch(splittedCommand[1]){
+								case "-c":
+									materials.add(new Coal(splittedCommand[2]));
+									break;
+								case "-i":
+									materials.add(new Iron(splittedCommand[2]));
+									break;
+								case "-s":
+									materials.add(new Silicon(splittedCommand[2]));
+									break;
+								case "-w":
+									materials.add(new WaterIce(splittedCommand[2]));
+									break;
+								default:
+							}
+							//System.out.println("nev: " + splittedCommand[2]);
+						}
+						break;
+					case "Setinventory":
+						if (setup){
+							System.out.println("des: " + splittedCommand[1] + " sour: " + splittedCommand[2]);
+							if (SolarSystem.getInstance().getThingByName(splittedCommand[1]) != null){
+
+							} else if (SettlerController.getInstance().getSettlerByName(splittedCommand[1]) != null){
+
+							}
+						}
+						break;
+					case "Robot":
+						if (setup){
+							System.out.println("nev: " + splittedCommand[1] + " aszteroid: " + splittedCommand[2]);
+						}
+						break;
+					case "UFO":
+						if (setup){
+							System.out.println("nev: " + splittedCommand[1] + " aszteroid: " + splittedCommand[2]);
+						}
+						break;
+					case "Setrandom":
+						if (setup){
+							System.out.println("ertek: " + splittedCommand[1]);
+						}
+						break;
+					case "<PROGRESS>":
+						if (!setup)
+							progress = true;
+						break;
+					case "</PROGRESS>":
+						if (progress)
+							progress = false;
+						break;
+					case "Move":
 						if (progress){
-							System.out.println("telepes: " + splittedCommand[1]);
+							System.out.println("nev: " + splittedCommand[1] + " des: " + splittedCommand[2]);
 						}
-					}
-					break;
-				case "Putdown":
-					if (progress){
-						System.out.println("obj nev: " + splittedCommand[1] + " telepes: " + splittedCommand[2]);
-					}
-					break;
-				case "Step":
-					if (progress){
-						System.out.println("step");
-					}
-					break;
-				case "List":
-					if (progress){
-						System.out.println("list");
-					}
-					break;
-				case "Makeeruption":
-					if (progress){
-						System.out.println("aszteroida: " + splittedCommand[1] + " sugar: " + splittedCommand[2]);
-					}
-					break;
-				case "Abort":
-					return;
-				case "Load":
-					System.out.println("load: " + splittedCommand[1]);
-					break;
-				default:
-					if (readboard == 0 && readnei == 0)
-						System.out.println("Ismeretlen parancs");
-					break;
+						break;
+					case "Drill":
+						if (progress){
+							System.out.println("nev: " + splittedCommand[1]);
+						}
+						break;
+					case "Mine":
+						if (progress){
+							System.out.println("nev: " + splittedCommand[1]);
+						}
+						break;
+					case "Buildrobot":
+						if (progress){
+							System.out.println("robot: " + splittedCommand[1] + " telepes: " + splittedCommand[2]);
+						}
+						break;
+					case "Buildgate":
+						if (progress){
+							System.out.println("kapu: " + splittedCommand[1] + " telepes: " + splittedCommand[2]);
+						}
+						break;
+					case "Buildbase":
+						if (progress){
+							if (progress){
+								System.out.println("telepes: " + splittedCommand[1]);
+							}
+						}
+						break;
+					case "Putdown":
+						if (progress){
+							System.out.println("obj nev: " + splittedCommand[1] + " telepes: " + splittedCommand[2]);
+						}
+						break;
+					case "Step":
+						if (progress){
+							System.out.println("step");
+						}
+						break;
+					case "List":
+						if (progress){
+							System.out.println("list");
+						}
+						break;
+					case "Makeeruption":
+						if (progress){
+							System.out.println("aszteroida: " + splittedCommand[1] + " sugar: " + splittedCommand[2]);
+						}
+						break;
+					case "Abort":
+						return;
+					case "Load":
+						System.out.println("load: " + splittedCommand[1]);
+						break;
+					default:
+						if (readboard == 0 && readnei == 0)
+							System.out.println("Ismeretlen parancs");
+						break;
+				}
 			}
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 

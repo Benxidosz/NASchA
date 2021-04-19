@@ -85,4 +85,22 @@ public class Inventory {
 	public boolean hasSpace() {
 		return (materials.size() < maxSpace || maxSpace == -1);
 	}
+
+	/**
+	 * Check the material, is it empty or not.
+	 * @return is it empty or not.
+	 */
+	public boolean isEmpty() {
+		return materials.isEmpty();
+	}
+
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		Inventory clone = new Inventory(maxSpace);
+		for (Material m : materials) {
+			clone.addMaterial(m);
+		}
+
+		return clone;
+	}
 }

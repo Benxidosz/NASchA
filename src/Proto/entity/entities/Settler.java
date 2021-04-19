@@ -21,13 +21,13 @@ public class Settler extends Entity {
 	public Settler(Thing loc, String name) {
 		super(loc, name);
 		gates = new ArrayList<>(3);
-		Inventory myInventory = new Inventory(10);
+		myInventory = new Inventory(10);
 	}
 
 	@Override
 	protected void done(){
 		active = false;
-		SettlerController.ref.done();
+		SettlerController.getInstance().done();
 	}
 
 	/**
@@ -46,7 +46,7 @@ public class Settler extends Entity {
 	 */
 	public void buildGate(String name) {
 		if (gates.size()<2) {
-			Inventory gateRecipe = GameManager.ref.recipes.get("TeleportGate");
+			Inventory gateRecipe = GameManager.getInstance().recipes.get("TeleportGate");
 			if(myInventory.containsRecipe(gateRecipe)) {
 				myInventory.rmAllFromRecipe(gateRecipe);
 				TeleportGate gate1 = new TeleportGate(name + "a");
@@ -63,11 +63,11 @@ public class Settler extends Entity {
 	 * Removes the Materials and creates a Robot.
 	 */
 	public void buildRobot(String name) {
-		Inventory robotRecipe = GameManager.ref.recipes.get("Robot");
+		Inventory robotRecipe = GameManager.getInstance().recipes.get("Robot");
 		if(myInventory.containsRecipe(robotRecipe)) {
 			myInventory.rmAllFromRecipe(robotRecipe);
 			Robot r = new Robot(name, location);
-			RobotController.ref.addRobot(r);
+			RobotController.getInstance().addRobot(r);
 			location.addEntity(r);
 		}
 	}
@@ -89,7 +89,7 @@ public class Settler extends Entity {
 	public void putGateDown(TeleportGate g) {
 		g.addNeighbour(location);
 		location.addNeighbour(g);
-		SolarSystem.ref.addThing(g);
+		SolarSystem.getInstance().addThing(g);
 		g.activate();
 		gates.remove(g);
 	}
@@ -128,7 +128,7 @@ public class Settler extends Entity {
 	@Override
 	public void die(){
 		super.die();
-		SettlerController.ref.rmSettler(this);
+		SettlerController.getInstance().rmSettler(this);
 	}
 
 	public Material getMaterialByName(String arg) {
@@ -151,4 +151,41 @@ public class Settler extends Entity {
 		this.active = active;
 	}
 
+	public boolean isActive() {
+		return active;
+	}
+
+	public ArrayList<TeleportGate> getGates() {
+		return gates;
+	}
+
+	public Inventory getMyInventory() {
+		return this.myInventory;
+	}
+
+	/**
+	 * Lists the attributes of the object.
+	 * @return the attributes as a string.
+	 */
+	@Override
+	public String List() {
+		StringBuilder result = new StringBuilder("+------------------+\n");
+		result.append("name: " + getName() + "\n");
+		result.append("materials: ");
+		if (myInventory.getMaterials().size() == 0)
+			result.append("null \n");
+		else
+			for (Material mat : myInventory.getMaterials())
+				result.append(mat.getName() + " ");
+		result.append("\ngates: ");
+		if (gates.size() == 0)
+			result.append("null \n");
+		else
+			for (TeleportGate tg : gates)
+				result.append(tg.getName() + " ");
+		result.append("\nlocation: " + location.getName() + "\n");
+		result.append("stepped: " + (active == true ? "false" : "true") + "\n");
+
+		return result.toString();
+	}
 }

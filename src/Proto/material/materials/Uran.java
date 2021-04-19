@@ -2,8 +2,11 @@ package Proto.material.materials;
 
 import Proto.Main;
 import Proto.material.Material;
-import Proto.simulator.Step;
 
+/**
+ * It represents a Uran type material and helps to distinguish it from other different materials.
+ * It counts how many times the object was near the sun and if so for the third time near the sun, it will explode.
+ */
 public class Uran extends Material {
 
 	private int countExposition;
@@ -24,8 +27,5 @@ public class Uran extends Material {
 			countExposition++;
 	}
 
-	@Override
-	public String printName() {
-		return name;
-	}
+
 }

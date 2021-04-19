@@ -2,6 +2,7 @@
 package Proto.entity;
 
 import Proto.material.Material;
+import Proto.simulator.listableObj;
 import Proto.things.Thing;
 import Proto.things.gate.TeleportGate;
 
@@ -12,7 +13,7 @@ public abstract class Entity {
 
 	public Entity(Thing loc, String name){
 		this.name = name;
-		loc = location;
+		location = loc;
 	}
 
 	protected void done(){}

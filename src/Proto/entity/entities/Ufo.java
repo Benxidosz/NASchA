@@ -18,7 +18,7 @@ public class Ufo extends Entity {
 	@Override
 	public void die(){
 		super.die();
-		UfoController.ref.rmUfo(this);
+		UfoController.getInstance().rmUfo(this);
 	}
 
 	@Override

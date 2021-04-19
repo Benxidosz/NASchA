@@ -2,17 +2,52 @@ package Proto.controller.controllers;
 
 import Proto.GameManager;
 import Proto.controller.Controller;
-import Proto.entity.entities.Robot;
-import Proto.entity.entities.Settler;
 import Proto.entity.entities.Ufo;
 import Proto.things.Thing;
 
 import java.util.LinkedList;
 
 public class UfoController implements Controller {
-	public static UfoController ref;
-	private LinkedList<Ufo> ufos;
+	/**
+	 * A reference for the class.
+	 */
+	private static UfoController ref;
+	/**
+	 * Returns the reference.
+	 * @return the reference
+	 */
+	public static UfoController getInstance() {
+		return ref;
+	}
+	/**
+	 * Sets the reference.
+	 */
+	public static void init() {
+		ref = new UfoController();
+	}
 
+	/**
+	 * The id of the ufo.
+	 * Used for the name of the object.
+	 */
+	private static int ufoId;
+
+	/**
+	 * Returns the id of the ufo.
+	 * @return the id of the ufo.
+	 */
+	public static String getUfoId() {
+		return "uf" + ufoId++;
+	}
+
+	/**
+	 * The ufos in the Solar System stored in list.
+	 */
+	private LinkedList<Ufo> ufos = new LinkedList<>();
+
+	/**
+	 * The constructor of the class
+	 */
 	public UfoController() {
 		ref = this;
 	}
@@ -29,7 +64,7 @@ public class UfoController implements Controller {
 	@Override
 	public void makeTurn() {
 		ufos.forEach(this::calculateStep);
-		GameManager.ref.jobsDone();
+		GameManager.getInstance().jobsDone();
 	}
 
 	@Override
@@ -56,5 +91,14 @@ public class UfoController implements Controller {
 
 	public void rmUfo(Ufo ufo) {
 		ufos.remove(ufo);
+	}
+
+	/**
+	 * Adds an ufo, got as a parameter, to the
+	 * ufos array.
+	 * @param u the Ufo which is added.
+	 */
+	public void addUfo(Ufo u) {
+		ufos.add(u);
 	}
 }

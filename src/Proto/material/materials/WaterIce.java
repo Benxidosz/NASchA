@@ -2,8 +2,11 @@ package Proto.material.materials;
 
 import Proto.Main;
 import Proto.material.Material;
-import Proto.simulator.Step;
 
+/**
+ * It represents the WaterIce type material and helps to distinguish it from different materials.
+ * If the material gets close to the sun, it will evaporate.
+ */
 public class WaterIce extends Material{
 
 	/**
@@ -17,10 +20,5 @@ public class WaterIce extends Material{
 	@Override
 	public void nearSun() {
 		myAsteroid.setCore(null);
-	}
-
-	@Override
-	public String printName() {
-		return name;
 	}
 }

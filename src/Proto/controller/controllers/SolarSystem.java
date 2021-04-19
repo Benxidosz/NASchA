@@ -2,24 +2,116 @@ package Proto.controller.controllers;
 
 import Proto.Main;
 import Proto.controller.Controller;
-import Proto.entity.entities.Robot;
-import Proto.entity.entities.Settler;
 import Proto.things.Thing;
 import Proto.things.gate.TeleportGate;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
 public class SolarSystem implements Controller {
 	private LinkedList<Thing> things = new LinkedList<>();
 	private LinkedList<TeleportGate> gates = new LinkedList<>();
-	private String name;
+	/**
+	 * The remaining turns until the next sun eruption.
+	 */
 	private int untilEruption = -1;
-	public static SolarSystem ref;
+	/**
+	 * A reference for the class.
+	 */
+	private static SolarSystem ref;
 
-	public SolarSystem(String name) {
-		this.name = name;
+	/**
+	 * Return the reference.
+	 * @return the reference.
+	 */
+	public static SolarSystem getInstance() {
+		return ref;
+	}
+
+	/**
+	 * Sets the reference and the IDs of the materials.
+	 */
+	public static void init() {
+		ref = new SolarSystem();
+		coalId = 0;
+		ironId = 0;
+		siliconId = 0;
+		uranId = 0;
+		waterIceId = 0;
+	}
+
+	/**
+	 * The IDs of the Materials and the Things in the Solar System.
+	 */
+	private static int coalId;
+	private static int ironId;
+	private static int siliconId;
+	private static int uranId;
+	private static int waterIceId;
+	private static int teleportGateId;
+	private static int asteroidId;
+
+	/**
+	 * Returns the ID of the Coal.
+	 * @return the ID.
+	 */
+	public static String  getCoalId() {
+		return "c" + coalId++;
+	}
+
+	/**
+	 * Returns the ID of the Iron.
+	 * @return the ID.
+	 */
+	public static String getIronId() {
+		return "i" + ironId++;
+	}
+
+	/**
+	 * Returns the ID of the Silicon.
+	 * @return the ID.
+	 */
+	public static String getSiliconId() {
+		return "s" + siliconId++;
+	}
+
+	/**
+	 * Returns the ID of the Uran.
+	 * @return the ID.
+	 */
+	public static String getUranId() {
+		return "ur" + uranId++;
+	}
+
+	/**
+	 * Returns the ID of the WaterIce.
+	 * @return the ID.
+	 */
+	public static String getWaterIceId() {
+		return "w" + waterIceId++;
+	}
+
+	/**
+	 * Returns the ID of the TeleportGate.
+	 * @return the ID.
+	 */
+	public static String getTeleportGateId(){
+		return "tg" + teleportGateId++;
+	}
+
+	/**
+	 * Returns the ID of the Asteroid.
+	 * @return the ID.
+	 */
+	public static String getAsteroidId() {
+		return "a" + asteroidId++;
+	}
+
+	/**
+	 * The constructor of the class.
+	 * Sets itself as the reference.
+	 */
+	private SolarSystem() {
 		ref = this;
 	}
 
@@ -92,10 +184,10 @@ public class SolarSystem implements Controller {
 		untilEruption = -1;
 	}
 
-	public String getName(){
-		return name;
-	}
-
+	/**
+	 * Makes a turn in the game.
+	 * Steps with the TeleportGates and handles the eruption.
+	 */
 	@Override
 	public void makeTurn() {
 		gates.forEach(TeleportGate::makeTurn);
@@ -110,6 +202,7 @@ public class SolarSystem implements Controller {
 				makeSolarEruption();
 			}
 		}
+		System.out.println(untilEruption == -1 ? "No SolarEruption danger." : "Danger! Eruption, after " + untilEruption + " turn.");
 	}
 
 	@Override
@@ -129,5 +222,13 @@ public class SolarSystem implements Controller {
 			if (start != null)
 				makeSolarEruption(start, Integer.parseInt(args[2]));
 		}
+	}
+
+	public Thing getThingByName(String name) {
+		for (Thing t : things)
+			if (t.getName().equals(name))
+				return t;
+
+		return null;
 	}
 }

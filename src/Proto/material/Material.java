@@ -30,4 +30,5 @@ public abstract class Material {
 	public void setMyAsteroid(Asteroid myAsteroid) {
 		this.myAsteroid = myAsteroid;
 	}
+
 }
