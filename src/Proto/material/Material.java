@@ -3,6 +3,7 @@ package Proto.material;
 import Proto.Main;
 import Proto.things.asteroids.Asteroid;
 
+
 public abstract class Material {
 	protected Asteroid myAsteroid;
 	protected String name;

@@ -40,7 +40,7 @@ public class Robot extends Entity{
 		StringBuilder result = new StringBuilder("+------------------+\n");
 
 		result.append("name: " + getName() + "\n");
-		result.append("\nlocation: " + location.getName() + "\n");
+		result.append("location: " + location.getName() + "\n");
 
 		return result.toString();
 	}

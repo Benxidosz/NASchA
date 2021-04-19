@@ -9,6 +9,7 @@ import Proto.things.Thing;
 import Proto.things.gate.TeleportGate;
 import Proto.entity.Entity;
 import Proto.material.Material;
+import Proto.simulator.*;
 
 import java.util.ArrayList;
 
@@ -174,13 +175,13 @@ public class Settler extends Entity {
 		result.append("name: " + getName() + "\n");
 		result.append("materials: ");
 		if (myInventory.getMaterials().size() == 0)
-			result.append("null \n");
+			result.append("null");
 		else
 			for (Material mat : myInventory.getMaterials())
 				result.append(mat.getName() + " ");
 		result.append("\ngates: ");
 		if (gates.size() == 0)
-			result.append("null \n");
+			result.append("null");
 		else
 			for (TeleportGate tg : gates)
 				result.append(tg.getName() + " ");

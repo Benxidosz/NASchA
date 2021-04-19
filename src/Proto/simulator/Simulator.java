@@ -1,7 +1,22 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+package Proto.simulator;
+
+import Proto.Main;
+import Proto.controller.controllers.RobotController;
+import Proto.controller.controllers.SettlerController;
+import Proto.controller.controllers.SolarSystem;
+import Proto.controller.controllers.UfoController;
+import Proto.entity.entities.Robot;
+import Proto.entity.entities.Settler;
+import Proto.entity.entities.Ufo;
+import Proto.material.Material;
+import Proto.material.materials.*;
+import Proto.things.Thing;
+import Proto.things.asteroids.Asteroid;
+import Proto.things.asteroids.MainAsteroid;
+import Proto.things.gate.TeleportGate;
+import jdk.jfr.SettingControl;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -16,8 +31,7 @@ public class Simulator {
 	LinkedList<TeleportGate> gates;
 	boolean random = false;
 
-	public Simulator(Scanner sc){
-		this.sc = sc;
+	public Simulator(){
 		commands = new ArrayList<>();
 		materials = new LinkedList<>();
 		gates = new LinkedList<>();
@@ -399,12 +413,22 @@ public class Simulator {
 					case "Buildgate":
 						if (progress){
 							System.out.println("kapu: " + splittedCommand[1] + " telepes: " + splittedCommand[2]);
+
+							Settler s = SettlerController.getInstance().getSettlerByName(splittedCommand[2]);
+							if (s != null){
+								SettlerController.getInstance().handleCommand("Buildgate " + splittedCommand[2] + " " + splittedCommand[1]);
+							}
 						}
 						break;
 					case "Buildbase":
 						if (progress){
 							if (progress){
-								System.out.println("telepes: " + splittedCommand[1]);
+							//	System.out.println("telepes: " + splittedCommand[1]);
+
+								Settler s = SettlerController.getInstance().getSettlerByName(splittedCommand[1]);
+								if (s != null){
+									SettlerController.getInstance().handleCommand("Buildbase " + splittedCommand[2] + " " + splittedCommand[1]);
+								}
 							}
 						}
 						break;
@@ -463,14 +487,18 @@ public class Simulator {
 						break;
 					case "Makeeruption":
 						if (progress){
-							System.out.println("aszteroida: " + splittedCommand[1] + " sugar: " + splittedCommand[2]);
+						//	System.out.println("aszteroida: " + splittedCommand[1] + " sugar: " + splittedCommand[2]);
+							Thing th = SolarSystem.getInstance().getThingByName(splittedCommand[1]);
+							SolarSystem.getInstance().makeSolarEruption(th, Integer.parseInt(splittedCommand[2]));
 						}
 						break;
 					case "Abort":
+
+
 						return;
 					default:
 						if (readboard == 0 && readnei == 0)
-							System.out.println("Ismeretlen parancs");
+						//	System.out.println("Ismeretlen parancs");
 						break;
 				}
 			}

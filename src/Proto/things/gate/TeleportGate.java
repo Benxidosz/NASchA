@@ -107,6 +107,7 @@ public class TeleportGate extends Thing {
 		result.append("\npair: " + ((pair != null) ? pair.getName() : "null"));
 		result.append("\nsetted: " + (setted ? "true" : "false"));
 		result.append("\nactive: " + (active ? "true" : "false"));
+		result.append("\nnormal: " + (normal ? "true" : "false") + "\n");
 		return result.toString();
 	}
 }

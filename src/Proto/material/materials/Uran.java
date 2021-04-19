@@ -18,6 +18,11 @@ public class Uran extends Material {
 		super(name);
 	}
 
+	public Uran(String name, int sunNum){
+		super(name);
+		this.countExposition = sunNum;
+	}
+
 	@Override
 	public void nearSun() {
 		if (countExposition == 3) {

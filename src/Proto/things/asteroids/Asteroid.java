@@ -4,6 +4,7 @@ import Proto.Main;
 import Proto.entity.Entity;
 import Proto.material.Material;
 import Proto.things.Thing;
+import Proto.simulator.*;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
