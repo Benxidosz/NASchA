@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * The main class of the game.
+ */
 public class Main {
     static public Scanner scanner = new Scanner(System.in);
     public static Random rng = new Random();

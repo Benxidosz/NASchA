@@ -9,6 +9,10 @@ import Proto.things.Thing;
 
 import java.util.LinkedList;
 
+/**
+ * Represents the controller class of the robots.
+ * Calculates the next step for each robot.
+ */
 public class RobotController implements Controller {
 	/**
 	 * A reference for the class.
@@ -55,6 +59,12 @@ public class RobotController implements Controller {
 		Main.log("RobotController created.");
 	}
 
+	/**
+	 * Calculates the next step of the robot.
+	 * If the location is drillable it drills,
+	 * otherwise moves to a random neighbour.
+	 * @param r the Robot which makes the step.
+	 */
 	private void calculateStep(Robot r) {
 		Thing tmpLoc = r.getLocation();
 		if (tmpLoc.isDrillable())
@@ -74,6 +84,11 @@ public class RobotController implements Controller {
 		return null;
 	}
 
+	/**
+	 * Adds a robot, got as a parameter, to the
+	 * robots array.
+	 * @param r the Robot which is added.
+	 */
 	public void addRobot(Robot r) {
 		Main.log("Robot added to controller: " + r.getName());
 		robots.add(r);
@@ -89,11 +104,23 @@ public class RobotController implements Controller {
 		robots.remove(r);
 	}
 
+	/**
+	 * Calls the calculateStep function for each robot
+	 * in the Solar System.
+	 */
 	@Override
 	public void makeTurn() {
 		robots.forEach(this::calculateStep);
 	}
 
+	public LinkedList<Robot> getRobots() {
+		return robots;
+	}
+
+	/**
+	 * Handles the inputs from the interface.
+	 * @param line
+	 */
 	@Override
 	public void handleCommand(String line) {
 		String[] args = line.split(" ");

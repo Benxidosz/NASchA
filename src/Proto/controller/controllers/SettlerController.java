@@ -10,6 +10,11 @@ import Proto.things.gate.TeleportGate;
 
 import java.util.LinkedList;
 
+/**
+ * Represents the controller class of the settlers.
+ * Handles the input from the interface, from the
+ * user, and stores the settler that are done.
+ */
 public class SettlerController implements Controller {
 	/**
 	 * A reference for the class.
@@ -45,6 +50,9 @@ public class SettlerController implements Controller {
 	 * Stores the settlers in the Solar System in a list.
 	 */
 	private final LinkedList<Settler> settlers = new LinkedList<>();
+	/**
+	 * Stores the number of settlers that are done.
+	 */
 	private int doneSettlers = 0;
 
 	/**
@@ -72,6 +80,10 @@ public class SettlerController implements Controller {
 		return "s" + settlerId++;
 	}
 
+	/**
+	 * Handles the inputs from the interface.
+	 * @param command the input from the interface.
+	 */
 	public void handleCommand(String command) {
 		String[] args = command.split(" ");
 
@@ -129,18 +141,34 @@ public class SettlerController implements Controller {
 		}
 	}
 
+	/**
+	 * Increases the number of the settlers that are done.
+	 */
 	public void done() {
 		++doneSettlers;
 	}
 
+	/**
+	 * Adds a settler to the list where the settlers
+	 * of the Solar System are stored in.
+	 * @param s the Settler which is added.
+	 */
 	public void addSettler(Settler s) {
 		settlers.add(s);
 	}
 
+	/**
+	 * Removes a settler from the list where the settlers
+	 * of the Solar System are stored in.
+	 * @param s the Settler which is removed.
+	 */
 	public void rmSettler(Settler s) {
 		settlers.remove(s);
 	}
 
+	/**
+	 * Handles a turn for the settlers.
+	 */
 	@Override
 	public void makeTurn() {
 		doneSettlers = 0;

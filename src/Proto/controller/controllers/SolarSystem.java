@@ -8,8 +8,17 @@ import Proto.things.gate.TeleportGate;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+/**
+ * Represents the controller class of the solar system in the game.
+ */
 public class SolarSystem implements Controller {
+	/**
+	 * The things in the solar system, stored in a list.
+	 */
 	private LinkedList<Thing> things = new LinkedList<>();
+	/**
+	 * The teleport gates in the solar system, stored in a list.
+	 */
 	private LinkedList<TeleportGate> gates = new LinkedList<>();
 	/**
 	 * The remaining turns until the next sun eruption.
@@ -129,18 +138,29 @@ public class SolarSystem implements Controller {
 	}
 
 	/**
-	 * Add a thing from the SolarSystem
+	 * Add a thing from the Solar System
 	 * @param t The thing that is added.
 	 */
 	public void addThing(Thing t) {
 		things.add(t);
 	}
 
+	/**
+	 * Add a TeleportGate from the Solar System
+	 * @param t the TeleportGate that is added.
+	 */
 	public void addThing(TeleportGate t) {
 		things.add(t);
 		gates.add(t);
 	}
 
+	/**
+	 * Calculates the area where something has effect in.
+	 * Makes an circle with r radius as an area that is affected.
+	 * @param start the Thing where it starts from.
+	 * @param r the radius of the circle.
+	 * @return the area.
+	 */
 	private LinkedList<Thing> makeArea(Thing start, int r) {
 		LinkedList<Thing> inProcess = new LinkedList<>();
 		LinkedList<Thing> touched = new LinkedList<>();
@@ -180,6 +200,11 @@ public class SolarSystem implements Controller {
 		untilEruption = -1;
 	}
 
+	/**
+	 * Makes a solar eruption in a distance from the start.
+	 * @param start the Thing where it starts from.
+	 * @param r the radius of the circle.
+	 */
 	public void makeSolarEruption(Thing start, int r) {
 		LinkedList<Thing> affected = makeArea(start, r);
 		affected.forEach(Thing::applySunEruption);
@@ -207,6 +232,10 @@ public class SolarSystem implements Controller {
 		System.out.println(untilEruption == -1 ? "No SolarEruption danger." : "Danger! Eruption, after " + untilEruption + " turn.");
 	}
 
+	/**
+	 * Handle the input from the interface.
+	 * @param command the input.
+	 */
 	@Override
 	public void handleCommand(String command) {
 		String[] args = command.split(" ");

@@ -1,13 +1,18 @@
 package Proto.things.asteroids;
 
 import Proto.Main;
+import Proto.controller.controllers.SolarSystem;
 import Proto.entity.Entity;
 import Proto.material.Material;
+import Proto.material.materials.Coal;
+import Proto.material.materials.Iron;
+import Proto.material.materials.Silicon;
+import Proto.material.materials.Uran;
+import Proto.material.materials.WaterIce;
 import Proto.things.Thing;
 import Proto.simulator.*;
 
-import java.util.ArrayList;
-import java.util.InputMismatchException;
+import java.util.Random;
 
 /**
  *  Represents the Asteroids in the Solar System.
@@ -34,8 +39,35 @@ public class Asteroid extends Thing {
 	public Asteroid(String name) {
 		super(name);
 
-		this.layer = layer;
-		this.nearBySun = nearBySun;
+		this.layer = Main.rng.nextInt(6) + 2;
+
+		if(Main.rng.nextBoolean())
+			this.nearBySun = true;
+		else
+			this.nearBySun = false;
+
+		Material core;
+		int b = Main.rng.nextInt(6);
+		switch(b){
+			case 0:
+				core = new Coal(SolarSystem.getCoalId());
+				break;
+			case 1:
+				core = new Iron(SolarSystem.getIronId());
+				break;
+			case 2:
+				core = new Silicon(SolarSystem.getSiliconId());
+				break;
+			case 3:
+				core = new Uran(SolarSystem.getUranId());
+				break;
+			case 4:
+				core = new WaterIce(SolarSystem.getWaterIceId());
+				break;
+			default:
+				core = null;
+		}
+
 		this.core = core;
 	}
 
