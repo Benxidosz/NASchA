@@ -2,6 +2,7 @@ package Proto.material.materials;
 
 import Proto.Main;
 import Proto.material.Material;
+import Proto.simulator.Step;
 
 public class WaterIce extends Material{
 
@@ -16,5 +17,10 @@ public class WaterIce extends Material{
 	@Override
 	public void nearSun() {
 		myAsteroid.setCore(null);
+	}
+
+	@Override
+	public String printName() {
+		return name;
 	}
 }

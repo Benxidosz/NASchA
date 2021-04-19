@@ -2,6 +2,7 @@ package Proto.material.materials;
 
 import Proto.Main;
 import Proto.material.Material;
+import Proto.simulator.Step;
 
 public class Uran extends Material {
 
@@ -21,5 +22,10 @@ public class Uran extends Material {
 		}
 		else
 			countExposition++;
+	}
+
+	@Override
+	public String printName() {
+		return name;
 	}
 }
