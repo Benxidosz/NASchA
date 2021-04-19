@@ -5,11 +5,23 @@ import Proto.entity.Entity;
 import Proto.simulator.listableObj;
 import Proto.things.Thing;
 
-public class Robot extends Entity{
+/**
+ * The robot which is controlled by the system and can drill and move
+ */
+public class Robot extends Entity {
 
+	/**
+	 * The constructor of the Robot class.
+	 * @param loc The location where the Robot is
+	 * @param name The name of the Robot
+	 */
 	public Robot(String name, Thing loc){
 		super(loc, name);
 	}
+
+	/**
+	 * Override mine by doing nothing.
+	 */
 	@Override
 	public void mine(){ }
 

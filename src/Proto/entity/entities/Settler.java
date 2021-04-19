@@ -13,12 +13,29 @@ import Proto.simulator.*;
 
 import java.util.ArrayList;
 
+/**
+ * The settler which is controlled by the player, it can do every activities.
+ */
 public class Settler extends Entity {
 
+	/**
+	 * The teleport gates which are owned by the settler.
+	 */
 	private ArrayList<TeleportGate> gates;
+	/**
+	 * The settlers inventory
+	 */
 	private Inventory myInventory;
+	/**
+	 * It's false, if settler haven't made his turn yet.
+	 */
 	private boolean active;
 
+	/**
+	 * The constructor of the Settler class.
+	 * @param loc The location where the Settler is
+	 * @param name The name of the Settler
+	 */
 	public Settler(Thing loc, String name) {
 		super(loc, name);
 		gates = new ArrayList<>(3);
@@ -26,6 +43,9 @@ public class Settler extends Entity {
 		active = true;
 	}
 
+	/**
+	 * The settler finish its turn.
+	 */
 	@Override
 	protected void done(){
 		active = false;
@@ -45,6 +65,7 @@ public class Settler extends Entity {
 
 	/**
 	 * Adds two new TeleportGates to the Settler.
+	 * @param name The name of the gates
 	 */
 	public void buildGate(String name) {
 		if (gates.size()<2) {
@@ -63,6 +84,7 @@ public class Settler extends Entity {
 
 	/**
 	 * Removes the Materials and creates a Robot.
+	 * @param name The name of the robot.
 	 */
 	public void buildRobot(String name) {
 		Inventory robotRecipe = GameManager.getInstance().recipes.get("Robot");
@@ -149,6 +171,10 @@ public class Settler extends Entity {
 		return null;
 	}
 
+	/**
+	 * Sets the active attribute.
+	 * @param active The boolean which it changes
+	 */
 	public void setActive(boolean active) {
 		this.active = active;
 	}

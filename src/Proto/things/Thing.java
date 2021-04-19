@@ -32,6 +32,10 @@ public abstract class Thing implements listableObj {
 	 */
 	protected String name;
 
+	/**
+	 * The constructor of the Thing
+	 * @param name The name of the Thing
+	 */
 	public Thing(String name) {
 		this.name = name;
 	}
@@ -147,10 +151,19 @@ public abstract class Thing implements listableObj {
 		return neighbour;
 	}
 
+	/**
+	 * Returns true if the Thing is drillable
+	 * @return false, but the Asteroid Override it
+	 */
 	public boolean isDrillable() {
 		return false;
 	}
 
+	/**
+	 * Returns the neighbours name.
+	 * @param name of the Thing
+	 * @return the neighbours
+	 */
 	public Thing getNeiByName(String name) {
 		for (Thing nei : neighbour) {
 			if (nei.getName().equals(name))
@@ -159,6 +172,10 @@ public abstract class Thing implements listableObj {
 		return null;
 	}
 
+	/**
+	 * Returns the core of the Thing
+	 * @return false, but the Asteroid Override it
+	 */
 	public Material getCore() {
 		return null;
 	}

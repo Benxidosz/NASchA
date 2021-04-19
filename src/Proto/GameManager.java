@@ -14,6 +14,9 @@ import Proto.things.asteroids.MainAsteroid;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Controls the operation of the game
+ */
 public class GameManager {
     /**
      * The recipes for building

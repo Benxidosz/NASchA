@@ -8,6 +8,10 @@ import Proto.things.Thing;
 
 import java.util.LinkedList;
 
+/**
+ * Controls the ufos activities.
+ * Calculates the next step for each ufo.
+ */
 public class UfoController implements Controller {
 	/**
 	 * A reference for the class.
@@ -53,6 +57,12 @@ public class UfoController implements Controller {
 		ref = this;
 	}
 
+	/**
+	 * Calculates the next step of the ufo.
+	 * If the location is not drillable and the core is not null it mines,
+	 * otherwise moves to a random neighbour.
+	 * @param u the Ufo which makes the step.
+	 */
 	private void calculateStep(Ufo u) {
 		Thing tmpLoc = u.getLocation();
 		if (!tmpLoc.isDrillable() && tmpLoc.getCore() != null)
@@ -62,12 +72,20 @@ public class UfoController implements Controller {
 		}
 	}
 
+	/**
+	 * Calls the calculateStep function for each ufo
+	 * in the Solar System.
+	 */
 	@Override
 	public void makeTurn() {
 		ufos.forEach(this::calculateStep);
 		GameManager.getInstance().jobsDone();
 	}
 
+	/**
+	 * Handles the instruction received.
+	 * @param command The instruction
+	 */
 	@Override
 	public void handleCommand(String command) {
 		String[] args = command.split(" ");
@@ -104,6 +122,11 @@ public class UfoController implements Controller {
 		return null;
 	}
 
+	/**
+	 * Removes an ufo, got as a parameter, from the
+	 * ufos array.
+	 * @param ufo the Ufo which is deleted.
+	 */
 	public void rmUfo(Ufo ufo) {
 		ufos.remove(ufo);
 	}

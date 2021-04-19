@@ -107,7 +107,7 @@ public class Asteroid extends Thing {
 	/**
 	 * Settler build the base with material.
 	 * Its overriden in the children class.
-	 * @param m
+	 * @param m The material built base with
 	 */
 	@Override
 	public boolean buildBase(Material m) {
@@ -116,7 +116,7 @@ public class Asteroid extends Thing {
 
 	/**
 	 * Settler set the asteroid core
-	 * @param m
+	 * @param m The core it sets
 	 */
 	public void setCore(Material m) {
 		core = m;
@@ -127,13 +127,17 @@ public class Asteroid extends Thing {
 
 	/**
 	 * Returns if the Asteroid is drillable.
-	 * @return
+	 * @return true if the layer is 0
 	 */
 	@Override
 	public boolean isDrillable(){
 		return (layer != 0);
 	}
 
+	/**
+	 * Returns the material contained by the asteroid.
+	 * @return The core material
+	 */
 	@Override
 	public Material getCore() {
 		return core;

@@ -6,16 +6,33 @@ import Proto.simulator.listableObj;
 import Proto.things.Thing;
 import Proto.things.gate.TeleportGate;
 
-public abstract class Entity {
+/**
+ * An abstract class, that represents the entities in the solar system, which can do activities.
+ */
+public abstract class Entity implements listableObj {
 
+	/**
+	 * The location of the entity
+	 */
 	protected Thing location;
+	/**
+	 * The name of the entity
+	 */
 	protected final String name;
 
+	/**
+	 * The constructor of the Entity class.
+	 * @param loc The location where the Entity is
+	 * @param name The name of the Entity
+	 */
 	public Entity(Thing loc, String name){
 		this.name = name;
 		location = loc;
 	}
 
+	/**
+	 * The entity finish its turn.
+	 */
 	protected void done(){}
 
 	/**
@@ -39,6 +56,10 @@ public abstract class Entity {
 		done();
 	}
 
+	/**
+	 * Add a material to te inventory.
+	 * @param m The material which is added
+	 */
 	public void addMaterial(Material m){
 	}
 
@@ -63,14 +84,25 @@ public abstract class Entity {
 
 	}
 
+	/**
+	 * The entity explodes.
+	 */
 	public void explode(){
 		die();
 	}
 
+	/**
+	 * Returns the location where the entity is.
+	 * @return The Thing location
+	 */
 	public Thing getLocation(){
 		return location;
 	}
 
+	/**
+	 * Returns the name of the Entity.
+	 * @return The string name
+	 */
 	public String getName() {
 		return name;
 	}

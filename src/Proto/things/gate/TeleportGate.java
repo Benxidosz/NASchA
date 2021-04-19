@@ -14,6 +14,9 @@ public class TeleportGate extends Thing {
 	 */
 	public TeleportGate(String name) {
 		super(name);
+		active = false;
+		setted = false;
+		normal = true;
 	}
 
 	/**
@@ -72,10 +75,18 @@ public class TeleportGate extends Thing {
 		entities.add(entity);
 	}
 
+	/**
+	 * Sets the teleport gates pair.
+	 * @param gate2 The gates pair
+	 */
 	public void setPair(TeleportGate gate2) {
 		pair = gate2;
 	}
 
+	/**
+	 * Sets The teleport gates active attribute
+	 * @param act The boolean to set
+	 */
 	public void setActive(boolean act){
 		active = act;
 	}
