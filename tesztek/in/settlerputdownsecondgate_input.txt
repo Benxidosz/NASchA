@@ -1,0 +1,15 @@
+<SETUP>
+Setboard 2
+a1;0;-e;0;0
+a2;0;-e;0;0
+Settler s1 a2
+Makegate g1 g2
+Setinventory s1 g2
+Setnei 2 
+a1;a2
+a1;g1
+</SETUP>
+<PROGRESS>
+Putdown g2 s1
+List
+</PROGRESS>

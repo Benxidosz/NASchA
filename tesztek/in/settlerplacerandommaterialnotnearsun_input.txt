@@ -1,0 +1,11 @@
+<SETUP>
+Setboard 1
+a1;0;-e;0;0
+Settler s1 a1
+Makematerial -c c1
+Setinventory s1 c1
+</SETUP>
+<PROGRESS>
+Putdown c1 s1
+List
+</PROGRESS>

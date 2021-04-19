@@ -1,0 +1,17 @@
+<SETUP>
+Setboard 1
+a1;2;-e;0;0
+Settler s1 a1
+Makematerial -i i1
+Makematerial -i i2
+Makematerial -u u1
+Makematerial -w w1
+Setinventory s1 i1
+Setinventory s1 c2
+Setinventory s1 u1
+Setinventory s1 w1
+</SETUP>
+<PROGRESS>
+Buildgate g1 s1
+List
+</PROGRESS>

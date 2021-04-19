@@ -1,0 +1,14 @@
+Gates cant't be created
++------------------+
+name: a1
+neighbours: null
+entities: s1
+layer number: 2
+core: null
+nearsun: false
++------------------+
+name: s1
+materials: null
+gates: null
+location: a1
+stepped: true

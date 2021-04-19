@@ -1,0 +1,14 @@
+Inventory is full
++------------------+
+name: a1
+neighbours: null
+entities: s1
+layer number: 0
+core: i1
+nearsun: false
++------------------+
+name: s1
+materials: c1 c2 c3 c4 i2 i3 i4 si1 si2 si3
+gates: null
+location: a1
+stepped: true
