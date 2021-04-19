@@ -1,11 +1,8 @@
 package Proto.things;
 
-import Proto.Main;
 import Proto.controller.controllers.SolarSystem;
 import Proto.entity.Entity;
 import Proto.material.Material;
-import Proto.simulator.SimulationObject;
-import Proto.simulator.Step;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -115,5 +112,17 @@ public abstract class Thing {
 	 */
 	public ArrayList<Thing> getNeighbour() {
 		return neighbour;
+	}
+
+	public boolean isDrillable() {
+		return false;
+	}
+
+	public Thing getNeiByName(String name) {
+		for (Thing nei : neighbour) {
+			if (nei.getName().equals(name))
+				return nei;
+		}
+		return null;
 	}
 }

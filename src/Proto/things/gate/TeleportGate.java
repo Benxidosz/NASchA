@@ -1,9 +1,6 @@
 package Proto.things.gate;
 
-import Proto.Main;
 import Proto.entity.Entity;
-import Proto.simulator.Step;
-import Proto.simulator.SimulationObject;
 import Proto.things.Thing;
 
 public class TeleportGate extends Thing {
@@ -61,7 +58,10 @@ public class TeleportGate extends Thing {
 	 */
 	@Override
 	public void addEntity(Entity entity){
-		pair.passEntity(entity);
+		if(active)
+			pair.passEntity(entity);
+		else
+			entities.add(entity);
 	}
 
 	/**

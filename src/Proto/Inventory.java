@@ -81,4 +81,8 @@ public class Inventory {
 	public LinkedList<Material> getMaterials() {
 		return materials;
 	}
+
+	public boolean hasSpace() {
+		return (materials.size() < maxSpace || maxSpace == -1);
+	}
 }

@@ -1,15 +1,13 @@
 package Proto.entity.entities;
 
-import Proto.Main;
 import Proto.controller.controllers.RobotController;
 import Proto.entity.Entity;
-import Proto.simulator.Step;
 import Proto.things.Thing;
 
 public class Robot extends Entity{
 
-	public Robot(Thing loc){
-		super(loc);
+	public Robot(String name, Thing loc){
+		super(loc, name);
 	}
 	@Override
 	public void mine(){ }

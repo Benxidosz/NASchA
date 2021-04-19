@@ -104,6 +104,7 @@ public class Asteroid extends Thing{
 	 * Returns if the Asteroid is drillable.
 	 * @return
 	 */
+	@Override
 	public boolean isDrillable(){
 		return (layer != 0);
 	}

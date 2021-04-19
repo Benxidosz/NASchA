@@ -2,20 +2,15 @@ package Proto.entity.entities;
 
 import Proto.GameManager;
 import Proto.Inventory;
-import Proto.Main;
 import Proto.controller.controllers.RobotController;
 import Proto.controller.controllers.SettlerController;
 import Proto.controller.controllers.SolarSystem;
-import Proto.material.materials.Coal;
-import Proto.material.materials.Uran;
-import Proto.simulator.Step;
 import Proto.things.Thing;
 import Proto.things.gate.TeleportGate;
 import Proto.entity.Entity;
 import Proto.material.Material;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 
 public class Settler extends Entity {
 
@@ -23,8 +18,8 @@ public class Settler extends Entity {
 	private Inventory myInventory;
 	private boolean active;
 
-	public Settler(Thing loc) {
-		super(loc);
+	public Settler(Thing loc, String name) {
+		super(loc, name);
 		gates = new ArrayList<>(3);
 		Inventory myInventory = new Inventory(10);
 	}
@@ -39,9 +34,9 @@ public class Settler extends Entity {
 	 * Settler builds a base with the right materials.
 	 */
 	public void buildBase() {
-		for (Material mat : Inventory.getMaterials()) {
+		for (Material mat : myInventory.getMaterials()) {
 			if (location.buildBase(mat)) {
-				Inventory.rmMaterial(mat);
+				myInventory.rmMaterial(mat);
 			}
 		}
 	}
@@ -49,13 +44,13 @@ public class Settler extends Entity {
 	/**
 	 * Adds two new TeleportGates to the Settler.
 	 */
-	public void buildGate() {
+	public void buildGate(String name) {
 		if (gates.size()<2) {
 			Inventory gateRecipe = GameManager.ref.recipes.get("TeleportGate");
 			if(myInventory.containsRecipe(gateRecipe)) {
-				myInventory.rmAllRecipe(gateRecipe);
-				TeleportGate gate1 = new TeleportGate();
-				TeleportGate gate2 = new TeleportGate();
+				myInventory.rmAllFromRecipe(gateRecipe);
+				TeleportGate gate1 = new TeleportGate(name + "a");
+				TeleportGate gate2 = new TeleportGate(name + "b");
 				gate1.setPair(gate2);
 				gate2.setPair(gate1);
 				addGate(gate1);
@@ -67,11 +62,11 @@ public class Settler extends Entity {
 	/**
 	 * Removes the Materials and creates a Robot.
 	 */
-	public void buildRobot() {
+	public void buildRobot(String name) {
 		Inventory robotRecipe = GameManager.ref.recipes.get("Robot");
 		if(myInventory.containsRecipe(robotRecipe)) {
-			myInventory.rmAllRecipe(robotRecipe);
-			Robot r = new Robot(location);
+			myInventory.rmAllFromRecipe(robotRecipe);
+			Robot r = new Robot(name, location);
 			RobotController.ref.addRobot(r);
 			location.addEntity(r);
 		}
@@ -136,8 +131,24 @@ public class Settler extends Entity {
 		SettlerController.ref.rmSettler(this);
 	}
 
-	/**
-	 * Settler object explodes, therefore dies.
-	 */
+	public Material getMaterialByName(String arg) {
+		for (Material mat : myInventory.getMaterials()) {
+			if (mat.getName().equals(arg))
+				return mat;
+		}
+		return null;
+	}
+
+	public TeleportGate getGateByName(String name) {
+		for (TeleportGate gate : gates)
+			if (gate.getName().equals(name))
+				return gate;
+
+		return null;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 
 }

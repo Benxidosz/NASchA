@@ -1,19 +1,17 @@
 
 package Proto.entity;
 
-import Proto.Main;
 import Proto.material.Material;
-import Proto.simulator.SimulationObject;
-import Proto.simulator.Step;
 import Proto.things.Thing;
-
-import java.util.InputMismatchException;
+import Proto.things.gate.TeleportGate;
 
 public abstract class Entity {
 
 	protected Thing location;
+	protected final String name;
 
-	public Entity(Thing loc){
+	public Entity(Thing loc, String name){
+		this.name = name;
 		loc = location;
 	}
 
@@ -67,6 +65,10 @@ public abstract class Entity {
 
 	public Thing getLocation(){
 		return location;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 }

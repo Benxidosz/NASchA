@@ -5,14 +5,13 @@ import Proto.controller.controllers.UfoController;
 import Proto.entity.Entity;
 import Proto.material.Material;
 import Proto.things.Thing;
-import Proto.things.gate.TeleportGate;
 
 public class Ufo extends Entity {
 
 	private Inventory myInventory;
 
-	public Ufo(Thing loc) {
-		super(loc);
+	public Ufo(Thing loc, String name) {
+		super(loc, name);
 		Inventory myInventory = new Inventory();
 	}
 

@@ -1,17 +1,6 @@
 package Proto;
 
-import Proto.controller.controllers.SolarSystem;
-import Proto.entity.entities.Robot;
-import Proto.entity.entities.Settler;
-import Proto.material.materials.Coal;
-import Proto.material.materials.Uran;
-import Proto.material.materials.Iron;
-import Proto.material.materials.WaterIce;
-import Proto.material.materials.Silicon;
-import Proto.simulator.Simulation;
 import Proto.simulator.Simulator;
-import Proto.things.asteroids.Asteroid;
-import Proto.things.gate.TeleportGate;
 
 import java.util.Scanner;
 
