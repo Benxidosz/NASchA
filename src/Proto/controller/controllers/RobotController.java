@@ -79,6 +79,11 @@ public class RobotController implements Controller {
 		robots.add(r);
 	}
 
+	/**
+	 * Removes a robot, got as a parameter, from the
+	 * robots array.
+	 * @param r the Robot which is deleted.
+	 */
 	public void rmRobot(Robot r) {
 		Main.log("Robot removed to controller: " + r.getName());
 		robots.remove(r);
