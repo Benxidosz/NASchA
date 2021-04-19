@@ -1,0 +1,14 @@
+<SETUP>
+Setboard 2
+a1;0;-e;1;0
+a2;2;-i;i1;0;0
+Setnei 1
+a1;a2
+Settler s1 a1
+Robot r1 a1
+Makematerial -u u1 2
+</SETUP>
+<PROGRESS>
+Putdown u1 s1
+List
+</PROGRESS>

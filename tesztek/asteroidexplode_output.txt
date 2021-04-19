@@ -1,0 +1,11 @@
++------------------+
+name: a2
+neighbours: null
+entities: r1
+layer number: 2
+core: i1
+nearsun: false
++------------------+
+name: r1
+location: a2
+stepped: false

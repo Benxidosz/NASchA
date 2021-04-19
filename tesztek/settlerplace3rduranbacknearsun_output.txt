@@ -1,0 +1,7 @@
++------------------+
+name: a2
+neighbours: null
+entities: null
+layer number: 2
+core: i1
+nearsun: false

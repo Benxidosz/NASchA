@@ -1,0 +1,34 @@
++------------------+
+name: a1
+neighbours: a2 g1
+entities: null
+layer number: 0
+core: null
+nearsun: false
++------------------+
+name: a2
+neighbours: a1
+entities: null
+layer number: 0
+core: null
+nearsun: false
++------------------+
+name: s1
+materials: null
+gates: g2
+location: g1
+stepped: true
++------------------+
+name: g1
+neighbours: a1
+entities: s1
+pair: g2
+setted: true
+active: false
++------------------+
+name: g2
+neighbours: null
+entities:  null
+pair: g1
+setted: true
+active: false

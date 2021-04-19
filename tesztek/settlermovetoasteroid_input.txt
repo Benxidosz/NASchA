@@ -1,0 +1,12 @@
+<SETUP>
+Setboard 2
+a1;0;-e;0;0
+a2;0;-e;0;0
+Settler s1 a1
+Setnei 1
+a1;a2
+</SETUP>
+<PROGRESS>
+Move s1 a2
+List
+</PROGRESS>

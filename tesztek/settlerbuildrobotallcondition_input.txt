@@ -1,0 +1,15 @@
+<SETUP>
+Setboard 1
+a1;2;-e;0;0
+Settler s1 a1
+Makematerial -i i1
+Makematerial -c c1
+Makematerial -u u1
+Setinventory s1 i1
+Setinventory s1 c1
+Setinventory s1 u1
+</SETUP>
+<PROGRESS>
+Buildrobot r1 s1
+List
+</PROGRESS>

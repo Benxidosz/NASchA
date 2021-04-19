@@ -1,0 +1,9 @@
+<SETUP>
+Setboard 1
+a1;2;-e;0;0
+Settler s1 a1
+</SETUP>
+<PROGRESS>
+Buildgate g1 s1
+List
+</PROGRESS>

@@ -1,0 +1,14 @@
+There is no layer
++------------------+
+name: a1
+neighbours: null
+entities: s1
+layer number: 0
+core: i1
+nearsun: false
++------------------+
+name: s1
+materials: null
+gates: null
+location: a1
+stepped: false

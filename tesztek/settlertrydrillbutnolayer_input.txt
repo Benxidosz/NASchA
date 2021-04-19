@@ -1,0 +1,9 @@
+<SETUP>
+Setboard 1
+a1;0;-i;i1;0;0
+Settler s1 a1
+</SETUP>
+<PROGRESS>
+Drill s1
+List
+</PROGRESS>

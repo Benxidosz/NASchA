@@ -1,0 +1,25 @@
+<SETUP>
+Setboard 4
+a1;2;-i;i1;0;0
+a2;0;-e;0;0
+a3;0;-e;0;0
+a4;3;-s;si1;0;0
+Makegate g1 g2
+Setnei 6
+a1;a2
+a2;a3
+a2;a4
+a3;a4
+a2;g1
+a3;g2
+Settler s1 a2
+Settler s2 a1
+Settler s3 a3
+Robot r1 a3
+Robot r2 a4
+Setrandom 2
+</SETUP>
+<PROGRESS>
+Makeeruption a2 2
+List
+</PROGRESS>

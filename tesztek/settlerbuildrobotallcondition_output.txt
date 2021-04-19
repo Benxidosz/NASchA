@@ -1,0 +1,17 @@
++------------------+
+name: a1
+neighbours: null
+entities: s1 r1
+layer number: 2
+core: null
+nearsun: false
++------------------+
+name: s1
+materials: null
+gates: null
+location: a1
+stepped: true
++------------------+
+name: r1
+location: a1
+stepped: false

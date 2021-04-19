@@ -1,0 +1,31 @@
+<SETUP>
+Setboard 1
+a1;0;-i;i1;0;0
+Settler s1 a1
+Makematerial -c c1
+Makematerial -c c2
+Makematerial -c c3
+Makematerial -c c4
+Setinventory s1 c1
+Setinventory s1 c2
+Setinventory s1 c3
+Setinventory s1 c4
+
+Makematerial -i i2
+Makematerial -i i3
+Makematerial -i i4
+Setinventory s1 i2
+Setinventory s1 i3
+Setinventory s1 i4
+
+Makematerial -s si1
+Makematerial -s si2
+Makematerial -s si3
+Setinventory s1 si1
+Setinventory s1 si2
+Setinventory s1 si3
+</SETUP>
+<PROGRESS>
+Mine s1
+List
+</PROGRESS>
