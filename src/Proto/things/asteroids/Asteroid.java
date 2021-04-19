@@ -92,11 +92,15 @@ public class Asteroid extends Thing {
 	 */
 	@Override
 	public void applySunEruption() {
-		if(layer != 0) return;
-		if(core != null) return;
-		entities.forEach((e) ->{
-			e.die();
-		});
+		if (layer == 0 && core == null)
+			return;
+
+
+		for (var iter = entities.iterator(); iter.hasNext();) {
+			Entity tmp = iter.next();
+			tmp.die();
+			iter.remove();
+		}
 	}
 
 	/**
@@ -165,7 +169,7 @@ public class Asteroid extends Thing {
 			for (Entity ent : entities)
 				result.append(ent.getName() + " ");
 
-		result.append("layer number: " + (layer == 0 ? "null" : layer)+ "\n");
+		result.append("\nlayer number: " + (layer == 0 ? "null" : layer)+ "\n");
 		result.append("core: " + (core == null ? "null" : core.getName()) + "\n");
 		result.append("nearsun: " + (nearBySun ? "true" : "false") + "\n");
 		return result.toString();

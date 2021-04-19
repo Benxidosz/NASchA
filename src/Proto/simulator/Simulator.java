@@ -19,6 +19,8 @@ public class Simulator {
 	public Simulator(Scanner sc){
 		this.sc = sc;
 		commands = new ArrayList<>();
+		materials = new LinkedList<>();
+		gates = new LinkedList<>();
 	}
 
 	private Material getMaterialByName(String name) {
@@ -92,7 +94,6 @@ public class Simulator {
 			UfoController.init();
 
 			for (String curent : commands) {
-				writer.write(curent + "\n");
 				String splittedCommand[] = curent.split(" ");
 				if (readboard > 0) {
 					String tmp[] = curent.split(";");
@@ -187,7 +188,7 @@ public class Simulator {
 						t2.addNeighbour(t1);
 					}
 
-					System.out.println(tmp[0]);
+//					System.out.println(tmp[0]);
 					readnei--;
 					continue;
 				}
@@ -210,8 +211,13 @@ public class Simulator {
 					case "Makegate":
 						if (setup){
 							//System.out.println("kapu1: " + splittedCommand[1] + " kapu2: " + splittedCommand[2]);
-							gates.add(new TeleportGate(splittedCommand[1]));
-							gates.add(new TeleportGate(splittedCommand[2]));
+							TeleportGate tg1 = new TeleportGate(splittedCommand[1]);
+							TeleportGate tg2 = new TeleportGate(splittedCommand[2]);
+							tg1.setPair(tg2);
+							tg2.setPair(tg1);
+
+							gates.add(tg1);
+							gates.add(tg2);
 						}
 						break;
 					case "Setnei":
@@ -224,7 +230,9 @@ public class Simulator {
 						if (setup){
 //							System.out.println("nev: " + splittedCommand[1] + " aszteroid: " + splittedCommand[2]);
 							Thing loc = SolarSystem.getInstance().getThingByName(splittedCommand[2]);
-							SettlerController.getInstance().addSettler(new Settler(loc, splittedCommand[1]));
+							Settler s = new Settler(loc, splittedCommand[1]);
+							SettlerController.getInstance().addSettler(s);
+							loc.addEntity(s);
 						}
 						break;
 					case "Makematerial":
@@ -254,27 +262,49 @@ public class Simulator {
 						break;
 					case "Setinventory":
 						if (setup){
-							System.out.println("des: " + splittedCommand[1] + " sour: " + splittedCommand[2]);
-							if (SolarSystem.getInstance().getThingByName(splittedCommand[1]) != null){
+//							System.out.println("des: " + splittedCommand[1] + " sour: " + splittedCommand[2]);
 
-							} else if (SettlerController.getInstance().getSettlerByName(splittedCommand[1]) != null){
+							Thing thing = SolarSystem.getInstance().getThingByName(splittedCommand[1]);
+							Settler settler = SettlerController.getInstance().getSettlerByName(splittedCommand[1]);
 
-							}
+							if (thing != null){
+								Asteroid tmp = (Asteroid) thing;
+								tmp.setCore(getMaterialByName(splittedCommand[2]));
+
+							} else if (settler != null){
+								Material mat = getMaterialByName(splittedCommand[2]);
+								TeleportGate tpGate = getGateByName(splittedCommand[2]);
+
+								if (mat != null && tpGate == null){
+									settler.getMyInventory().addMaterial(mat);
+
+								} if (tpGate != null && mat == null)
+									settler.addGate(tpGate);
+								}
 						}
 						break;
 					case "Robot":
 						if (setup){
-							System.out.println("nev: " + splittedCommand[1] + " aszteroid: " + splittedCommand[2]);
+//							System.out.println("nev: " + splittedCommand[1] + " aszteroid: " + splittedCommand[2]);
+							Thing loc = SolarSystem.getInstance().getThingByName(splittedCommand[2]);
+							Robot r = new Robot(splittedCommand[1], loc);
+							RobotController.getInstance().addRobot(r);
+							loc.addEntity(r);
 						}
 						break;
 					case "UFO":
 						if (setup){
-							System.out.println("nev: " + splittedCommand[1] + " aszteroid: " + splittedCommand[2]);
+//							System.out.println("nev: " + splittedCommand[1] + " aszteroid: " + splittedCommand[2]);
+							Thing loc = SolarSystem.getInstance().getThingByName(splittedCommand[2]);
+							Ufo u = new Ufo(loc, splittedCommand[1]);
+							UfoController.getInstance().addUfo(u);
+							loc.addEntity(u);
 						}
 						break;
 					case "Setrandom":
 						if (setup){
-							System.out.println("ertek: " + splittedCommand[1]);
+//							System.out.println("ertek: " + splittedCommand[1]);
+							random = splittedCommand[1].equals("1");
 						}
 						break;
 					case "<PROGRESS>":
@@ -287,22 +317,83 @@ public class Simulator {
 						break;
 					case "Move":
 						if (progress){
-							System.out.println("nev: " + splittedCommand[1] + " des: " + splittedCommand[2]);
+//							System.out.println("nev: " + splittedCommand[1] + " des: " + splittedCommand[2]);
+
+							Settler s = SettlerController.getInstance().getSettlerByName(splittedCommand[1]);
+							if (s != null) {
+								SettlerController.getInstance().handleCommand("Move " + splittedCommand[1] + " " + splittedCommand[2]);
+								break;
+							}
+
+							Robot r = RobotController.getInstance().getRobotByName(splittedCommand[1]);
+							if (r != null) {
+								RobotController.getInstance().handleCommand("Move " + splittedCommand[1] + " " + splittedCommand[2]);
+								break;
+							}
+
+							Ufo u = UfoController.getInstance().getUfoByName(splittedCommand[1]);
+							if (u != null) {
+								UfoController.getInstance().handleCommand("Move " + splittedCommand[1] + " " + splittedCommand[2]);
+								break;
+							}
+
 						}
 						break;
 					case "Drill":
 						if (progress){
-							System.out.println("nev: " + splittedCommand[1]);
+							//System.out.println("nev: " + splittedCommand[1]);
+
+							Settler s = SettlerController.getInstance().getSettlerByName(splittedCommand[1]);
+							if (s != null) {
+								SettlerController.getInstance().handleCommand("Drill " + splittedCommand[1]);
+								break;
+							}
+
+							Robot r = RobotController.getInstance().getRobotByName(splittedCommand[1]);
+							if (r != null) {
+								RobotController.getInstance().handleCommand("Drill " + splittedCommand[1]);
+								break;
+							}
+
+							Ufo u = UfoController.getInstance().getUfoByName(splittedCommand[1]);
+							if (u != null) {
+								UfoController.getInstance().handleCommand("Drill " + splittedCommand[1]);
+								break;
+							}
 						}
 						break;
 					case "Mine":
 						if (progress){
-							System.out.println("nev: " + splittedCommand[1]);
+						//	System.out.println("nev: " + splittedCommand[1]);
+
+							Settler s = SettlerController.getInstance().getSettlerByName(splittedCommand[1]);
+							if (s != null) {
+								SettlerController.getInstance().handleCommand("Mine " + splittedCommand[1]);
+								break;
+							}
+
+							Robot r = RobotController.getInstance().getRobotByName(splittedCommand[1]);
+							if (r != null) {
+								RobotController.getInstance().handleCommand("Mine " + splittedCommand[1]);
+								break;
+							}
+
+							Ufo u = UfoController.getInstance().getUfoByName(splittedCommand[1]);
+							if (u != null) {
+								UfoController.getInstance().handleCommand("Mine " + splittedCommand[1]);
+								break;
+							}
 						}
 						break;
 					case "Buildrobot":
 						if (progress){
-							System.out.println("robot: " + splittedCommand[1] + " telepes: " + splittedCommand[2]);
+						//	System.out.println("robot: " + splittedCommand[1] + " telepes: " + splittedCommand[2]);
+
+							Settler s = SettlerController.getInstance().getSettlerByName(splittedCommand[2]);
+							if (s != null) {
+								SettlerController.getInstance().handleCommand("Buildrobot " + splittedCommand[2] + " " + splittedCommand[1]);
+								break;
+							}
 						}
 						break;
 					case "Buildgate":
@@ -319,17 +410,55 @@ public class Simulator {
 						break;
 					case "Putdown":
 						if (progress){
-							System.out.println("obj nev: " + splittedCommand[1] + " telepes: " + splittedCommand[2]);
+						//	System.out.println("obj nev: " + splittedCommand[1] + " telepes: " + splittedCommand[2]);
+
+							Settler s = SettlerController.getInstance().getSettlerByName(splittedCommand[2]);
+							if (s != null){
+								SettlerController.getInstance().handleCommand("Putdown " + splittedCommand[2] + " " + splittedCommand[1]);
+							}
 						}
 						break;
 					case "Step":
 						if (progress){
-							System.out.println("step");
+						//	System.out.println("step");
+							if (random) {
+								SolarSystem.getInstance().makeTurn();
+								RobotController.getInstance().makeTurn();
+								UfoController.getInstance().makeTurn();
+							}
 						}
 						break;
 					case "List":
 						if (progress){
-							System.out.println("list");
+						//	System.out.println("list");
+							SolarSystem.getInstance().getThings().forEach(t -> {
+								try {
+									writer.write(t.List());
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
+							});
+							SettlerController.getInstance().getSettlers().forEach(s -> {
+								try {
+									writer.write(s.List());
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
+							});
+							RobotController.getInstance().getRobots().forEach(r -> {
+								try {
+									writer.write(r.List());
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
+							});
+							UfoController.getInstance().getUfos().forEach(u -> {
+								try {
+									writer.write(u.List());
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
+							});
 						}
 						break;
 					case "Makeeruption":
@@ -339,9 +468,6 @@ public class Simulator {
 						break;
 					case "Abort":
 						return;
-					case "Load":
-						System.out.println("load: " + splittedCommand[1]);
-						break;
 					default:
 						if (readboard == 0 && readnei == 0)
 							System.out.println("Ismeretlen parancs");

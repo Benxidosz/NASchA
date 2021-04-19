@@ -158,9 +158,11 @@ public class SolarSystem implements Controller {
 
 			underProcess.getNeighbour().forEach(nei -> {
 				if (!touched.contains(nei)) {
-					inProcess.offer(nei);
-					touched.offer(nei);
-					bfs.put(nei, bfs.get(underProcess) + 1);
+					if (bfs.get(underProcess) < r) {
+						inProcess.offer(nei);
+						touched.offer(nei);
+						bfs.put(nei, bfs.get(underProcess) + 1);
+					}
 				}
 			});
 		}
@@ -230,5 +232,9 @@ public class SolarSystem implements Controller {
 				return t;
 
 		return null;
+	}
+
+	public LinkedList<Thing> getThings() {
+		return things;
 	}
 }

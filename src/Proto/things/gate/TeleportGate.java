@@ -20,9 +20,8 @@ public class TeleportGate extends Thing {
 	 * Applies sun eruption on the TeleportGate.
 	 */
 	public void applySunEruption() {
-		entities.forEach((e) -> {
-			e.die();
-		});
+		super.applySunEruption();
+		normal = false;
 	}
 
 	/**

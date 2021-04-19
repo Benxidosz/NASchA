@@ -37,6 +37,10 @@ public class SettlerController implements Controller {
 		settlerId = 0;
 	}
 
+	public LinkedList<Settler> getSettlers() {
+		return settlers;
+	}
+
 	/**
 	 * Stores the settlers in the Solar System in a list.
 	 */

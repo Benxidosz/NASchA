@@ -1,8 +1,10 @@
 package Proto.controller.controllers;
 
 import Proto.GameManager;
+import Proto.Main;
 import Proto.controller.Controller;
 import Proto.entity.entities.Robot;
+import Proto.entity.entities.Settler;
 import Proto.things.Thing;
 
 import java.util.LinkedList;
@@ -50,7 +52,7 @@ public class RobotController implements Controller {
 	 * The constructor of the class
 	 */
 	private RobotController() {
-
+		Main.log("RobotController created.");
 	}
 
 	private void calculateStep(Robot r) {
@@ -62,11 +64,23 @@ public class RobotController implements Controller {
 		}
 	}
 
+	public Robot getRobotByName(String name) {
+		for (Robot robot : robots) {
+			if (robot.getName().equals(name)) {
+				return robot;
+			}
+		}
+
+		return null;
+	}
+
 	public void addRobot(Robot r) {
+		Main.log("Robot added to controller: " + r.getName());
 		robots.add(r);
 	}
 
 	public void rmRobot(Robot r) {
+		Main.log("Robot removed to controller: " + r.getName());
 		robots.remove(r);
 	}
 
@@ -77,6 +91,19 @@ public class RobotController implements Controller {
 
 	@Override
 	public void handleCommand(String line) {
+		String[] args = line.split(" ");
 
+		Robot selected = null;
+		if (args.length > 1)
+			selected = getRobotByName(args[1]);
+
+		if ("Move".equals(args[0])) {
+			if (selected.getLocation() != null) {
+				Thing dest = selected.getLocation().getNeiByName(args[2]);
+				selected.move(dest);
+			}
+		} else if ("Drill".equals(args[0])) {
+			selected.drill();
+		}
 	}
 }

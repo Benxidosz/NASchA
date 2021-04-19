@@ -22,6 +22,7 @@ public class Settler extends Entity {
 		super(loc, name);
 		gates = new ArrayList<>(3);
 		myInventory = new Inventory(10);
+		active = true;
 	}
 
 	@Override

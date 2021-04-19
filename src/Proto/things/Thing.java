@@ -73,7 +73,13 @@ public abstract class Thing implements listableObj {
 	/**
 	 * Abstract function of the sun eruption.
 	 */
-	public abstract void applySunEruption();
+	public void applySunEruption() {
+		for (var iter = entities.iterator(); iter.hasNext();) {
+			Entity tmp = iter.next();
+			tmp.die();
+			iter.remove();
+		}
+	}
 
 	/**
 	 * Its overridden in the children classes.

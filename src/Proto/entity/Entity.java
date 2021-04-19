@@ -56,8 +56,11 @@ public abstract class Entity {
 		done();
 	}
 
-	public void die(){
-		location.removeEntity(this);
+	/**
+	 * The entity dies.
+	 */
+	public void die() {
+
 	}
 
 	public void explode(){

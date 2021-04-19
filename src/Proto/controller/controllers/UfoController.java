@@ -2,6 +2,7 @@ package Proto.controller.controllers;
 
 import Proto.GameManager;
 import Proto.controller.Controller;
+import Proto.entity.entities.Settler;
 import Proto.entity.entities.Ufo;
 import Proto.things.Thing;
 
@@ -87,6 +88,20 @@ public class UfoController implements Controller {
 		} else if ("Mine".equals(args[0])) {
 			selected.mine();
 		}
+	}
+
+	public LinkedList<Ufo> getUfos() {
+		return ufos;
+	}
+
+	public Ufo getUfoByName(String name) {
+		for (Ufo settler : ufos) {
+			if (settler.getName().equals(name)) {
+				return settler;
+			}
+		}
+
+		return null;
 	}
 
 	public void rmUfo(Ufo ufo) {
