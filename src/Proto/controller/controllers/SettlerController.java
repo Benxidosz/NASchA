@@ -4,10 +4,11 @@ import Proto.GameManager;
 import Proto.Main;
 import Proto.controller.Controller;
 import Proto.entity.entities.Settler;
+import Proto.material.Material;
 import Proto.things.Thing;
+import Proto.things.gate.TeleportGate;
 
 import java.util.LinkedList;
-import java.util.Scanner;
 
 public class SettlerController implements Controller {
 	public static SettlerController ref;
@@ -35,7 +36,7 @@ public class SettlerController implements Controller {
 
 		if ("Move".equals(args[0])) {
 			if (selected.getLocation() != null) {
-				Thing dest = selected.getLocation().getNeiByName(args[1]);
+				Thing dest = selected.getLocation().getNeiByName(args[2]);
 				selected.move(dest);
 			}
 		} else if ("Drill".equals(args[0])) {
@@ -43,7 +44,19 @@ public class SettlerController implements Controller {
 		} else if ("Mine".equals(args[0])) {
 			selected.mine();
 		} else if ("Buildrobot".equals(args[0])) {
-			
+			selected.buildRobot(args[2]);
+ 		} else if ("Buildgate".equals(args[0])) {
+			selected.buildGate(args[2]);
+		} else if ("Buildbase".equals(args[0])) {
+			selected.buildBase();
+		} else if ("Putdown".equals(args[0])) {
+			Material material = selected.getMaterialByName(args[2]);
+			TeleportGate tg = selected.getGateByName(args[2]);
+			if (material != null) {
+				selected.placeMaterial(material);
+			} else if (tg != null) {
+				selected.putGateDown(tg);
+			}
 		}
 	}
 

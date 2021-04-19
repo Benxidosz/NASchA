@@ -77,4 +77,8 @@ public class Inventory {
 
 		return true;
 	}
+
+	public LinkedList<Material> getMaterials() {
+		return materials;
+	}
 }

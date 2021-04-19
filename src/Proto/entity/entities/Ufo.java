@@ -22,10 +22,7 @@ public class Ufo extends Entity {
 
 	}
 
-	@Override
-	public void listParameters() {
-
-	}
+	public void mine(){}
 
 	@Override
 	public String printName() {

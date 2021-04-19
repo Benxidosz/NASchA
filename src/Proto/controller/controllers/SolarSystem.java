@@ -10,7 +10,7 @@ import Proto.things.Thing;
 
 import java.util.ArrayList;
 
-public class SolarSystem extends Controller implements SimulationObject {
+public class SolarSystem implements SimulationObject, Controller {
 	private ArrayList<Robot> robots = new ArrayList<>();
 	private ArrayList<Settler> settlers = new ArrayList<>();
 	private ArrayList<Thing> things = new ArrayList<>();
@@ -173,21 +173,19 @@ public class SolarSystem extends Controller implements SimulationObject {
 		return name;
 	}
 
-	@Override
-	public void listParameters() {
-		System.out.println("--------");
-		System.out.println(name + ":");
-		System.out.println("\trobots:");
-		robots.forEach(r -> System.out.println("\t" + r.getName()));
-		System.out.println("\tsettlers:");
-		settlers.forEach(s -> System.out.println("\t" + s.getName()));
-		System.out.println("\tthings:");
-		things.forEach(t -> System.out.println("\t" + t.getName()));
-		System.out.println("--------");
-	}
 
 	@Override
 	public String printName() {
 		return name;
+	}
+
+	@Override
+	public void makeTurn() {
+
+	}
+
+	@Override
+	public void handleCommand(String line) {
+
 	}
 }
