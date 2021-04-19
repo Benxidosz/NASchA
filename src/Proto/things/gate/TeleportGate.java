@@ -3,10 +3,25 @@ package Proto.things.gate;
 import Proto.entity.Entity;
 import Proto.things.Thing;
 
+/**
+ * Settlers can build teleport gates. Each has one pair somewhere on the field.
+ * They can move on to that pair in 1 step, even if they are not neighbours.
+ */
 public class TeleportGate extends Thing {
-	private TeleportGate pair;	//The pair TeleportGate of this TeleportGate
-	private boolean normal;		//Stores if the TeleportGate is normal
-	private boolean active;		//Stores if the TeleportGate is active
+	/**
+	 * The pair TeleportGate of this TeleportGate
+	 */
+	private TeleportGate pair;
+	/**
+	 * Stores if the TeleportGate is normal
+	 */
+	private boolean normal;
+	/**
+	 * Stores if the TeleportGate is active
+	 */
+	private boolean active;
+
+	private boolean setted;
 
 	/**
 	 * The constructor of the class.
@@ -69,7 +84,7 @@ public class TeleportGate extends Thing {
 
 	/**
 	 * Teleport entity to the gates pair.
-	 * @param entity the entity that is teleoprted.
+	 * @param entity the entity that is teleported.
 	 */
 	public void passEntity(Entity entity){
 		entities.add(entity);

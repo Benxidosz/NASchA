@@ -4,8 +4,17 @@ import Proto.Main;
 import Proto.things.asteroids.Asteroid;
 
 
+/**
+ * It represents the various materials on the field by the classes derived from it.
+ */
 public abstract class Material {
+	/**
+	 * An Asteroid attribute that stores which asteroid he is on.
+	 */
 	protected Asteroid myAsteroid;
+	/**
+	 * Name of the Material.
+	 */
 	protected String name;
 
 	/**
@@ -16,7 +25,6 @@ public abstract class Material {
 		this.name = name;
 	}
 
-
 	/**
 	 * The asteroid that contains the material is near sun and its last layer was drilled.
 	 */
@@ -24,6 +32,10 @@ public abstract class Material {
 
 	}
 
+	/**
+	 * Returns the name of the Material.
+	 * @return The string name
+	 */
 	public String getName(){
 		return name;
 	}

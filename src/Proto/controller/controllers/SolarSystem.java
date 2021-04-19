@@ -132,6 +132,10 @@ public class SolarSystem implements Controller {
 		things.remove(t);
 	}
 
+	/**
+	 * Removes a gate from the SolarSystem
+	 * @param t The gate that is removed.
+	 */
 	public void removeThing(TeleportGate t) {
 		things.remove(t);
 		gates.remove(t);

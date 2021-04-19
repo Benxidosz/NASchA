@@ -2,6 +2,9 @@ package Proto.material.materials;
 
 import Proto.material.Material;
 
+/**
+ * It represents a Silicon type material and helps to distinguish it from other different materials.
+ */
 public class Silicon extends Material {
 
 	/**

@@ -17,6 +17,9 @@ public class WaterIce extends Material{
 		super(name);
 	}
 
+	/**
+	 * Evaporates (remove from the inventory) the given object.
+	 */
 	@Override
 	public void nearSun() {
 		myAsteroid.setCore(null);

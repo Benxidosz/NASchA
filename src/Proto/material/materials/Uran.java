@@ -8,7 +8,9 @@ import Proto.material.Material;
  * It counts how many times the object was near the sun and if so for the third time near the sun, it will explode.
  */
 public class Uran extends Material {
-
+	/**
+	 * It counts how many times the object was near the sun.
+	 */
 	private int countExposition;
 	/**
 	 * Constructor of the Uran class. Sets the name and the asteroid where the material is.
@@ -23,6 +25,9 @@ public class Uran extends Material {
 		this.countExposition = sunNum;
 	}
 
+	/**
+	 * It decides the material explodes or only increases the countExposition attribute.
+	 */
 	@Override
 	public void nearSun() {
 		if (countExposition == 3) {

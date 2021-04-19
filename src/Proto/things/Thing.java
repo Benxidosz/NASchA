@@ -86,13 +86,13 @@ public abstract class Thing implements listableObj {
 	}
 
 	/**
-	 * Its overridden in the children classes.
+	 * It's overridden in the children classes.
 	 */
 	public void drill() {
 	}
 
 	/**
-	 * Its overridden in the children classes.
+	 * It's overridden in the children classes.
 	 * @return
 	 */
 	public Material excavate() {
@@ -100,7 +100,7 @@ public abstract class Thing implements listableObj {
 	}
 
 	/**
-	 * Its overridden in the children classes.
+	 * It's overridden in the children classes.
 	 * @param m
 	 * @return
 	 */
@@ -109,8 +109,9 @@ public abstract class Thing implements listableObj {
 	}
 
 	/**
-	 * Its overridden in the children classes.
+	 * It's overridden in the children classes.
 	 * @param m
+	 * @return
 	 */
 	public boolean buildBase(Material m) {
 		return false;
@@ -129,7 +130,7 @@ public abstract class Thing implements listableObj {
 
 	/**
 	 * Returns the name of the object.
-	 * @return the of the object.
+	 * @return the name of the object.
 	 */
 	public String getName() {
 		return name;
@@ -145,7 +146,7 @@ public abstract class Thing implements listableObj {
 
 	/**
 	 * Returns the neighbours of the Thing
-	 * @return
+	 * @return with the neighbour.
 	 */
 	public ArrayList<Thing> getNeighbour() {
 		return neighbour;

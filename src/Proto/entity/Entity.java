@@ -63,6 +63,9 @@ public abstract class Entity implements listableObj {
 	public void addMaterial(Material m){
 	}
 
+	/**
+	 * The entity mines.
+	 */
 	public void mine() {
 		Material m = location.excavate();
 		if (m != null)
