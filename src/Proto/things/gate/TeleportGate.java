@@ -6,54 +6,62 @@ import Proto.simulator.Step;
 import Proto.simulator.SimulationObject;
 import Proto.things.Thing;
 
-public class TeleportGate extends Thing implements SimulationObject {
-	private TeleportGate pair;
-	private boolean active;
+public class TeleportGate extends Thing {
+	private TeleportGate pair;	//The pair TeleportGate of this TeleportGate
+	private boolean normal;		//Stores if the TeleportGate is normal
+	private boolean active;		//Stores if the TeleportGate is active
 
+	/**
+	 * The constructor of the class.
+	 * @param name the name of the Object.
+	 */
 	public TeleportGate(String name) {
 		super(name);
-
-		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " created.");
-		step.addObject(this);
-
-		Main.activeSimulation.addStep(step);
-
-		Main.decreaseTab();
 	}
 
+	/**
+	 * Applies sun eruption on the TeleportGate.
+	 */
 	public void applySunEruption() {
-		Step step = new Step(Main.call + " " + name + " applySunEruption()");
-		Main.activeSimulation.addStep(step);
 		entities.forEach((e) -> {
-			Main.increaseTab();
 			e.die();
 		});
-
-		Main.decreaseTab();
 	}
 
 	/**
 	 * Activates the gates pair when this gate is placed.
 	 */
 	public void activate() {
-		Step step = new Step(Main.call + " " + name + " activate()");
-		Main.activeSimulation.addStep(step);
 		pair.setActive(true);
-		Main.decreaseTab();
 	}
 
+	/**
+	 * If the TeleportGate isn't normal it travels and gets a new neighbour.
+	 */
+	public void makeTurn(){
+		if(normal) return;
 
+		Thing rand1 = randomNeighbour();
+		Thing rand2 = rand1.randomNeighbour();
+
+		if(rand2 == this) return;
+
+		for(Thing t: neighbour) {
+			removeNeighbour(t);
+			t.removeNeighbour(this);
+		}
+
+		addNeighbour(rand2);
+		rand2.addNeighbour(this);
+	}
+
+	/**
+	 * Adds a Entity on the TeleportGate.
+	 * @param entity the entity that is added.
+	 */
 	@Override
 	public void addEntity(Entity entity){
-		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " addEntity(" + entity.getName() + ")");
-
-		addAllObject(step);
-
-		Main.activeSimulation.addStep(step);
-
 		pair.passEntity(entity);
-
-		Main.decreaseTab();
 	}
 
 	/**
@@ -61,15 +69,7 @@ public class TeleportGate extends Thing implements SimulationObject {
 	 * @param entity the entity that is teleoprted.
 	 */
 	public void passEntity(Entity entity){
-		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " passEntity(" + entity.getName() + ")");
-
-		addAllObject(step);
-
-		Main.activeSimulation.addStep(step);
-
 		entities.add(entity);
-
-		Main.decreaseTab();
 	}
 
 	public void setPair(TeleportGate gate2) {
@@ -80,24 +80,4 @@ public class TeleportGate extends Thing implements SimulationObject {
 		active = act;
 	}
 
-	@Override
-	public void listParameters() {
-		System.out.println(name + ":\n" +
-				"Neighbours: ");
-		for(int i=0; i<neighbour.size(); ++i)
-			System.out.println(neighbour.get(i).getName() + " ");
-		System.out.println("Entities: ");
-		for(int i=0; i<entities.size(); ++i)
-			System.out.println(entities.get(i).getName() + " ");
-		System.out.println("Pair: " + pair.getName() + "\nActive: ");
-		if(active)
-			System.out.println("true");
-		else
-			System.out.println("false");
-	}
-
-	@Override
-	public String printName() {
-		return name;
-	}
 }

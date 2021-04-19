@@ -1,5 +1,6 @@
 package Proto.things.asteroids;
 
+import Proto.GameManager;
 import Proto.Main;
 import Proto.material.Material;
 import Proto.simulator.Step;
@@ -7,16 +8,11 @@ import Proto.simulator.Step;
 import java.util.ArrayList;
 
 public class MainAsteroid extends Asteroid {
-	private ArrayList<Material> builtIn = new ArrayList<>();
+	private ArrayList<Material> requirements = new ArrayList<>();	//The Materials which the Settlers put on the Asteroid
 
 	public MainAsteroid(String name) {
 		super(name);
-	}
-
-	@Override
-	protected void addAllObject(Step step) {
-		super.addAllObject(step);
-
+		//requirements = GameManager.ref.recipes.get("Base");
 	}
 
 	/**
@@ -24,23 +20,11 @@ public class MainAsteroid extends Asteroid {
 	 * @param m the material.
 	 */
 	@Override
-	public void buildBase(Material m) {
-		Step step = new Step(Main.printTabs() + Main.call++ + " " + name + " buildBase()");
+	public boolean buildBase(Material m) {
+		if(requirements.size() == 0) return true;
 
-		addAllObject(step);
-		step.addObject(m);
-
-		Main.activeSimulation.addStep(step);
-		builtIn.add(m);
-
-		Main.decreaseTab();
+		requirements.remove(m);
+		return false;
 	}
 
-	/**
-	 * list the main asteroid parameters
-	 */
-	@Override
-	public void listParameters() {
-
-	}
 }
