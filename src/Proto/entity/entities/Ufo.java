@@ -1,34 +1,34 @@
 package Proto.entity.entities;
 
+import Proto.Inventory;
+import Proto.controller.controllers.UfoController;
 import Proto.entity.Entity;
+import Proto.material.Material;
+import Proto.things.Thing;
+import Proto.things.gate.TeleportGate;
 
 public class Ufo extends Entity {
-	/**
-	 * Constructor of the Entity class. Sets the name and location.
-	 *
-	 * @param name The name of the object
-	 */
-	public Ufo(String name) {
-		super(name);
+
+	private Inventory myInventory;
+
+	public Ufo(Thing loc) {
+		super(loc);
+		Inventory myInventory = new Inventory();
 	}
 
 	@Override
-	public void die() {
-
+	public void die(){
+		super.die();
+		UfoController.ref.rmUfo(this);
 	}
 
 	@Override
-	public void explode() {
-
+	public void addMaterial(Material m){
+		myInventory.addMaterial(m);
 	}
 
 	@Override
-	public void listParameters() {
-
+	public void drill(){
 	}
 
-	@Override
-	public String printName() {
-		return null;
-	}
 }

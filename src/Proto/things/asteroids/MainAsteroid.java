@@ -1,7 +1,7 @@
 package Proto.things.asteroids;
 
 import Proto.Main;
-import Proto.materials.Material;
+import Proto.material.Material;
 import Proto.simulator.Step;
 
 import java.util.ArrayList;
