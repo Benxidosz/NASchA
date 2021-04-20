@@ -14,4 +14,3 @@ stepped: true
 +------------------+
 name: r1
 location: a1
-stepped: false

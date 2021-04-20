@@ -56,6 +56,7 @@ public class Main {
 
                     if (testAll) {
                         File outDir = new File("outTest");
+                        int passed = 0;
                         outDir.mkdir();
                         for (int i = 0; i < 21; ++i) {
                             String fileBase = "test" + (i + 1);
@@ -64,11 +65,12 @@ public class Main {
                             expected = new File("tests", fileBase + "_output.txt");
                             output = new File(outDir, (fileBase + "_out.txt"));
 
-                            simulator.Read(input, output, expected);
+                            if (simulator.Read(input, output, expected))
+                                ++passed;
                             System.out.println("-------------------------------");
                         }
 
-                        System.out.println("All test Done.");
+                        System.out.println("All test Done. " + passed + " of 21 passed.");
                     }
                 } else {
                     System.out.println("You are in test mode! You can load file by:\n" +

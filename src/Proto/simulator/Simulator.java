@@ -55,20 +55,22 @@ public class Simulator {
 		return null;
 	}
 
-	public void Read(File in, File out, File exp){
+	public boolean Read(File in, File out, File exp){
 		try {
 			Scanner sc = null;
 			sc = new Scanner(in);
+			commands = new ArrayList<>();
 			while (sc.hasNext()){
 				String stringTmp = sc.nextLine();
 				commands.add(stringTmp);
 			}
 			Execute(out);
-			compareTest(exp, out);
+			return compareTest(exp, out);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		//System.out.println(commands);
+		return false;
 	}
 
 	public void run() {
