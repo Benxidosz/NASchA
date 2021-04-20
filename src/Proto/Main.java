@@ -75,7 +75,7 @@ public class Main {
                     }
                 } else {
                     System.out.println("You are in test mode! You can load file by:\n" +
-                            "load -i <inputFile> -o <testOutputFile>");
+                            "load -i <inputFile> -o <testOutputFile> -e <expected>");
                     simulator.run();
                 }
             }
