@@ -66,6 +66,7 @@ public class Settler extends Entity {
 		} catch (CloneNotSupportedException e) {
 			e.printStackTrace();
 		}
+		done();
 	}
 
 	/**
@@ -85,6 +86,7 @@ public class Settler extends Entity {
 				addGate(gate2);
 			}
 		}
+		done();
 	}
 
 	/**
@@ -99,6 +101,7 @@ public class Settler extends Entity {
 			RobotController.getInstance().addRobot(r);
 			location.addEntity(r);
 		}
+		done();
 	}
 
 	/**
@@ -109,6 +112,7 @@ public class Settler extends Entity {
 		if(location.placeMaterial(m)) {
 			rmMaterial(m);
 		}
+		done();
 	}
 
 	/**
@@ -121,6 +125,7 @@ public class Settler extends Entity {
 		SolarSystem.getInstance().addThing(g);
 		g.activate();
 		gates.remove(g);
+		done();
 	}
 
 	/**
