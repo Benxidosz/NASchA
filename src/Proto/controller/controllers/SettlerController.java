@@ -129,11 +129,7 @@ public class SettlerController implements Controller {
  		} else if ("Buildgate".equals(args[0])) {
 			selected.buildGate(args[2]);
 		} else if ("Buildbase".equals(args[0])) {
-			try {
-				selected.buildBase();
-			} catch (CloneNotSupportedException e) {
-				e.printStackTrace();
-			}
+			selected.buildBase();
 		} else if ("Putdown".equals(args[0])) {
 			Material material = selected.getMaterialByName(args[2]);
 			TeleportGate tg = selected.getGateByName(args[2]);
