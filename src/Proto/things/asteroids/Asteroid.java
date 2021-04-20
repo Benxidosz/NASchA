@@ -87,10 +87,8 @@ public class Asteroid extends Thing {
 	 * Calls explode for all entities on it.
 	 */
 	public void explode() {
-		ArrayList<Entity> tmp = new ArrayList(entities);
-		tmp.forEach(((e) -> {
-			e.explode();
-		}));
+		ArrayList<Entity> tmp = new ArrayList<>(entities);
+		tmp.forEach((Entity::explode));
 		SolarSystem.getInstance().removeThing(this);
 	}
 

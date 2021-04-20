@@ -218,7 +218,10 @@ public class Settler extends Entity {
 			result.append("null");
 		else
 			for (Material mat : myInventory.getMaterials())
-				result.append(mat.getName() + " ");
+				if (myInventory.getMaterials().getLast() != mat)
+					result.append(mat.getName() + " ");
+				else
+					result.append(mat.getName());
 		result.append("\ngates: ");
 		if (gates.size() == 0)
 			result.append("null");

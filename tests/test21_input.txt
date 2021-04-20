@@ -7,6 +7,7 @@ a1;a2
 Settler s1 a1
 Robot r1 a1
 Makematerial -u u1 2
+Setinventory s1 u1
 </SETUP>
 <PROGRESS>
 Putdown u1 s1

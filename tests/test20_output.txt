@@ -7,28 +7,28 @@ core: i1
 nearsun: false
 +------------------+
 name: a2
-neighbours: a1 a3 a4 g1 
-entities: s1 
+neighbours: a1 a3 a4 g1
+entities: s1
 layer number: 0
 core: null
 nearsun: false
 +------------------+
 name: a3
-neighbours: a2 a4 g2 
-entities: s3 r1 
+neighbours: a2 a4 g2
+entities: s3 r1
 layer number: 0
 core: null
 nearsun: false
 +------------------+
 name: a4
-neighbours: a2 a3 
+neighbours: a2 a3
 entities: null
 layer number: 3
 core: si1
 nearsun: false
 +------------------+
 name: g1
-neighbours: a2 
+neighbours: a2
 entities: null
 pair: g2
 setted: true
@@ -36,7 +36,7 @@ active: true
 normal: false
 +------------------+
 name: g2
-neighbours: a3 
+neighbours: a3
 entities: null
 pair: g1
 setted: true
