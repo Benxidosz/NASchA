@@ -62,6 +62,9 @@ public class GameManager {
      */
     private boolean ended;
 
+    /**
+     * Make the quit to true.
+     */
     public void makeQuit() {
         quit = true;
     }

@@ -28,7 +28,7 @@ public class SettlerController implements Controller {
 
 	/**
 	 * Returns the reference.
-	 * @return
+	 * @return The reference
 	 */
 	public static SettlerController getInstance() {
 		return ref;
@@ -42,6 +42,10 @@ public class SettlerController implements Controller {
 		settlerId = 0;
 	}
 
+	/**
+	 * Returns the settlers.
+	 * @return The settlers.
+	 */
 	public LinkedList<Settler> getSettlers() {
 		return settlers;
 	}
@@ -62,6 +66,11 @@ public class SettlerController implements Controller {
 
 	}
 
+	/**
+	 * Returns the settler by his name
+	 * @param name Name of the settler
+	 * @return The settler
+	 */
 	public Settler getSettlerByName(String name) {
 		for (Settler settler : settlers) {
 			if (settler.getName().equals(name)) {
@@ -74,7 +83,7 @@ public class SettlerController implements Controller {
 
 	/**
 	 * Returns the id of the settler.
-	 * @return
+	 * @return The id of the settler.
 	 */
 	public static String  getSettlerId() {
 		return "s" + settlerId++;

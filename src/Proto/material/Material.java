@@ -50,10 +50,45 @@ public abstract class Material {
 		this.myAsteroid = myAsteroid;
 	}
 
+	/**
+	 * An abstract method which is compare two material in the children classes.
+	 * @param o a material
+	 * @return if the material has the same type as the child class, it returns true.
+	 */
 	public abstract boolean compare(Material o);
+
+	/**
+	 * An abstract method which is compare two material in the children classes.
+	 * @param o an iron
+	 * @return if the material has the same type as the child class, it returns true.
+	 */
 	public abstract boolean compare(Iron o);
+
+	/**
+	 * An abstract method which is compare two material in the children classes.
+	 * @param o a waterice
+	 * @return if the material has the same type as the child class, it returns true.
+	 */
 	public abstract boolean compare(WaterIce o);
+
+	/**
+	 * An abstract method which is compare two material in the children classes.
+	 * @param o an uran
+	 * @return if the material has the same type as the child class, it returns true.
+	 */
 	public abstract boolean compare(Uran o);
+
+	/**
+	 * An abstract method which is compare two material in the children classes.
+	 * @param o a silicon
+	 * @return if the material has the same type as the child class, it returns true.
+	 */
 	public abstract boolean compare(Silicon o);
+
+	/**
+	 * An abstract method which is compare two material in the children classes.
+	 * @param o a coal
+	 * @return if the material has the same type as the child class, it returns true.
+	 */
 	public abstract boolean compare(Coal o);
 }

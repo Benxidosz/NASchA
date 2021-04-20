@@ -26,6 +26,12 @@ public class WaterIce extends Material{
 		myAsteroid.setCore(null);
 	}
 
+	/**
+	 * An override method which is compares the parameter to the type
+	 * of this class' material.
+	 * @param o a material
+	 * @return if it's the same type, it returns true
+	 */
 	@Override
 	public boolean compare(Material o) {
 		return MaterialCompare.getInstance().compare(this, o);
@@ -36,6 +42,12 @@ public class WaterIce extends Material{
 		return false;
 	}
 
+	/**
+	 * An override method which is compares the parameter to the type
+	 * of this class' material.
+	 * @param o a waterice
+	 * @return true
+	 */
 	@Override
 	public boolean compare(WaterIce o) {
 		return true;

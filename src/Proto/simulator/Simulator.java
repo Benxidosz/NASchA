@@ -27,17 +27,35 @@ import java.util.Scanner;
  * Store all the simulations and it can run them.
  */
 public class Simulator {
-
+	/**
+	 * List of the messages.
+	 */
 	private static LinkedList<String> messages;
 
+	/**
+	 * Add message to the messages list.
+	 * @param msg The message.
+	 */
 	public static void addMessage(String msg) {
 		if (messages != null)
 			messages.add(msg);
 	}
 
+	/**
+	 * List of the commands.
+	 */
 	ArrayList<String> commands;
+	/**
+	 * List of the materials.
+	 */
 	LinkedList<Material> materials;
+	/**
+	 * List of the gates.
+	 */
 	LinkedList<TeleportGate> gates;
+	/**
+	 * It turns the random to false.
+	 */
 	boolean random = false;
 
 	public Simulator(){
@@ -47,6 +65,11 @@ public class Simulator {
 		messages = new LinkedList<>();
 	}
 
+	/**
+	 * Returns the material by his given name
+	 * @param name Name of the material
+	 * @return The material
+	 */
 	private Material getMaterialByName(String name) {
 		for (Material m : materials)
 			if (m.getName().equals(name))
@@ -55,6 +78,11 @@ public class Simulator {
 		return null;
 	}
 
+	/**
+	 * Returns the teleport gate by his given name
+	 * @param name Name of the teleport gate
+	 * @return The teleport gate
+	 */
 	private TeleportGate getGateByName(String name) {
 		for (TeleportGate m : gates)
 			if (m.getName().equals(name))
@@ -63,6 +91,13 @@ public class Simulator {
 		return null;
 	}
 
+	/**
+	 * Read the files.
+	 * @param in X_input.text file
+	 * @param out X_out.txt file
+	 * @param exp X_output.txt file
+	 * @return false
+	 */
 	public boolean Read(File in, File out, File exp){
 		try {
 			Scanner sc = null;
@@ -81,6 +116,9 @@ public class Simulator {
 		return false;
 	}
 
+	/**
+	 * Run the simulator
+	 */
 	public void run() {
 		boolean quit = false;
 		while (!quit) {

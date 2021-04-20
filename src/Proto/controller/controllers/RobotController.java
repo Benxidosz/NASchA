@@ -73,6 +73,11 @@ public class RobotController implements Controller {
 		}
 	}
 
+	/**
+	 * Returns the robot by his given name
+	 * @param name Name of the robot
+	 * @return The robot
+	 */
 	public Robot getRobotByName(String name) {
 		for (Robot robot : robots) {
 			if (robot.getName().equals(name)) {
@@ -116,7 +121,7 @@ public class RobotController implements Controller {
 
 	/**
 	 * Handles the inputs from the interface.
-	 * @param line
+	 * @param line The command
 	 */
 	@Override
 	public void handleCommand(String line) {

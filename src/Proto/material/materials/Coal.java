@@ -16,11 +16,23 @@ public class Coal extends Material {
 		super(name);
 	}
 
+	/**
+	 * An override method which is compares the parameter to the type
+	 * of this class' material.
+	 * @param o a material
+	 * @return if it's the same type, it returns true
+	 */
 	@Override
 	public boolean compare(Material o) {
 		return MaterialCompare.getInstance().compare(this, o);
 	}
 
+	/**
+	 * An override method which is compares the parameter to the type
+	 * of this class' material.
+	 * @param m a coal
+	 * @return true
+	 */
 	@Override
 	public boolean compare(Coal m) {
 		return true;
