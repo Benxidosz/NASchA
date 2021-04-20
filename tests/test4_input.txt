@@ -7,7 +7,7 @@ Makematerial -i i2
 Makematerial -u u1
 Makematerial -w w1
 Setinventory s1 i1
-Setinventory s1 c2
+Setinventory s1 i2
 Setinventory s1 u1
 Setinventory s1 w1
 </SETUP>

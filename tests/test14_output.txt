@@ -13,18 +13,13 @@ layer number: 0
 core: null
 nearsun: false
 +------------------+
-name: s1
-materials: null
-gates: g2
-location: a2
-stepped: true
-+------------------+
 name: g1
 neighbours: a1
 entities: null
 pair: g2
 setted: true
 active: true
+normal: true
 +------------------+
 name: g2
 neighbours: a2
@@ -32,3 +27,10 @@ entities: null
 pair: g1
 setted: true
 active: true
+normal: true
++------------------+
+name: s1
+materials: null
+gates: null
+location: a2
+stepped: true

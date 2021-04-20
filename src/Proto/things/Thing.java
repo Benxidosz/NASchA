@@ -78,7 +78,7 @@ public abstract class Thing implements listableObj {
 	 * @param nei the Thing which is removed.
 	 */
 	public void removeNeighbour(Thing nei) {
-		if (!(nei == this || neighbour.contains(nei)))
+		if (nei != this)
 			neighbour.remove(nei);
 	}
 
@@ -179,6 +179,23 @@ public abstract class Thing implements listableObj {
 				return nei;
 		}
 		return null;
+	}
+
+	/**
+	 * Calls explode for all entities on it.
+	 */
+	public void explode() {
+		ArrayList<Entity> tmp = new ArrayList<>(entities);
+		tmp.forEach((Entity::explode));
+		for (Thing nei1 : neighbour) {
+			nei1.removeNeighbour(this);
+			for (Thing nei2 : neighbour)
+				if (nei1 != nei2) {
+					nei1.addNeighbour(nei2);
+					nei2.addNeighbour(nei1);
+				}
+		}
+		SolarSystem.getInstance().removeThing(this);
 	}
 
 	/**

@@ -8,6 +8,7 @@ import Proto.entity.entities.Settler;
 import Proto.entity.entities.Ufo;
 import Proto.material.compare.MaterialCompare;
 import Proto.material.materials.*;
+import Proto.simulator.Simulator;
 import Proto.things.Thing;
 import Proto.things.asteroids.Asteroid;
 import Proto.things.asteroids.MainAsteroid;
@@ -207,6 +208,7 @@ public class GameManager {
      */
     public void win() {
         ended = true;
+        Simulator.addMessage("game win\n");
         if (!Main.isTestMode()) {
             System.out.println("Victory!");
             System.out.println("Play again? [Y/N]");
@@ -225,6 +227,7 @@ public class GameManager {
      */
     public void lose(){
         ended = true;
+        Simulator.addMessage("game lose\n");
         if (!Main.isTestMode()) {
             System.out.println("Defeat!");
             System.out.println("Play again? [Y/N]");

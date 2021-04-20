@@ -59,6 +59,7 @@ public class Main {
                         int passed = 0;
                         outDir.mkdir();
                         for (int i = 0; i < 21; ++i) {
+                            simulator = new Simulator();
                             String fileBase = "test" + (i + 1);
                             System.out.println(fileBase + ": ");
                             input = new File("tests", fileBase + "_input.txt");

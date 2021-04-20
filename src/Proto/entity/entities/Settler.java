@@ -74,6 +74,7 @@ public class Settler extends Entity {
 	 * @param name The name of the gates
 	 */
 	public void buildGate(String name) {
+		boolean created = false;
 		if (gates.size()<2) {
 			Inventory gateRecipe = GameManager.getInstance().recipes.get("TeleportGate");
 			if(myInventory.containsRecipe(gateRecipe)) {
@@ -84,8 +85,11 @@ public class Settler extends Entity {
 				gate2.setPair(gate1);
 				addGate(gate1);
 				addGate(gate2);
+				created = true;
 			}
 		}
+		if (!created)
+			Simulator.addMessage("Gates can't be created.");
 		done();
 	}
 
@@ -100,7 +104,8 @@ public class Settler extends Entity {
 			Robot r = new Robot(name, location);
 			RobotController.getInstance().addRobot(r);
 			location.addEntity(r);
-		}
+		} else
+			Simulator.addMessage("Robot can't be created.");
 		done();
 	}
 
@@ -227,7 +232,10 @@ public class Settler extends Entity {
 			result.append("null");
 		else
 			for (TeleportGate tg : gates)
-				result.append(tg.getName() + " ");
+				if (gates.get(gates.size() - 1) != tg)
+					result.append(tg.getName() + " ");
+				else
+					result.append(tg.getName());
 		result.append("\nlocation: " + location.getName() + "\n");
 		result.append("stepped: " + (active == true ? "false" : "true") + "\n");
 

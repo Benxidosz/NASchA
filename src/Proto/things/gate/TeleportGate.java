@@ -124,14 +124,20 @@ public class TeleportGate extends Thing {
 			result.append("null");
 		else
 			for (Thing nei : neighbour)
-				result.append(nei.getName() + " ");
+				if (nei != neighbour.get(neighbour.size() - 1))
+					result.append(nei.getName() + " ");
+				else
+					result.append(nei.getName());
 
 		result.append("\nentities: ");
 		if (entities.size() == 0)
 			result.append("null");
 		else
 			for (Entity ent : entities)
-				result.append(ent.getName() + " ");
+				if (ent != entities.get(entities.size() - 1))
+					result.append(ent.getName() + " ");
+				else
+					result.append(ent.getName());
 
 		result.append("\npair: " + ((pair != null) ? pair.getName() : "null"));
 		result.append("\nsetted: " + (setted ? "true" : "false"));

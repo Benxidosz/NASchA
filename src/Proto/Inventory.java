@@ -96,11 +96,19 @@ public class Inventory implements Cloneable {
 	 * @return if the copied recipe is empty, it is true, if not it's false.
 	 */
 	public boolean containsRecipe(Inventory recipe) {
-		for (Material m : recipe.materials)
-			if (!containsMaterial(m))
-				return false;
+		try {
+			Inventory tmp = (Inventory) this.clone();
+			for (Material m : recipe.materials)
+				if (!tmp.containsMaterial(m))
+					return false;
+				else
+					tmp.rmMaterial(m);
 
-		return true;
+			return true;
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	/**

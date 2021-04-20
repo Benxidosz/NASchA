@@ -84,15 +84,6 @@ public class Asteroid extends Thing {
 	}
 
 	/**
-	 * Calls explode for all entities on it.
-	 */
-	public void explode() {
-		ArrayList<Entity> tmp = new ArrayList<>(entities);
-		tmp.forEach((Entity::explode));
-		SolarSystem.getInstance().removeThing(this);
-	}
-
-	/**
 	 * The asteroid gets excavated and sets it's core to null.
 	 * @return The core Material.
 	 */
@@ -209,7 +200,10 @@ public class Asteroid extends Thing {
 			result.append("null");
 		else
 			for (Thing nei : neighbour)
-				result.append(nei.getName() + " ");
+				if (nei != neighbour.get(neighbour.size() - 1))
+					result.append(nei.getName() + " ");
+				else
+					result.append(nei.getName());
 
 		result.append("\nentities: ");
 		if (entities.size() == 0)

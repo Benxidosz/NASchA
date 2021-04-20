@@ -8,4 +8,5 @@ nearsun: false
 +------------------+
 name: r1
 location: a2
-stepped: false
++------------------+
+game lose

@@ -1,6 +1,6 @@
 +------------------+
 name: a1
-neighbours: a2 
+neighbours: a2
 entities: null
 layer number: 2
 core: i1

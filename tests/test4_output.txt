@@ -6,8 +6,24 @@ layer number: 2
 core: null
 nearsun: false
 +------------------+
+name: g1a
+neighbours: null
+entities: null
+pair: g1b
+setted: false
+active: false
+normal: true
++------------------+
+name: g1b
+neighbours: null
+entities: null
+pair: g1a
+setted: false
+active: false
+normal: true
++------------------+
 name: s1
 materials: null
-gates: g1a g2b
+gates: g1a g1b
 location: a1
 stepped: true

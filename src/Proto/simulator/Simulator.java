@@ -28,6 +28,13 @@ import java.util.Scanner;
  */
 public class Simulator {
 
+	private static LinkedList<String> messages;
+
+	public static void addMessage(String msg) {
+		if (messages != null)
+			messages.add(msg);
+	}
+
 	ArrayList<String> commands;
 	LinkedList<Material> materials;
 	LinkedList<TeleportGate> gates;
@@ -37,6 +44,7 @@ public class Simulator {
 		commands = new ArrayList<>();
 		materials = new LinkedList<>();
 		gates = new LinkedList<>();
+		messages = new LinkedList<>();
 	}
 
 	private Material getMaterialByName(String name) {
@@ -529,6 +537,15 @@ public class Simulator {
 							UfoController.getInstance().getUfos().forEach(u -> {
 								try {
 									writer.write(u.List());
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
+							});
+							if (messages.size() > 0)
+								writer.write("+------------------+\n");
+							messages.forEach(msg -> {
+								try {
+									writer.write(msg);
 								} catch (IOException e) {
 									e.printStackTrace();
 								}
