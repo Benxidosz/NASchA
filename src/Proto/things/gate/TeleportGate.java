@@ -75,11 +75,13 @@ public class TeleportGate extends Thing {
 	 * @param entity the entity that is added.
 	 */
 	@Override
-	public void addEntity(Entity entity){
-		if(active)
+	public Thing addEntity(Entity entity){
+		if(active) {
 			pair.passEntity(entity);
-		else
-			entities.add(entity);
+			return pair;
+		}
+		entities.add(entity);
+		return this;
 	}
 
 	/**
@@ -88,6 +90,7 @@ public class TeleportGate extends Thing {
 	 */
 	public void passEntity(Entity entity){
 		entities.add(entity);
+
 	}
 
 	/**

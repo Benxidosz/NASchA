@@ -136,10 +136,14 @@ public class Settler extends Entity {
 	 */
 	@Override
 	public void addMaterial(Material m) {
-		if(myInventory.hasSpace())
+		if(myInventory.hasSpace()) {
 			myInventory.addMaterial(m);
-		else
+			fullInventory = false;
+		}
+		else {
 			location.placeMaterial(m);
+			fullInventory = true;
+		}
 	}
 
 	/**

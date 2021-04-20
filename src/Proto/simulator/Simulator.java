@@ -144,7 +144,7 @@ public class Simulator {
 					} else {
 						Asteroid asteroid = null;
 						if (tmp[2].equals("-e")) {
-							asteroid = new MainAsteroid(tmp[0], Integer.parseInt(tmp[1]), null, tmp[3].equals("1"));
+							asteroid = new Asteroid(tmp[0], Integer.parseInt(tmp[1]), null, tmp[3].equals("1"));
 						} else {
 							Material core = null;
 							switch(tmp[2]){
@@ -166,7 +166,7 @@ public class Simulator {
 								default:
 									core = null;
 							}
-							asteroid = new MainAsteroid(tmp[0], Integer.parseInt(tmp[1]), core, tmp[4].equals("1"));
+							asteroid = new Asteroid(tmp[0], Integer.parseInt(tmp[1]), core, tmp[4].equals("1"));
 						}
 						SolarSystem.getInstance().addThing(asteroid);
 					}
@@ -477,10 +477,13 @@ public class Simulator {
 								try{
 									if (t.emptyCore)
 										writer.write("Core is empty\n");
+									if (t.fullInventory)
+										writer.write("Inventory is full\n");
 								} catch (IOException e) {
 									e.printStackTrace();
 								}
 							});
+
 
 							SolarSystem.getInstance().getThings().forEach(t -> {
 								try {
@@ -489,7 +492,19 @@ public class Simulator {
 									e.printStackTrace();
 								}
 							});
+
 							SettlerController.getInstance().getSettlers().forEach(s -> {
+								s.getGates().forEach(g -> {
+									try {
+										writer.write(g.List());
+									} catch (IOException e) {
+										e.printStackTrace();
+									}
+								});
+							});
+
+							SettlerController.getInstance().getSettlers().forEach(s -> {
+
 								try {
 									writer.write(s.List());
 								} catch (IOException e) {

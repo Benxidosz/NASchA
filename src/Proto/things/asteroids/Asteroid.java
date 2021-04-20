@@ -12,6 +12,7 @@ import Proto.material.materials.WaterIce;
 import Proto.things.Thing;
 import Proto.simulator.*;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -86,7 +87,8 @@ public class Asteroid extends Thing {
 	 * Calls explode for all entities on it.
 	 */
 	public void explode() {
-		entities.forEach(((e) -> {
+		ArrayList<Entity> tmp = new ArrayList(entities);
+		tmp.forEach(((e) -> {
 			e.explode();
 		}));
 		SolarSystem.getInstance().removeThing(this);

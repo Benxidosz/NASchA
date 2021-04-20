@@ -38,6 +38,7 @@ public abstract class Thing implements listableObj {
 	public boolean nullLayer = false;
 
 
+
 	/**
 	 * The constructor of the Thing
 	 * @param name The name of the Thing
@@ -50,8 +51,9 @@ public abstract class Thing implements listableObj {
 	 * Adds the paramater to the entities array.
 	 * @param entity the entity that is added.
 	 */
-	public void addEntity(Entity entity) {
+	public Thing addEntity(Entity entity) {
 		entities.add(entity);
+		return this;
 	}
 
 	/**

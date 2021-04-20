@@ -26,6 +26,11 @@ public abstract class Entity implements listableObj {
 	public boolean emptyCore = false;
 
 	/**
+	 * true if the inventory is full
+	 */
+	public boolean fullInventory = false;
+
+	/**
 	 * The constructor of the Entity class.
 	 * @param loc The location where the Entity is
 	 * @param name The name of the Entity
@@ -53,11 +58,10 @@ public abstract class Entity implements listableObj {
 	 * @param destination The next location of the object
 	 */
 	public void move(Thing destination) {
-		destination.addEntity(this);
 		if (location != null) {
 			location.removeEntity(this);
 		}
-		location = destination;
+		location = destination.addEntity(this);
 		done();
 	}
 
