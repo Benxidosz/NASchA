@@ -108,10 +108,20 @@ public class UfoController implements Controller {
 		}
 	}
 
+
+	/**
+	 * Returns the ufos in the game.
+	 * @return the ufos
+	 */
 	public LinkedList<Ufo> getUfos() {
 		return ufos;
 	}
 
+	/**
+	 * Returns the ufo with the given name.
+	 * @param name the name
+	 * @return the ufo
+	 */
 	public Ufo getUfoByName(String name) {
 		for (Ufo ufo : ufos) {
 			if (ufo.getName().equals(name)) {

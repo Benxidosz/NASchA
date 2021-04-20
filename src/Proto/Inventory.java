@@ -135,6 +135,11 @@ public class Inventory implements Cloneable {
 		return materials.isEmpty();
 	}
 
+	/**
+	 * Copies an inventory.
+	 * @return the clone
+	 * @throws CloneNotSupportedException
+	 */
 	@Override
 	public Object clone() throws CloneNotSupportedException {
 		Inventory clone = new Inventory(maxSpace);

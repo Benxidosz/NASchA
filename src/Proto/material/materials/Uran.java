@@ -52,6 +52,12 @@ public class Uran extends Material {
 		return MaterialCompare.getInstance().compare(this, o);
 	}
 
+	/**
+	 * An override method which is compares the parameter to the type
+	 * of this class' material.
+	 * @param o an iron
+	 * @return false
+	 */
 	@Override
 	public boolean compare(Iron o) {
 		return false;

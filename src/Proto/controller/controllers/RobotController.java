@@ -115,6 +115,10 @@ public class RobotController implements Controller {
 		robots.forEach(this::calculateStep);
 	}
 
+	/**
+	 * Returns the robots in the game.
+	 * @return the robots
+	 */
 	public LinkedList<Robot> getRobots() {
 		return robots;
 	}

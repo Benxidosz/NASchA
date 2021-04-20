@@ -38,21 +38,45 @@ public class Coal extends Material {
 		return true;
 	}
 
+	/**
+	 * An override method which is compares the parameter to the type
+	 * of this class' material.
+	 * @param o an iron
+	 * @return true
+	 */
 	@Override
 	public boolean compare(Iron o) {
 		return false;
 	}
 
+	/**
+	 * An override method which is compares the parameter to the type
+	 * of this class' material.
+	 * @param o a waterice
+	 * @return false
+	 */
 	@Override
 	public boolean compare(WaterIce o) {
 		return false;
 	}
 
+	/**
+	 * An override method which is compares the parameter to the type
+	 * of this class' material.
+	 * @param o an uran
+	 * @return false
+	 */
 	@Override
 	public boolean compare(Uran o) {
 		return false;
 	}
 
+	/**
+	 * An override method which is compares the parameter to the type
+	 * of this class' material.
+	 * @param o a silicon
+	 * @return false
+	 */
 	@Override
 	public boolean compare(Silicon o) {
 		return false;

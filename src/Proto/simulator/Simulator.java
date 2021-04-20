@@ -58,6 +58,9 @@ public class Simulator {
 	 */
 	boolean random = false;
 
+	/**
+	 * The constructor of the class
+	 */
 	public Simulator(){
 		commands = new ArrayList<>();
 		materials = new LinkedList<>();
@@ -146,6 +149,10 @@ public class Simulator {
 		}
 	}
 
+	/**
+	 * Executes the commands from the input
+	 * @param out the outcome of the commands
+	 */
 	public void Execute(File out) {
 		BufferedWriter writer;
 		try {
@@ -613,6 +620,13 @@ public class Simulator {
 		}
 	}
 
+	/**
+	 * Compares the test result with the expected result.
+	 * @param test1 The expected result
+	 * @param test2 The result
+	 * @return true if the result and the expected result is equal
+	 * @throws IOException
+	 */
 	public boolean compareTest(File test1, File test2) throws IOException {
 		BufferedReader reader1 = new BufferedReader(new FileReader(test1));
 

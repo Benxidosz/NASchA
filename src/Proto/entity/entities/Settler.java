@@ -174,6 +174,11 @@ public class Settler extends Entity {
 		SettlerController.getInstance().rmSettler(this);
 	}
 
+	/**
+	 * Return material with the given name.
+	 * @param arg the name
+	 * @return the material
+	 */
 	public Material getMaterialByName(String arg) {
 		for (Material mat : myInventory.getMaterials()) {
 			if (mat.getName().equals(arg))
@@ -182,6 +187,11 @@ public class Settler extends Entity {
 		return null;
 	}
 
+	/**
+	 * Return teleport gate with the given name.
+	 * @param name the name
+	 * @return the gate
+	 */
 	public TeleportGate getGateByName(String name) {
 		for (TeleportGate gate : gates)
 			if (gate.getName().equals(name))
@@ -198,14 +208,26 @@ public class Settler extends Entity {
 		this.active = active;
 	}
 
+	/**
+	 * Returns the value of the active attribute.
+	 * @return The boolean
+	 */
 	public boolean isActive() {
 		return active;
 	}
 
+	/**
+	 * Returns the TeleportGates owned by the settler.
+	 * @return The gates
+	 */
 	public ArrayList<TeleportGate> getGates() {
 		return gates;
 	}
 
+	/**
+	 * Returns the settlers inventory.
+	 * @return the inventory
+	 */
 	public Inventory getMyInventory() {
 		return this.myInventory;
 	}

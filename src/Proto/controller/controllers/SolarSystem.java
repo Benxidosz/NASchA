@@ -259,6 +259,11 @@ public class SolarSystem implements Controller {
 		}
 	}
 
+	/**
+	 * Returns thing with the given name.
+	 * @param name the name
+	 * @return the thing
+	 */
 	public Thing getThingByName(String name) {
 		for (Thing t : things)
 			if (t.getName().equals(name))
@@ -267,6 +272,10 @@ public class SolarSystem implements Controller {
 		return null;
 	}
 
+	/**
+	 * Returns the things in the game.
+	 * @return the things
+	 */
 	public LinkedList<Thing> getThings() {
 		return things;
 	}

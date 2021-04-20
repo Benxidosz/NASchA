@@ -20,15 +20,32 @@ import java.util.Scanner;
  * The main class of the game.
  */
 public class Main {
+
     static public Scanner scanner = new Scanner(System.in);
+
+    /**
+     * Random variable for the random activities.
+     */
     public static Random rng = new Random();
 
+    /**
+     * It's true if the program is in test mode.
+     */
     private static boolean testMode = false;
 
+    /**
+     * Returns the value of the testMode variable.
+     * @return the boolean.
+     */
     public static boolean isTestMode() {
         return testMode;
     }
 
+    /**
+     * The main function
+     * @param args the launching mode
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException {
         if (args.length > 0) {
             if (args[0].equals("-t")) {
