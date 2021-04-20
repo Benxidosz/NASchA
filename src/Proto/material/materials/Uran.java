@@ -2,6 +2,7 @@ package Proto.material.materials;
 
 import Proto.Main;
 import Proto.material.Material;
+import Proto.material.compare.MaterialCompare;
 
 /**
  * It represents a Uran type material and helps to distinguish it from other different materials.
@@ -38,6 +39,36 @@ public class Uran extends Material {
 			if (countExposition == 3)
 				myAsteroid.explode();
 		}
+	}
+
+	@Override
+	public boolean compare(Material o) {
+		return MaterialCompare.getInstance().compare(this, o);
+	}
+
+	@Override
+	public boolean compare(Iron o) {
+		return false;
+	}
+
+	@Override
+	public boolean compare(WaterIce o) {
+		return false;
+	}
+
+	@Override
+	public boolean compare(Uran o) {
+		return true;
+	}
+
+	@Override
+	public boolean compare(Silicon o) {
+		return false;
+	}
+
+	@Override
+	public boolean compare(Coal o) {
+		return false;
 	}
 
 

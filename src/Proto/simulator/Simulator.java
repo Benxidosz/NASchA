@@ -10,6 +10,7 @@ import Proto.entity.entities.Robot;
 import Proto.entity.entities.Settler;
 import Proto.entity.entities.Ufo;
 import Proto.material.Material;
+import Proto.material.compare.MaterialCompare;
 import Proto.material.materials.*;
 import Proto.things.Thing;
 import Proto.things.asteroids.Asteroid;
@@ -108,6 +109,7 @@ public class Simulator {
 			RobotController.init();
 			UfoController.init();
 			GameManager.init();
+			MaterialCompare.init();
 
 			for (String curent : commands) {
 				String splittedCommand[] = curent.split(" ");

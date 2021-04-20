@@ -168,6 +168,8 @@ public class SettlerController implements Controller {
 	 */
 	public void rmSettler(Settler s) {
 		settlers.remove(s);
+		if (settlers.size() == 0)
+			GameManager.getInstance().lose();
 	}
 
 	/**

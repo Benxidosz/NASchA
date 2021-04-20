@@ -1,11 +1,18 @@
 package Proto;
 
+import Proto.material.Material;
+import Proto.material.compare.MaterialCompare;
+import Proto.material.materials.Coal;
+import Proto.material.materials.Iron;
+import Proto.material.materials.Uran;
+import Proto.material.materials.WaterIce;
 import Proto.simulator.Simulator;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.rmi.MarshalException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -28,9 +35,14 @@ public class Main {
         }
     }
 
+    private static boolean testMode = false;
+
+    public static boolean isTestMode() {
+        return testMode;
+    }
+
     public static void main(String[] args) throws IOException {
         writer = new BufferedWriter(new FileWriter("log.txt"));
-        boolean testMode = false;
         if (args.length > 0) {
             if (args[0].equals("-t")) {
                 testMode = true;
@@ -48,8 +60,11 @@ public class Main {
 
                     if (input != null && output != null)
                         simulator.Read(input, output);
-                } else
+                } else {
+                    System.out.println("You are in test mode! You can load file by:\n" +
+                            "load -i <inputFile> -o <testOutputFile>");
                     simulator.run();
+                }
             }
         }
 

@@ -1,6 +1,8 @@
 package Proto.material;
 
 import Proto.Main;
+import Proto.material.materials.*;
+import Proto.simulator.Simulator;
 import Proto.things.asteroids.Asteroid;
 
 
@@ -48,4 +50,10 @@ public abstract class Material {
 		this.myAsteroid = myAsteroid;
 	}
 
+	public abstract boolean compare(Material o);
+	public abstract boolean compare(Iron o);
+	public abstract boolean compare(WaterIce o);
+	public abstract boolean compare(Uran o);
+	public abstract boolean compare(Silicon o);
+	public abstract boolean compare(Coal o);
 }

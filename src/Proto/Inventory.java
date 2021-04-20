@@ -1,6 +1,7 @@
 package Proto;
 
 import Proto.material.Material;
+import Proto.material.compare.MaterialCompare;
 import Proto.material.materials.*;
 
 import java.util.LinkedList;
@@ -40,62 +41,7 @@ public class Inventory implements Cloneable {
 	 * @return with false.
 	 */
 	private boolean compareMaterial(Material m1, Material m2) {
-		return false;
-	}
-
-	/**
-	 * Overrides the compareMaterial(Material m1, Material m2). It will be called if the
-	 * two Materials are type of Coal.
-	 * @param m1 a coal.
-	 * @param m2 another coal.
-	 * @return with true.
-	 */
-	private boolean compareMaterial(Coal m1, Coal m2) {
-		return true;
-	}
-
-	/**
-	 * Overrides the compareMaterial(Material m1, Material m2). It will be called if the
-	 * two Materials are type of Iron.
-	 * @param m1 an iron.
-	 * @param m2 another iron.
-	 * @return with true.
-	 */
-	private boolean compareMaterial(Iron m1, Iron m2) {
-		return true;
-	}
-
-	/**
-	 * Overrides the compareMaterial(Material m1, Material m2). It will be called if the
-	 * two Materials are type of Silicon.
-	 * @param m1 a silicon.
-	 * @param m2 another silicon.
-	 * @return with true.
-	 */
-	private boolean compareMaterial(Silicon m1, Silicon m2) {
-		return true;
-	}
-
-	/**
-	 * Overrides the compareMaterial(Material m1, Material m2). It will be called if the
-	 * two Materials are type of Uran.
-	 * @param m1 an uran.
-	 * @param m2 another uran.
-	 * @return with true.
-	 */
-	private boolean compareMaterial(Uran m1, Uran m2) {
-		return true;
-	}
-
-	/**
-	 * Overrides the compareMaterial(Material m1, Material m2). It will be called if the
-	 * two Materials are type of WaterIce.
-	 * @param m1 a waterice.
-	 * @param m2 another waterice.
-	 * @return with true.
-	 */
-	private boolean compareMaterial(WaterIce m1, WaterIce m2) {
-		return true;
+		return MaterialCompare.getInstance().compare(m1, m2);
 	}
 
 	/**

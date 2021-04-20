@@ -55,16 +55,17 @@ public class Settler extends Entity {
 	/**
 	 * Settler builds a base with the right materials.
 	 */
-	public void buildBase() throws CloneNotSupportedException {
-
-		Inventory tmp = (Inventory) myInventory.clone();
-		for (Material mat : tmp.getMaterials()) {
-			if (location.buildBase(mat)) {
-				myInventory.rmMaterial(mat);
+	public void buildBase() {
+		try {
+			Inventory inv = (Inventory) myInventory.clone();
+			for (Material mat : inv.getMaterials()) {
+				if (location.buildBase(mat)) {
+					myInventory.rmMaterial(mat);
+				}
 			}
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
 		}
-
-
 	}
 
 	/**

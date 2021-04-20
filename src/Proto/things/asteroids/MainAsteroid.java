@@ -4,8 +4,6 @@ import Proto.Inventory;
 import Proto.material.Material;
 import Proto.GameManager;
 
-import java.util.LinkedList;
-
 /**
  * Represents the main asteroid, where Settlers spawn and they have to build the base in.
  * Stores the required materials for building the base and win.
@@ -21,8 +19,18 @@ public class MainAsteroid extends Asteroid {
 	 * The constructor of the class. Sets the recipe of the base.
 	 * @param name the name of the object.
 	 */
-	public MainAsteroid(String name) {
+	public MainAsteroid(String name) throws CloneNotSupportedException {
 		super(name);
+
+		requirements = (Inventory) GameManager.getInstance().recipes.get("Base").clone();
+
+		nearBySun = false;
+		core = null;
+		layer = 0;
+	}
+
+	public MainAsteroid(String name, int layer, Material core, boolean nearBySun) {
+		super(name, layer, core, nearBySun);
 
 		try {
 			requirements = (Inventory) GameManager.getInstance().recipes.get("Base").clone();
@@ -34,16 +42,6 @@ public class MainAsteroid extends Asteroid {
 		core = null;
 		layer = 0;
 	}
-
-	public MainAsteroid(String name, int layer, Material core, boolean nearBySun) {
-		super(name, layer, core, nearBySun);
-		try {
-			requirements = (Inventory) GameManager.getInstance().recipes.get("Base").clone();
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
-		}
-	}
-
 	/**
 	 * A player build base with a material.
 	 * @param m the material.

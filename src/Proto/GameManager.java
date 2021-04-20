@@ -6,6 +6,7 @@ import Proto.controller.controllers.SolarSystem;
 import Proto.controller.controllers.UfoController;
 import Proto.entity.entities.Settler;
 import Proto.entity.entities.Ufo;
+import Proto.material.compare.MaterialCompare;
 import Proto.material.materials.*;
 import Proto.things.Thing;
 import Proto.things.asteroids.Asteroid;
@@ -137,6 +138,7 @@ public class GameManager {
         UfoController.init();
         RobotController.init();
         SolarSystem.init();
+        MaterialCompare.init();
 
         System.out.println("How many settlers do you want?");
         String input = Main.scanner.nextLine().toUpperCase();
@@ -152,7 +154,12 @@ public class GameManager {
 
         ArrayList<Asteroid> asteroids = new ArrayList<>();
 
-        MainAsteroid main = new MainAsteroid("main");
+        MainAsteroid main = null;
+        try {
+            main = new MainAsteroid("main");
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
         asteroids.add(main);
 
         //generate asteroids
@@ -200,16 +207,16 @@ public class GameManager {
      */
     public void win() {
         ended = true;
-        System.out.println("Victory!");
-        System.out.println("Play again? [Y/N]");
-        try{
-            String input = Main.scanner.nextLine().toUpperCase();
-            if(input == "Y")
-                newGame();
-            if(input == "N")
-                makeQuit();
-        }catch (Exception e) {
-            e.printStackTrace();
+        if (!Main.isTestMode()) {
+            System.out.println("Victory!");
+            System.out.println("Play again? [Y/N]");
+            try {
+                String input = Main.scanner.nextLine().toUpperCase();
+                if (input.toUpperCase() == "N")
+                    makeQuit();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -218,16 +225,16 @@ public class GameManager {
      */
     public void lose(){
         ended = true;
-        System.out.println("Defeat!");
-        System.out.println("Play again? [Y/N]");
-        try{
-            String input = Main.scanner.nextLine().toUpperCase();
-            if(input == "Y")
-                newGame();
-            if(input == "N")
-                makeQuit();
-        }catch (Exception e) {
-            e.printStackTrace();
+        if (!Main.isTestMode()) {
+            System.out.println("Defeat!");
+            System.out.println("Play again? [Y/N]");
+            try {
+                String input = Main.scanner.nextLine().toUpperCase();
+                if (input.toUpperCase() == "N")
+                    makeQuit();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
