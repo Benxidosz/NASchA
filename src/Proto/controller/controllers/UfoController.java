@@ -113,9 +113,9 @@ public class UfoController implements Controller {
 	}
 
 	public Ufo getUfoByName(String name) {
-		for (Ufo settler : ufos) {
-			if (settler.getName().equals(name)) {
-				return settler;
+		for (Ufo ufo : ufos) {
+			if (ufo.getName().equals(name)) {
+				return ufo;
 			}
 		}
 

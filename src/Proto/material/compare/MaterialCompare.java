@@ -20,9 +20,7 @@ public class MaterialCompare {
 		return m.compare(o);
 	}
 
-	public boolean compare(Coal m, Material o) {
-		return o.compare(m);
-	}
+	public boolean compare(Coal m, Material o) { return o.compare(m); }
 
 	public boolean compare(Iron m, Material o) {
 		return o.compare(m);

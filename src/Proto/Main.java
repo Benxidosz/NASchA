@@ -56,14 +56,20 @@ public class Main {
 
                     if (testAll) {
                         File outDir = new File("outTest");
+                        File inDir = new File("tests");
+                        if (!inDir.isDirectory()) {
+                            inDir.delete();
+                            inDir.mkdir();
+                        }
                         int passed = 0;
+                        int testNum = inDir.listFiles().length / 2;
                         outDir.mkdir();
-                        for (int i = 0; i < 21; ++i) {
+                        for (int i = 0; i < testNum; ++i) {
                             simulator = new Simulator();
                             String fileBase = "test" + (i + 1);
                             System.out.println(fileBase + ": ");
-                            input = new File("tests", fileBase + "_input.txt");
-                            expected = new File("tests", fileBase + "_output.txt");
+                            input = new File(inDir, fileBase + "_input.txt");
+                            expected = new File(inDir, fileBase + "_output.txt");
                             output = new File(outDir, (fileBase + "_out.txt"));
 
                             if (simulator.Read(input, output, expected))
@@ -71,7 +77,7 @@ public class Main {
                             System.out.println("-------------------------------");
                         }
 
-                        System.out.println("All test Done. " + passed + " of 21 passed.");
+                        System.out.println("All test Done. " + passed + " of " + testNum + " passed.");
                     }
                 } else {
                     System.out.println("You are in test mode! You can load file by:\n" +
