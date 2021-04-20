@@ -1,5 +1,6 @@
 package Proto.simulator;
 
+import Proto.GameManager;
 import Proto.Main;
 import Proto.controller.controllers.RobotController;
 import Proto.controller.controllers.SettlerController;
@@ -106,6 +107,7 @@ public class Simulator {
 			SettlerController.init();
 			RobotController.init();
 			UfoController.init();
+			GameManager.init();
 
 			for (String curent : commands) {
 				String splittedCommand[] = curent.split(" ");
@@ -142,7 +144,7 @@ public class Simulator {
 					} else {
 						Asteroid asteroid = null;
 						if (tmp[2].equals("-e")) {
-							asteroid = new MainAsteroid(tmp[0], Integer.parseInt(tmp[1]), null, tmp[2].equals("1"));
+							asteroid = new MainAsteroid(tmp[0], Integer.parseInt(tmp[1]), null, tmp[3].equals("1"));
 						} else {
 							Material core = null;
 							switch(tmp[2]){
@@ -164,7 +166,7 @@ public class Simulator {
 								default:
 									core = null;
 							}
-							asteroid = new MainAsteroid(tmp[0], Integer.parseInt(tmp[1]), core, tmp[3].equals("1"));
+							asteroid = new MainAsteroid(tmp[0], Integer.parseInt(tmp[1]), core, tmp[4].equals("1"));
 						}
 						SolarSystem.getInstance().addThing(asteroid);
 					}
@@ -253,8 +255,14 @@ public class Simulator {
 						if (setup) {
 							if (splittedCommand[1].equals("-u")) {
 								//System.out.println("nev: " + splittedCommand[2] + " napkoz: " + splittedCommand[3]);
-								materials.add(new Uran(splittedCommand[2], Integer.parseInt(splittedCommand[3])));
-								break;
+								try {
+									materials.add(new Uran(splittedCommand[2], Integer.parseInt(splittedCommand[3])));
+									break;
+								} catch (ArrayIndexOutOfBoundsException e){
+									materials.add(new Uran(splittedCommand[2], 0));
+									break;
+								}
+
 							}
 							switch(splittedCommand[1]){
 								case "-c":
@@ -427,7 +435,7 @@ public class Simulator {
 
 								Settler s = SettlerController.getInstance().getSettlerByName(splittedCommand[1]);
 								if (s != null){
-									SettlerController.getInstance().handleCommand("Buildbase " + splittedCommand[2] + " " + splittedCommand[1]);
+									SettlerController.getInstance().handleCommand("Buildbase " + splittedCommand[1]);
 								}
 							}
 						}
@@ -455,6 +463,25 @@ public class Simulator {
 					case "List":
 						if (progress){
 						//	System.out.println("list");
+							SolarSystem.getInstance().getThings().forEach(t -> {
+								try{
+									if (t.nullLayer)
+										writer.write("There is no layer\n");
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
+
+							});
+
+							SettlerController.getInstance().getSettlers().forEach(t -> {
+								try{
+									if (t.emptyCore)
+										writer.write("Core is empty\n");
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
+							});
+
 							SolarSystem.getInstance().getThings().forEach(t -> {
 								try {
 									writer.write(t.List());

@@ -33,6 +33,12 @@ public abstract class Thing implements listableObj {
 	protected String name;
 
 	/**
+	 * true if we tries to drill under 0 layer
+	 */
+	public boolean nullLayer = false;
+
+
+	/**
 	 * The constructor of the Thing
 	 * @param name The name of the Thing
 	 */

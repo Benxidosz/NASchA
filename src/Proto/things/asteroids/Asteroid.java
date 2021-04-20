@@ -32,6 +32,8 @@ public class Asteroid extends Thing {
 	 */
 	protected Material core;
 
+
+
 	/**
 	 * The constructor of the Asteroid class. Sets it's attributes.
 	 * @param name The name of the object
@@ -75,6 +77,8 @@ public class Asteroid extends Thing {
 		super(name);
 		this.layer = layer;
 		this.core = core;
+		if (core != null)
+			core.setMyAsteroid(this);
 		this.nearBySun = nearBySun;
 	}
 
@@ -85,6 +89,7 @@ public class Asteroid extends Thing {
 		entities.forEach(((e) -> {
 			e.explode();
 		}));
+		SolarSystem.getInstance().removeThing(this);
 	}
 
 	/**
@@ -106,6 +111,9 @@ public class Asteroid extends Thing {
 	public boolean placeMaterial(Material m) {
 		if(core != null) return false;
 		core = m;
+		core.setMyAsteroid(this);
+		if (nearBySun)
+			core.nearSun();
 		return true;
 	}
 
@@ -114,10 +122,14 @@ public class Asteroid extends Thing {
 	 */
 	@Override
 	public void drill() {
-		layer--;
-		if(layer == 0)
-			if(nearBySun)
-				core.nearSun();
+		if (layer > 0) {
+			layer--;
+			if (layer == 0)
+				if (nearBySun)
+					core.nearSun();
+		} else {
+			nullLayer = true;
+		}
 	}
 
 	/**
@@ -206,7 +218,7 @@ public class Asteroid extends Thing {
 			for (Entity ent : entities)
 				result.append(ent.getName() + " ");
 
-		result.append("\nlayer number: " + (layer == 0 ? "null" : layer)+ "\n");
+		result.append("\nlayer number: " + (layer == 0 ? "0" : layer)+ "\n");
 		result.append("core: " + (core == null ? "null" : core.getName()) + "\n");
 		result.append("nearsun: " + (nearBySun ? "true" : "false") + "\n");
 		return result.toString();

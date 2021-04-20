@@ -39,7 +39,7 @@ public class Inventory implements Cloneable {
 	 * @param m2 Another material.
 	 * @return with false.
 	 */
-	public boolean compareMaterial(Material m1, Material m2) {
+	private boolean compareMaterial(Material m1, Material m2) {
 		return false;
 	}
 

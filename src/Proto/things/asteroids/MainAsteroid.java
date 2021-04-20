@@ -37,6 +37,11 @@ public class MainAsteroid extends Asteroid {
 
 	public MainAsteroid(String name, int layer, Material core, boolean nearBySun) {
 		super(name, layer, core, nearBySun);
+		try {
+			requirements = (Inventory) GameManager.getInstance().recipes.get("Base").clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -47,10 +52,8 @@ public class MainAsteroid extends Asteroid {
 	public boolean buildBase(Material m) {
 		if (requirements.containsMaterial(m)) {
 			requirements.rmMaterial(m);
-
 			if(requirements.isEmpty())
 				GameManager.getInstance().win();
-
 			return true;
 		}
 		return false;

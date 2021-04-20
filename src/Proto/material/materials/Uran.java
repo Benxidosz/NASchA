@@ -33,8 +33,11 @@ public class Uran extends Material {
 		if (countExposition == 3) {
 			myAsteroid.explode();
 		}
-		else
+		else {
 			countExposition++;
+			if (countExposition == 3)
+				myAsteroid.explode();
+		}
 	}
 
 

@@ -21,6 +21,11 @@ public abstract class Entity implements listableObj {
 	protected final String name;
 
 	/**
+	 * true if tries to mine empty core
+	 */
+	public boolean emptyCore = false;
+
+	/**
 	 * The constructor of the Entity class.
 	 * @param loc The location where the Entity is
 	 * @param name The name of the Entity
@@ -70,6 +75,8 @@ public abstract class Entity implements listableObj {
 		Material m = location.excavate();
 		if (m != null)
 			addMaterial(m);
+		else
+			emptyCore = true;
 		done();
 	}
 
