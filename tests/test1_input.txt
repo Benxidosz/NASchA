@@ -3,42 +3,36 @@ Setboard 1
 main;3;-e;0;1
 Settler s1 main
 Settler s2 main
-
 Makematerial -c c1
 Makematerial -c c2
 Makematerial -c c3
 Setinventory s1 c1
 Setinventory s1 c2
 Setinventory s1 c3
-
 Makematerial -i i1
 Makematerial -i i2
 Makematerial -i i3
 Setinventory s1 i1
 Setinventory s1 i2
 Setinventory s1 i3
-
 Makematerial -s si1
 Makematerial -s si2
 Makematerial -s si3
 Setinventory s1 si1
 Setinventory s1 si2
 Setinventory s1 si3
-
 Makematerial -u u1 0
 Makematerial -u u2 1
 Makematerial -u u3 1
 Setinventory s2 u1
 Setinventory s2 u2
 Setinventory s2 u3
-
 Makematerial -w w1
 Makematerial -w w2
 Makematerial -w w3
 Setinventory s2 w1
 Setinventory s2 w2
 Setinventory s2 w3
-
 </SETUP>
 <PROGRESS>
 Buildbase s1

@@ -218,7 +218,10 @@ public class Asteroid extends Thing {
 			result.append("null");
 		else
 			for (Entity ent : entities)
-				result.append(ent.getName() + " ");
+				if (ent != entities.get(entities.size() - 1))
+					result.append(ent.getName() + " ");
+				else
+					result.append(ent.getName());
 
 		result.append("\nlayer number: " + (layer == 0 ? "0" : layer)+ "\n");
 		result.append("core: " + (core == null ? "null" : core.getName()) + "\n");

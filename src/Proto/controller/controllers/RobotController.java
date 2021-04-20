@@ -56,7 +56,6 @@ public class RobotController implements Controller {
 	 * The constructor of the class
 	 */
 	private RobotController() {
-		Main.log("RobotController created.");
 	}
 
 	/**
@@ -90,7 +89,6 @@ public class RobotController implements Controller {
 	 * @param r the Robot which is added.
 	 */
 	public void addRobot(Robot r) {
-		Main.log("Robot added to controller: " + r.getName());
 		robots.add(r);
 	}
 
@@ -100,7 +98,6 @@ public class RobotController implements Controller {
 	 * @param r the Robot which is deleted.
 	 */
 	public void rmRobot(Robot r) {
-		Main.log("Robot removed to controller: " + r.getName());
 		robots.remove(r);
 	}
 

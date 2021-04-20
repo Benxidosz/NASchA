@@ -55,7 +55,7 @@ public class Simulator {
 		return null;
 	}
 
-	public void Read(File in, File out){
+	public void Read(File in, File out, File exp){
 		try {
 			Scanner sc = null;
 			sc = new Scanner(in);
@@ -64,7 +64,8 @@ public class Simulator {
 				commands.add(stringTmp);
 			}
 			Execute(out);
-		} catch (FileNotFoundException e) {
+			compareTest(exp, out);
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		//System.out.println(commands);
@@ -77,17 +78,20 @@ public class Simulator {
 			String[] args = line.split(" ");
 			File input = null;
 			File output = null;
+			File expected = null;
 			if (args[0].equals("load"))
-				for (int i = 1; i < args.length - 1; ++i) {
+				for (int i = 0; i < args.length; ++i) {
 					if (args[i].equals("-i") && i + 1 < args.length)
 						input = new File(args[++i]);
 
 					if (args[i].equals("-o") && i + 1 < args.length)
 						output = new File(args[++i]);
+					if (args[i].equals("-e") && i + 1 < args.length)
+						expected = new File(args[++i]);
 				}
 
-			if (input != null && output != null)
-				Read(input, output);
+			if (input != null && output != null && expected != null)
+				Read(input, output, expected);
 
 			if (args[0].equals("quit"))
 				quit = true;
@@ -97,7 +101,7 @@ public class Simulator {
 	public void Execute(File out) {
 		BufferedWriter writer;
 		try {
-			writer = new BufferedWriter(new FileWriter(out.getName()));
+			writer = new BufferedWriter(new FileWriter(out.getAbsoluteFile()));
 
 			boolean setup = false;
 			boolean progress = false;
@@ -422,7 +426,7 @@ public class Simulator {
 						break;
 					case "Buildgate":
 						if (progress){
-							System.out.println("kapu: " + splittedCommand[1] + " telepes: " + splittedCommand[2]);
+//							System.out.println("kapu: " + splittedCommand[1] + " telepes: " + splittedCommand[2]);
 
 							Settler s = SettlerController.getInstance().getSettlerByName(splittedCommand[2]);
 							if (s != null){
@@ -589,16 +593,16 @@ public class Simulator {
 
 		if(areEqual)
 		{
-			System.out.println("Two files have same content.");
+			System.out.println("Test passed.");
 			reader1.close();
 			reader2.close();
 			return true;
 		}
 		else
 		{
-			System.out.println("Two files have different content. They differ at line "+lineNum);
+			System.out.println("Test failed at line "+lineNum);
 
-			System.out.println("File1 has "+line1+" and File2 has "+line2+" at line "+lineNum);
+			System.out.println("Expected: "+line1+" and Gotten: "+line2+" at line "+lineNum);
 			reader1.close();
 			reader2.close();
 			return false;

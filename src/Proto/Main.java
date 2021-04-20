@@ -22,18 +22,6 @@ import java.util.Scanner;
 public class Main {
     static public Scanner scanner = new Scanner(System.in);
     public static Random rng = new Random();
-    public static BufferedWriter writer;
-
-
-
-    public static void log(String log) {
-        System.out.println(log);
-        try {
-            writer.write(log);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     private static boolean testMode = false;
 
@@ -42,24 +30,46 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException {
-        writer = new BufferedWriter(new FileWriter("log.txt"));
         if (args.length > 0) {
             if (args[0].equals("-t")) {
                 testMode = true;
-                File input = null;
-                File output = null;
                 Simulator simulator = new Simulator();
                 if (args.length > 1) {
-                    for (int i = 1; i < args.length - 1; ++i) {
+                    File input = null;
+                    File output = null;
+                    File expected = null;
+                    boolean testAll = false;
+                    for (int i = 0; i < args.length; ++i) {
                         if (args[i].equals("-i") && i + 1 < args.length)
                             input = new File(args[++i]);
 
                         if (args[i].equals("-o") && i + 1 < args.length)
                             output = new File(args[++i]);
+                        if (args[i].equals("-e") && i + 1 < args.length)
+                            expected = new File(args[++i]);
+                        if (args[i].equals("-a"))
+                            testAll = true;
                     }
 
-                    if (input != null && output != null)
-                        simulator.Read(input, output);
+                    if (input != null && output != null && expected != null)
+                        simulator.Read(input, output, expected);
+
+                    if (testAll) {
+                        File outDir = new File("outTest");
+                        outDir.mkdir();
+                        for (int i = 0; i < 21; ++i) {
+                            String fileBase = "test" + (i + 1);
+                            System.out.println(fileBase + ": ");
+                            input = new File("tests", fileBase + "_input.txt");
+                            expected = new File("tests", fileBase + "_output.txt");
+                            output = new File(outDir, (fileBase + "_out.txt"));
+
+                            simulator.Read(input, output, expected);
+                            System.out.println("-------------------------------");
+                        }
+
+                        System.out.println("All test Done.");
+                    }
                 } else {
                     System.out.println("You are in test mode! You can load file by:\n" +
                             "load -i <inputFile> -o <testOutputFile>");

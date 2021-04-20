@@ -6,7 +6,7 @@ Setnei 1
 a1;a2
 Settler s1 a1
 Makematerial -u u1 2
-Setinventory s1 c1
+Setinventory s1 u1
 </SETUP>
 <PROGRESS>
 Putdown u1 s1

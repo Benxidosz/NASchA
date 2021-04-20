@@ -4,7 +4,7 @@ a1;0;-e;0;0
 a2;0;-e;0;0
 Settler s1 a1
 Makegate g1 g2
-Setnei 2 
+Setnei 3 
 a1;a2
 a1;g1
 a2;g2

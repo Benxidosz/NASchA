@@ -1,42 +1,44 @@
 +------------------+
 name: a1
-neighbours: a2 g1
+neighbours: a2 
 entities: null
 layer number: 2
 core: i1
 nearsun: false
 +------------------+
 name: a2
-neighbours: a1 a3 a4
-entities: s1
-layer number: 0
-core: null
+neighbours: a1 a3 a4 g1 
+entities: null
+layer number: 3
+core: c1
 nearsun: false
 +------------------+
 name: a3
-neighbours: a2 a4 
-entities: s3 r1
-layer number: 0
-core: null
+neighbours: a2 a4 g2 
+entities: null
+layer number: 2
+core: w1
 nearsun: false
 +------------------+
 name: a4
-neighbours: a2 a3 g2 
+neighbours: a2 a3 
 entities: null
 layer number: 3
 core: si1
 nearsun: false
 +------------------+
 name: g1
-neighbours: a1 
+neighbours: a2 
 entities: null
 pair: g2
 setted: true
 active: true
+normal: false
 +------------------+
 name: g2
-neighbours: a4
+neighbours: a3 
 entities: null
 pair: g1
 setted: true
 active: true
+normal: false
