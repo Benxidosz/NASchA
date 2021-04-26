@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e29d61ae-2263-44ea-a550-1be655b52556" name="Default Changelist" comment="ha minden igaz megvan" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JupyterTrust" id="b18a5dff-e4c9-4a5c-a6c4-d76cb90646c3" />
+  <component name="ProjectId" id="1rLT6NifMGbSvuXkpi7R0TS7vnN" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\czani\Documents\GitHub\NASchA" />
+      <recent name="C:\Users\czani\Documents\GitHub\NASchA\out\production\NASchA" />
+      <recent name="C:\Users\czani\Documents\GitHub\NASchA\out\production\NASchA\Proto" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Proto.Main" />
+      <module name="NASchA" />
+      <option name="PROGRAM_PARAMETERS" value="-t -a" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e29d61ae-2263-44ea-a550-1be655b52556" name="Default Changelist" comment="" />
+      <created>1618754193484</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1618754193484</updated>
+      <workItem from="1618754194575" duration="9529000" />
+      <workItem from="1618876277910" duration="211000" />
+      <workItem from="1618876503397" duration="1436000" />
+      <workItem from="1618877964829" duration="15006000" />
+      <workItem from="1618894825132" duration="2488000" />
+      <workItem from="1618897405225" duration="4064000" />
+    </task>
+    <task id="LOCAL-00001" summary="balint atnezve:&#10;Settler tries to mine empty core - ig">
+      <created>1618885635696</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1618885635696</updated>
+    </task>
+    <task id="LOCAL-00002" summary="ha minden igaz megvan">
+      <created>1618890549953</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1618890549953</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="balint atnezve:&#10;Settler tries to mine empty core - ig" />
+    <MESSAGE value="ha minden igaz megvan" />
+    <option name="LAST_COMMIT_MESSAGE" value="ha minden igaz megvan" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="410" y="166" width="1099" height="766" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1618898401055">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="410" y="166" width="1099" height="766" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.125.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1618898401055" />
+    <state x="623" y="275" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1618760696183">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="275" key="#com.intellij.ide.util.TreeClassChooserDialog/1920.125.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1618760696183" />
+    <state x="686" y="199" key="FileChooserDialogImpl" timestamp="1618878200563">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="686" y="199" key="FileChooserDialogImpl/1920.125.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1618878200563" />
+    <state width="1865" height="254" key="GridCell.Tab.0.bottom" timestamp="1618946748537">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1865" height="254" key="GridCell.Tab.0.bottom/1920.125.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1618946748537" />
+    <state width="1865" height="254" key="GridCell.Tab.0.center" timestamp="1618946748536">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1865" height="254" key="GridCell.Tab.0.center/1920.125.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1618946748536" />
+    <state width="1865" height="254" key="GridCell.Tab.0.left" timestamp="1618946748536">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1865" height="254" key="GridCell.Tab.0.left/1920.125.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1618946748536" />
+    <state width="1865" height="254" key="GridCell.Tab.0.right" timestamp="1618946748537">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1865" height="254" key="GridCell.Tab.0.right/1920.125.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1618946748537" />
+    <state x="351" y="78" key="SettingsEditor" timestamp="1618878229698">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="351" y="78" key="SettingsEditor/1920.125.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1618878229698" />
+    <state x="452" y="172" key="Vcs.Push.Dialog.v2" timestamp="1618890552073">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="452" y="172" key="Vcs.Push.Dialog.v2/1920.125.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1618890552073" />
+    <state x="1920" y="177" width="1542" height="978" key="dock-window-1" timestamp="1618895867820">
+      <screen x="1920" y="125" width="1920" height="1040" />
+    </state>
+    <state x="1920" y="177" width="1542" height="978" key="dock-window-1/1920.125.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1618895867820" />
+    <state x="1920" y="125" width="1542" height="974" key="dock-window-2" timestamp="1618895867820">
+      <screen x="1920" y="125" width="1920" height="1040" />
+    </state>
+    <state x="1920" y="125" width="1542" height="974" key="dock-window-2/1920.125.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1618895867820" />
+    <state x="227" y="51" key="new project wizard" timestamp="1618760929347">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="227" y="51" key="new project wizard/1920.125.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1618760929347" />
+    <state x="539" y="5" width="840" height="1034" key="search.everywhere.popup" timestamp="1618877949892">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="539" y="5" width="840" height="1034" key="search.everywhere.popup/1920.125.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1618877949892" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Proto/simulator/Simulator.java</url>
+          <line>350</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Proto/things/gate/TeleportGate.java</url>
+          <line>91</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Proto/things/asteroids/Asteroid.java</url>
+          <line>89</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Proto/things/asteroids/Asteroid.java</url>
+          <line>115</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Proto/simulator/Simulator.java</url>
+          <line>470</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
