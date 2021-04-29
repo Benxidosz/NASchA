@@ -4486,17 +4486,17 @@
 <XPD:ATTR name="Name" type="string">rePaintBoard</XPD:ATTR>
 <XPD:ATTR name="Visibility" type="UMLVisibilityKind">vkPrivate</XPD:ATTR>
 <XPD:REF name="Owner">CsP+qe+hQ0mBK5yMuUP8EwAA</XPD:REF>
-<XPD:ATTR name="#CallActions" type="integer">3</XPD:ATTR>
+<XPD:ATTR name="#CallActions" type="integer">2</XPD:ATTR>
 <XPD:REF name="CallActions[0]">6ty0MG9Qek6gwXcE8W8nFAAA</XPD:REF>
 <XPD:REF name="CallActions[1]">qcAzoE1M1UKmPWNF4FalLgAA</XPD:REF>
-<XPD:REF name="CallActions[2]">Xf0HzsFvnku87eiBAbD7HAAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="Operations[16]" type="UMLOperation" guid="M73rwLyufU6VldSicVlgSQAA">
 <XPD:ATTR name="Name" type="string">rePaintAsteroid</XPD:ATTR>
 <XPD:ATTR name="Visibility" type="UMLVisibilityKind">vkPrivate</XPD:ATTR>
 <XPD:REF name="Owner">CsP+qe+hQ0mBK5yMuUP8EwAA</XPD:REF>
-<XPD:ATTR name="#CallActions" type="integer">1</XPD:ATTR>
+<XPD:ATTR name="#CallActions" type="integer">2</XPD:ATTR>
 <XPD:REF name="CallActions[0]">xY0HPWu3WkeCX9MhxIlBeAAA</XPD:REF>
+<XPD:REF name="CallActions[1]">Xf0HzsFvnku87eiBAbD7HAAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="Operations[17]" type="UMLOperation" guid="pMjOd5vNSkS4K0U0lL9r6AAA">
 <XPD:ATTR name="Name" type="string">rePaintMenu</XPD:ATTR>
@@ -4880,7 +4880,7 @@
 <XPD:ATTR name="Height" type="integer">493</XPD:ATTR>
 <XPD:REF name="Model">6y6PWklaEkiTygm+h5GcZAAA</XPD:REF>
 <XPD:OBJ name="NameLabel" type="LabelView" guid="nh/hsMQoWEOER+3jx4ZllwAA">
-<XPD:ATTR name="Text" type="string">destination</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">Push Move Button</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="FrameTypeLabel" type="LabelView" guid="CDQsXJxj9kKQnNW0F/gypAAA">
 <XPD:ATTR name="FontStyle" type="integer">1</XPD:ATTR>
@@ -5590,7 +5590,7 @@
 </XPD:OBJ>
 <XPD:ATTR name="#OwnedFrames" type="integer">1</XPD:ATTR>
 <XPD:OBJ name="OwnedFrames[0]" type="UMLFrame" guid="6y6PWklaEkiTygm+h5GcZAAA">
-<XPD:ATTR name="Name" type="string">destination</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">Push Move Button</XPD:ATTR>
 <XPD:ATTR name="FrameKind" type="string">sd</XPD:ATTR>
 <XPD:REF name="InteractionInstanceSet">l5jAcIouMUqjbAAXB8eFxQAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">1</XPD:ATTR>
@@ -7401,7 +7401,7 @@
 <XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="e8rsAsrmmkOUuwVksgvfhwAA">
 <XPD:ATTR name="Alpha" type="real">1.5707953267949</XPD:ATTR>
 <XPD:ATTR name="Distance" type="real">48</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">rePaintBoard()</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">rePaintAsteroid()</XPD:ATTR>
 <XPD:REF name="Model">Jd6MXB70l0+yXxx85XOYDgAA</XPD:REF>
 <XPD:REF name="HostEdge">QCu8+xub/0eROp/uTd975AAA</XPD:REF>
 </XPD:OBJ>
@@ -7471,8 +7471,8 @@
 <XPD:REF name="Head">umUmwniVk0aM5HTtdUsltwAA</XPD:REF>
 <XPD:REF name="Tail">qRNElRiSSk++UQmrTpP26AAA</XPD:REF>
 <XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="x716gjF/9ky85wzo4/E5tQAA">
-<XPD:ATTR name="Alpha" type="real">1.5707963267949</XPD:ATTR>
-<XPD:ATTR name="Distance" type="real">10</XPD:ATTR>
+<XPD:ATTR name="Alpha" type="real">1.40564927100233</XPD:ATTR>
+<XPD:ATTR name="Distance" type="real">6.08276253029822</XPD:ATTR>
 <XPD:ATTR name="Text" type="string">data</XPD:ATTR>
 <XPD:REF name="Model">+/5hLAJxM0yy8wN3gNMCDwAA</XPD:REF>
 <XPD:REF name="HostEdge">29ckVa2GBUO4hu/zRRtf7wAA</XPD:REF>
@@ -7544,8 +7544,8 @@
 <XPD:REF name="Head">umUmwniVk0aM5HTtdUsltwAA</XPD:REF>
 <XPD:REF name="Tail">AD7uxuoIH02DbvPdiyduswAA</XPD:REF>
 <XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="kviNUO93wUibB8LMWe6iawAA">
-<XPD:ATTR name="Alpha" type="real">1.5707963267949</XPD:ATTR>
-<XPD:ATTR name="Distance" type="real">10</XPD:ATTR>
+<XPD:ATTR name="Alpha" type="real">1.57079733987177</XPD:ATTR>
+<XPD:ATTR name="Distance" type="real">6</XPD:ATTR>
 <XPD:ATTR name="Text" type="string">entities</XPD:ATTR>
 <XPD:REF name="Model">YHdXdTfKXE2HM53kygylAQAA</XPD:REF>
 <XPD:REF name="HostEdge">ozJlV1ogI0m9klt/cKEz9AAA</XPD:REF>
@@ -7726,7 +7726,7 @@
 <XPD:REF name="Receiver">azZAuiSc60ymVrHhX3KNnQAA</XPD:REF>
 <XPD:OBJ name="Action" type="UMLCallAction" guid="Xf0HzsFvnku87eiBAbD7HAAA">
 <XPD:REF name="Stimulus">Jd6MXB70l0+yXxx85XOYDgAA</XPD:REF>
-<XPD:REF name="Operation">jDXnlG49bEKQuNQJuVD3cwAA</XPD:REF>
+<XPD:REF name="Operation">M73rwLyufU6VldSicVlgSQAA</XPD:REF>
 </XPD:OBJ>
 <XPD:REF name="InteractionInstanceSet">ZuRgYiRtl0yCLfEQltkDUQAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
