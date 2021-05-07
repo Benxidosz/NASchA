@@ -1,4 +1,4 @@
-package Graphics;
+package Graphics.controller;
 
 import Graphics.material.Material;
 import Graphics.material.compare.MaterialCompare;

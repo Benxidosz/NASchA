@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Graphics.ui.game.views.asteroidView.AsteroidViewController">
+   <children>
+      <Button layoutX="582.0" layoutY="347.0" mnemonicParsing="false" onAction="#switchBoard" text="SwitchToBoard" />
+   </children>
+</AnchorPane>

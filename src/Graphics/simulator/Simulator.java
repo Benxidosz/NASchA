@@ -1,6 +1,6 @@
 package Graphics.simulator;
 
-import Graphics.GameManager;
+import Graphics.controller.GameManager;
 import Graphics.Main;
 import Graphics.controller.controllers.RobotController;
 import Graphics.controller.controllers.SettlerController;

@@ -1,6 +1,6 @@
 package Graphics.entity.entities;
 
-import Graphics.Inventory;
+import Graphics.controller.Inventory;
 import Graphics.controller.controllers.UfoController;
 import Graphics.entity.Entity;
 import Graphics.material.Material;

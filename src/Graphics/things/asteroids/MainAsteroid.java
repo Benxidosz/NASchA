@@ -1,8 +1,8 @@
 package Graphics.things.asteroids;
 
-import Graphics.Inventory;
+import Graphics.controller.Inventory;
 import Graphics.material.Material;
-import Graphics.GameManager;
+import Graphics.controller.GameManager;
 
 /**
  * Represents the main asteroid, where Settlers spawn and they have to build the base in.

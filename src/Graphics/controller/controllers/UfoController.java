@@ -1,6 +1,6 @@
 package Graphics.controller.controllers;
 
-import Graphics.GameManager;
+import Graphics.controller.GameManager;
 import Graphics.controller.Controller;
 import Graphics.entity.entities.Ufo;
 import Graphics.things.Thing;

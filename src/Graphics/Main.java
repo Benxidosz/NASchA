@@ -1,5 +1,6 @@
 package Graphics;
 
+import Graphics.controller.GameManager;
 import Graphics.simulator.Simulator;
 
 import java.io.File;

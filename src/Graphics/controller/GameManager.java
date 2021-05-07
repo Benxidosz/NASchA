@@ -1,5 +1,6 @@
-package Graphics;
+package Graphics.controller;
 
+import Graphics.Main;
 import Graphics.controller.controllers.RobotController;
 import Graphics.controller.controllers.SettlerController;
 import Graphics.controller.controllers.SolarSystem;
@@ -72,7 +73,7 @@ public class GameManager {
     /**
      * The constructor of this class.
      */
-    private GameManager(){
+    protected GameManager(){
         doneControllers = 0;
         turnNum = 0;
         ref = this;

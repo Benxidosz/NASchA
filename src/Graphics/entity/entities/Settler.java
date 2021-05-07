@@ -1,7 +1,7 @@
 package Graphics.entity.entities;
 
-import Graphics.GameManager;
-import Graphics.Inventory;
+import Graphics.controller.GameManager;
+import Graphics.controller.Inventory;
 import Graphics.controller.controllers.RobotController;
 import Graphics.controller.controllers.SettlerController;
 import Graphics.controller.controllers.SolarSystem;
