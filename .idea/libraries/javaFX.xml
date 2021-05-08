@@ -2,6 +2,7 @@
   <library name="javaFX">
     <CLASSES>
       <root url="file://$PROJECT_DIR$/javafx-sdk-linux/lib" />
+      <root url="file://$PROJECT_DIR$/javafx-sdk-windows/lib" />
     </CLASSES>
     <JAVADOC />
     <NATIVE>
@@ -9,8 +10,11 @@
     </NATIVE>
     <SOURCES>
       <root url="file://$PROJECT_DIR$/javafx-sdk-linux/lib" />
+      <root url="file://$PROJECT_DIR$/javafx-sdk-windows/lib" />
     </SOURCES>
     <jarDirectory url="file://$PROJECT_DIR$/javafx-sdk-linux/lib" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/javafx-sdk-windows/lib" recursive="false" />
     <jarDirectory url="file://$PROJECT_DIR$/javafx-sdk-linux/lib" recursive="false" type="SOURCES" />
+    <jarDirectory url="file://$PROJECT_DIR$/javafx-sdk-windows/lib" recursive="false" type="SOURCES" />
   </library>
 </component>
