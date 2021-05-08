@@ -162,11 +162,11 @@ public class Simulator {
 			int readboard = 0;
 			int readnei = 0;
 
-			SolarSystem.init();
-			SettlerController.init();
-			RobotController.init();
-			UfoController.init();
 			GameManager.init();
+			SolarSystem.init(GameManager.getInstance());
+			SettlerController.init(GameManager.getInstance());
+			RobotController.init(GameManager.getInstance());
+			UfoController.init(GameManager.getInstance());
 			MaterialCompare.init();
 
 			for (String curent : commands) {

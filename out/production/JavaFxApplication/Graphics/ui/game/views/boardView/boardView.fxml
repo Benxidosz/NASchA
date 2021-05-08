@@ -64,7 +64,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="7. turn">
+                  <Label fx:id="turnLabel" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="7. turn">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
@@ -72,7 +72,7 @@
                         <Insets right="20.0" />
                      </padding>
                   </Label>
-                  <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Errupion in \n 3 turn" wrapText="true" GridPane.rowIndex="1">
+                  <Label fx:id="eruptionTurnLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Errupion in \n 3 turn" wrapText="true" GridPane.rowIndex="1">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
@@ -93,10 +93,10 @@
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
-                  <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                  <TextArea fx:id="statusText" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
                </children>
             </GridPane>
-            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" styleClass="EndTurnButton, Button" text="End Turn" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#endTurnButton" prefHeight="75.0" prefWidth="75.0" styleClass="EndTurnButton, Button" text="End Turn" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
          </children>
       </GridPane>
    </right>

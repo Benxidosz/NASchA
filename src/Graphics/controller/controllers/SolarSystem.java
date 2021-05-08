@@ -2,6 +2,7 @@ package Graphics.controller.controllers;
 
 import Graphics.Main;
 import Graphics.controller.Controller;
+import Graphics.controller.GameManager;
 import Graphics.thing.Thing;
 import Graphics.thing.things.TeleportGate;
 
@@ -11,7 +12,7 @@ import java.util.LinkedList;
 /**
  * Represents the controller class of the solar system in the game.
  */
-public class SolarSystem implements Controller {
+public class SolarSystem extends Controller {
 	/**
 	 * The things in the solar system, stored in a list.
 	 */
@@ -40,8 +41,8 @@ public class SolarSystem implements Controller {
 	/**
 	 * Sets the reference and the IDs of the materials.
 	 */
-	public static void init() {
-		ref = new SolarSystem();
+	public static void init(GameManager manager) {
+		ref = new SolarSystem(manager);
 		coalId = 0;
 		ironId = 0;
 		siliconId = 0;
@@ -120,7 +121,8 @@ public class SolarSystem implements Controller {
 	 * The constructor of the class.
 	 * Sets itself as the reference.
 	 */
-	private SolarSystem() {
+	private SolarSystem(GameManager manager) {
+		super(manager);
 		ref = this;
 	}
 
@@ -234,6 +236,7 @@ public class SolarSystem implements Controller {
 			}
 		}
 		System.out.println(untilEruption == -1 ? "No SolarEruption danger." : "Danger! Eruption, after " + untilEruption + " turn.");
+		manager.jobsDone();
 	}
 
 	/**
@@ -278,5 +281,9 @@ public class SolarSystem implements Controller {
 	 */
 	public LinkedList<Thing> getThings() {
 		return things;
+	}
+
+	public int getUntilEruption() {
+		return untilEruption;
 	}
 }

@@ -1,12 +1,12 @@
 package Graphics.ui.game.drawable.drawables;
 
+import Graphics.App;
 import Graphics.thing.Thing;
 import Graphics.ui.game.drawable.Drawable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-import java.awt.*;
 import java.util.LinkedHashSet;
 
 public class Obstacle extends Drawable {
@@ -45,7 +45,7 @@ public class Obstacle extends Drawable {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         if (selected)
             gc.setFill(Color.RED);
-        else if (data.getEntities().size() > 0) {
+        else if (data.getEntities().size() > 0 && App.isTestMode()) {
             gc.setFill(Color.PINK);
         } else
             gc.setFill(fillColor);

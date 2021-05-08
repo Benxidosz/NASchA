@@ -15,7 +15,7 @@ import java.util.LinkedList;
  * Handles the input from the interface, from the
  * user, and stores the settler that are done.
  */
-public class SettlerController implements Controller {
+public class SettlerController extends Controller {
 	/**
 	 * A reference for the class.
 	 */
@@ -37,8 +37,8 @@ public class SettlerController implements Controller {
 	/**
 	 * Sets the reference and the id.
 	 */
-	public static void init() {
-		ref = new SettlerController();
+	public static void init(GameManager manager) {
+		ref = new SettlerController(manager);
 		settlerId = 0;
 	}
 
@@ -62,8 +62,8 @@ public class SettlerController implements Controller {
 	/**
 	 * The constructor of the class
 	 */
-	private SettlerController() {
-
+	private SettlerController(GameManager manager) {
+		super(manager);
 	}
 
 	/**
@@ -85,7 +85,7 @@ public class SettlerController implements Controller {
 	 * Returns the id of the settler.
 	 * @return The id of the settler.
 	 */
-	public static String  getSettlerId() {
+	public static String getSettlerId() {
 		return "s" + settlerId++;
 	}
 
@@ -121,14 +121,24 @@ public class SettlerController implements Controller {
 			}
 		}
 
+		if ("endTurn".equals(args[0])) {
+			done();
+			if (doneSettlers == settlers.size()) {
+				settlers.forEach(s -> s.setActive(true));
+				doneSettlers = 0;
+				manager.jobsDone();
+			}
+		}
+
 		if (selected == null || !selected.isActive())
 			return;
 
 		if ("Move".equals(args[0])) {
 			if (selected.getLocation() != null) {
 				Thing dest = selected.getLocation().getNeiByName(args[2]);
-				if (dest != null)
+				if (dest != null) {
 					selected.move(dest);
+				}
 			}
 		} else if ("Drill".equals(args[0])) {
 			selected.drill();
@@ -155,7 +165,10 @@ public class SettlerController implements Controller {
 	 * Increases the number of the settlers that are done.
 	 */
 	public void done() {
-		++doneSettlers;
+		doneSettlers = 0;
+		for (Settler s : settlers)
+			if (!s.isActive())
+				doneSettlers++;
 	}
 
 	/**

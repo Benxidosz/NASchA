@@ -1,6 +1,7 @@
 package Graphics.controller.controllers;
 
 import Graphics.controller.Controller;
+import Graphics.controller.GameManager;
 import Graphics.entity.entities.Robot;
 import Graphics.thing.Thing;
 
@@ -10,7 +11,7 @@ import java.util.LinkedList;
  * Represents the controller class of the robots.
  * Calculates the next step for each robot.
  */
-public class RobotController implements Controller {
+public class RobotController extends Controller {
 	/**
 	 * A reference for the class.
 	 */
@@ -40,8 +41,8 @@ public class RobotController implements Controller {
 	/**
 	 * Sets the reference.
 	 */
-	public static void init() {
-		ref = new RobotController();
+	public static void init(GameManager manager) {
+		ref = new RobotController(manager);
 	}
 
 	/**
@@ -52,7 +53,8 @@ public class RobotController implements Controller {
 	/**
 	 * The constructor of the class
 	 */
-	private RobotController() {
+	private RobotController(GameManager manager) {
+		super(manager);
 	}
 
 	/**
@@ -110,6 +112,7 @@ public class RobotController implements Controller {
 	@Override
 	public void makeTurn() {
 		robots.forEach(this::calculateStep);
+		manager.jobsDone();
 	}
 
 	/**

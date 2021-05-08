@@ -10,8 +10,11 @@ import Graphics.ui.game.UIController;
 import Graphics.ui.game.drawable.drawables.Root;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -31,7 +34,11 @@ public class BoardViewController extends View {
     @FXML
     public ListView settlerList;
     @FXML
-    public ListView statusList;
+    public TextArea statusText;
+    @FXML
+    public Label turnLabel;
+    @FXML
+    public Label eruptionTurnLabel;
 
     private LinkedHashSet<Obstacle> obstacles;
     private LinkedHashSet<Root> roots;
@@ -73,6 +80,8 @@ public class BoardViewController extends View {
                 else{
                     setText(p.getName() + (p.isActive() ? " Free." : " Worked."));
                 }
+                rePaint();
+                selectedRefreshed();
             }
         });
 
@@ -130,7 +139,6 @@ public class BoardViewController extends View {
         double tmpPoint = 0;
         while (tmpPoint != pointBoarByAvgNei()) {
             tmpPoint = pointBoarByAvgNei();
-            int corrected = 0;
             for (Obstacle o1 : obstacles) {
                 double bestDisDelta = 0;
                 Obstacle best = null;
@@ -177,13 +185,28 @@ public class BoardViewController extends View {
     }
 
     public void rePaint() {
-        myCanvas.getGraphicsContext2D().clearRect(0, 0, myCanvas.getWidth(), myCanvas.getHeight());
+        GraphicsContext gc = myCanvas.getGraphicsContext2D();
+        gc.clearRect(0, 0, myCanvas.getWidth(), myCanvas.getHeight());
 
-        myCanvas.getGraphicsContext2D().setFill(Color.BEIGE);
-        myCanvas.getGraphicsContext2D().fillRect(0, 0, myCanvas.getWidth(), myCanvas.getHeight());
+        gc.setFill(Color.BEIGE);
+        gc.fillRect(0, 0, myCanvas.getWidth(), myCanvas.getHeight());
 
         roots.forEach(r -> r.draw(myCanvas));
         obstacles.forEach(o -> o.draw(myCanvas));
+
+        Settler selectedSettler = (Settler) settlerList.getSelectionModel().getSelectedItem();
+        if (selectedSettler != null) {
+            Obstacle loc = getObstacleByData(selectedSettler.getLocation());
+            gc.setFill(Color.GREEN);
+            gc.strokeOval(loc.getPosX() - 20,loc.getPosY() - 20, 40, 40);
+        }
+        turnLabel.setText(UIController.getInstance().getTurnNum() + ". Turn");
+        int untilEruption = SolarSystem.getInstance().getUntilEruption();
+        if (untilEruption < 0) {
+            eruptionTurnLabel.setText("No Danger!");
+        } else {
+            eruptionTurnLabel.setText("Eruption in\n" + untilEruption + " turn.");
+        }
     }
 
     @FXML
@@ -196,6 +219,7 @@ public class BoardViewController extends View {
                         selected.setSelected(false);
                     o.setSelected(true);
                     UIController.getInstance().setSelectedThing(o.getData());
+                    selectedRefreshed();
                     break;
                 }
             }
@@ -205,7 +229,13 @@ public class BoardViewController extends View {
 
     @FXML
     public void move() {
-        System.out.println(settlerList.getSelectionModel().getSelectedItem());
+        Settler selectedSettler = (Settler) settlerList.getSelectionModel().getSelectedItem();
+        Obstacle selectedObstacle = getObstacleByData(UIController.getInstance().getSelectedThing());
+        if (selectedSettler != null && selectedObstacle != null) {
+            SettlerController.getInstance().handleCommand("Move " + selectedSettler.getName() + " " + selectedObstacle.getData().getName());
+            rePaint();
+            selectAnotherSettler(selectedSettler);
+        }
     }
 
     @FXML
@@ -220,5 +250,37 @@ public class BoardViewController extends View {
             }
         }
         rePaint();
+    }
+
+    private void selectedRefreshed() {
+        Thing selected = UIController.getInstance().getSelectedThing();
+        Settler selectedSettler = (Settler) settlerList.getSelectionModel().getSelectedItem();
+        statusText.setText((selected != null ? selected.List() : "") + (selectedSettler != null ? selectedSettler.List() : ""));
+    }
+
+    public void endTurnButton() {
+        SettlerController.getInstance().handleCommand("endTurn");
+        rePaint();
+        Settler selectedSettler = (Settler) settlerList.getSelectionModel().getSelectedItem();
+        selectAnotherSettler(selectedSettler);
+    }
+
+    private void selectAnotherSettler(Settler selectedSettler) {
+        boolean selected = false;
+        for (Settler settler : SettlerController.getInstance().getSettlers()) {
+            if (settler.isActive()) {
+                settlerList.getSelectionModel().select(settler);
+                selected = true;
+                break;
+            }
+        }
+        if (!selected) {
+            for (Settler settler : SettlerController.getInstance().getSettlers()) {
+                if (settler != selectedSettler) {
+                    settlerList.getSelectionModel().select(settler);
+                    break;
+                }
+            }
+        }
     }
 }

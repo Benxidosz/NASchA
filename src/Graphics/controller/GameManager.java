@@ -111,8 +111,13 @@ public class GameManager {
      * Checks if the controllers are done.
      */
     public void jobsDone(){
-        if(doneControllers == 4)
+        doneControllers++;
+        if (doneControllers == 4)
             newTurn();
+    }
+
+    public int getTurnNum() {
+        return turnNum;
     }
 
     /**
@@ -188,10 +193,10 @@ public class GameManager {
         quit = false;
         ended = false;
 
-        SettlerController.init();
-        UfoController.init();
-        RobotController.init();
-        SolarSystem.init();
+        SettlerController.init(this);
+        UfoController.init(this);
+        RobotController.init(this);
+        SolarSystem.init(this);
         MaterialCompare.init();
 
         System.out.println("How many settlers do you want?");

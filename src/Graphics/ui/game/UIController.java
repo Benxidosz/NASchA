@@ -141,10 +141,10 @@ public class UIController extends GameManager {
         quit = false;
         ended = false;
 
-        SettlerController.init();
-        UfoController.init();
-        RobotController.init();
-        SolarSystem.init();
+        SettlerController.init(this);
+        UfoController.init(this);
+        RobotController.init(this);
+        SolarSystem.init(this);
         MaterialCompare.init();
 
         ArrayList<Asteroid> asteroids = new ArrayList<>();
@@ -189,6 +189,17 @@ public class UIController extends GameManager {
 
         activeView.setActive();
         activeView.rePaint();
+        newTurn();
+    }
+
+    @Override
+    public void newTurn() {
+        doneControllers = 0;
+        turnNum++;
+
+        SolarSystem.getInstance().makeTurn();
+        RobotController.getInstance().makeTurn();
+        UfoController.getInstance().makeTurn();
     }
 
     public Stage getGameStage() {
@@ -199,8 +210,7 @@ public class UIController extends GameManager {
         if (boardActive) {
             asteroidView.refreshTree();
             activeView = asteroidView;
-        }
-        else
+        } else
             activeView = boardView;
 
         boardActive = !boardActive;

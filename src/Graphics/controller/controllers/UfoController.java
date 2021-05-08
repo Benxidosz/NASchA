@@ -11,7 +11,7 @@ import java.util.LinkedList;
  * Controls the ufos activities.
  * Calculates the next step for each ufo.
  */
-public class UfoController implements Controller {
+public class UfoController extends Controller {
 	/**
 	 * A reference for the class.
 	 */
@@ -26,8 +26,8 @@ public class UfoController implements Controller {
 	/**
 	 * Sets the reference.
 	 */
-	public static void init() {
-		ref = new UfoController();
+	public static void init(GameManager manager) {
+		ref = new UfoController(manager);
 	}
 
 	/**
@@ -52,7 +52,8 @@ public class UfoController implements Controller {
 	/**
 	 * The constructor of the class
 	 */
-	public UfoController() {
+	public UfoController(GameManager manager) {
+		super(manager);
 		ref = this;
 	}
 
@@ -78,7 +79,7 @@ public class UfoController implements Controller {
 	@Override
 	public void makeTurn() {
 		ufos.forEach(this::calculateStep);
-		GameManager.getInstance().jobsDone();
+		manager.jobsDone();
 	}
 
 	/**
