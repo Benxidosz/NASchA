@@ -20,6 +20,8 @@ public class AsteroidViewController extends View {
     public Canvas myCanvas;
     @FXML
     public Pane canvasWrapper;
+    @FXML
+    public TreeView entitiesTree;
 
     public AsteroidViewController() throws IOException {
         super("asteroidView.fxml");
@@ -42,10 +44,9 @@ public class AsteroidViewController extends View {
             Inventory tmpInventory = e.getInventory();
             if (tmpInventory != null) {
                 tmpInventory.getMaterials().forEach((m) -> {
-
+                    item.getChildren().add(new TreeItem<String>(m.getName()));
                 });
             }
-
             rootEntitiItem.getChildren().add(item);
         });
         entitiesTree.setRoot(rootEntitiItem);
@@ -74,8 +75,7 @@ public class AsteroidViewController extends View {
 
         myCanvas.getGraphicsContext2D().setFill(Color.BEIGE);
         myCanvas.getGraphicsContext2D().fillRect(0, 0, myCanvas.getWidth(), myCanvas.getHeight());
-
-        Thing selected = UIController.getInstance().getSelectedThing();
-
     }
+
+
 }

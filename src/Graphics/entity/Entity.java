@@ -1,6 +1,7 @@
 
 package Graphics.entity;
 
+import Graphics.Inventory;
 import Graphics.material.Material;
 import Graphics.simulator.listableObj;
 import Graphics.thing.Thing;
@@ -119,5 +120,7 @@ public abstract class Entity implements listableObj {
 	public String getName() {
 		return name;
 	}
+
+	public Inventory getInventory() { return null; }
 
 }

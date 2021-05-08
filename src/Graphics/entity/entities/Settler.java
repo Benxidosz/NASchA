@@ -232,6 +232,11 @@ public class Settler extends Entity {
 		return this.myInventory;
 	}
 
+	@Override
+	public Inventory getInventory() {
+		return this.myInventory;
+	}
+
 	/**
 	 * Lists the attributes of the object.
 	 * @return the attributes as a string.
