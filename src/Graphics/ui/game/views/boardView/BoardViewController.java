@@ -32,7 +32,7 @@ public class BoardViewController extends View {
     @FXML
     public Pane canvasWrapper;
     @FXML
-    public ListView settlerList;
+    public ListView settlerList; //TODO: Update when data change.
     @FXML
     public TextArea statusText;
     @FXML

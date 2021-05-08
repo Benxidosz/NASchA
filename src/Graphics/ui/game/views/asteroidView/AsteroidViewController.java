@@ -1,6 +1,9 @@
 package Graphics.ui.game.views.asteroidView;
 
 import Graphics.Inventory;
+import Graphics.controller.controllers.SettlerController;
+import Graphics.entity.Entity;
+import Graphics.entity.entities.Settler;
 import Graphics.material.Material;
 import Graphics.thing.Thing;
 import Graphics.ui.game.View;
@@ -24,7 +27,7 @@ public class AsteroidViewController extends View {
     @FXML
     public Pane canvasWrapper;
     @FXML
-    public TreeView entitiesTree;
+    public TreeView entitiesTree; //TODO: Update when data change.
 
     public AsteroidViewController() throws IOException {
         super("asteroidView.fxml");
@@ -60,10 +63,6 @@ public class AsteroidViewController extends View {
         UIController.getInstance().switchView();
     }
 
-    @FXML
-    public void move(ActionEvent actionEvent) {
-    }
-
     public void toBoard() {
         UIController.getInstance().switchView();
     }
@@ -78,14 +77,20 @@ public class AsteroidViewController extends View {
 
         myCanvas.getGraphicsContext2D().setFill(Color.BEIGE);
         myCanvas.getGraphicsContext2D().fillRect(0, 0, myCanvas.getWidth(), myCanvas.getHeight());
+
+        Thing selectedThing = UIController.getInstance().getSelectedThing();
+
+        if (selectedThing == null)
+            return;
+
         double r = 200;
         double centerX = canvasWrapper.getWidth() / 2;
         double centerY = canvasWrapper.getHeight() / 2;
         myCanvas.getGraphicsContext2D().strokeOval(centerX - r,centerY - r, 2 * r, 2 *r );
         myCanvas.getGraphicsContext2D().strokeOval(centerX - r / 3,centerY - r / 3, 2 * (r / 3), 2 * (r / 3));
-        myCanvas.getGraphicsContext2D().strokeText("x layer left", centerX - 30, centerY - 150);
+        myCanvas.getGraphicsContext2D().strokeText(selectedThing.getLayer() + " layer left", centerX - 30, centerY - 150);
         myCanvas.getGraphicsContext2D().setFont(new Font(15));
-        Material mat = UIController.getInstance().getSelectedThing().getCore();
+        Material mat = selectedThing.getCore();
         if (mat != null)
             myCanvas.getGraphicsContext2D().strokeText(mat.getName(), centerX-7, centerY+7);
         else
@@ -93,5 +98,48 @@ public class AsteroidViewController extends View {
 
     }
 
+    public void mine() {
+        String selectedEntity = ((TreeItem<String>) entitiesTree.getSelectionModel().getSelectedItem()).getValue();
+        if (selectedEntity != null) {
+            SettlerController.getInstance().handleCommand("Mine " + selectedEntity);
+        }
+        rePaint();
+    }
 
+    public void buildRobot() {
+        String selectedEntity = ((TreeItem<String>) entitiesTree.getSelectionModel().getSelectedItem()).getValue();
+        if (selectedEntity != null) {
+            SettlerController.getInstance().handleCommand("Buildrobot " + selectedEntity);
+        }
+        rePaint();
+    }
+
+    public void buildGate() {
+        String selectedEntity = ((TreeItem<String>) entitiesTree.getSelectionModel().getSelectedItem()).getValue();
+        if (selectedEntity != null) {
+            SettlerController.getInstance().handleCommand("Buildgate " + selectedEntity);
+        }
+        rePaint();
+    }
+
+    //TODO: Make it work for gate.
+    public void place() {
+        TreeItem<String> selectedTreeItem = (TreeItem<String>) entitiesTree.getSelectionModel().getSelectedItem();
+        String selectedItem = selectedTreeItem.getValue();
+        TreeItem<String> root = selectedTreeItem.getParent();
+        String selectedEntity = root.getValue();
+
+        if (selectedEntity != null) {
+            SettlerController.getInstance().handleCommand("Putdown " + selectedEntity + " " + selectedItem);
+        }
+        rePaint();
+    }
+
+    public void drill() {
+        String selectedEntity = ((TreeItem<String>) entitiesTree.getSelectionModel().getSelectedItem()).getValue();
+        if (selectedEntity != null) {
+            SettlerController.getInstance().handleCommand("Drill " + selectedEntity);
+        }
+        rePaint();
+    }
 }
