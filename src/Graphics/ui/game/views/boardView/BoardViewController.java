@@ -72,12 +72,11 @@ public class BoardViewController extends View {
 
         settlerList.setCellFactory(param -> new ListCell<Settler>() {
             @Override
-            protected void updateItem(Settler p, boolean empty){
+            protected void updateItem(Settler p, boolean empty) {
                 super.updateItem(p, empty);
-                if(empty || p == null || p.getName() == null){
+                if (empty || p == null || p.getName() == null) {
                     setText("");
-                }
-                else{
+                } else {
                     setText(p.getName() + (p.isActive() ? " Free." : " Worked."));
                 }
                 rePaint();
@@ -106,7 +105,7 @@ public class BoardViewController extends View {
 
             for (int i = 0; i < tmpNum; ++i) {
                 double phi = ((i * 2.0f * Math.PI) / tmpNum);
-                obstacles.add(new Obstacle( (int) Math.ceil(cX + layerR * Math.cos(phi)), (int) Math.ceil(cY + layerR * Math.sin(phi)), things.get(processedNodes++)));
+                obstacles.add(new Obstacle((int) Math.ceil(cX + layerR * Math.cos(phi)), (int) Math.ceil(cY + layerR * Math.sin(phi)), things.get(processedNodes++)));
             }
 
             nodeInLayer *= diffLayers;
@@ -179,11 +178,32 @@ public class BoardViewController extends View {
         return sum / roots.size();
     }
 
-    @FXML
-    public void switchAsteroid() {
-        UIController.getInstance().switchView();
+    private void selectedRefreshed() {
+        Thing selected = UIController.getInstance().getSelectedThing();
+        Settler selectedSettler = (Settler) settlerList.getSelectionModel().getSelectedItem();
+        statusText.setText((selected != null ? selected.List() : "") + (selectedSettler != null ? selectedSettler.List() : ""));
     }
 
+    private void selectAnotherSettler(Settler selectedSettler) {
+        boolean selected = false;
+        for (Settler settler : SettlerController.getInstance().getSettlers()) {
+            if (settler.isActive()) {
+                settlerList.getSelectionModel().select(settler);
+                selected = true;
+                break;
+            }
+        }
+        if (!selected) {
+            for (Settler settler : SettlerController.getInstance().getSettlers()) {
+                if (settler != selectedSettler) {
+                    settlerList.getSelectionModel().select(settler);
+                    break;
+                }
+            }
+        }
+    }
+
+    @Override
     public void rePaint() {
         GraphicsContext gc = myCanvas.getGraphicsContext2D();
         gc.clearRect(0, 0, myCanvas.getWidth(), myCanvas.getHeight());
@@ -198,7 +218,7 @@ public class BoardViewController extends View {
         if (selectedSettler != null) {
             Obstacle loc = getObstacleByData(selectedSettler.getLocation());
             gc.setFill(Color.GREEN);
-            gc.strokeOval(loc.getPosX() - 20,loc.getPosY() - 20, 40, 40);
+            gc.strokeOval(loc.getPosX() - 20, loc.getPosY() - 20, 40, 40);
         }
         turnLabel.setText(UIController.getInstance().getTurnNum() + ". Turn");
         int untilEruption = SolarSystem.getInstance().getUntilEruption();
@@ -207,6 +227,11 @@ public class BoardViewController extends View {
         } else {
             eruptionTurnLabel.setText("Eruption in\n" + untilEruption + " turn.");
         }
+    }
+
+    @FXML
+    public void switchAsteroid() {
+        UIController.getInstance().switchView();
     }
 
     @FXML
@@ -242,7 +267,7 @@ public class BoardViewController extends View {
     public void canvasMouseMoved(MouseEvent mouseEvent) {
         Obstacle selected = getObstacleByData(UIController.getInstance().getSelectedThing());
         for (Obstacle o : obstacles) {
-            if (o.distance((int) mouseEvent.getX(), (int)mouseEvent.getY()) < 15) {
+            if (o.distance((int) mouseEvent.getX(), (int) mouseEvent.getY()) < 15) {
                 o.setFillColor(Color.LAVENDER);
             } else {
                 if (selected != o)
@@ -252,35 +277,11 @@ public class BoardViewController extends View {
         rePaint();
     }
 
-    private void selectedRefreshed() {
-        Thing selected = UIController.getInstance().getSelectedThing();
-        Settler selectedSettler = (Settler) settlerList.getSelectionModel().getSelectedItem();
-        statusText.setText((selected != null ? selected.List() : "") + (selectedSettler != null ? selectedSettler.List() : ""));
-    }
-
+    @FXML
     public void endTurnButton() {
         SettlerController.getInstance().handleCommand("endTurn");
         rePaint();
         Settler selectedSettler = (Settler) settlerList.getSelectionModel().getSelectedItem();
         selectAnotherSettler(selectedSettler);
-    }
-
-    private void selectAnotherSettler(Settler selectedSettler) {
-        boolean selected = false;
-        for (Settler settler : SettlerController.getInstance().getSettlers()) {
-            if (settler.isActive()) {
-                settlerList.getSelectionModel().select(settler);
-                selected = true;
-                break;
-            }
-        }
-        if (!selected) {
-            for (Settler settler : SettlerController.getInstance().getSettlers()) {
-                if (settler != selectedSettler) {
-                    settlerList.getSelectionModel().select(settler);
-                    break;
-                }
-            }
-        }
     }
 }

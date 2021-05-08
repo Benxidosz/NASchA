@@ -58,20 +58,7 @@ public class AsteroidViewController extends View {
         entitiesTree.setRoot(rootEntitiItem);
     }
 
-    @FXML
-    public void switchBoard(ActionEvent actionEvent) {
-        UIController.getInstance().switchView();
-    }
-
-    public void toBoard() {
-        UIController.getInstance().switchView();
-    }
-
-    @FXML
-    public void canvasClick(MouseEvent mouseEvent) {
-        rePaint();
-    }
-
+    @Override
     public void rePaint() {
         myCanvas.getGraphicsContext2D().clearRect(0, 0, myCanvas.getWidth(), myCanvas.getHeight());
 
@@ -98,6 +85,17 @@ public class AsteroidViewController extends View {
 
     }
 
+    @FXML
+    public void toBoard() {
+        UIController.getInstance().switchView();
+    }
+
+    @FXML
+    public void canvasClick(MouseEvent mouseEvent) {
+        rePaint();
+    }
+
+    @FXML
     public void mine() {
         String selectedEntity = ((TreeItem<String>) entitiesTree.getSelectionModel().getSelectedItem()).getValue();
         if (selectedEntity != null) {
@@ -106,6 +104,7 @@ public class AsteroidViewController extends View {
         rePaint();
     }
 
+    @FXML
     public void buildRobot() {
         String selectedEntity = ((TreeItem<String>) entitiesTree.getSelectionModel().getSelectedItem()).getValue();
         if (selectedEntity != null) {
@@ -114,6 +113,7 @@ public class AsteroidViewController extends View {
         rePaint();
     }
 
+    @FXML
     public void buildGate() {
         String selectedEntity = ((TreeItem<String>) entitiesTree.getSelectionModel().getSelectedItem()).getValue();
         if (selectedEntity != null) {
@@ -123,6 +123,7 @@ public class AsteroidViewController extends View {
     }
 
     //TODO: Make it work for gate.
+    @FXML
     public void place() {
         TreeItem<String> selectedTreeItem = (TreeItem<String>) entitiesTree.getSelectionModel().getSelectedItem();
         String selectedItem = selectedTreeItem.getValue();
@@ -135,6 +136,7 @@ public class AsteroidViewController extends View {
         rePaint();
     }
 
+    @FXML
     public void drill() {
         String selectedEntity = ((TreeItem<String>) entitiesTree.getSelectionModel().getSelectedItem()).getValue();
         if (selectedEntity != null) {

@@ -68,33 +68,6 @@ public class UIController extends GameManager {
         gameStage.setResizable(false);
     }
 
-    @Override
-    protected void generateNeis(ArrayList<Asteroid> asteroids) {
-        for(Asteroid a1: asteroids) {
-            for (Asteroid a2 : asteroids) {
-                if (a1 != a2)
-                    if (Main.rng.nextDouble() < 0.03) {
-                        a1.addNeighbour(a2);
-                        a2.addNeighbour(a1);
-                    }
-            }
-        }
-
-        for(Asteroid a1: asteroids) {
-            if (a1.getNeighbour().size() == 0) {
-                boolean gotten = false;
-                while (!gotten) {
-                    Asteroid nei = asteroids.get(Main.rng.nextInt(asteroids.size()));
-                    if (nei != a1) {
-                        gotten = true;
-                        a1.addNeighbour(nei);
-                        nei.addNeighbour(a1);
-                    }
-                }
-            }
-        }
-    }
-
     private LinkedList<Thing> BFSFromAsteroid(Asteroid a) {
         LinkedList<Thing> unTouched = new LinkedList<>(SolarSystem.getInstance().getThings());
 
@@ -130,6 +103,33 @@ public class UIController extends GameManager {
                 nei.addNeighbour(a);
 
                 unTouched = BFSFromAsteroid(a);
+            }
+        }
+    }
+
+    @Override
+    protected void generateNeis(ArrayList<Asteroid> asteroids) {
+        for(Asteroid a1: asteroids) {
+            for (Asteroid a2 : asteroids) {
+                if (a1 != a2)
+                    if (Main.rng.nextDouble() < 0.03) {
+                        a1.addNeighbour(a2);
+                        a2.addNeighbour(a1);
+                    }
+            }
+        }
+
+        for(Asteroid a1: asteroids) {
+            if (a1.getNeighbour().size() == 0) {
+                boolean gotten = false;
+                while (!gotten) {
+                    Asteroid nei = asteroids.get(Main.rng.nextInt(asteroids.size()));
+                    if (nei != a1) {
+                        gotten = true;
+                        a1.addNeighbour(nei);
+                        nei.addNeighbour(a1);
+                    }
+                }
             }
         }
     }
