@@ -1,0 +1,82 @@
+.Button {
+    -fx-background-color: black;
+    -fx-text-fill: white;
+    -fx-border-color: black;
+    -fx-border-width: 5px;
+}
+
+.Button:hover {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+}
+
+.Button:pressed {
+    -fx-background-color: lightgrey;
+}
+
+.Button:disabled {
+    -fx-background-color: dimgray;
+    -fx-border-width: 0px;
+}
+
+.helpButton {
+    -fx-background-color: #000000;
+    -fx-text-fill: white;
+}
+
+.helpButton:hover {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #000000;
+}
+
+.helpButton:pressed {
+    -fx-background-color: #d4d4d4;
+}
+
+.DataBox {
+    -fx-border-width: 2px;
+    -fx-border-color: black;
+}
+
+.DataBox:hover {
+    -fx-background-color: lightgrey;
+    -fx-border-width: 2px;
+    -fx-border-color: black;
+}
+
+.Title {
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+}
+
+.centerColumn {
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+    -fx-font-size: 17px;
+}
+
+.helpBox {
+    -fx-background-color: #eeeeee;
+    -fx-border-color: #000000;
+    -fx-border-width: 1px;
+}
+
+.title {
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+}
+
+.regular {
+    -fx-font-size: 12px;
+    -fx-font-weight: normal;
+}
+
+.GridWithBorder {
+    -fx-border-width: 2px;
+    -fx-border-color: black;
+}
+
+.EndTurnButton {
+    -fx-background-radius: 38px;
+    -fx-border-radius: 38px;
+}

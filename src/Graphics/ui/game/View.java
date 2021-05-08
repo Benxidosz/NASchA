@@ -1,4 +1,4 @@
-package Graphics.ui;
+package Graphics.ui.game;
 
 import Graphics.ui.game.UIController;
 import javafx.fxml.FXMLLoader;
@@ -8,11 +8,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public abstract class FXMLController {
+public abstract class View {
     private final Scene myScene;
     protected String title = "No target!";
 
-    public FXMLController(String fxmlFile) throws IOException {
+    public View(String fxmlFile) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
         loader.setControllerFactory(c -> this);
 
@@ -22,7 +22,6 @@ public abstract class FXMLController {
 
     public void setActive() {
         Stage primaryStage = UIController.getInstance().getGameStage();
-//        primaryStage.close();
 
         primaryStage.setScene(myScene);
         primaryStage.setTitle(title);

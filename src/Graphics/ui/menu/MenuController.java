@@ -1,18 +1,31 @@
 package Graphics.ui.menu;
 
-import Graphics.ui.FXMLController;
 import Graphics.ui.game.UIController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class MenuController {
     private static MenuController ref;
+
+    @FXML
+    public Slider ufoSlider;
+    @FXML
+    public Slider settlerSlider;
+    ToggleGroup systemSize;
+
+    @FXML
+    public RadioButton largeRadio;
+    @FXML
+    public RadioButton smallRadio;
 
     public static MenuController getInstance() {
         return ref;
@@ -39,6 +52,15 @@ public class MenuController {
         myScene = new Scene(main);
     }
 
+    @FXML
+    public void initialize() {
+        systemSize = new ToggleGroup();
+        smallRadio.setToggleGroup(systemSize);
+        largeRadio.setToggleGroup(systemSize);
+
+        smallRadio.setSelected(true);
+    }
+
     public void setActive() {
         primaryStage.close();
 
@@ -53,5 +75,27 @@ public class MenuController {
         primaryStage.close();
         UIController.init();
         UIController.getInstance().newGame();
+    }
+
+    private void scrollSlider(Slider slider, ScrollEvent scrollEvent) {
+        int scroll = (int) scrollEvent.getDeltaY();
+        int value = (int) slider.getValue();
+        int tick = (int) slider.getMajorTickUnit();
+
+        if (scroll != 0) {
+            scroll = scroll / Math.abs(scroll);
+            value = value + scroll * tick;
+            slider.adjustValue(value);
+        }
+    }
+
+    @FXML
+    public void settlerSliderScroll(ScrollEvent scrollEvent) {
+        scrollSlider(settlerSlider, scrollEvent);
+    }
+
+    @FXML
+    public void ufoSliderScroll(ScrollEvent scrollEvent) {
+        scrollSlider(ufoSlider, scrollEvent);
     }
 }

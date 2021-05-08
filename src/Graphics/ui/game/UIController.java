@@ -1,8 +1,6 @@
 package Graphics.ui.game;
 
 import Graphics.controller.GameManager;
-import Graphics.things.asteroids.Asteroid;
-import Graphics.ui.FXMLController;
 import Graphics.ui.game.views.asteroidView.AsteroidViewController;
 import Graphics.ui.game.views.boardView.BoardViewController;
 import javafx.stage.Stage;
@@ -15,10 +13,10 @@ public class UIController extends GameManager {
         return ref;
     }
 
-    private FXMLController activeView;
+    private View activeView;
 
-    private BoardViewController boardView;
-    private AsteroidViewController asteroidView;
+    private final BoardViewController boardView;
+    private final AsteroidViewController asteroidView;
     private boolean boardActive;
 
     private final Stage gameStage;
@@ -34,6 +32,7 @@ public class UIController extends GameManager {
     private UIController() throws IOException {
         super();
         gameStage = new Stage();
+        gameStage.setResizable(false);
         boardView = new BoardViewController();
         asteroidView = new AsteroidViewController();
     }
