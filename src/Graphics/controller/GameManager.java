@@ -1,5 +1,6 @@
 package Graphics.controller;
 
+import Graphics.App;
 import Graphics.Inventory;
 import Graphics.Main;
 import Graphics.controller.controllers.RobotController;
@@ -134,6 +135,13 @@ public class GameManager {
     protected void generateSettlers(Asteroid main, int settlerNum) {
         for(int i = 0; i < settlerNum; i++){
             Settler s = new Settler(main, SettlerController.getSettlerId());
+            if (App.isTestMode()) {
+                s.addMaterial(new Coal(s.getName() + "c1"));
+                s.addMaterial(new Coal(s.getName() + "c2"));
+                s.addMaterial(new Iron(s.getName() + "i1"));
+                s.addMaterial(new Iron(s.getName() + "i2"));
+                s.addMaterial(new WaterIce(s.getName() + "w1"));
+            }
             main.addEntity(s);
             SettlerController.getInstance().addSettler(s);
         }
