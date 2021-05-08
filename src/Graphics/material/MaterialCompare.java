@@ -1,6 +1,5 @@
-package Graphics.material.compare;
+package Graphics.material;
 
-import Graphics.material.Material;
 import Graphics.material.materials.*;
 
 /**

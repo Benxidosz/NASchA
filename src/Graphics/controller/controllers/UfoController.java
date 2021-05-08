@@ -3,7 +3,7 @@ package Graphics.controller.controllers;
 import Graphics.controller.GameManager;
 import Graphics.controller.Controller;
 import Graphics.entity.entities.Ufo;
-import Graphics.things.Thing;
+import Graphics.thing.Thing;
 
 import java.util.LinkedList;
 

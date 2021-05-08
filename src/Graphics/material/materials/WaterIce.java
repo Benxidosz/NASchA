@@ -1,7 +1,7 @@
 package Graphics.material.materials;
 
 import Graphics.material.Material;
-import Graphics.material.compare.MaterialCompare;
+import Graphics.material.MaterialCompare;
 
 /**
  * It represents the WaterIce type material and helps to distinguish it from different materials.

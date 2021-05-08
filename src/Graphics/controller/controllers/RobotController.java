@@ -2,7 +2,7 @@ package Graphics.controller.controllers;
 
 import Graphics.controller.Controller;
 import Graphics.entity.entities.Robot;
-import Graphics.things.Thing;
+import Graphics.thing.Thing;
 
 import java.util.LinkedList;
 

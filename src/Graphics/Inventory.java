@@ -1,7 +1,7 @@
-package Graphics.controller;
+package Graphics;
 
 import Graphics.material.Material;
-import Graphics.material.compare.MaterialCompare;
+import Graphics.material.MaterialCompare;
 
 import java.util.LinkedList;
 

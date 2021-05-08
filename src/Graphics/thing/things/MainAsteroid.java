@@ -1,6 +1,6 @@
-package Graphics.things.asteroids;
+package Graphics.thing.things;
 
-import Graphics.controller.Inventory;
+import Graphics.Inventory;
 import Graphics.material.Material;
 import Graphics.controller.GameManager;
 

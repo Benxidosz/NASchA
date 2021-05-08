@@ -1,5 +1,6 @@
 package Graphics.controller;
 
+import Graphics.Inventory;
 import Graphics.Main;
 import Graphics.controller.controllers.RobotController;
 import Graphics.controller.controllers.SettlerController;
@@ -7,12 +8,12 @@ import Graphics.controller.controllers.SolarSystem;
 import Graphics.controller.controllers.UfoController;
 import Graphics.entity.entities.Settler;
 import Graphics.entity.entities.Ufo;
-import Graphics.material.compare.MaterialCompare;
+import Graphics.material.MaterialCompare;
 import Graphics.material.materials.*;
 import Graphics.simulator.Simulator;
-import Graphics.things.Thing;
-import Graphics.things.asteroids.Asteroid;
-import Graphics.things.asteroids.MainAsteroid;
+import Graphics.thing.Thing;
+import Graphics.thing.things.Asteroid;
+import Graphics.thing.things.MainAsteroid;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,11 +29,11 @@ public class GameManager {
     /**
      * The number of Controller which are done in this turn
      */
-    private int doneControllers;
+    protected int doneControllers;
     /**
      * Number of turns.
      */
-    private int turnNum;
+    protected int turnNum;
 
     /**
      * A reference for the class.
@@ -57,11 +58,11 @@ public class GameManager {
     /**
      * If it's true, the program quits.
      */
-    private boolean quit;
+    protected boolean quit;
     /**
      * If it's true current game end.
      */
-    private boolean ended;
+    protected boolean ended;
 
     /**
      * Make the quit to true.
@@ -130,6 +131,46 @@ public class GameManager {
         }
     }
 
+    protected void generateSettlers(Asteroid main, int settlerNum) {
+        for(int i = 0; i < settlerNum; i++){
+            Settler s = new Settler(main, SettlerController.getSettlerId());
+            main.addEntity(s);
+            SettlerController.getInstance().addSettler(s);
+        }
+    }
+
+    protected void generateUfo(ArrayList<Asteroid> asteroids, int ufoNum) {
+        for(int i = 0; i < ufoNum; i++){
+            Thing loc = asteroids.get(Main.rng.nextInt(asteroids.size()));
+            Ufo u = new Ufo(loc, UfoController.getUfoId());
+            loc.addEntity(u);
+            UfoController.getInstance().addUfo(u);
+        }
+    }
+
+    protected void generateAsteroids(ArrayList<Asteroid> asteroids, int asteroidNum) {
+        for(int i = 0; i < asteroidNum; i++){
+            Asteroid temp = new Asteroid(SolarSystem.getAsteroidId());
+            asteroids.add(temp);
+        }
+    }
+
+    protected void generateNeis(ArrayList<Asteroid> asteroids) {
+        for(Asteroid a1: asteroids) {
+            for (Asteroid a2 : asteroids) {
+                if (a1 != a2)
+                    if (Main.rng.nextBoolean()) {
+                        a1.addNeighbour(a2);
+                        a2.addNeighbour(a1);
+                    }
+            }
+
+            if (a1.getNeighbour().size() == 0) {
+                a1.addNeighbour(asteroids.get(Main.rng.nextInt(asteroids.size())));
+            }
+        }
+    }
+
     /**
      * Asks the user the number of settlers and asteroids and creates the entities.
      */
@@ -167,42 +208,15 @@ public class GameManager {
         }
         asteroids.add(main);
 
-        //generate asteroids
-        for(int i = 0; i < asteroidnum; i++){
-            Asteroid temp = new Asteroid(SolarSystem.getAsteroidId());
-            asteroids.add(temp);
-        }
+        generateAsteroids(asteroids, asteroidnum);
 
-        //Generate neis
-        for(Asteroid a1: asteroids) {
-            for (Asteroid a2 : asteroids) {
-                if (a1 != a2)
-                    if (Main.rng.nextBoolean()) {
-                        a1.addNeighbour(a2);
-                        a2.addNeighbour(a1);
-                    }
-            }
-
-            if (a1.getNeighbour().size() == 0) {
-                a1.addNeighbour(asteroids.get(Main.rng.nextInt(asteroids.size())));
-            }
-        }
-
-        //generate settlers and add SettlerController
-        for(int i = 0; i < settlernum; i++){
-            Settler s = new Settler(main, SettlerController.getSettlerId());
-            SettlerController.getInstance().addSettler(s);
-        }
-
-        //generate ufos and add UfoController
-        for(int i = 0; i < ufoNum; i++){
-            Thing loc = asteroids.get(Main.rng.nextInt(asteroids.size()));
-            Ufo u = new Ufo(loc, UfoController.getUfoId());
-            UfoController.getInstance().addUfo(u);
-        }
-
-        //add asteroids to SolarSystem
         asteroids.forEach(a -> SolarSystem.getInstance().addThing(a));
+
+        generateNeis(asteroids);
+
+        generateSettlers(main, settlernum);
+
+        generateUfo(asteroids, ufoNum);
 
         newTurn();
     }

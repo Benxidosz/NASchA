@@ -1,4 +1,4 @@
-package Graphics.things.asteroids;
+package Graphics.thing.things;
 
 import Graphics.Main;
 import Graphics.controller.controllers.SolarSystem;
@@ -9,7 +9,7 @@ import Graphics.material.materials.Iron;
 import Graphics.material.materials.Silicon;
 import Graphics.material.materials.Uran;
 import Graphics.material.materials.WaterIce;
-import Graphics.things.Thing;
+import Graphics.thing.Thing;
 
 /**
  *  Represents the Asteroids in the Solar System.

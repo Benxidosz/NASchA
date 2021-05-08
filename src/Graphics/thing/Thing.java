@@ -1,4 +1,4 @@
-package Graphics.things;
+package Graphics.thing;
 
 import Graphics.controller.controllers.SolarSystem;
 import Graphics.entity.Entity;
@@ -204,5 +204,9 @@ public abstract class Thing implements listableObj {
 	 */
 	public Material getCore() {
 		return null;
+	}
+
+	public ArrayList<Entity> getEntities() {
+		return entities;
 	}
 }

@@ -3,7 +3,7 @@ package Graphics.entity;
 
 import Graphics.material.Material;
 import Graphics.simulator.listableObj;
-import Graphics.things.Thing;
+import Graphics.thing.Thing;
 
 /**
  * An abstract class, that represents the entities in the solar system, which can do activities.

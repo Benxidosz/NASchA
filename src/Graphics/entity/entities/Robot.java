@@ -2,7 +2,7 @@ package Graphics.entity.entities;
 
 import Graphics.controller.controllers.RobotController;
 import Graphics.entity.Entity;
-import Graphics.things.Thing;
+import Graphics.thing.Thing;
 
 /**
  * The robot which is controlled by the system and can drill and move

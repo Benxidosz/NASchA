@@ -28,4 +28,6 @@ public abstract class View {
 
         primaryStage.show();
     }
+
+    public abstract void rePaint();
 }

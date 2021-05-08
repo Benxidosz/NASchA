@@ -10,12 +10,12 @@ import Graphics.entity.entities.Robot;
 import Graphics.entity.entities.Settler;
 import Graphics.entity.entities.Ufo;
 import Graphics.material.Material;
-import Graphics.material.compare.MaterialCompare;
+import Graphics.material.MaterialCompare;
 import Graphics.material.materials.*;
-import Graphics.things.Thing;
-import Graphics.things.asteroids.Asteroid;
-import Graphics.things.asteroids.MainAsteroid;
-import Graphics.things.gate.TeleportGate;
+import Graphics.thing.Thing;
+import Graphics.thing.things.Asteroid;
+import Graphics.thing.things.MainAsteroid;
+import Graphics.thing.things.TeleportGate;
 
 import java.io.*;
 import java.util.ArrayList;

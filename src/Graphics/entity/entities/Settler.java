@@ -1,12 +1,12 @@
 package Graphics.entity.entities;
 
 import Graphics.controller.GameManager;
-import Graphics.controller.Inventory;
+import Graphics.Inventory;
 import Graphics.controller.controllers.RobotController;
 import Graphics.controller.controllers.SettlerController;
 import Graphics.controller.controllers.SolarSystem;
-import Graphics.things.Thing;
-import Graphics.things.gate.TeleportGate;
+import Graphics.thing.Thing;
+import Graphics.thing.things.TeleportGate;
 import Graphics.entity.Entity;
 import Graphics.material.Material;
 import Graphics.simulator.*;

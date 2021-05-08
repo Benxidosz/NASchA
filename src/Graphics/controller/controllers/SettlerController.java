@@ -5,8 +5,8 @@ import Graphics.Main;
 import Graphics.controller.Controller;
 import Graphics.entity.entities.Settler;
 import Graphics.material.Material;
-import Graphics.things.Thing;
-import Graphics.things.gate.TeleportGate;
+import Graphics.thing.Thing;
+import Graphics.thing.things.TeleportGate;
 
 import java.util.LinkedList;
 
@@ -127,7 +127,8 @@ public class SettlerController implements Controller {
 		if ("Move".equals(args[0])) {
 			if (selected.getLocation() != null) {
 				Thing dest = selected.getLocation().getNeiByName(args[2]);
-				selected.move(dest);
+				if (dest != null)
+					selected.move(dest);
 			}
 		} else if ("Drill".equals(args[0])) {
 			selected.drill();

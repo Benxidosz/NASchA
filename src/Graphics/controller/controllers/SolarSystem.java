@@ -2,8 +2,8 @@ package Graphics.controller.controllers;
 
 import Graphics.Main;
 import Graphics.controller.Controller;
-import Graphics.things.Thing;
-import Graphics.things.gate.TeleportGate;
+import Graphics.thing.Thing;
+import Graphics.thing.things.TeleportGate;
 
 import java.util.HashMap;
 import java.util.LinkedList;

@@ -1,7 +1,7 @@
-package Graphics.things.gate;
+package Graphics.thing.things;
 
 import Graphics.entity.Entity;
-import Graphics.things.Thing;
+import Graphics.thing.Thing;
 
 /**
  * Settlers can build teleport gates. Each has one pair somewhere on the field.
