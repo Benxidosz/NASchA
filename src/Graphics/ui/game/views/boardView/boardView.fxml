@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@/basicStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Graphics.ui.game.views.boardView.BoardViewController">
+<BorderPane onMouseMoved="#boardViewMouseMoved" prefHeight="720.0" prefWidth="1280.0" stylesheets="@/basicStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Graphics.ui.game.views.boardView.BoardViewController">
    <left>
       <GridPane prefHeight="720.0" prefWidth="211.0" styleClass="GridWithBorder" BorderPane.alignment="CENTER">
          <columnConstraints>

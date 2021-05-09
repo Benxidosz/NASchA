@@ -9,6 +9,10 @@ import Graphics.ui.game.drawable.drawables.Obstacle;
 import Graphics.ui.game.View;
 import Graphics.ui.game.UIController;
 import Graphics.ui.game.drawable.drawables.Root;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableListBase;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -39,12 +43,15 @@ public class BoardViewController extends View {
     @FXML
     public Label eruptionTurnLabel;
 
+    private int tmpSettlerNum;
+
     private LinkedHashSet<Obstacle> obstacles;
     private LinkedHashSet<Root> roots;
 
     public BoardViewController() throws IOException {
         super("boardView.fxml");
         title = "Board View";
+        tmpSettlerNum = SettlerController.getInstance().getSettlers().size();
     }
 
     private Obstacle getObstacleByData(Thing data) {
@@ -76,7 +83,13 @@ public class BoardViewController extends View {
                 if (empty || p == null || p.getName() == null) {
                     setText("");
                 } else {
-                    setText(p.getName() + (p.isActive() ? " Free." : " Worked."));
+                    if (SettlerController.getInstance().getSettlers().contains(p)) {
+                        setDisable(false);
+                        setText(p.getName() + (p.isActive() ? " Free." : " Worked."));
+                    } else {
+                        setDisable(true);
+                        setText(p.getName() + "died.");
+                    }
                 }
                 rePaint();
                 selectedRefreshed();
@@ -171,10 +184,13 @@ public class BoardViewController extends View {
 
     @Override
     public void refresh() {
-        for (var item : settlerList.getItems()) {
-            settlerList.getSelectionModel().select(item);
+        settlerList.refresh();
+        int settlerNum = SettlerController.getInstance().getSettlers().size();
+        if (tmpSettlerNum != settlerNum) {
+            settlerList.getItems().clear();
+            settlerList.getItems().addAll(SettlerController.getInstance().getSettlers());
         }
-        selectAnotherSettler(null);
+        tmpSettlerNum = settlerNum;
     }
 
     private double pointBoarByAvgNei() {
@@ -194,7 +210,7 @@ public class BoardViewController extends View {
     private void selectAnotherSettler(Settler selectedSettler) {
         boolean selected = false;
         for (Settler settler : SettlerController.getInstance().getSettlers()) {
-            if (settler.isActive()) {
+            if (settler.isActive() && SettlerController.getInstance().getSettlers().contains(settler)) {
                 settlerList.getSelectionModel().select(settler);
                 selected = true;
                 break;
@@ -253,15 +269,9 @@ public class BoardViewController extends View {
             }
         }
     }
-
-    private void fixList() {
-        settlerList.getItems().removeIf(s -> !SettlerController.getInstance().getSettlers().contains(s));
-    }
-
     @Override
     public void rePaint() {
         reloadObstacles();
-        fixList();
         GraphicsContext gc = myCanvas.getGraphicsContext2D();
         gc.clearRect(0, 0, myCanvas.getWidth(), myCanvas.getHeight());
 
@@ -316,6 +326,7 @@ public class BoardViewController extends View {
         if (selectedSettler != null && selectedObstacle != null) {
             SettlerController.getInstance().handleCommand("Move " + selectedSettler.getName() + " " + selectedObstacle.getData().getName());
             rePaint();
+            settlerList.refresh();
             selectAnotherSettler(selectedSettler);
         }
     }
@@ -339,7 +350,17 @@ public class BoardViewController extends View {
         SettlerController.getInstance().handleCommand("endTurn");
         rePaint();
         Settler selectedSettler = (Settler) settlerList.getSelectionModel().getSelectedItem();
-        refresh();
+        settlerList.refresh();
         selectAnotherSettler(selectedSettler);
+    }
+
+    @FXML
+    public void boardViewMouseMoved(MouseEvent mouseEvent) {
+        int settlerNum = SettlerController.getInstance().getSettlers().size();
+        if (tmpSettlerNum != settlerNum) {
+            settlerList.getItems().clear();
+            settlerList.getItems().addAll(SettlerController.getInstance().getSettlers());
+        }
+        tmpSettlerNum = settlerNum;
     }
 }

@@ -211,7 +211,7 @@ public class UIController extends GameManager {
 
         boardActive = !boardActive;
         activeView.setActive();
-        activeView.rePaint();
         activeView.refresh();
+        activeView.rePaint();
     }
 }

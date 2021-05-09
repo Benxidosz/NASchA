@@ -69,6 +69,8 @@ import javafx.scene.canvas.Canvas;
 		}
 
 		this.core = core;
+		if (core != null)
+			core.setMyAsteroid(this);
 	}
 
 	public Asteroid(String name, int layer, Material core, boolean nearBySun) {
@@ -113,7 +115,7 @@ import javafx.scene.canvas.Canvas;
 		if (layer > 0) {
 			layer--;
 			if (layer == 0)
-				if (nearBySun)
+				if (nearBySun && core != null)
 					core.nearSun();
 		} else {
 			nullLayer = true;
