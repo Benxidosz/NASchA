@@ -1,10 +1,13 @@
 
-package Graphics.entity;
+package Graphics.observable.entity;
 
 import Graphics.Inventory;
 import Graphics.material.Material;
+import Graphics.observable.thing.Thing;
 import Graphics.simulator.listableObj;
-import Graphics.thing.Thing;
+import Graphics.observable.thing.TeleportGate;
+
+import java.util.ArrayList;
 
 /**
  * An abstract class, that represents the entities in the solar system, which can do activities.
@@ -122,5 +125,9 @@ public abstract class Entity implements listableObj {
 	}
 
 	public Inventory getInventory() { return null; }
+
+	public ArrayList<TeleportGate> getGates() {
+		return null;
+	}
 
 }

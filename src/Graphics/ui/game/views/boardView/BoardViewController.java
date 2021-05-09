@@ -1,9 +1,10 @@
 package Graphics.ui.game.views.boardView;
 
+import Graphics.Main;
 import Graphics.controller.controllers.SettlerController;
 import Graphics.controller.controllers.SolarSystem;
-import Graphics.entity.entities.Settler;
-import Graphics.thing.Thing;
+import Graphics.observable.entity.entities.Settler;
+import Graphics.observable.thing.Thing;
 import Graphics.ui.game.drawable.drawables.Obstacle;
 import Graphics.ui.game.View;
 import Graphics.ui.game.UIController;
@@ -21,9 +22,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.LinkedHashSet;
+import java.util.*;
 
 public class BoardViewController extends View {
 
@@ -32,7 +31,7 @@ public class BoardViewController extends View {
     @FXML
     public Pane canvasWrapper;
     @FXML
-    public ListView settlerList; //TODO: Update when data change.
+    public ListView settlerList;
     @FXML
     public TextArea statusText;
     @FXML
@@ -170,6 +169,14 @@ public class BoardViewController extends View {
         }
     }
 
+    @Override
+    public void refresh() {
+        for (var item : settlerList.getItems()) {
+            settlerList.getSelectionModel().select(item);
+        }
+        selectAnotherSettler(null);
+    }
+
     private double pointBoarByAvgNei() {
         double sum = 0;
         for (Root r : roots) {
@@ -203,8 +210,37 @@ public class BoardViewController extends View {
         }
     }
 
+    private void reloadObstacles() {
+        LinkedList<Thing> things = SolarSystem.getInstance().getThings();
+        for (Thing t : things) {
+            boolean loaded = false;
+
+            obstacles.removeIf(obstacle -> !SolarSystem.getInstance().getThings().contains(obstacle.getData()));
+
+            for (Obstacle o : obstacles)
+                if (o.equalData(t)) {
+                    loaded = true;
+                    break;
+                }
+
+            if (!loaded) {
+                Thing randomNei = t.getNeighbour().get(0);
+                Obstacle o = getObstacleByData(randomNei);
+                if (o != null) {
+                    double phi = Main.rng.nextDouble() * 360;
+                    double x = o.getPosX() + Math.cos(phi) * 60;
+                    double y = o.getPosY() + Math.sin(phi) * 60;
+                    Obstacle newObstacle = new Obstacle((int) x, (int) y, t);
+                    obstacles.add(newObstacle);
+                    roots.add(new Root(o, newObstacle));
+                }
+            }
+        }
+    }
+
     @Override
     public void rePaint() {
+        reloadObstacles();
         GraphicsContext gc = myCanvas.getGraphicsContext2D();
         gc.clearRect(0, 0, myCanvas.getWidth(), myCanvas.getHeight());
 
@@ -282,6 +318,7 @@ public class BoardViewController extends View {
         SettlerController.getInstance().handleCommand("endTurn");
         rePaint();
         Settler selectedSettler = (Settler) settlerList.getSelectionModel().getSelectedItem();
+        refresh();
         selectAnotherSettler(selectedSettler);
     }
 }

@@ -3,10 +3,10 @@ package Graphics.controller.controllers;
 import Graphics.controller.GameManager;
 import Graphics.Main;
 import Graphics.controller.Controller;
-import Graphics.entity.entities.Settler;
+import Graphics.observable.entity.entities.Settler;
 import Graphics.material.Material;
-import Graphics.thing.Thing;
-import Graphics.thing.things.TeleportGate;
+import Graphics.observable.thing.Thing;
+import Graphics.observable.thing.TeleportGate;
 
 import java.util.LinkedList;
 
@@ -158,6 +158,8 @@ public class SettlerController extends Controller {
 			} else if (tg != null) {
 				selected.putGateDown(tg);
 			}
+		} else if ("Wait".equals(args[0])) {
+			selected.waitEntity();
 		}
 	}
 

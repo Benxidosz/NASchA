@@ -1,7 +1,9 @@
 package Graphics.ui.game.drawable.drawables;
 
 import Graphics.App;
-import Graphics.thing.Thing;
+import Graphics.observable.thing.Thing;
+import Graphics.observable.thing.Asteroid;
+import Graphics.observable.thing.TeleportGate;
 import Graphics.ui.game.drawable.Drawable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -33,6 +35,13 @@ public class Obstacle extends Drawable {
         neighbours = new LinkedHashSet<>();
     }
 
+    @Override
+    public void setFillColor(Color color) {
+        super.setFillColor(color);
+        if (color == Color.WHITE && data.getEntities().size() > 0 && App.isTestMode())
+            fillColor = Color.PINK;
+    }
+
     public int getPosX() {
         return posX;
     }
@@ -42,6 +51,22 @@ public class Obstacle extends Drawable {
     }
 
     public void draw(Canvas canvas) {
+        data.observe(canvas, this);
+    }
+
+    public void draw(Canvas canvas, Asteroid asteroid) {
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        if (selected)
+            gc.setFill(Color.RED);
+        else
+            gc.setFill(fillColor);
+        gc.fillOval(posX - 15, posY - 15, 30, 30);
+
+        gc.setFill(lineColor);
+        gc.strokeOval(posX - 15, posY - 15, 30, 30);
+    }
+
+    public void draw(Canvas canvas, TeleportGate gate) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         if (selected)
             gc.setFill(Color.RED);
@@ -49,10 +74,10 @@ public class Obstacle extends Drawable {
             gc.setFill(Color.PINK);
         } else
             gc.setFill(fillColor);
-        gc.fillOval(posX - 15, posY - 15, 30, 30);
+        gc.fillRect(posX - 15, posY - 15, 30, 30);
 
         gc.setFill(lineColor);
-        gc.strokeOval(posX - 15, posY - 15, 30, 30);
+        gc.strokeRect(posX - 15, posY - 15, 30, 30);
     }
 
     public boolean equalData(Thing d) {

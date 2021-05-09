@@ -1,7 +1,8 @@
-package Graphics.thing.things;
+package Graphics.observable.thing;
 
-import Graphics.entity.Entity;
-import Graphics.thing.Thing;
+import Graphics.observable.entity.Entity;
+import Graphics.ui.game.drawable.drawables.Obstacle;
+import javafx.scene.canvas.Canvas;
 
 /**
  * Settlers can build teleport gates. Each has one pair somewhere on the field.
@@ -144,5 +145,10 @@ public class TeleportGate extends Thing {
 		result.append("\nactive: " + (active ? "true" : "false"));
 		result.append("\nnormal: " + (normal ? "true" : "false") + "\n");
 		return result.toString();
+	}
+
+	@Override
+	public void observe(Canvas canvas, Obstacle obstacle) {
+		obstacle.draw(canvas, this);
 	}
 }

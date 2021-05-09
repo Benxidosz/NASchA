@@ -7,14 +7,14 @@ import Graphics.controller.controllers.RobotController;
 import Graphics.controller.controllers.SettlerController;
 import Graphics.controller.controllers.SolarSystem;
 import Graphics.controller.controllers.UfoController;
-import Graphics.entity.entities.Settler;
-import Graphics.entity.entities.Ufo;
+import Graphics.observable.entity.entities.Settler;
+import Graphics.observable.entity.entities.Ufo;
 import Graphics.material.MaterialCompare;
 import Graphics.material.materials.*;
 import Graphics.simulator.Simulator;
-import Graphics.thing.Thing;
-import Graphics.thing.things.Asteroid;
-import Graphics.thing.things.MainAsteroid;
+import Graphics.observable.thing.Thing;
+import Graphics.observable.thing.Asteroid;
+import Graphics.observable.thing.MainAsteroid;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -146,6 +146,8 @@ public class GameManager {
                 s.addMaterial(new Iron(s.getName() + "i1"));
                 s.addMaterial(new Iron(s.getName() + "i2"));
                 s.addMaterial(new WaterIce(s.getName() + "w1"));
+                s.addMaterial(new Uran(s.getName() + "u1"));
+                s.addMaterial(new Uran(s.getName() + "uDanger", 2));
             }
             main.addEntity(s);
             SettlerController.getInstance().addSettler(s);

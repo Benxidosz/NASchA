@@ -72,7 +72,7 @@
                         <Insets right="20.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="eruptionTurnLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Errupion in \n 3 turn" wrapText="true" GridPane.rowIndex="1">
+                  <Label fx:id="eruptionTurnLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Errupion in \n 3 turn" textAlignment="RIGHT" wrapText="true" GridPane.rowIndex="1">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>

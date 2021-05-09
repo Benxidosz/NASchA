@@ -2,8 +2,8 @@ package Graphics.controller.controllers;
 
 import Graphics.controller.Controller;
 import Graphics.controller.GameManager;
-import Graphics.entity.entities.Robot;
-import Graphics.thing.Thing;
+import Graphics.observable.entity.entities.Robot;
+import Graphics.observable.thing.Thing;
 
 import java.util.LinkedList;
 

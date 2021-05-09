@@ -1,8 +1,8 @@
-package Graphics.entity.entities;
+package Graphics.observable.entity.entities;
 
 import Graphics.controller.controllers.RobotController;
-import Graphics.entity.Entity;
-import Graphics.thing.Thing;
+import Graphics.observable.thing.Thing;
+import Graphics.observable.entity.Entity;
 
 /**
  * The robot which is controlled by the system and can drill and move

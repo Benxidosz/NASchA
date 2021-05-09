@@ -30,4 +30,5 @@ public abstract class View {
     }
 
     public abstract void rePaint();
+    public abstract void refresh();
 }

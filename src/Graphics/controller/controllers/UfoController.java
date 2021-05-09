@@ -2,8 +2,8 @@ package Graphics.controller.controllers;
 
 import Graphics.controller.GameManager;
 import Graphics.controller.Controller;
-import Graphics.entity.entities.Ufo;
-import Graphics.thing.Thing;
+import Graphics.observable.entity.entities.Ufo;
+import Graphics.observable.thing.Thing;
 
 import java.util.LinkedList;
 

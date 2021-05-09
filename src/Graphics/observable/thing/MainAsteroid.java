@@ -1,4 +1,4 @@
-package Graphics.thing.things;
+package Graphics.observable.thing;
 
 import Graphics.Inventory;
 import Graphics.material.Material;

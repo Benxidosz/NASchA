@@ -1,9 +1,12 @@
-package Graphics.thing;
+package Graphics.observable.thing;
 
 import Graphics.controller.controllers.SolarSystem;
-import Graphics.entity.Entity;
+import Graphics.observable.Observable;
+import Graphics.observable.entity.Entity;
 import Graphics.material.Material;
 import Graphics.simulator.listableObj;
+import Graphics.ui.game.drawable.drawables.Obstacle;
+import javafx.scene.canvas.Canvas;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -14,7 +17,7 @@ import java.util.Random;
  * Stores the neighbours of the thing, the entities on the thing
  * and the solar system which contains it.
  */
-public abstract class Thing implements listableObj {
+public abstract class Thing implements listableObj, Observable {
 	/**
 	 * The Thing's neighbour Thing objects
 	 */

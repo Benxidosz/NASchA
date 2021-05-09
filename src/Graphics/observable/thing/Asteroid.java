@@ -1,21 +1,22 @@
-package Graphics.thing.things;
+package Graphics.observable.thing;
 
 import Graphics.Main;
 import Graphics.controller.controllers.SolarSystem;
-import Graphics.entity.Entity;
+import Graphics.observable.entity.Entity;
 import Graphics.material.Material;
 import Graphics.material.materials.Coal;
 import Graphics.material.materials.Iron;
 import Graphics.material.materials.Silicon;
 import Graphics.material.materials.Uran;
 import Graphics.material.materials.WaterIce;
-import Graphics.thing.Thing;
+import Graphics.ui.game.drawable.drawables.Obstacle;
+import javafx.scene.canvas.Canvas;
 
 /**
  *  Represents the Asteroids in the Solar System.
  *  Stores it's layer, core and if it's near by sun.
  */
-public class Asteroid extends Thing {
+				public class Asteroid extends Thing {
 	/**
 	 * The number of layers on the Asteriod
 	 */
@@ -215,5 +216,10 @@ public class Asteroid extends Thing {
 		result.append("core: " + (core == null ? "null" : core.getName()) + "\n");
 		result.append("nearsun: " + (nearBySun ? "true" : "false") + "\n");
 		return result.toString();
+	}
+
+	@Override
+	public void observe(Canvas canvas, Obstacle obstacle) {
+		obstacle.draw(canvas, this);
 	}
 }

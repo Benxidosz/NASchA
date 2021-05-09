@@ -1,17 +1,16 @@
 package Graphics.ui.game.views.asteroidView;
 
 import Graphics.Inventory;
+import Graphics.controller.controllers.RobotController;
 import Graphics.controller.controllers.SettlerController;
-import Graphics.entity.Entity;
-import Graphics.entity.entities.Settler;
+import Graphics.controller.controllers.SolarSystem;
 import Graphics.material.Material;
-import Graphics.thing.Thing;
+import Graphics.observable.thing.Thing;
+import Graphics.observable.thing.TeleportGate;
 import Graphics.ui.game.View;
 import Graphics.ui.game.UIController;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.input.MouseEvent;
@@ -20,6 +19,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class AsteroidViewController extends View {
     @FXML
@@ -27,7 +27,7 @@ public class AsteroidViewController extends View {
     @FXML
     public Pane canvasWrapper;
     @FXML
-    public TreeView entitiesTree; //TODO: Update when data change.
+    public TreeView entitiesTree;
 
     public AsteroidViewController() throws IOException {
         super("asteroidView.fxml");
@@ -40,7 +40,7 @@ public class AsteroidViewController extends View {
         myCanvas.heightProperty().bind(canvasWrapper.heightProperty());
     }
 
-    public void refreshTree() {
+    public void refresh() {
         Thing selected = UIController.getInstance().getSelectedThing();
         if (selected == null) return;
         TreeItem<String> rootEntitiItem = new TreeItem<>("");
@@ -49,10 +49,13 @@ public class AsteroidViewController extends View {
             TreeItem<String> item = new TreeItem<>(e.getName());
             Inventory tmpInventory = e.getInventory();
             if (tmpInventory != null) {
-                tmpInventory.getMaterials().forEach((m) -> {
-                    item.getChildren().add(new TreeItem<String>(m.getName()));
-                });
+                tmpInventory.getMaterials().forEach((m) -> item.getChildren().add(new TreeItem<>(m.getName())));
             }
+
+            ArrayList<TeleportGate> gates = e.getGates();
+            if (gates != null)
+                gates.forEach(g -> item.getChildren().add(new TreeItem<>(g.getName())));
+
             rootEntitiItem.getChildren().add(item);
         });
         entitiesTree.setRoot(rootEntitiItem);
@@ -60,6 +63,7 @@ public class AsteroidViewController extends View {
 
     @Override
     public void rePaint() {
+        refresh();
         myCanvas.getGraphicsContext2D().clearRect(0, 0, myCanvas.getWidth(), myCanvas.getHeight());
 
         myCanvas.getGraphicsContext2D().setFill(Color.BEIGE);
@@ -97,7 +101,11 @@ public class AsteroidViewController extends View {
 
     @FXML
     public void mine() {
-        String selectedEntity = ((TreeItem<String>) entitiesTree.getSelectionModel().getSelectedItem()).getValue();
+        TreeItem<String> selectedTreeItem = (TreeItem<String>) entitiesTree.getSelectionModel().getSelectedItem();
+        if (selectedTreeItem == null)
+            return;
+        String selectedEntity = selectedTreeItem.getValue();
+
         if (selectedEntity != null) {
             SettlerController.getInstance().handleCommand("Mine " + selectedEntity);
         }
@@ -106,18 +114,26 @@ public class AsteroidViewController extends View {
 
     @FXML
     public void buildRobot() {
-        String selectedEntity = ((TreeItem<String>) entitiesTree.getSelectionModel().getSelectedItem()).getValue();
+        TreeItem<String> selectedTreeItem = (TreeItem<String>) entitiesTree.getSelectionModel().getSelectedItem();
+        if (selectedTreeItem == null)
+            return;
+        String selectedEntity = selectedTreeItem.getValue();
+
         if (selectedEntity != null) {
-            SettlerController.getInstance().handleCommand("Buildrobot " + selectedEntity);
+            SettlerController.getInstance().handleCommand("Buildrobot " + selectedEntity + " " + RobotController.getRobotId());
         }
         rePaint();
     }
 
     @FXML
     public void buildGate() {
-        String selectedEntity = ((TreeItem<String>) entitiesTree.getSelectionModel().getSelectedItem()).getValue();
+        TreeItem<String> selectedTreeItem = (TreeItem<String>) entitiesTree.getSelectionModel().getSelectedItem();
+        if (selectedTreeItem == null)
+            return;
+        String selectedEntity = selectedTreeItem.getValue();
+
         if (selectedEntity != null) {
-            SettlerController.getInstance().handleCommand("Buildgate " + selectedEntity);
+            SettlerController.getInstance().handleCommand("Buildgate " + selectedEntity + " " + SolarSystem.getTeleportGateId());
         }
         rePaint();
     }
@@ -126,6 +142,9 @@ public class AsteroidViewController extends View {
     @FXML
     public void place() {
         TreeItem<String> selectedTreeItem = (TreeItem<String>) entitiesTree.getSelectionModel().getSelectedItem();
+        if (selectedTreeItem == null)
+            return;
+
         String selectedItem = selectedTreeItem.getValue();
         TreeItem<String> root = selectedTreeItem.getParent();
         String selectedEntity = root.getValue();
@@ -138,9 +157,26 @@ public class AsteroidViewController extends View {
 
     @FXML
     public void drill() {
-        String selectedEntity = ((TreeItem<String>) entitiesTree.getSelectionModel().getSelectedItem()).getValue();
+        TreeItem<String> selectedTreeItem = (TreeItem<String>) entitiesTree.getSelectionModel().getSelectedItem();
+        if (selectedTreeItem == null)
+            return;
+        String selectedEntity = selectedTreeItem.getValue();
+
         if (selectedEntity != null) {
             SettlerController.getInstance().handleCommand("Drill " + selectedEntity);
+        }
+        rePaint();
+    }
+
+    @FXML
+    public void waitBoard() {
+        TreeItem<String> selectedTreeItem = (TreeItem<String>) entitiesTree.getSelectionModel().getSelectedItem();
+        if (selectedTreeItem == null)
+            return;
+        String selectedEntity = selectedTreeItem.getValue();
+
+        if (selectedEntity != null) {
+            SettlerController.getInstance().handleCommand("Wait " + selectedEntity);
         }
         rePaint();
     }

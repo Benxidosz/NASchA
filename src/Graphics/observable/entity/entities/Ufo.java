@@ -1,10 +1,10 @@
-package Graphics.entity.entities;
+package Graphics.observable.entity.entities;
 
 import Graphics.Inventory;
 import Graphics.controller.controllers.UfoController;
-import Graphics.entity.Entity;
+import Graphics.observable.thing.Thing;
+import Graphics.observable.entity.Entity;
 import Graphics.material.Material;
-import Graphics.thing.Thing;
 
 /**
  * The ufo which is controlled by the system and can mine and move.

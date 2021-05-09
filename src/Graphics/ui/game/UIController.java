@@ -6,19 +6,16 @@ import Graphics.controller.controllers.RobotController;
 import Graphics.controller.controllers.SettlerController;
 import Graphics.controller.controllers.SolarSystem;
 import Graphics.controller.controllers.UfoController;
-import Graphics.entity.entities.Settler;
-import Graphics.entity.entities.Ufo;
 import Graphics.material.MaterialCompare;
-import Graphics.thing.Thing;
-import Graphics.thing.things.Asteroid;
-import Graphics.thing.things.MainAsteroid;
+import Graphics.observable.thing.Thing;
+import Graphics.observable.thing.Asteroid;
+import Graphics.observable.thing.MainAsteroid;
 import Graphics.ui.game.views.asteroidView.AsteroidViewController;
 import Graphics.ui.game.views.boardView.BoardViewController;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.LinkedList;
 
 public class UIController extends GameManager {
@@ -208,7 +205,6 @@ public class UIController extends GameManager {
 
     public void switchView() {
         if (boardActive) {
-            asteroidView.refreshTree();
             activeView = asteroidView;
         } else
             activeView = boardView;
@@ -216,5 +212,6 @@ public class UIController extends GameManager {
         boardActive = !boardActive;
         activeView.setActive();
         activeView.rePaint();
+        activeView.refresh();
     }
 }

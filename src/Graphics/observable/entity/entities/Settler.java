@@ -1,13 +1,13 @@
-package Graphics.entity.entities;
+package Graphics.observable.entity.entities;
 
 import Graphics.controller.GameManager;
 import Graphics.Inventory;
 import Graphics.controller.controllers.RobotController;
 import Graphics.controller.controllers.SettlerController;
 import Graphics.controller.controllers.SolarSystem;
-import Graphics.thing.Thing;
-import Graphics.thing.things.TeleportGate;
-import Graphics.entity.Entity;
+import Graphics.observable.thing.Thing;
+import Graphics.observable.entity.Entity;
+import Graphics.observable.thing.TeleportGate;
 import Graphics.material.Material;
 import Graphics.simulator.*;
 
