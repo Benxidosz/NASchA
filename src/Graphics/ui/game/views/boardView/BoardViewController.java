@@ -231,24 +231,6 @@ public class BoardViewController extends View {
         for (Thing t : things) {
             boolean loaded = false;
 
-            for (Iterator<Obstacle> iter = obstacles.iterator(); iter.hasNext();) {
-                Obstacle obstacle = iter.next();
-                if (!SolarSystem.getInstance().getThings().contains(obstacle.getData())) {
-                    roots.removeIf(root -> root.contains(obstacle));
-                    ArrayList<Thing> neighbours = obstacle.getData().getNeighbour();
-                    for (Thing nei1 : neighbours) {
-                        Obstacle oNei1 = getObstacleByData(nei1);
-                        for (Thing nei2 : neighbours) {
-                            Obstacle oNei2 = getObstacleByData(nei2);
-                            if (oNei1 != oNei2) {
-                                roots.add(new Root(oNei1, oNei2));
-                            }
-                        }
-                    }
-                    iter.remove();
-                }
-            }
-
             for (Obstacle o : obstacles)
                 if (o.equalData(t)) {
                     loaded = true;
@@ -265,6 +247,24 @@ public class BoardViewController extends View {
                     Obstacle newObstacle = new Obstacle((int) x, (int) y, t);
                     obstacles.add(newObstacle);
                     roots.add(new Root(o, newObstacle));
+                }
+            }
+
+            for (Iterator<Obstacle> iter = obstacles.iterator(); iter.hasNext();) {
+                Obstacle obstacle = iter.next();
+                if (!SolarSystem.getInstance().getThings().contains(obstacle.getData())) {
+                    roots.removeIf(root -> root.contains(obstacle));
+                    ArrayList<Thing> neighbours = obstacle.getData().getNeighbour();
+                    for (Thing nei1 : neighbours) {
+                        Obstacle oNei1 = getObstacleByData(nei1);
+                        for (Thing nei2 : neighbours) {
+                            Obstacle oNei2 = getObstacleByData(nei2);
+                            if (oNei1 != oNei2 && oNei1 != null && oNei2 != null) {
+                                roots.add(new Root(oNei1, oNei2));
+                            }
+                        }
+                    }
+                    iter.remove();
                 }
             }
         }

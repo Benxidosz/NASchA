@@ -138,7 +138,6 @@ public class AsteroidViewController extends View {
         rePaint();
     }
 
-    //TODO: Make it work for gate.
     @FXML
     public void place() {
         TreeItem<String> selectedTreeItem = (TreeItem<String>) entitiesTree.getSelectionModel().getSelectedItem();
