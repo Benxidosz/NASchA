@@ -7,12 +7,14 @@ import Graphics.controller.controllers.SettlerController;
 import Graphics.controller.controllers.SolarSystem;
 import Graphics.controller.controllers.UfoController;
 import Graphics.material.MaterialCompare;
+import Graphics.observable.entity.entities.Settler;
 import Graphics.observable.thing.Thing;
 import Graphics.observable.thing.things.Asteroid;
 import Graphics.observable.thing.things.MainAsteroid;
 import Graphics.ui.game.views.asteroidView.AsteroidViewController;
 import Graphics.ui.game.views.boardView.BoardViewController;
 import Graphics.ui.game.views.messegeBox.GameMassage;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Dialog;
 import javafx.scene.image.Image;
@@ -68,6 +70,18 @@ public class UIController extends GameManager {
 
     public static void init(int settlerNum, int ufoNum, int asteroidNum) {
         ref = new UIController(settlerNum, ufoNum, asteroidNum);
+    }
+
+    public static void checkFree(String name) {
+        Settler settler = SettlerController.getInstance().getSettlerByName(name);
+        if (settler != null && settler.isActive()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Something went wrong!");
+            alert.setHeaderText(null);
+            alert.setContentText("Settler can't do this.");
+
+            alert.showAndWait();
+        }
     }
 
     private UIController(int settlerNum, int ufoNum, int asteroidNum) {

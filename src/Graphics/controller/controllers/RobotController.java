@@ -3,6 +3,7 @@ package Graphics.controller.controllers;
 import Graphics.controller.Controller;
 import Graphics.controller.GameManager;
 import Graphics.observable.entity.entities.Robot;
+import Graphics.observable.entity.entities.Settler;
 import Graphics.observable.thing.Thing;
 
 import java.util.LinkedList;
@@ -144,4 +145,14 @@ public class RobotController extends Controller {
 			selected.drill();
 		}
 	}
+
+    public Robot getSettlerByName(String name) {
+		for (Robot robot : robots) {
+			if (robot.getName().equals(name)) {
+				return robot;
+			}
+		}
+
+		return null;
+    }
 }

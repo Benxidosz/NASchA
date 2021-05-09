@@ -56,17 +56,20 @@ public class Settler extends Entity {
 	 * Settler builds a base with the right materials.
 	 */
 	public void buildBase() {
+		boolean built = false;
 		try {
 			Inventory inv = (Inventory) myInventory.clone();
 			for (Material mat : inv.getMaterials()) {
 				if (location.buildBase(mat)) {
 					myInventory.rmMaterial(mat);
+					built = true;
 				}
 			}
 		} catch (CloneNotSupportedException e) {
 			e.printStackTrace();
 		}
-		done();
+		if (built)
+			done();
 	}
 
 	/**
@@ -86,11 +89,11 @@ public class Settler extends Entity {
 				addGate(gate1);
 				addGate(gate2);
 				created = true;
+				done();
 			}
 		}
 		if (!created)
 			Simulator.addMessage("Gates can't be created.");
-		done();
 	}
 
 	/**
@@ -104,9 +107,9 @@ public class Settler extends Entity {
 			Robot r = new Robot(name, location);
 			RobotController.getInstance().addRobot(r);
 			location.addEntity(r);
+			done();
 		} else
 			Simulator.addMessage("Robot can't be created.");
-		done();
 	}
 
 	/**
@@ -116,8 +119,8 @@ public class Settler extends Entity {
 	public void placeMaterial(Material m) {
 		if(location.placeMaterial(m)) {
 			rmMaterial(m);
+			done();
 		}
-		done();
 	}
 
 	/**

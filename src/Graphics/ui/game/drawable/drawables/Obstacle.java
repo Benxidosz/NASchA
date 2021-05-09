@@ -15,14 +15,6 @@ import javafx.scene.paint.Color;
 import java.util.LinkedHashSet;
 
 public class Obstacle extends Drawable {
-    public void setPosX(int posX) {
-        this.posX = posX;
-    }
-
-    public void setPosY(int posY) {
-        this.posY = posY;
-    }
-
     private int posX;
     private int posY;
     private final Thing data;
@@ -50,6 +42,14 @@ public class Obstacle extends Drawable {
 
     public int getPosY() {
         return posY;
+    }
+
+    public void setPosX(int posX) {
+        this.posX = posX;
+    }
+
+    public void setPosY(int posY) {
+        this.posY = posY;
     }
 
     public void draw(Canvas canvas) {
@@ -101,6 +101,10 @@ public class Obstacle extends Drawable {
 
     public void addNei(Obstacle o) {
         neighbours.add(o);
+    }
+
+    public void rmNei(Obstacle o) {
+        neighbours.remove(o);
     }
 
     public double getAvgDistance() {

@@ -4,16 +4,19 @@ import Graphics.Inventory;
 import Graphics.controller.controllers.RobotController;
 import Graphics.controller.controllers.SettlerController;
 import Graphics.controller.controllers.SolarSystem;
+import Graphics.controller.controllers.UfoController;
 import Graphics.material.Material;
+import Graphics.observable.entity.entities.Robot;
+import Graphics.observable.entity.entities.Settler;
+import Graphics.observable.entity.entities.Ufo;
 import Graphics.observable.thing.Thing;
 import Graphics.observable.thing.things.TeleportGate;
 import Graphics.ui.game.View;
 import Graphics.ui.game.UIController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -41,6 +44,49 @@ public class AsteroidViewController extends View {
     void initialize() {
         myCanvas.widthProperty().bind(canvasWrapper.widthProperty());
         myCanvas.heightProperty().bind(canvasWrapper.heightProperty());
+
+        entitiesTree.setCellFactory(param -> new TreeCell<String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (item == null || empty || "".equals(item)) {
+                    setText("");
+                } else {
+                    setText(item);
+                }
+                selectedChanged();
+            }
+        });
+    }
+
+    private void selectedChanged() {
+        TreeItem item = (TreeItem) entitiesTree.getSelectionModel().getSelectedItem();
+        String name = null;
+        TreeItem parent = null;
+
+        if (item != null) {
+            name = (String) item.getValue();
+            parent = item.getParent();
+        }
+        Settler selectedSettler = SettlerController.getInstance().getSettlerByName(name);
+        Robot selectedRobot = RobotController.getInstance().getSettlerByName(name);
+        Ufo selectedUfo = UfoController.getInstance().getSettlerByName(name);
+        Thing selected = UIController.getInstance().getSelectedThing();
+
+        TeleportGate selectedGate = null;
+
+        if (parent != null && parent != entitiesTree.getRoot()) {
+            String parentName = (String) parent.getValue();
+            selectedSettler = SettlerController.getInstance().getSettlerByName(parentName);
+            if (selectedSettler != null)
+                selectedGate = selectedSettler.getGateByName(name);
+        }
+
+        statusText.setText((selected != null ? selected.List() : "") +
+                (selectedSettler != null ? selectedSettler.List() : "") +
+                (selectedUfo != null ? selectedUfo.List() : "") +
+                (selectedRobot != null ? selectedRobot.List() : "") +
+                (selectedGate != null ? selectedGate.List() : ""));
     }
 
     public void refresh() {
@@ -111,6 +157,7 @@ public class AsteroidViewController extends View {
 
         if (selectedEntity != null) {
             SettlerController.getInstance().handleCommand("Mine " + selectedEntity);
+            UIController.checkFree(selectedEntity);
         }
         rePaint();
     }
@@ -124,6 +171,7 @@ public class AsteroidViewController extends View {
 
         if (selectedEntity != null) {
             SettlerController.getInstance().handleCommand("Buildrobot " + selectedEntity + " " + RobotController.getRobotId());
+            UIController.checkFree(selectedEntity);
         }
         rePaint();
     }
@@ -137,6 +185,7 @@ public class AsteroidViewController extends View {
 
         if (selectedEntity != null) {
             SettlerController.getInstance().handleCommand("Buildgate " + selectedEntity + " " + SolarSystem.getTeleportGateId());
+            UIController.checkFree(selectedEntity);
         }
         rePaint();
     }
@@ -153,6 +202,7 @@ public class AsteroidViewController extends View {
 
         if (selectedEntity != null) {
             SettlerController.getInstance().handleCommand("Putdown " + selectedEntity + " " + selectedItem);
+            UIController.checkFree(selectedEntity);
         }
         rePaint();
     }
@@ -166,6 +216,7 @@ public class AsteroidViewController extends View {
 
         if (selectedEntity != null) {
             SettlerController.getInstance().handleCommand("Drill " + selectedEntity);
+            UIController.checkFree(selectedEntity);
         }
         rePaint();
     }
@@ -179,6 +230,20 @@ public class AsteroidViewController extends View {
 
         if (selectedEntity != null) {
             SettlerController.getInstance().handleCommand("Wait " + selectedEntity);
+            UIController.checkFree(selectedEntity);
+        }
+        rePaint();
+    }
+
+    public void buildBase() {
+        TreeItem<String> selectedTreeItem = (TreeItem<String>) entitiesTree.getSelectionModel().getSelectedItem();
+        if (selectedTreeItem == null)
+            return;
+        String selectedEntity = selectedTreeItem.getValue();
+
+        if (selectedEntity != null) {
+            SettlerController.getInstance().handleCommand("Buildbase " + selectedEntity);
+            UIController.checkFree(selectedEntity);
         }
         rePaint();
     }

@@ -3,7 +3,10 @@ package Graphics.observable.thing.things;
 import Graphics.observable.entity.Entity;
 import Graphics.observable.thing.Thing;
 import Graphics.ui.game.drawable.drawables.Obstacle;
+import Graphics.ui.game.views.boardView.BoardViewController;
 import javafx.scene.canvas.Canvas;
+
+import java.util.Iterator;
 
 /**
  * Settlers can build teleport gates. Each has one pair somewhere on the field.
@@ -63,9 +66,10 @@ public class TeleportGate extends Thing {
 
 		if(rand2 == this) return;
 
-		for(Thing t: neighbour) {
-			removeNeighbour(t);
-			t.removeNeighbour(this);
+		for (Iterator<Thing> iter = neighbour.iterator();iter.hasNext();) {
+			Thing thing = iter.next();
+			iter.remove();
+			thing.removeNeighbour(this);
 		}
 
 		addNeighbour(rand2);
@@ -151,5 +155,10 @@ public class TeleportGate extends Thing {
 	@Override
 	public void observe(Canvas canvas, Obstacle obstacle) {
 		obstacle.draw(canvas, this);
+	}
+
+	@Override
+	public void move(BoardViewController controller) {
+		controller.moveMe(this);
 	}
 }

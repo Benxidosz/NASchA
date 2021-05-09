@@ -2,6 +2,7 @@ package Graphics.controller.controllers;
 
 import Graphics.controller.GameManager;
 import Graphics.controller.Controller;
+import Graphics.observable.entity.entities.Settler;
 import Graphics.observable.entity.entities.Ufo;
 import Graphics.observable.thing.Thing;
 
@@ -149,4 +150,14 @@ public class UfoController extends Controller {
 	public void addUfo(Ufo u) {
 		ufos.add(u);
 	}
+
+    public Ufo getSettlerByName(String name) {
+		for (Ufo ufo : ufos) {
+			if (ufo.getName().equals(name)) {
+				return ufo;
+			}
+		}
+
+		return null;
+    }
 }

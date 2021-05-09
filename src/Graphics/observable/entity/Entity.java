@@ -52,8 +52,10 @@ public abstract class Entity implements listableObj {
 	 * Drills the location.
 	 */
 	public void drill() {
-		location.drill();
-		done();
+		if (location.isDrillable()) {
+			location.drill();
+			done();
+		}
 	}
 
 	/**
@@ -80,11 +82,11 @@ public abstract class Entity implements listableObj {
 	 */
 	public void mine() {
 		Material m = location.excavate();
-		if (m != null)
+		if (m != null) {
 			addMaterial(m);
-		else
+			done();
+		} else
 			emptyCore = true;
-		done();
 	}
 
 	/**

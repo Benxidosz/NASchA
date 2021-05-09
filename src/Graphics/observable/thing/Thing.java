@@ -6,6 +6,7 @@ import Graphics.observable.entity.Entity;
 import Graphics.material.Material;
 import Graphics.simulator.listableObj;
 import Graphics.ui.game.drawable.drawables.Obstacle;
+import Graphics.ui.game.views.boardView.BoardViewController;
 import javafx.scene.canvas.Canvas;
 
 import java.util.ArrayList;
@@ -211,5 +212,9 @@ public abstract class Thing implements listableObj, Observable {
 
 	public ArrayList<Entity> getEntities() {
 		return entities;
+	}
+
+	public void move(BoardViewController controller) {
+		controller.moveMe(this);
 	}
 }

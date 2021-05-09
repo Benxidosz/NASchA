@@ -141,13 +141,32 @@ public class GameManager {
         for(int i = 0; i < settlerNum; i++){
             Settler s = new Settler(main, SettlerController.getSettlerId());
             if (App.isTestMode()) {
-                s.addMaterial(new Coal(s.getName() + "c1"));
-                s.addMaterial(new Coal(s.getName() + "c2"));
-                s.addMaterial(new Iron(s.getName() + "i1"));
-                s.addMaterial(new Iron(s.getName() + "i2"));
-                s.addMaterial(new WaterIce(s.getName() + "w1"));
-                s.addMaterial(new Uran(s.getName() + "u1"));
-                s.addMaterial(new Uran(s.getName() + "uDanger", 2));
+                if (i % 3 == 0) {
+                    s.addMaterial(new Coal(s.getName() + "c1"));
+                    s.addMaterial(new Coal(s.getName() + "c2"));
+                    s.addMaterial(new Coal(s.getName() + "c3"));
+                    s.addMaterial(new Iron(s.getName() + "i1"));
+                    s.addMaterial(new Iron(s.getName() + "i2"));
+                    s.addMaterial(new Iron(s.getName() + "i3"));
+                    s.addMaterial(new WaterIce(s.getName() + "w1"));
+                    s.addMaterial(new WaterIce(s.getName() + "w2"));
+                    s.addMaterial(new WaterIce(s.getName() + "w3"));
+                } else if (i % 3 == 1) {
+                    s.addMaterial(new Uran(s.getName() + "u1"));
+                    s.addMaterial(new Uran(s.getName() + "u2"));
+                    s.addMaterial(new Uran(s.getName() + "uDanger", 2));
+                    s.addMaterial(new Silicon(s.getName() + "s1"));
+                    s.addMaterial(new Silicon(s.getName() + "s2"));
+                    s.addMaterial(new Silicon(s.getName() + "s3"));
+                } else {
+                    s.addMaterial(new Coal(s.getName() + "c1"));
+                    s.addMaterial(new Iron(s.getName() + "i1"));
+                    s.addMaterial(new Uran(s.getName() + "uDanger", 2));
+                    s.addMaterial(new Iron(s.getName() + "i2"));
+                    s.addMaterial(new Iron(s.getName() + "i3"));
+                    s.addMaterial(new WaterIce(s.getName() + "w1"));
+                    s.addMaterial(new Uran(s.getName() + "u1"));
+                }
             }
             main.addEntity(s);
             SettlerController.getInstance().addSettler(s);

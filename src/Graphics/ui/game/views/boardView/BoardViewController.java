@@ -5,16 +5,12 @@ import Graphics.controller.controllers.SettlerController;
 import Graphics.controller.controllers.SolarSystem;
 import Graphics.observable.entity.entities.Settler;
 import Graphics.observable.thing.Thing;
+import Graphics.observable.thing.things.TeleportGate;
 import Graphics.ui.game.drawable.drawables.Obstacle;
 import Graphics.ui.game.View;
 import Graphics.ui.game.UIController;
 import Graphics.ui.game.drawable.drawables.Root;
 import Graphics.ui.game.views.DrawState;
-import Graphics.ui.game.views.messegeBox.GameMassage;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.ObservableListBase;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -109,7 +105,7 @@ public class BoardViewController extends View {
         int diffLayers = 2;
         int nodeInLayer = 5;
         int processedNodes = 0;
-        double rDiff = things.size() < 25 ? 110 : 100;
+        double rDiff = things.size() < 30 ? 110 : 105;
         double layerR = rDiff;
         double cX = canvasWrapper.getPrefWidth() / 2 + 75;
         double cY = canvasWrapper.getPrefHeight() / 2;
@@ -233,6 +229,24 @@ public class BoardViewController extends View {
     private void reloadObstacles() {
         LinkedList<Thing> things = SolarSystem.getInstance().getThings();
         for (Thing t : things) {
+            for (Iterator<Obstacle> iter = obstacles.iterator(); iter.hasNext();) {
+                Obstacle obstacle = iter.next();
+                if (!SolarSystem.getInstance().getThings().contains(obstacle.getData())) {
+                    roots.removeIf(root -> root.contains(obstacle));
+                    ArrayList<Thing> neighbours = obstacle.getData().getNeighbour();
+                    for (Thing nei1 : neighbours) {
+                        Obstacle oNei1 = getObstacleByData(nei1);
+                        for (Thing nei2 : neighbours) {
+                            Obstacle oNei2 = getObstacleByData(nei2);
+                            if (oNei1 != oNei2 && oNei1 != null && oNei2 != null) {
+                                roots.add(new Root(oNei1, oNei2));
+                            }
+                        }
+                    }
+                    iter.remove();
+                }
+            }
+
             boolean loaded = false;
 
             for (Obstacle o : obstacles)
@@ -255,25 +269,63 @@ public class BoardViewController extends View {
                 }
             }
 
-            for (Iterator<Obstacle> iter = obstacles.iterator(); iter.hasNext();) {
-                Obstacle obstacle = iter.next();
-                if (!SolarSystem.getInstance().getThings().contains(obstacle.getData())) {
-                    roots.removeIf(root -> root.contains(obstacle));
-                    ArrayList<Thing> neighbours = obstacle.getData().getNeighbour();
-                    for (Thing nei1 : neighbours) {
-                        Obstacle oNei1 = getObstacleByData(nei1);
-                        for (Thing nei2 : neighbours) {
-                            Obstacle oNei2 = getObstacleByData(nei2);
-                            if (oNei1 != oNei2 && oNei1 != null && oNei2 != null) {
-                                roots.add(new Root(oNei1, oNei2));
-                            }
+            for (Obstacle o1 : obstacles) {
+                for (Obstacle o2 : obstacles) {
+                    Thing data1 = o1.getData();
+                    Thing data2 = o2.getData();
+                    if (o1.getNeighbours().contains(o2) && o2.getNeighbours().contains(o1)
+                            && !data1.getNeighbour().contains(data2) && !data2.getNeighbour().contains(data1)) {
+                        roots.removeIf(root -> root.contains(o1, o2));
+                        o1.rmNei(o2);
+                        o2.rmNei(o1);
+
+                        for (Obstacle oNeiCheck : obstacles) {
+                            Thing dataNeiCheck = oNeiCheck.getData();
+                            fixNei(o1, data1, oNeiCheck, dataNeiCheck);
+
+                            fixNei(o2, data2, oNeiCheck, dataNeiCheck);
+
+                            moveObstacle(data1);
+
+                            moveObstacle(data2);
                         }
                     }
-                    iter.remove();
                 }
             }
         }
     }
+
+    public void moveObstacle(Thing thing) {
+        thing.move(this);
+    }
+
+    public void moveMe(Thing thing) {
+        return;
+    }
+
+    public void moveMe(TeleportGate gate) {
+        Obstacle o = getObstacleByData(gate);
+        Thing randNei = gate.randomNeighbour();
+        Obstacle oNei = getObstacleByData(randNei);
+        if (oNei != null) {
+            double phi = Main.rng.nextDouble() * 360;
+            int r = UIController.getObstacleRadius() * 2 + 20;
+            double x = oNei.getPosX() + Math.cos(phi) * r;
+            double y = oNei.getPosY() + Math.sin(phi) * r;
+            o.setPosX((int)x);
+            o.setPosY((int)y);
+        }
+    }
+
+    private void fixNei(Obstacle o1, Thing data1, Obstacle oNeiCheck, Thing dataNeiCheck) {
+        if (!o1.getNeighbours().contains(oNeiCheck) && !oNeiCheck.getNeighbours().contains(o1)
+                && data1.getNeighbour().contains(dataNeiCheck) && dataNeiCheck.getNeighbour().contains(data1)) {
+            roots.add(new Root(o1, oNeiCheck));
+            o1.addNei(oNeiCheck);
+            oNeiCheck.addNei(o1);
+        }
+    }
+
     @Override
     public void rePaint() {
         reloadObstacles();
@@ -332,6 +384,7 @@ public class BoardViewController extends View {
             rePaint();
             settlerList.refresh();
             selectAnotherSettler(selectedSettler);
+            UIController.checkFree(selectedSettler.getName());
         }
     }
 
@@ -358,6 +411,8 @@ public class BoardViewController extends View {
         Settler selectedSettler = (Settler) settlerList.getSelectionModel().getSelectedItem();
         settlerList.refresh();
         selectAnotherSettler(selectedSettler);
+        if (selectedSettler != null)
+            UIController.checkFree(selectedSettler.getName());
     }
 
     @FXML

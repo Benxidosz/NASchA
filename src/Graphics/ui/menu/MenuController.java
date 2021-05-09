@@ -72,7 +72,7 @@ public class MenuController {
 
     @FXML
     public void start() {
-        int asteroidNum = systemSize.getSelectedToggle() == smallRadio ? 20 : 30;
+        int asteroidNum = systemSize.getSelectedToggle() == smallRadio ? 24 : 34;
         primaryStage.close();
         UIController.init((int) settlerSlider.getValue(),(int) ufoSlider.getValue(), asteroidNum);
         UIController.getInstance().newGame();
