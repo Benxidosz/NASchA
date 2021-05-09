@@ -33,8 +33,12 @@ public class Root extends Drawable {
         gc.strokeLine(x1, y1, x2, y2);
     }
 
-    public boolean containsAll(Obstacle o1, Obstacle o2) {
+    public boolean contains(Obstacle o1, Obstacle o2) {
         return obstacles.contains(o1) && obstacles.contains(o2);
+    }
+
+    public boolean contains (Obstacle o) {
+        return obstacles.contains(o);
     }
 
     public double getDistance() {

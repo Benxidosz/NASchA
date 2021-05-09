@@ -124,7 +124,7 @@ public class BoardViewController extends View {
 
                 boolean has = false;
                 for (Root r : roots)
-                    if (r.containsAll(o1, o2)) {
+                    if (r.contains(o1, o2)) {
                         has = true;
                         break;
                     }
@@ -215,7 +215,23 @@ public class BoardViewController extends View {
         for (Thing t : things) {
             boolean loaded = false;
 
-            obstacles.removeIf(obstacle -> !SolarSystem.getInstance().getThings().contains(obstacle.getData()));
+            for (Iterator<Obstacle> iter = obstacles.iterator(); iter.hasNext();) {
+                Obstacle obstacle = iter.next();
+                if (!SolarSystem.getInstance().getThings().contains(obstacle.getData())) {
+                    roots.removeIf(root -> root.contains(obstacle));
+                    ArrayList<Thing> neighbours = obstacle.getData().getNeighbour();
+                    for (Thing nei1 : neighbours) {
+                        Obstacle oNei1 = getObstacleByData(nei1);
+                        for (Thing nei2 : neighbours) {
+                            Obstacle oNei2 = getObstacleByData(nei2);
+                            if (oNei1 != oNei2) {
+                                roots.add(new Root(oNei1, oNei2));
+                            }
+                        }
+                    }
+                    iter.remove();
+                }
+            }
 
             for (Obstacle o : obstacles)
                 if (o.equalData(t)) {
@@ -238,9 +254,14 @@ public class BoardViewController extends View {
         }
     }
 
+    private void fixList() {
+        settlerList.getItems().removeIf(s -> !SettlerController.getInstance().getSettlers().contains(s));
+    }
+
     @Override
     public void rePaint() {
         reloadObstacles();
+        fixList();
         GraphicsContext gc = myCanvas.getGraphicsContext2D();
         gc.clearRect(0, 0, myCanvas.getWidth(), myCanvas.getHeight());
 
