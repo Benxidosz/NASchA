@@ -1,8 +1,10 @@
-package Graphics.observable.thing;
+package Graphics.observable.thing.things;
 
 import Graphics.Inventory;
 import Graphics.material.Material;
 import Graphics.controller.GameManager;
+import Graphics.ui.game.drawable.drawables.Obstacle;
+import javafx.scene.canvas.Canvas;
 
 /**
  * Represents the main asteroid, where Settlers spawn and they have to build the base in.
@@ -55,5 +57,10 @@ public class MainAsteroid extends Asteroid {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public void observe(Canvas canvas, Obstacle obstacle) {
+		obstacle.draw(canvas, this);
 	}
 }

@@ -1,10 +1,13 @@
 package Graphics.ui.game.drawable.drawables;
 
 import Graphics.App;
+import Graphics.observable.thing.things.MainAsteroid;
 import Graphics.observable.thing.Thing;
-import Graphics.observable.thing.Asteroid;
-import Graphics.observable.thing.TeleportGate;
+import Graphics.observable.thing.things.Asteroid;
+import Graphics.observable.thing.things.TeleportGate;
+import Graphics.ui.game.UIController;
 import Graphics.ui.game.drawable.Drawable;
+import Graphics.ui.game.views.DrawState;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -24,7 +27,6 @@ public class Obstacle extends Drawable {
     private int posY;
     private final Thing data;
     private final LinkedHashSet<Obstacle> neighbours;
-    private boolean selected;
 
     public Obstacle(int posX, int posY, Thing data) {
         super(Color.WHITE, Color.BLACK);
@@ -56,28 +58,41 @@ public class Obstacle extends Drawable {
 
     public void draw(Canvas canvas, Asteroid asteroid) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        if (selected)
-            gc.setFill(Color.RED);
+        int r = UIController.getObstacleRadius();
+        if (state.equals(DrawState.selected))
+            gc.drawImage(UIController.getSprite("asteroid_selected"), posX - r, posY - r, 2 * r, 2 * r);
+        else if (state.equals(DrawState.idle))
+            gc.drawImage(UIController.getSprite("asteroid_idle"), posX - r, posY - r, 2 * r, 2 * r);
+        else if (state.equals(DrawState.hoover))
+            gc.drawImage(UIController.getSprite("asteroid_hoover"), posX - r, posY - r, 2 * r, 2 * r);
         else
-            gc.setFill(fillColor);
-        gc.fillOval(posX - 15, posY - 15, 30, 30);
-
-        gc.setFill(lineColor);
-        gc.strokeOval(posX - 15, posY - 15, 30, 30);
+            gc.drawImage(UIController.getSprite("asteroid_idle"), posX - r, posY - r, 2 * r, 2 * r);
     }
 
     public void draw(Canvas canvas, TeleportGate gate) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        if (selected)
-            gc.setFill(Color.RED);
-        else if (data.getEntities().size() > 0 && App.isTestMode()) {
-            gc.setFill(Color.PINK);
-        } else
-            gc.setFill(fillColor);
-        gc.fillRect(posX - 15, posY - 15, 30, 30);
+        int r = UIController.getObstacleRadius();
+        if (state.equals(DrawState.idle))
+            gc.drawImage(UIController.getSprite("gate_idle"), posX - r, posY - r, 2 * r, 2 * r);
+        else if (state.equals(DrawState.hoover))
+            gc.drawImage(UIController.getSprite("gate_hoover"), posX - r, posY - r, 2 * r, 2 * r);
+        else if (state.equals(DrawState.selected))
+            gc.drawImage(UIController.getSprite("gate_selected"), posX - r, posY - r, 2 * r, 2 * r);
+        else
+            gc.drawImage(UIController.getSprite("gate_idle"), posX - r, posY - r, 2 * r, 2 * r);
+    }
 
-        gc.setFill(lineColor);
-        gc.strokeRect(posX - 15, posY - 15, 30, 30);
+    public void draw(Canvas canvas, MainAsteroid main) {
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        int r = UIController.getObstacleRadius();
+        if (state.equals(DrawState.idle))
+            gc.drawImage(UIController.getSprite("main_idle"), posX - r, posY - r, 2 * r, 2 * r);
+        else if (state.equals(DrawState.hoover))
+            gc.drawImage(UIController.getSprite("main_hoover"), posX - r, posY - r, 2 * r, 2 * r);
+        else if (state.equals(DrawState.selected))
+            gc.drawImage(UIController.getSprite("main_selected"), posX - r, posY - r, 2 * r, 2 * r);
+        else
+            gc.drawImage(UIController.getSprite("main_idle"), posX - r, posY - r, 2 * r, 2 * r);
     }
 
     public boolean equalData(Thing d) {
@@ -118,9 +133,5 @@ public class Obstacle extends Drawable {
 
     public LinkedHashSet<Obstacle> getNeighbours() {
         return neighbours;
-    }
-
-    public void setSelected(boolean selected) {
-        this.selected = selected;
     }
 }

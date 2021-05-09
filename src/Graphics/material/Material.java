@@ -1,7 +1,7 @@
 package Graphics.material;
 
 import Graphics.material.materials.*;
-import Graphics.observable.thing.Asteroid;
+import Graphics.observable.thing.things.Asteroid;
 
 
 /**

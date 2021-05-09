@@ -1,6 +1,7 @@
-package Graphics.observable.thing;
+package Graphics.observable.thing.things;
 
 import Graphics.observable.entity.Entity;
+import Graphics.observable.thing.Thing;
 import Graphics.ui.game.drawable.drawables.Obstacle;
 import javafx.scene.canvas.Canvas;
 

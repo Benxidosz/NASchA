@@ -1,4 +1,4 @@
-package Graphics.observable.thing;
+package Graphics.observable.thing.things;
 
 import Graphics.Main;
 import Graphics.controller.controllers.SolarSystem;
@@ -9,6 +9,7 @@ import Graphics.material.materials.Iron;
 import Graphics.material.materials.Silicon;
 import Graphics.material.materials.Uran;
 import Graphics.material.materials.WaterIce;
+import Graphics.observable.thing.Thing;
 import Graphics.ui.game.drawable.drawables.Obstacle;
 import javafx.scene.canvas.Canvas;
 

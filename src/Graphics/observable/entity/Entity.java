@@ -5,7 +5,7 @@ import Graphics.Inventory;
 import Graphics.material.Material;
 import Graphics.observable.thing.Thing;
 import Graphics.simulator.listableObj;
-import Graphics.observable.thing.TeleportGate;
+import Graphics.observable.thing.things.TeleportGate;
 
 import java.util.ArrayList;
 

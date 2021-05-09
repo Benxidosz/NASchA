@@ -13,8 +13,8 @@ import Graphics.material.MaterialCompare;
 import Graphics.material.materials.*;
 import Graphics.simulator.Simulator;
 import Graphics.observable.thing.Thing;
-import Graphics.observable.thing.Asteroid;
-import Graphics.observable.thing.MainAsteroid;
+import Graphics.observable.thing.things.Asteroid;
+import Graphics.observable.thing.things.MainAsteroid;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -9,6 +9,8 @@ import Graphics.ui.game.drawable.drawables.Obstacle;
 import Graphics.ui.game.View;
 import Graphics.ui.game.UIController;
 import Graphics.ui.game.drawable.drawables.Root;
+import Graphics.ui.game.views.DrawState;
+import Graphics.ui.game.views.messegeBox.GameMassage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableListBase;
@@ -148,7 +150,8 @@ public class BoardViewController extends View {
         }
 
         double tmpPoint = 0;
-        while (tmpPoint != pointBoarByAvgNei()) {
+        int iter = 0;
+        while (tmpPoint != pointBoarByAvgNei() && iter < 1000) {
             tmpPoint = pointBoarByAvgNei();
             for (Obstacle o1 : obstacles) {
                 double bestDisDelta = 0;
@@ -179,6 +182,7 @@ public class BoardViewController extends View {
                     o1.swapPos(best);
                 }
             }
+            ++iter;
         }
     }
 
@@ -242,8 +246,9 @@ public class BoardViewController extends View {
                 Obstacle o = getObstacleByData(randomNei);
                 if (o != null) {
                     double phi = Main.rng.nextDouble() * 360;
-                    double x = o.getPosX() + Math.cos(phi) * 60;
-                    double y = o.getPosY() + Math.sin(phi) * 60;
+                    int r = UIController.getObstacleRadius() * 2 + 20;
+                    double x = o.getPosX() + Math.cos(phi) * r;
+                    double y = o.getPosY() + Math.sin(phi) * r;
                     Obstacle newObstacle = new Obstacle((int) x, (int) y, t);
                     obstacles.add(newObstacle);
                     roots.add(new Root(o, newObstacle));
@@ -273,10 +278,7 @@ public class BoardViewController extends View {
     public void rePaint() {
         reloadObstacles();
         GraphicsContext gc = myCanvas.getGraphicsContext2D();
-        gc.clearRect(0, 0, myCanvas.getWidth(), myCanvas.getHeight());
-
-        gc.setFill(Color.BEIGE);
-        gc.fillRect(0, 0, myCanvas.getWidth(), myCanvas.getHeight());
+        gc.drawImage(UIController.getSprite("board"), 0, 0, myCanvas.getWidth(), myCanvas.getHeight());
 
         roots.forEach(r -> r.draw(myCanvas));
         obstacles.forEach(o -> o.draw(myCanvas));
@@ -285,7 +287,8 @@ public class BoardViewController extends View {
         if (selectedSettler != null) {
             Obstacle loc = getObstacleByData(selectedSettler.getLocation());
             gc.setFill(Color.GREEN);
-            gc.strokeOval(loc.getPosX() - 20, loc.getPosY() - 20, 40, 40);
+            int r = UIController.getObstacleRadius() + 5;
+            gc.strokeOval(loc.getPosX() - r, loc.getPosY() - r, 2 * r, 2 * r);
         }
         turnLabel.setText(UIController.getInstance().getTurnNum() + ". Turn");
         int untilEruption = SolarSystem.getInstance().getUntilEruption();
@@ -307,9 +310,10 @@ public class BoardViewController extends View {
             Obstacle selected = getObstacleByData(UIController.getInstance().getSelectedThing());
             for (Obstacle o : obstacles) {
                 if (o.distance((int) mouseEvent.getX(), (int) mouseEvent.getY()) < 15) {
-                    if (selected != null)
-                        selected.setSelected(false);
-                    o.setSelected(true);
+                    if (selected != null) {
+                        selected.setState(DrawState.idle);
+                    }
+                    o.setState(DrawState.selected);
                     UIController.getInstance().setSelectedThing(o.getData());
                     selectedRefreshed();
                     break;
@@ -335,11 +339,13 @@ public class BoardViewController extends View {
     public void canvasMouseMoved(MouseEvent mouseEvent) {
         Obstacle selected = getObstacleByData(UIController.getInstance().getSelectedThing());
         for (Obstacle o : obstacles) {
-            if (o.distance((int) mouseEvent.getX(), (int) mouseEvent.getY()) < 15) {
-                o.setFillColor(Color.LAVENDER);
+            if (o.distance((int) mouseEvent.getX(), (int) mouseEvent.getY()) < 15 && (selected != o)) {
+                o.setState(DrawState.hoover);
             } else {
                 if (selected != o)
-                    o.setFillColor(Color.WHITE);
+                    o.setState(DrawState.idle);
+                else
+                    o.setState(DrawState.selected);
             }
         }
         rePaint();

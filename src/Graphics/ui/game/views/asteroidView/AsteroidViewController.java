@@ -6,11 +6,12 @@ import Graphics.controller.controllers.SettlerController;
 import Graphics.controller.controllers.SolarSystem;
 import Graphics.material.Material;
 import Graphics.observable.thing.Thing;
-import Graphics.observable.thing.TeleportGate;
+import Graphics.observable.thing.things.TeleportGate;
 import Graphics.ui.game.View;
 import Graphics.ui.game.UIController;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.input.MouseEvent;
@@ -28,6 +29,8 @@ public class AsteroidViewController extends View {
     public Pane canvasWrapper;
     @FXML
     public TreeView entitiesTree;
+    @FXML
+    public TextArea statusText;
 
     public AsteroidViewController() throws IOException {
         super("asteroidView.fxml");

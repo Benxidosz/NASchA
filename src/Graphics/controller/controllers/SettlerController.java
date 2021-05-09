@@ -6,7 +6,7 @@ import Graphics.controller.Controller;
 import Graphics.observable.entity.entities.Settler;
 import Graphics.material.Material;
 import Graphics.observable.thing.Thing;
-import Graphics.observable.thing.TeleportGate;
+import Graphics.observable.thing.things.TeleportGate;
 
 import java.util.LinkedList;
 

@@ -1,8 +1,5 @@
 package Graphics.ui.game;
 
-import Graphics.ui.game.UIController;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

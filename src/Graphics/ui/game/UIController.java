@@ -8,14 +8,19 @@ import Graphics.controller.controllers.SolarSystem;
 import Graphics.controller.controllers.UfoController;
 import Graphics.material.MaterialCompare;
 import Graphics.observable.thing.Thing;
-import Graphics.observable.thing.Asteroid;
-import Graphics.observable.thing.MainAsteroid;
+import Graphics.observable.thing.things.Asteroid;
+import Graphics.observable.thing.things.MainAsteroid;
 import Graphics.ui.game.views.asteroidView.AsteroidViewController;
 import Graphics.ui.game.views.boardView.BoardViewController;
+import Graphics.ui.game.views.messegeBox.GameMassage;
+import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 public class UIController extends GameManager {
@@ -24,11 +29,21 @@ public class UIController extends GameManager {
         return ref;
     }
 
+    private static HashMap<String, Image> sprites;
+    public static Image getSprite(String key) {
+        return sprites.get(key);
+    }
+    private static int obstacleRadius = 20;
+
     private View activeView;
 
     private final int settlerNum;
     private final int ufoNum;
     private final int asteroidNum;
+
+    public static int getObstacleRadius() {
+        return obstacleRadius;
+    }
 
     public Thing getSelectedThing() {
         return selectedThing;
@@ -42,6 +57,7 @@ public class UIController extends GameManager {
 
     private BoardViewController boardView;
     private AsteroidViewController asteroidView;
+    private GameMassage gameMassage;
     private boolean boardActive;
 
     private final Stage gameStage;
@@ -60,6 +76,18 @@ public class UIController extends GameManager {
         this.settlerNum = settlerNum;
         this.ufoNum = ufoNum;
         this.asteroidNum = asteroidNum;
+
+        sprites = new HashMap<>();
+        sprites.put("asteroid_idle", new Image("sprites/Asteroid.png", false));
+        sprites.put("asteroid_selected", new Image("sprites/AsteroidSelected.png", false));
+        sprites.put("asteroid_hoover", new Image("sprites/AsteroidHoover.png", false));
+        sprites.put("gate_idle", new Image("sprites/TeleportGate.png", false));
+        sprites.put("gate_selected", new Image("sprites/TeleportGateSelected.png", false));
+        sprites.put("gate_hoover", new Image("sprites/TeleportGateHoover.png", false));
+        sprites.put("main_idle", new Image("sprites/MainAsteroid.png", false));
+        sprites.put("main_selected", new Image("sprites/MainAsteroidSelected.png", false));
+        sprites.put("main_hoover", new Image("sprites/MainAsteroidHoover.png", false));
+        sprites.put("board", new Image("sprites/Board.png", false));
 
         gameStage = new Stage();
         gameStage.setResizable(false);
@@ -177,6 +205,7 @@ public class UIController extends GameManager {
         try {
             boardView = new BoardViewController();
             asteroidView = new AsteroidViewController();
+            gameMassage = new GameMassage();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -197,6 +226,28 @@ public class UIController extends GameManager {
         SolarSystem.getInstance().makeTurn();
         RobotController.getInstance().makeTurn();
         UfoController.getInstance().makeTurn();
+    }
+
+    @Override
+    public void win() {
+        gameMassage.showAndWait("Win");
+        String data = gameMassage.getData();
+        if ("new".equals(data)) {
+            newGame();
+        } else if ("exit".equals(data)) {
+            gameStage.close();
+        }
+    }
+
+    @Override
+    public void lose() {
+        gameMassage.showAndWait("Lose");
+        String data = gameMassage.getData();
+        if ("new".equals(data)) {
+            newGame();
+        } else if ("exit".equals(data)) {
+            gameStage.close();
+        }
     }
 
     public Stage getGameStage() {

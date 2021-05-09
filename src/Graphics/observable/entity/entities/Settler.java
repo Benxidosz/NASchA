@@ -7,7 +7,7 @@ import Graphics.controller.controllers.SettlerController;
 import Graphics.controller.controllers.SolarSystem;
 import Graphics.observable.thing.Thing;
 import Graphics.observable.entity.Entity;
-import Graphics.observable.thing.TeleportGate;
+import Graphics.observable.thing.things.TeleportGate;
 import Graphics.material.Material;
 import Graphics.simulator.*;
 

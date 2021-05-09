@@ -13,9 +13,9 @@ import Graphics.material.Material;
 import Graphics.material.MaterialCompare;
 import Graphics.material.materials.*;
 import Graphics.observable.thing.Thing;
-import Graphics.observable.thing.Asteroid;
-import Graphics.observable.thing.MainAsteroid;
-import Graphics.observable.thing.TeleportGate;
+import Graphics.observable.thing.things.Asteroid;
+import Graphics.observable.thing.things.MainAsteroid;
+import Graphics.observable.thing.things.TeleportGate;
 
 import java.io.*;
 import java.util.ArrayList;
