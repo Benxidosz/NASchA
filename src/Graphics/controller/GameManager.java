@@ -11,6 +11,7 @@ import Graphics.observable.entity.entities.Settler;
 import Graphics.observable.entity.entities.Ufo;
 import Graphics.material.MaterialCompare;
 import Graphics.material.materials.*;
+import Graphics.observable.thing.things.TeleportGate;
 import Graphics.simulator.Simulator;
 import Graphics.observable.thing.Thing;
 import Graphics.observable.thing.things.Asteroid;
@@ -151,6 +152,13 @@ public class GameManager {
                     s.addMaterial(new WaterIce(s.getName() + "w1"));
                     s.addMaterial(new WaterIce(s.getName() + "w2"));
                     s.addMaterial(new WaterIce(s.getName() + "w3"));
+                    String id = SolarSystem.getTeleportGateId();
+                    TeleportGate gate1 = new TeleportGate(s.getName() + id + "a");
+                    TeleportGate gate2 = new TeleportGate(s.getName() + id + "b");
+                    gate1.setPair(gate2);
+                    gate2.setPair(gate1);
+                    s.addGate(gate1);
+                    s.addGate(gate2);
                 } else if (i % 3 == 1) {
                     s.addMaterial(new Uran(s.getName() + "u1"));
                     s.addMaterial(new Uran(s.getName() + "u2"));
@@ -158,6 +166,13 @@ public class GameManager {
                     s.addMaterial(new Silicon(s.getName() + "s1"));
                     s.addMaterial(new Silicon(s.getName() + "s2"));
                     s.addMaterial(new Silicon(s.getName() + "s3"));
+                    String id = SolarSystem.getTeleportGateId();
+                    TeleportGate gate1 = new TeleportGate(s.getName() + id + "a");
+                    TeleportGate gate2 = new TeleportGate(s.getName() + id + "b");
+                    gate1.setPair(gate2);
+                    gate2.setPair(gate1);
+                    s.addGate(gate1);
+                    s.addGate(gate2);
                 } else {
                     s.addMaterial(new Coal(s.getName() + "c1"));
                     s.addMaterial(new Iron(s.getName() + "i1"));

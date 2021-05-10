@@ -4,6 +4,7 @@ import Graphics.controller.controllers.SolarSystem;
 import Graphics.observable.Observable;
 import Graphics.observable.entity.Entity;
 import Graphics.material.Material;
+import Graphics.observable.thing.things.TeleportGate;
 import Graphics.simulator.listableObj;
 import Graphics.ui.game.drawable.drawables.Obstacle;
 import Graphics.ui.game.views.boardView.BoardViewController;
@@ -216,5 +217,9 @@ public abstract class Thing implements listableObj, Observable {
 
 	public void move(BoardViewController controller) {
 		controller.moveMe(this);
+	}
+
+	public TeleportGate getPair() {
+		return null;
 	}
 }

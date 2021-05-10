@@ -161,4 +161,9 @@ public class TeleportGate extends Thing {
 	public void move(BoardViewController controller) {
 		controller.moveMe(this);
 	}
+
+	@Override
+	public TeleportGate getPair() {
+		return pair;
+	}
 }

@@ -10,7 +10,7 @@ import Graphics.ui.game.drawable.drawables.Obstacle;
 import Graphics.ui.game.View;
 import Graphics.ui.game.UIController;
 import Graphics.ui.game.drawable.drawables.Root;
-import Graphics.ui.game.views.DrawState;
+import Graphics.ui.game.drawable.DrawState;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -364,8 +364,20 @@ public class BoardViewController extends View {
                 if (o.distance((int) mouseEvent.getX(), (int) mouseEvent.getY()) < 15) {
                     if (selected != null) {
                         selected.setState(DrawState.idle);
+                        Thing pair = selected.getThingData().getPair();
+                        if (pair != null) {
+                            Obstacle pairO = getObstacleByData(pair);
+                            if (pairO != null)
+                                pairO.setState(DrawState.idle);
+                        }
                     }
                     o.setState(DrawState.selected);
+                    Thing pair = o.getThingData().getPair();
+                    if (pair != null) {
+                        Obstacle pairO = getObstacleByData(pair);
+                        if (pairO != null)
+                            pairO.setState(DrawState.pairActive);
+                    }
                     UIController.getInstance().setSelectedThing(o.getThingData());
                     selectedRefreshed();
                     break;
@@ -391,15 +403,14 @@ public class BoardViewController extends View {
     @FXML
     public void canvasMouseMoved(MouseEvent mouseEvent) {
         Obstacle selected = getObstacleByData(UIController.getInstance().getSelectedThing());
+        Obstacle pair = null;
+        if (selected != null)
+            pair = getObstacleByData(selected.getThingData().getPair());
         for (Obstacle o : obstacles) {
-            if (o.distance((int) mouseEvent.getX(), (int) mouseEvent.getY()) < 15 && (selected != o)) {
+            if (o.distance((int) mouseEvent.getX(), (int) mouseEvent.getY()) < 15 && selected != o && pair != o) {
                 o.setState(DrawState.hoover);
-            } else {
-                if (selected != o)
-                    o.setState(DrawState.idle);
-                else
-                    o.setState(DrawState.selected);
-            }
+            } else if (selected != o && pair != o)
+                o.setState(DrawState.idle);
         }
         rePaint();
     }

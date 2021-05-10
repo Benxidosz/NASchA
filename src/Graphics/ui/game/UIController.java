@@ -105,6 +105,7 @@ public class UIController extends GameManager {
         sprites.put("settler", new Image("sprites/Settler.png", false));
         sprites.put("ufo", new Image("sprites/Ufo.png", false));
         sprites.put("robot", new Image("sprites/Robot.png", false));
+        sprites.put("gate_pairActive", new Image("sprites/TeleportGatePairActive.png", false));
 
         gameStage = new Stage();
         gameStage.setResizable(false);

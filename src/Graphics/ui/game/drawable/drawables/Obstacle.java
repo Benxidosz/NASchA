@@ -12,7 +12,7 @@ import Graphics.observable.thing.things.Asteroid;
 import Graphics.observable.thing.things.TeleportGate;
 import Graphics.ui.game.UIController;
 import Graphics.ui.game.drawable.Drawable;
-import Graphics.ui.game.views.DrawState;
+import Graphics.ui.game.drawable.DrawState;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -109,6 +109,8 @@ public class Obstacle extends Drawable {
             gc.drawImage(UIController.getSprite("gate_hoover"), posX - r, posY - r, 2 * r, 2 * r);
         else if (state.equals(DrawState.selected))
             gc.drawImage(UIController.getSprite("gate_selected"), posX - r, posY - r, 2 * r, 2 * r);
+        else if (state.equals(DrawState.pairActive))
+            gc.drawImage(UIController.getSprite("gate_pairActive"), posX - r, posY - r, 2 * r, 2 * r);
         else
             gc.drawImage(UIController.getSprite("gate_idle"), posX - r, posY - r, 2 * r, 2 * r);
     }

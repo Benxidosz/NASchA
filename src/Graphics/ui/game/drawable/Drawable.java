@@ -1,6 +1,5 @@
 package Graphics.ui.game.drawable;
 
-import Graphics.ui.game.views.DrawState;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
 
