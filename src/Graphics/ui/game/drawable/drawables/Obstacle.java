@@ -155,7 +155,7 @@ public class Obstacle extends Drawable {
     /**
      * Draw a Teleport gate to the given canvas
      * @param canvas the canvas
-     * @param gatethe teleport gate
+     * @param gate the teleport gate
      */
     public void draw(Canvas canvas, TeleportGate gate) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
