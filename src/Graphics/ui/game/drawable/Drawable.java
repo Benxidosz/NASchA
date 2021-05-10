@@ -21,13 +21,13 @@ public abstract class Drawable {
 
     /**
      * Draw to the canvas
-     * @param canvas
+     * @param canvas the canvas
      */
     public abstract void draw(Canvas canvas);
 
     /**
      * Set the drawing state
-     * @param state
+     * @param state the state
      */
     public void setState(DrawState state) {
         this.state = state;
