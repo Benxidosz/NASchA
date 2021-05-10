@@ -26,32 +26,73 @@ import javafx.scene.paint.Color;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * The controller class of the board view.
+ * Makes changes in the graphics.
+ */
 public class BoardViewController extends View {
 
+    /**
+     * The canvas where the view will be drawn.
+     */
     @FXML
     public Canvas myCanvas;
+    /**
+     * The panel which contains the canvas.
+     */
     @FXML
     public Pane canvasWrapper;
+    /**
+     * The list which shows the settlers in the game.
+     */
     @FXML
     public ListView settlerList;
+    /**
+     * The TextArea of the status text. The area's graphic view.
+     */
     @FXML
     public TextArea statusText;
+    /**
+     * Label for showing the current turn.
+     */
     @FXML
     public Label turnLabel;
+    /**
+     * Label for showing the turns left until eruption.
+     */
     @FXML
     public Label eruptionTurnLabel;
 
+    /**
+     * The number of settler at the time of the last refresh.
+     */
     private int tmpSettlerNum;
 
+    /**
+     * The obstacles what represents the Entities around the asteroids.
+     */
     private LinkedHashSet<Obstacle> obstacles;
+    /**
+     * The roads between the obstacles stored in a LinkedHashSet.
+     */
     private LinkedHashSet<Root> roots;
 
+    /**
+     * The constructor of the class. Calls the super's constructor
+     * adn sets the title and the number of settlers.
+     * @throws IOException
+     */
     public BoardViewController() throws IOException {
         super("boardView.fxml");
         title = "Board View";
         tmpSettlerNum = SettlerController.getInstance().getSettlers().size();
     }
 
+    /**
+     * Finds the right obstacle from the data.
+     * @param data the data which helps to find the data.
+     * @return the Obstacle found.
+     */
     private Obstacle getObstacleByData(Thing data) {
         if (data == null)
             return null;
@@ -185,6 +226,9 @@ public class BoardViewController extends View {
         }
     }
 
+    /**
+     * Refreshes the settler's list and sets the number of settlers.
+     */
     @Override
     public void refresh() {
         settlerList.refresh();
@@ -196,6 +240,11 @@ public class BoardViewController extends View {
         tmpSettlerNum = settlerNum;
     }
 
+    /**
+     * Calculates the average distance between the
+     * obstacles average distance from their neighbours.
+     * @return
+     */
     private double pointBoarByAvgNei() {
         double sum = 0;
         for (Obstacle o : obstacles) {

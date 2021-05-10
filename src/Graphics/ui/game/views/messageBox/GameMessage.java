@@ -22,6 +22,9 @@ public class GameMessage {
     public Label result;
 
     private String data;
+    /**
+     * The stage of the message. This is what is showed to the user.
+     */
     private final Stage stage;
 
     /**
@@ -42,21 +45,34 @@ public class GameMessage {
         stage.initModality(Modality.APPLICATION_MODAL);
     }
 
+    /**
+     * Sets the text of the result label
+     * @param res the text of the label.
+     */
     public void showAndWait(String res) {
         result.setText(res);
         stage.showAndWait();
     }
 
+    /**
+     * Sets the date to new.
+     */
     public void newGame() {
         data = "new";
         stage.close();
     }
 
+    /**
+     * Sets the data to exit.
+     */
     public void exit() {
         data = "exit";
         stage.close();
     }
 
+    /**
+     * Returns the data.
+     */
     public String getData() {
         return data;
     }
