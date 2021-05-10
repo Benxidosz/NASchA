@@ -3,6 +3,8 @@ package Graphics.observable.entity.entities;
 import Graphics.controller.controllers.RobotController;
 import Graphics.observable.thing.Thing;
 import Graphics.observable.entity.Entity;
+import Graphics.ui.game.drawable.drawables.Obstacle;
+import javafx.scene.canvas.Canvas;
 
 /**
  * The robot which is controlled by the system and can drill and move
@@ -54,5 +56,10 @@ public class Robot extends Entity {
 		result.append("location: " + location.getName() + "\n");
 
 		return result.toString();
+	}
+
+	@Override
+	public void observe(Canvas canvas, Obstacle obstacle) {
+		obstacle.draw(canvas, this);
 	}
 }

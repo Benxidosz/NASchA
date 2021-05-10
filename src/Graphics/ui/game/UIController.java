@@ -102,6 +102,9 @@ public class UIController extends GameManager {
         sprites.put("main_selected", new Image("sprites/MainAsteroidSelected.png", false));
         sprites.put("main_hoover", new Image("sprites/MainAsteroidHoover.png", false));
         sprites.put("board", new Image("sprites/Board.png", false));
+        sprites.put("settler", new Image("sprites/Settler.png", false));
+        sprites.put("ufo", new Image("sprites/Ufo.png", false));
+        sprites.put("robot", new Image("sprites/Robot.png", false));
 
         gameStage = new Stage();
         gameStage.setResizable(false);

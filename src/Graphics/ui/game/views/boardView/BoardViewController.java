@@ -58,7 +58,7 @@ public class BoardViewController extends View {
 
         Obstacle o1 = null;
         for (Obstacle o : obstacles)
-            if (o.equalData(data)) {
+            if (o.equalThingData(data)) {
                 o1 = o;
                 break;
             }
@@ -231,9 +231,9 @@ public class BoardViewController extends View {
         for (Thing t : things) {
             for (Iterator<Obstacle> iter = obstacles.iterator(); iter.hasNext();) {
                 Obstacle obstacle = iter.next();
-                if (!SolarSystem.getInstance().getThings().contains(obstacle.getData())) {
+                if (!SolarSystem.getInstance().getThings().contains(obstacle.getThingData())) {
                     roots.removeIf(root -> root.contains(obstacle));
-                    ArrayList<Thing> neighbours = obstacle.getData().getNeighbour();
+                    ArrayList<Thing> neighbours = obstacle.getThingData().getNeighbour();
                     for (Thing nei1 : neighbours) {
                         Obstacle oNei1 = getObstacleByData(nei1);
                         for (Thing nei2 : neighbours) {
@@ -250,7 +250,7 @@ public class BoardViewController extends View {
             boolean loaded = false;
 
             for (Obstacle o : obstacles)
-                if (o.equalData(t)) {
+                if (o.equalThingData(t)) {
                     loaded = true;
                     break;
                 }
@@ -271,8 +271,8 @@ public class BoardViewController extends View {
 
             for (Obstacle o1 : obstacles) {
                 for (Obstacle o2 : obstacles) {
-                    Thing data1 = o1.getData();
-                    Thing data2 = o2.getData();
+                    Thing data1 = o1.getThingData();
+                    Thing data2 = o2.getThingData();
                     if (o1.getNeighbours().contains(o2) && o2.getNeighbours().contains(o1)
                             && !data1.getNeighbour().contains(data2) && !data2.getNeighbour().contains(data1)) {
                         roots.removeIf(root -> root.contains(o1, o2));
@@ -280,7 +280,7 @@ public class BoardViewController extends View {
                         o2.rmNei(o1);
 
                         for (Obstacle oNeiCheck : obstacles) {
-                            Thing dataNeiCheck = oNeiCheck.getData();
+                            Thing dataNeiCheck = oNeiCheck.getThingData();
                             fixNei(o1, data1, oNeiCheck, dataNeiCheck);
 
                             fixNei(o2, data2, oNeiCheck, dataNeiCheck);
@@ -366,7 +366,7 @@ public class BoardViewController extends View {
                         selected.setState(DrawState.idle);
                     }
                     o.setState(DrawState.selected);
-                    UIController.getInstance().setSelectedThing(o.getData());
+                    UIController.getInstance().setSelectedThing(o.getThingData());
                     selectedRefreshed();
                     break;
                 }
@@ -380,7 +380,7 @@ public class BoardViewController extends View {
         Settler selectedSettler = (Settler) settlerList.getSelectionModel().getSelectedItem();
         Obstacle selectedObstacle = getObstacleByData(UIController.getInstance().getSelectedThing());
         if (selectedSettler != null && selectedObstacle != null) {
-            SettlerController.getInstance().handleCommand("Move " + selectedSettler.getName() + " " + selectedObstacle.getData().getName());
+            SettlerController.getInstance().handleCommand("Move " + selectedSettler.getName() + " " + selectedObstacle.getThingData().getName());
             rePaint();
             settlerList.refresh();
             selectAnotherSettler(selectedSettler);
@@ -411,8 +411,6 @@ public class BoardViewController extends View {
         Settler selectedSettler = (Settler) settlerList.getSelectionModel().getSelectedItem();
         settlerList.refresh();
         selectAnotherSettler(selectedSettler);
-        if (selectedSettler != null)
-            UIController.checkFree(selectedSettler.getName());
     }
 
     @FXML

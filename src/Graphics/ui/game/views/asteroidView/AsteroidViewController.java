@@ -6,6 +6,7 @@ import Graphics.controller.controllers.SettlerController;
 import Graphics.controller.controllers.SolarSystem;
 import Graphics.controller.controllers.UfoController;
 import Graphics.material.Material;
+import Graphics.observable.entity.Entity;
 import Graphics.observable.entity.entities.Robot;
 import Graphics.observable.entity.entities.Settler;
 import Graphics.observable.entity.entities.Ufo;
@@ -13,17 +14,21 @@ import Graphics.observable.thing.Thing;
 import Graphics.observable.thing.things.TeleportGate;
 import Graphics.ui.game.View;
 import Graphics.ui.game.UIController;
+import Graphics.ui.game.drawable.drawables.Obstacle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.transform.Rotate;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class AsteroidViewController extends View {
     @FXML
@@ -35,9 +40,12 @@ public class AsteroidViewController extends View {
     @FXML
     public TextArea statusText;
 
+    private LinkedList<Obstacle> obstacles;
+
     public AsteroidViewController() throws IOException {
         super("asteroidView.fxml");
         title = "Asteroid View";
+        obstacles = new LinkedList<>();
     }
 
     @FXML
@@ -87,6 +95,7 @@ public class AsteroidViewController extends View {
                 (selectedUfo != null ? selectedUfo.List() : "") +
                 (selectedRobot != null ? selectedRobot.List() : "") +
                 (selectedGate != null ? selectedGate.List() : ""));
+        rePaint();
     }
 
     public void refresh() {
@@ -108,15 +117,32 @@ public class AsteroidViewController extends View {
             rootEntitiItem.getChildren().add(item);
         });
         entitiesTree.setRoot(rootEntitiItem);
+
+        obstacles = new LinkedList<>();
+        ArrayList<Entity> entities = selected.getEntities();
+        double dAlfa = (2 * Math.PI) / entities.size();
+        double alfa = 0;
+        double r = 200;
+        double cX = canvasWrapper.getWidth() / 2;
+        double cY = canvasWrapper.getHeight() / 2;
+        for (Entity entity : entities) {
+            double phi = Math.toDegrees(alfa) + 90;
+            double x = cX + r * Math.cos(alfa) + 50 * Math.cos(alfa);
+            double y = cY + r * Math.sin(alfa) + 50 * Math.sin(alfa);
+            Obstacle obstacle = new Obstacle((int) x, (int) y, entity);
+            obstacle.setRotate(new Rotate(phi, x, y));
+            obstacles.add(obstacle);
+            alfa += dAlfa;
+        }
     }
 
     @Override
     public void rePaint() {
-        refresh();
-        myCanvas.getGraphicsContext2D().clearRect(0, 0, myCanvas.getWidth(), myCanvas.getHeight());
+        GraphicsContext gc = myCanvas.getGraphicsContext2D();
+        gc.clearRect(0, 0, myCanvas.getWidth(), myCanvas.getHeight());
 
-        myCanvas.getGraphicsContext2D().setFill(Color.BEIGE);
-        myCanvas.getGraphicsContext2D().fillRect(0, 0, myCanvas.getWidth(), myCanvas.getHeight());
+        gc.setFill(Color.BEIGE);
+        gc.fillRect(0, 0, myCanvas.getWidth(), myCanvas.getHeight());
 
         Thing selectedThing = UIController.getInstance().getSelectedThing();
 
@@ -126,16 +152,31 @@ public class AsteroidViewController extends View {
         double r = 200;
         double centerX = canvasWrapper.getWidth() / 2;
         double centerY = canvasWrapper.getHeight() / 2;
-        myCanvas.getGraphicsContext2D().strokeOval(centerX - r,centerY - r, 2 * r, 2 *r );
-        myCanvas.getGraphicsContext2D().strokeOval(centerX - r / 3,centerY - r / 3, 2 * (r / 3), 2 * (r / 3));
-        myCanvas.getGraphicsContext2D().strokeText(selectedThing.getLayer() + " layer left", centerX - 30, centerY - 150);
-        myCanvas.getGraphicsContext2D().setFont(new Font(15));
+        gc.strokeOval(centerX - r,centerY - r, 2 * r, 2 *r );
+        gc.strokeOval(centerX - r / 3,centerY - r / 3, 2 * (r / 3), 2 * (r / 3));
+        gc.strokeText(selectedThing.getLayer() + " layer left", centerX - 30, centerY - 150);
+        gc.setFont(new Font(15));
         Material mat = selectedThing.getCore();
         if (mat != null)
-            myCanvas.getGraphicsContext2D().strokeText(mat.getName(), centerX-7, centerY+7);
+            gc.strokeText(mat.getName(), centerX-7, centerY+7);
         else
-            myCanvas.getGraphicsContext2D().strokeText("empty", centerX-7, centerY+7);
+            gc.strokeText("empty", centerX-7, centerY+7);
 
+        obstacles.forEach(obstacle -> {
+            TreeItem<String> item = (TreeItem<String>) entitiesTree.getSelectionModel().getSelectedItem();
+            obstacle.draw(myCanvas);
+            if (item != null) {
+                Settler selected = SettlerController.getInstance().getSettlerByName(item.getValue());
+                if (selected != null && obstacle.getEntityData() == selected) {
+                    gc.save();
+                    Rotate rotate = obstacle.getRotate();
+                    gc.setTransform(rotate.getMxx(), rotate.getMyx(), rotate.getMxy(), rotate.getMyy(), rotate.getTx(), rotate.getTy());
+                    gc.setFill(Color.GREEN);
+                    gc.strokeOval(obstacle.getPosX() - 25, obstacle.getPosY() - 50, 50, 100);
+                    gc.restore();
+                }
+            }
+        });
     }
 
     @FXML
@@ -159,7 +200,7 @@ public class AsteroidViewController extends View {
             SettlerController.getInstance().handleCommand("Mine " + selectedEntity);
             UIController.checkFree(selectedEntity);
         }
-        rePaint();
+        refresh();
     }
 
     @FXML
@@ -173,7 +214,7 @@ public class AsteroidViewController extends View {
             SettlerController.getInstance().handleCommand("Buildrobot " + selectedEntity + " " + RobotController.getRobotId());
             UIController.checkFree(selectedEntity);
         }
-        rePaint();
+        refresh();
     }
 
     @FXML
@@ -187,7 +228,7 @@ public class AsteroidViewController extends View {
             SettlerController.getInstance().handleCommand("Buildgate " + selectedEntity + " " + SolarSystem.getTeleportGateId());
             UIController.checkFree(selectedEntity);
         }
-        rePaint();
+        refresh();
     }
 
     @FXML
@@ -204,7 +245,7 @@ public class AsteroidViewController extends View {
             SettlerController.getInstance().handleCommand("Putdown " + selectedEntity + " " + selectedItem);
             UIController.checkFree(selectedEntity);
         }
-        rePaint();
+        refresh();
     }
 
     @FXML
@@ -218,7 +259,7 @@ public class AsteroidViewController extends View {
             SettlerController.getInstance().handleCommand("Drill " + selectedEntity);
             UIController.checkFree(selectedEntity);
         }
-        rePaint();
+        refresh();
     }
 
     @FXML
@@ -232,7 +273,7 @@ public class AsteroidViewController extends View {
             SettlerController.getInstance().handleCommand("Wait " + selectedEntity);
             UIController.checkFree(selectedEntity);
         }
-        rePaint();
+        refresh();
     }
 
     public void buildBase() {
@@ -245,6 +286,6 @@ public class AsteroidViewController extends View {
             SettlerController.getInstance().handleCommand("Buildbase " + selectedEntity);
             UIController.checkFree(selectedEntity);
         }
-        rePaint();
+        refresh();
     }
 }

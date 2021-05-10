@@ -5,6 +5,8 @@ import Graphics.controller.controllers.UfoController;
 import Graphics.observable.thing.Thing;
 import Graphics.observable.entity.Entity;
 import Graphics.material.Material;
+import Graphics.ui.game.drawable.drawables.Obstacle;
+import javafx.scene.canvas.Canvas;
 
 /**
  * The ufo which is controlled by the system and can mine and move.
@@ -69,5 +71,10 @@ public class Ufo extends Entity {
 				result.append(mat.getName() + " ");
 		result.append("\n");
 		return result.toString();
+	}
+
+	@Override
+	public void observe(Canvas canvas, Obstacle obstacle) {
+		obstacle.draw(canvas, this);
 	}
 }

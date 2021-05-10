@@ -3,16 +3,19 @@ package Graphics.observable.entity;
 
 import Graphics.Inventory;
 import Graphics.material.Material;
+import Graphics.observable.Observable;
 import Graphics.observable.thing.Thing;
 import Graphics.simulator.listableObj;
 import Graphics.observable.thing.things.TeleportGate;
+import Graphics.ui.game.drawable.drawables.Obstacle;
+import javafx.scene.canvas.Canvas;
 
 import java.util.ArrayList;
 
 /**
  * An abstract class, that represents the entities in the solar system, which can do activities.
  */
-public abstract class Entity implements listableObj {
+public abstract class Entity implements listableObj, Observable {
 
 	/**
 	 * The location of the entity
@@ -132,4 +135,8 @@ public abstract class Entity implements listableObj {
 		return null;
 	}
 
+	@Override
+	public void observe(Canvas canvas, Obstacle obstacle) {
+		obstacle.draw(canvas, this);
+	}
 }

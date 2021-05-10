@@ -10,6 +10,8 @@ import Graphics.observable.entity.Entity;
 import Graphics.observable.thing.things.TeleportGate;
 import Graphics.material.Material;
 import Graphics.simulator.*;
+import Graphics.ui.game.drawable.drawables.Obstacle;
+import javafx.scene.canvas.Canvas;
 
 import java.util.ArrayList;
 
@@ -270,5 +272,10 @@ public class Settler extends Entity {
 		result.append("stepped: " + (active == true ? "false" : "true") + "\n");
 
 		return result.toString();
+	}
+
+	@Override
+	public void observe(Canvas canvas, Obstacle obstacle) {
+		obstacle.draw(canvas, this);
 	}
 }

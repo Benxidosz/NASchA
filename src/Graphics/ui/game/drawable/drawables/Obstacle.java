@@ -1,6 +1,11 @@
 package Graphics.ui.game.drawable.drawables;
 
 import Graphics.App;
+import Graphics.observable.Observable;
+import Graphics.observable.entity.Entity;
+import Graphics.observable.entity.entities.Robot;
+import Graphics.observable.entity.entities.Settler;
+import Graphics.observable.entity.entities.Ufo;
 import Graphics.observable.thing.things.MainAsteroid;
 import Graphics.observable.thing.Thing;
 import Graphics.observable.thing.things.Asteroid;
@@ -10,29 +15,44 @@ import Graphics.ui.game.drawable.Drawable;
 import Graphics.ui.game.views.DrawState;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.transform.Rotate;
 
 import java.util.LinkedHashSet;
 
 public class Obstacle extends Drawable {
     private int posX;
     private int posY;
-    private final Thing data;
+    private final Thing thingData;
+    private final Entity entityData;
     private final LinkedHashSet<Obstacle> neighbours;
+    private Rotate rotate;
 
     public Obstacle(int posX, int posY, Thing data) {
         super(Color.WHITE, Color.BLACK);
-
         this.posX = posX;
         this.posY = posY;
-        this.data = data;
+        thingData = data;
+        entityData = null;
         neighbours = new LinkedHashSet<>();
+        rotate = null;
+    }
+
+    public Obstacle(int posX, int posY, Entity data) {
+        super(Color.WHITE, Color.BLACK);
+        this.posX = posX;
+        this.posY = posY;
+        entityData = data;
+        thingData = null;
+        neighbours = new LinkedHashSet<>();
+        rotate = null;
     }
 
     @Override
     public void setFillColor(Color color) {
         super.setFillColor(color);
-        if (color == Color.WHITE && data.getEntities().size() > 0 && App.isTestMode())
+        if (color == Color.WHITE && thingData.getEntities().size() > 0 && App.isTestMode())
             fillColor = Color.PINK;
     }
 
@@ -52,8 +72,19 @@ public class Obstacle extends Drawable {
         this.posY = posY;
     }
 
+    public void setRotate(Rotate rotate) {
+        this.rotate = rotate;
+    }
+
     public void draw(Canvas canvas) {
-        data.observe(canvas, this);
+        if (thingData != null)
+            thingData.observe(canvas, this);
+        if (entityData != null)
+            entityData.observe(canvas, this);
+    }
+
+    public void draw(Canvas canvas, Observable observable) {
+        throw new UnsupportedOperationException();
     }
 
     public void draw(Canvas canvas, Asteroid asteroid) {
@@ -95,8 +126,41 @@ public class Obstacle extends Drawable {
             gc.drawImage(UIController.getSprite("main_idle"), posX - r, posY - r, 2 * r, 2 * r);
     }
 
-    public boolean equalData(Thing d) {
-        return data == d;
+    public void draw(Canvas canvas, Settler settler) {
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.save();
+        if (rotate != null) {
+            gc.setTransform(rotate.getMxx(), rotate.getMyx(), rotate.getMxy(), rotate.getMyy(), rotate.getTx(), rotate.getTy());
+        }
+        Image img = UIController.getSprite("settler");
+        gc.drawImage(img, posX - 25, posY - 50, 50, 100);
+        gc.restore();
+    }
+
+    public void draw(Canvas canvas, Robot robot) {
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.save();
+        if (rotate != null) {
+            gc.setTransform(rotate.getMxx(), rotate.getMyx(), rotate.getMxy(), rotate.getMyy(), rotate.getTx(), rotate.getTy());
+        }
+        Image img = UIController.getSprite("robot");
+        gc.drawImage(img, posX - 25, posY - 50, 50, 100);
+        gc.restore();
+    }
+
+    public void draw(Canvas canvas, Ufo ufo) {
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.save();
+        if (rotate != null) {
+            gc.setTransform(rotate.getMxx(), rotate.getMyx(), rotate.getMxy(), rotate.getMyy(), rotate.getTx(), rotate.getTy());
+        }
+        Image img = UIController.getSprite("ufo");
+        gc.drawImage(img, posX - 25, posY - 50, 50, 100);
+        gc.restore();
+    }
+
+    public boolean equalThingData(Thing d) {
+        return thingData == d;
     }
 
     public void addNei(Obstacle o) {
@@ -131,11 +195,19 @@ public class Obstacle extends Drawable {
         o.setPosY(tmpY);
     }
 
-    public Thing getData() {
-        return data;
+    public Thing getThingData() {
+        return thingData;
     }
 
     public LinkedHashSet<Obstacle> getNeighbours() {
         return neighbours;
+    }
+
+    public Rotate getRotate() {
+        return rotate;
+    }
+
+    public Entity getEntityData() {
+        return entityData;
     }
 }
