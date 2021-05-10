@@ -30,6 +30,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+/**
+ * The controller class of the asteroid view.
+ * It makes the changes in graphics, if we do something in asteroid view.
+ */
 public class AsteroidViewController extends View {
     /**
      * The canvas where the Asteroid view be drawn.
@@ -92,6 +96,9 @@ public class AsteroidViewController extends View {
         });
     }
 
+    /**
+     * Changes the selected settler.
+     */
     private void selectedChanged() {
         TreeItem item = (TreeItem) entitiesTree.getSelectionModel().getSelectedItem();
         String name = null;
@@ -123,6 +130,9 @@ public class AsteroidViewController extends View {
         rePaint();
     }
 
+    /**
+     * Refresh the view
+     */
     public void refresh() {
         Thing selected = UIController.getInstance().getSelectedThing();
         if (selected == null) return;
@@ -161,6 +171,9 @@ public class AsteroidViewController extends View {
         }
     }
 
+    /**
+     * Repaint the canvas
+     */
     @Override
     public void rePaint() {
         GraphicsContext gc = myCanvas.getGraphicsContext2D();
@@ -204,6 +217,9 @@ public class AsteroidViewController extends View {
         });
     }
 
+    /**
+     * Switches to board view from asteroid view after pressing To Board View button
+     */
     @FXML
     public void toBoard() {
         UIController.getInstance().switchView();
@@ -214,6 +230,9 @@ public class AsteroidViewController extends View {
         rePaint();
     }
 
+    /**
+     * The settler mines after pressing Mine button.
+     */
     @FXML
     public void mine() {
         TreeItem<String> selectedTreeItem = (TreeItem<String>) entitiesTree.getSelectionModel().getSelectedItem();
@@ -228,6 +247,9 @@ public class AsteroidViewController extends View {
         refresh();
     }
 
+    /**
+     * The settler builds robot after pressing Build Robot button.
+     */
     @FXML
     public void buildRobot() {
         TreeItem<String> selectedTreeItem = (TreeItem<String>) entitiesTree.getSelectionModel().getSelectedItem();
@@ -242,6 +264,9 @@ public class AsteroidViewController extends View {
         refresh();
     }
 
+    /**
+     * The settler builds teleport gate after pressing Build Gate button.
+     */
     @FXML
     public void buildGate() {
         TreeItem<String> selectedTreeItem = (TreeItem<String>) entitiesTree.getSelectionModel().getSelectedItem();
@@ -256,6 +281,9 @@ public class AsteroidViewController extends View {
         refresh();
     }
 
+    /**
+     * The settler place material or gate after pressing Place button.
+     */
     @FXML
     public void place() {
         TreeItem<String> selectedTreeItem = (TreeItem<String>) entitiesTree.getSelectionModel().getSelectedItem();
@@ -273,6 +301,9 @@ public class AsteroidViewController extends View {
         refresh();
     }
 
+    /**
+     * The settler drills the asteroid after pressing Drill button.
+     */
     @FXML
     public void drill() {
         TreeItem<String> selectedTreeItem = (TreeItem<String>) entitiesTree.getSelectionModel().getSelectedItem();
@@ -287,6 +318,9 @@ public class AsteroidViewController extends View {
         refresh();
     }
 
+    /**
+     * The settler waits after pressing Wait button.
+     */
     @FXML
     public void waitBoard() {
         TreeItem<String> selectedTreeItem = (TreeItem<String>) entitiesTree.getSelectionModel().getSelectedItem();
@@ -301,6 +335,9 @@ public class AsteroidViewController extends View {
         refresh();
     }
 
+    /**
+     * The settler builds the base after pressing Build Base button.
+     */
     public void buildBase() {
         TreeItem<String> selectedTreeItem = (TreeItem<String>) entitiesTree.getSelectionModel().getSelectedItem();
         if (selectedTreeItem == null)

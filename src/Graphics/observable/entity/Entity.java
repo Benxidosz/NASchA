@@ -129,8 +129,16 @@ public abstract class Entity implements listableObj, Observable {
 		return name;
 	}
 
+	/**
+	 * Return the Entity inventory
+	 * @return null, because you can get only the settlers inventory, and they Override it
+	 */
 	public Inventory getInventory() { return null; }
 
+	/**
+	 * Returns the TeleportGates owned by the entity.
+	 * @return null, because only settler can own gates, and they Override it
+	 */
 	public ArrayList<TeleportGate> getGates() {
 		return null;
 	}

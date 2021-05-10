@@ -4,9 +4,20 @@ import Graphics.ui.menu.MenuController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+/**
+ * The main of the game with graphics
+ */
 public class App extends Application {
+
+    /**
+     * True, if the game is in test mode
+     */
     private static boolean testMode = false;
 
+    /**
+     * Return true, if the gam is in test mode
+     * @return true, if the gam is in test mode
+     */
     public static boolean isTestMode() {
         return testMode;
     }

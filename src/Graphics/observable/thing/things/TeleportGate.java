@@ -26,6 +26,9 @@ public class TeleportGate extends Thing {
 	 */
 	private boolean active;
 
+	/**
+	 * TeleportGate is setted to active
+	 */
 	private boolean setted;
 
 	/**

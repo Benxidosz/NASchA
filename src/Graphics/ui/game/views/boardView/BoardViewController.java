@@ -316,10 +316,18 @@ public class BoardViewController extends View {
         thing.move(this);
     }
 
+    /**
+     * Empty function, the moveMe function don't do anything, if the Thing isn't a TeleportGate
+     * @param thing A thing
+     */
     public void moveMe(Thing thing) {
         return;
     }
 
+    /**
+     * The teleport gate is located to a Thing
+     * @param gate The teleport gate which is located
+     */
     public void moveMe(TeleportGate gate) {
         Obstacle o = getObstacleByData(gate);
         Thing randNei = gate.randomNeighbour();
@@ -379,11 +387,18 @@ public class BoardViewController extends View {
         }
     }
 
+    /**
+     * Switches to asteroid view from board view after pressing To Asteroid View button
+     */
     @FXML
     public void switchAsteroid() {
         UIController.getInstance().switchView();
     }
 
+    /**
+     * The canvas is clicked by the mouse
+     * @param mouseEvent the mouseevent
+     */
     @FXML
     public void canvasClick(MouseEvent mouseEvent) {
         if (mouseEvent.getButton() == MouseButton.PRIMARY) {
@@ -415,6 +430,9 @@ public class BoardViewController extends View {
         }
     }
 
+    /**
+     * The settler moves after pressing Move button.
+     */
     @FXML
     public void move() {
         Settler selectedSettler = (Settler) settlerList.getSelectionModel().getSelectedItem();
@@ -428,6 +446,10 @@ public class BoardViewController extends View {
         }
     }
 
+    /**
+     * The mouse is moved in canvas
+     * @param mouseEvent the mouseevent
+     */
     @FXML
     public void canvasMouseMoved(MouseEvent mouseEvent) {
         Obstacle selected = getObstacleByData(UIController.getInstance().getSelectedThing());
@@ -443,6 +465,9 @@ public class BoardViewController extends View {
         rePaint();
     }
 
+    /**
+     * Ends the settlers turn after pressing End Turn button.
+     */
     @FXML
     public void endTurnButton() {
         SettlerController.getInstance().handleCommand("endTurn");

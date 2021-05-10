@@ -371,7 +371,7 @@ public class UIController extends GameManager {
 
     /**
      * Get the current stage.
-     * @return
+     * @return the stage
      */
     public Stage getGameStage() {
         return gameStage;
