@@ -17,7 +17,7 @@ import javafx.scene.canvas.Canvas;
  *  Represents the Asteroids in the Solar System.
  *  Stores it's layer, core and if it's near by sun.
  */
-				public class Asteroid extends Thing {
+public class Asteroid extends Thing {
 	/**
 	 * The number of layers on the Asteriod
 	 */

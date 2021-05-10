@@ -106,7 +106,7 @@ public abstract class Thing implements listableObj, Observable {
 
 	/**
 	 * It's overridden in the children classes.
-	 * @return
+	 * @return null
 	 */
 	public Material excavate() {
 		return null;
@@ -114,8 +114,8 @@ public abstract class Thing implements listableObj, Observable {
 
 	/**
 	 * It's overridden in the children classes.
-	 * @param m
-	 * @return
+	 * @param m material
+	 * @return false
 	 */
 	public boolean placeMaterial(Material m) {
 		return false;
@@ -123,8 +123,8 @@ public abstract class Thing implements listableObj, Observable {
 
 	/**
 	 * It's overridden in the children classes.
-	 * @param m
-	 * @return
+	 * @param m material
+	 * @return false
 	 */
 	public boolean buildBase(Material m) {
 		return false;
