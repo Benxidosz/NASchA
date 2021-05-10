@@ -134,9 +134,4 @@ public abstract class Entity implements listableObj, Observable {
 	public ArrayList<TeleportGate> getGates() {
 		return null;
 	}
-
-	@Override
-	public void observe(Canvas canvas, Obstacle obstacle) {
-		obstacle.draw(canvas, this);
-	}
 }

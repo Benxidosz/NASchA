@@ -40,9 +40,9 @@ public class MainAsteroid extends Asteroid {
 			e.printStackTrace();
 		}
 
-		nearBySun = false;
-		core = null;
-		layer = 0;
+		this.nearBySun = false;
+		this.core = null;
+		this.layer = 0;
 	}
 	/**
 	 * A player build base with a material.
@@ -59,6 +59,11 @@ public class MainAsteroid extends Asteroid {
 		return false;
 	}
 
+	/**
+	 * Call the given obstacle draw method, with this added as second argument.
+	 * @param canvas The canvas what will be given back to the obstacle.
+	 * @param obstacle The obstacle which will be gotten the information.
+	 */
 	@Override
 	public void observe(Canvas canvas, Obstacle obstacle) {
 		obstacle.draw(canvas, this);

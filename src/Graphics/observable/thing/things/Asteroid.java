@@ -221,6 +221,11 @@ import javafx.scene.canvas.Canvas;
 		return result.toString();
 	}
 
+	/**
+	 * Call the given obstacle draw method, with this added as second argument.
+	 * @param canvas The canvas what will be given back to the obstacle.
+	 * @param obstacle The obstacle which will be gotten the information.
+	 */
 	@Override
 	public void observe(Canvas canvas, Obstacle obstacle) {
 		obstacle.draw(canvas, this);

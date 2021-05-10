@@ -17,7 +17,6 @@ public class WaterIce extends Material{
 		super(name);
 	}
 
-	//TODO: not working well.
 	/**
 	 * Evaporates (remove from the inventory) the given object.
 	 */

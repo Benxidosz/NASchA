@@ -229,14 +229,6 @@ public class Settler extends Entity {
 		return gates;
 	}
 
-	/**
-	 * Returns the settlers inventory.
-	 * @return the inventory
-	 */
-	public Inventory getMyInventory() {
-		return this.myInventory;
-	}
-
 	@Override
 	public Inventory getInventory() {
 		return this.myInventory;

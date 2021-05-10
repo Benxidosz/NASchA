@@ -358,7 +358,7 @@ public class Simulator {
 								TeleportGate tpGate = getGateByName(splittedCommand[2]);
 
 								if (mat != null && tpGate == null){
-									settler.getMyInventory().addMaterial(mat);
+									settler.getInventory().addMaterial(mat);
 
 								} if (tpGate != null && mat == null)
 									settler.addGate(tpGate);

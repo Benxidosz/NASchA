@@ -13,10 +13,8 @@ import Graphics.observable.thing.things.Asteroid;
 import Graphics.observable.thing.things.MainAsteroid;
 import Graphics.ui.game.views.asteroidView.AsteroidViewController;
 import Graphics.ui.game.views.boardView.BoardViewController;
-import Graphics.ui.game.views.messegeBox.GameMassage;
+import Graphics.ui.game.views.messageBox.GameMessage;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Dialog;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
@@ -26,52 +24,122 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 public class UIController extends GameManager {
+    /**
+     * The actual UIController's reference.
+     */
     private static UIController ref;
+
+    /**
+     * Getter for the ref attribute.
+     * @return The ref attribute.
+     */
     public static UIController getInstance() {
         return ref;
     }
 
+    /**
+     * All Sprites, what the program uses.
+     */
     private static HashMap<String, Image> sprites;
+
+    /**
+     * Give back a sprite, from sprites, which have the given key.
+     * @param key The wanted sprite's key.
+     * @return The Sprite, from the HashMap.
+     */
     public static Image getSprite(String key) {
         return sprites.get(key);
     }
+
+    /**
+     * The radius of circle obstacles.
+     */
     private static int obstacleRadius = 20;
 
+    /**
+     * The active view, which should be presented.
+     */
     private View activeView;
 
+    /**
+     * The number settlers.
+     */
     private final int settlerNum;
+
+    /**
+     * The number of Ufos.
+     */
     private final int ufoNum;
+
+    /**
+     * The number of asteroids.
+     */
     private final int asteroidNum;
 
+    /**
+     * Getter obstacleRadius field.
+     * @return The field.
+     */
     public static int getObstacleRadius() {
         return obstacleRadius;
     }
 
+    /**
+     * Give the selected thing back.
+     * @return The selected thing.
+     */
     public Thing getSelectedThing() {
         return selectedThing;
     }
 
+    /**
+     * Set the selected thing.
+     * @param selectedThing The given value.
+     */
     public void setSelectedThing(Thing selectedThing) {
         this.selectedThing = selectedThing;
     }
 
+    /**
+     * The selected thing in the board.
+     */
     private Thing selectedThing;
 
+    /**
+     * The board view of the game.
+     */
     private BoardViewController boardView;
-    private AsteroidViewController asteroidView;
-    private GameMassage gameMassage;
-    private boolean boardActive;
 
+    /**
+     * The asteroid view of the game.
+     */
+    private AsteroidViewController asteroidView;
+
+    /**
+     * The end game message of the game.
+     */
+    private GameMessage gameMessage;
+
+    /**
+     * The program's stage, what is showed to user.
+     */
     private final Stage gameStage;
 
-    public static void init() {
-        throw new UnsupportedOperationException();
-    }
-
+    /**
+     * The initialization method of the UIController.
+     * @param settlerNum The number of settlers.
+     * @param ufoNum The number of Ufos.
+     * @param asteroidNum The number of asteroids.
+     */
     public static void init(int settlerNum, int ufoNum, int asteroidNum) {
         ref = new UIController(settlerNum, ufoNum, asteroidNum);
     }
 
+    /**
+     * Check if the settler with the given name is free or not, if free,  it didn't do anything so, the it can't do
+     * the given command. That's why it shows an Alert window, with a message of: "Settler can't do this.".
+     * @param name The settlers name
+     */
     public static void checkFree(String name) {
         Settler settler = SettlerController.getInstance().getSettlerByName(name);
         if (settler != null && settler.isActive()) {
@@ -84,6 +152,12 @@ public class UIController extends GameManager {
         }
     }
 
+    /**
+     * The constructor of the UIController, it is private, because only the init method should be called.
+     * @param settlerNum The number of settlers.
+     * @param ufoNum The number of Ufos.
+     * @param asteroidNum The number of asteroids.
+     */
     private UIController(int settlerNum, int ufoNum, int asteroidNum) {
         super();
 
@@ -111,6 +185,11 @@ public class UIController extends GameManager {
         gameStage.setResizable(false);
     }
 
+    /**
+     * Run a BFS algorithm from the given Asteroid, give back the untouched Things.
+     * @param a The starting asteroid.
+     * @return The untouched Things.
+     */
     private LinkedList<Thing> BFSFromAsteroid(Asteroid a) {
         LinkedList<Thing> unTouched = new LinkedList<>(SolarSystem.getInstance().getThings());
 
@@ -136,6 +215,10 @@ public class UIController extends GameManager {
         return unTouched;
     }
 
+    /**
+     * Make the asteroids field a connected graph.
+     * @param asteroids The list of asteroids, which represent the asteroid field.
+     */
     private void correctAsteroids(ArrayList<Asteroid> asteroids) {
         for (Asteroid a : asteroids) {
             LinkedList<Thing> unTouched = BFSFromAsteroid(a);
@@ -150,6 +233,10 @@ public class UIController extends GameManager {
         }
     }
 
+    /**
+     * Generate Neighbours for the asteroids.
+     * @param asteroids The asteroids.
+     */
     @Override
     protected void generateNeis(ArrayList<Asteroid> asteroids) {
         for(Asteroid a1: asteroids) {
@@ -177,6 +264,9 @@ public class UIController extends GameManager {
         }
     }
 
+    /**
+     * Start a new Game. (Initialize the backend).
+     */
     @Override
     public void newGame() {
         turnNum = 0;
@@ -223,19 +313,21 @@ public class UIController extends GameManager {
         try {
             boardView = new BoardViewController();
             asteroidView = new AsteroidViewController();
-            gameMassage = new GameMassage();
+            gameMessage = new GameMessage();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         activeView = boardView;
-        boardActive = true;
 
         activeView.setActive();
         activeView.rePaint();
         newTurn();
     }
 
+    /**
+     * Start a new turn of the present game.
+     */
     @Override
     public void newTurn() {
         doneControllers = 0;
@@ -246,10 +338,13 @@ public class UIController extends GameManager {
         UfoController.getInstance().makeTurn();
     }
 
+    /**
+     * Called, when the player win.
+     */
     @Override
     public void win() {
-        gameMassage.showAndWait("Win");
-        String data = gameMassage.getData();
+        gameMessage.showAndWait("Win");
+        String data = gameMessage.getData();
         if ("new".equals(data)) {
             newGame();
         } else if ("exit".equals(data)) {
@@ -257,10 +352,13 @@ public class UIController extends GameManager {
         }
     }
 
+    /**
+     * Called, when the player lose.
+     */
     @Override
     public void lose() {
-        gameMassage.showAndWait("Lose");
-        String data = gameMassage.getData();
+        gameMessage.showAndWait("Lose");
+        String data = gameMessage.getData();
         if ("new".equals(data)) {
             newGame();
         } else if ("exit".equals(data)) {
@@ -268,17 +366,22 @@ public class UIController extends GameManager {
         }
     }
 
+    /**
+     * Get the current stage.
+     * @return
+     */
     public Stage getGameStage() {
         return gameStage;
     }
 
+    /**
+     * Switch between views.
+     */
     public void switchView() {
-        if (boardActive) {
+        if (activeView == boardView) {
             activeView = asteroidView;
         } else
             activeView = boardView;
-
-        boardActive = !boardActive;
         activeView.setActive();
         activeView.refresh();
         activeView.rePaint();

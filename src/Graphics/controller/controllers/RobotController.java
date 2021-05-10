@@ -146,6 +146,11 @@ public class RobotController extends Controller {
 		}
 	}
 
+	/**
+	 * Get a Robot from the robots, by its name.
+	 * @param name The wanted robot's name.
+	 * @return The robot which name matches the given name.
+	 */
     public Robot getSettlerByName(String name) {
 		for (Robot robot : robots) {
 			if (robot.getName().equals(name)) {

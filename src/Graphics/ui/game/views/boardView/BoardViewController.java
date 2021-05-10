@@ -66,6 +66,9 @@ public class BoardViewController extends View {
         return o1;
     }
 
+    /**
+     * Itt called when the the windows start to initialize.
+     */
     @FXML
     void initialize() {
         obstacles = new LinkedHashSet<>();
@@ -195,18 +198,25 @@ public class BoardViewController extends View {
 
     private double pointBoarByAvgNei() {
         double sum = 0;
-        for (Root r : roots) {
-            sum += r.getDistance();
+        for (Obstacle o : obstacles) {
+            sum += o.getAvgDistance();
         }
         return sum / roots.size();
     }
 
+    /**
+     * It is called when the selected member of the list updated.
+     */
     private void selectedRefreshed() {
         Thing selected = UIController.getInstance().getSelectedThing();
         Settler selectedSettler = (Settler) settlerList.getSelectionModel().getSelectedItem();
         statusText.setText((selected != null ? selected.List() : "") + (selectedSettler != null ? selectedSettler.List() : ""));
     }
 
+    /**
+     * Select a free
+     * @param selectedSettler
+     */
     private void selectAnotherSettler(Settler selectedSettler) {
         boolean selected = false;
         for (Settler settler : SettlerController.getInstance().getSettlers()) {
@@ -226,6 +236,9 @@ public class BoardViewController extends View {
         }
     }
 
+    /**
+     * Reload the obstacles from the backend.
+     */
     private void reloadObstacles() {
         LinkedList<Thing> things = SolarSystem.getInstance().getThings();
         for (Thing t : things) {
@@ -295,6 +308,10 @@ public class BoardViewController extends View {
         }
     }
 
+    /**
+     * Try to move an obstacle.
+     * @param thing
+     */
     public void moveObstacle(Thing thing) {
         thing.move(this);
     }
@@ -317,6 +334,14 @@ public class BoardViewController extends View {
         }
     }
 
+    /**
+     * Check if the two obstacles data is neighbour, but the Obstacle not, if it happen, fix it, and make them neighbour.
+     * Correct the frontend, with the backend data.
+     * @param o1 first Obstacle.
+     * @param data1 first Obstacle's data.
+     * @param oNeiCheck the possible neighbour obstacle.
+     * @param dataNeiCheck the possible neighbour obstacle's data.
+     */
     private void fixNei(Obstacle o1, Thing data1, Obstacle oNeiCheck, Thing dataNeiCheck) {
         if (!o1.getNeighbours().contains(oNeiCheck) && !oNeiCheck.getNeighbours().contains(o1)
                 && data1.getNeighbour().contains(dataNeiCheck) && dataNeiCheck.getNeighbour().contains(data1)) {
@@ -326,6 +351,9 @@ public class BoardViewController extends View {
         }
     }
 
+    /**
+     * It is rePaint the canvas.
+     */
     @Override
     public void rePaint() {
         reloadObstacles();
@@ -424,6 +452,10 @@ public class BoardViewController extends View {
         selectAnotherSettler(selectedSettler);
     }
 
+    /**
+     * It is called, when the user move the mouse on the whole window.
+     * @param mouseEvent
+     */
     @FXML
     public void boardViewMouseMoved(MouseEvent mouseEvent) {
         int settlerNum = SettlerController.getInstance().getSettlers().size();

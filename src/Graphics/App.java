@@ -11,6 +11,11 @@ public class App extends Application {
         return testMode;
     }
 
+    /**
+     * Start an application.
+     * @param primaryStage The Stage what will be appeared.
+     * @throws Exception MenuController can throwed.
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setResizable(false);
@@ -20,6 +25,10 @@ public class App extends Application {
         MenuController.getInstance().setActive();
     }
 
+    /**
+     * The main method.
+     * @param args Given args.
+     */
     public static void main(String[] args) {
         if (args.length > 0) {
             if (args[0].equals("-t")) {

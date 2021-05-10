@@ -30,7 +30,7 @@ public class Obstacle extends Drawable {
     private Rotate rotate;
 
     public Obstacle(int posX, int posY, Thing data) {
-        super(Color.WHITE, Color.BLACK);
+        super();
         this.posX = posX;
         this.posY = posY;
         thingData = data;
@@ -40,7 +40,7 @@ public class Obstacle extends Drawable {
     }
 
     public Obstacle(int posX, int posY, Entity data) {
-        super(Color.WHITE, Color.BLACK);
+        super();
         this.posX = posX;
         this.posY = posY;
         entityData = data;

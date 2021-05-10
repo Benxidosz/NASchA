@@ -11,7 +11,7 @@ public class Root extends Drawable {
     private final ArrayList<Obstacle> obstacles;
 
     public Root(Obstacle o1, Obstacle o2) {
-        super(Color.BLACK, Color.BLACK);
+        super();
 
         obstacles = new ArrayList<>(2);
 
@@ -25,7 +25,6 @@ public class Root extends Drawable {
     @Override
     public void draw(Canvas canvas) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        gc.setFill(fillColor);
         int x1 = obstacles.get(0).getPosX();
         int y1 = obstacles.get(0).getPosY();
         int x2 = obstacles.get(1).getPosX();

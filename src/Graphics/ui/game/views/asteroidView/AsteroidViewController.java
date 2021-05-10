@@ -31,23 +31,48 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class AsteroidViewController extends View {
+    /**
+     * The canvas where the Asteroid view be drawn.
+     */
     @FXML
     public Canvas myCanvas;
+
+    /**
+     * The panel what contains the canvas.
+     */
     @FXML
     public Pane canvasWrapper;
+
+    /**
+     * The tree views, what shows the entities, and their possible inventory.
+     */
     @FXML
     public TreeView entitiesTree;
+
+    /**
+     * The TextArea where the status message showed up.
+     */
     @FXML
     public TextArea statusText;
 
+    /**
+     * The obstacles what represents the Entities around the asteroids.
+     */
     private LinkedList<Obstacle> obstacles;
 
+    /**
+     * The constructor, set the title to the right title.
+     * @throws IOException The super constructor can thrown it
+     */
     public AsteroidViewController() throws IOException {
         super("asteroidView.fxml");
         title = "Asteroid View";
         obstacles = new LinkedList<>();
     }
 
+    /**
+     * Itt called when the the windows start to initialize.
+     */
     @FXML
     void initialize() {
         myCanvas.widthProperty().bind(canvasWrapper.widthProperty());

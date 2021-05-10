@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/16" stylesheets="@/basicStyle.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Graphics.ui.game.views.messegeBox.GameMassage">
+<AnchorPane prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/16" stylesheets="@/basicStyle.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Graphics.ui.game.views.messageBox.GameMessage">
    <children>
       <Label layoutX="172.0" layoutY="124.0" text="END" AnchorPane.topAnchor="100.0">
          <font>

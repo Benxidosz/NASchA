@@ -4,26 +4,24 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
 
 public abstract class Drawable {
-    protected Color fillColor;
-    protected Color lineColor;
+    /**
+     * The state of draw
+     */
     protected DrawState state;
 
-    public Drawable(Color fill, Color line) {
-        fillColor = fill;
-        lineColor = line;
+    /**
+     * Set the state of draw to idle in constructor
+     */
+    public Drawable() {
         state = DrawState.idle;
     }
 
     public abstract void draw(Canvas canvas);
 
-    public void setFillColor(Color color) {
-        fillColor = color;
-    }
-
-    public void setLineColor(Color lineColor) {
-        this.lineColor = lineColor;
-    }
-
+    /**
+     * Set the drawing state
+     * @param state
+     */
     public void setState(DrawState state) {
         this.state = state;
     }

@@ -116,7 +116,7 @@ public class SettlerController extends Controller {
 					System.out.println("\tGates:");
 					selected.getGates().forEach(g -> System.out.println("\t\t" + g.getName()));
 					System.out.println("\tMaterials:");
-					selected.getMyInventory().getMaterials().forEach(m -> System.out.println("\t\t" + m.getName()));
+					selected.getInventory().getMaterials().forEach(m -> System.out.println("\t\t" + m.getName()));
 				}
 			}
 		}

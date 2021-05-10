@@ -211,14 +211,26 @@ public abstract class Thing implements listableObj, Observable {
 		return null;
 	}
 
+	/**
+	 * Getter for the entities field.
+	 * @return The entities field.
+	 */
 	public ArrayList<Entity> getEntities() {
 		return entities;
 	}
 
+	/**
+	 * Responsible for the movement on the board, it call the given BoardView's moveMe method and give this for the argument.
+	 * @param controller The controller, what called this function.
+	 */
 	public void move(BoardViewController controller) {
 		controller.moveMe(this);
 	}
 
+	/**
+	 * Getter for field.
+	 * @return null because, this don't have pair.
+	 */
 	public TeleportGate getPair() {
 		return null;
 	}

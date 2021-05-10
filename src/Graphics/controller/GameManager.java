@@ -138,7 +138,12 @@ public class GameManager {
         }
     }
 
-    protected void generateSettlers(Asteroid main, int settlerNum) {
+    /**
+     * Generate settlers for the board, then add to SettlerController.
+     * @param main The Main asteroid where the settlers start.
+     * @param settlerNum The number of settlers.
+     */
+    protected void generateSettlers(MainAsteroid main, int settlerNum) {
         for(int i = 0; i < settlerNum; i++){
             Settler s = new Settler(main, SettlerController.getSettlerId());
             if (App.isTestMode()) {
@@ -188,6 +193,11 @@ public class GameManager {
         }
     }
 
+    /**
+     * Generate ufos for the board, then add to UfoController.
+     * @param asteroids The asteroids of the board.
+     * @param ufoNum The number of ufos.
+     */
     protected void generateUfo(ArrayList<Asteroid> asteroids, int ufoNum) {
         for(int i = 0; i < ufoNum; i++){
             Thing loc = asteroids.get(Main.rng.nextInt(asteroids.size()));
@@ -197,6 +207,11 @@ public class GameManager {
         }
     }
 
+    /**
+     * Generate asteroids for the board and add them to a list.
+     * @param asteroids The list of asteroids, where they should be added.
+     * @param asteroidNum The number of asteroids.
+     */
     protected void generateAsteroids(ArrayList<Asteroid> asteroids, int asteroidNum) {
         for(int i = 0; i < asteroidNum; i++){
             Asteroid temp = new Asteroid(SolarSystem.getAsteroidId());

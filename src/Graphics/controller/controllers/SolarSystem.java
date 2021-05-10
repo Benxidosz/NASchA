@@ -283,6 +283,10 @@ public class SolarSystem extends Controller {
 		return things;
 	}
 
+	/**
+	 * Getter for untilEruption.
+	 * @return The untilEruption.
+	 */
 	public int getUntilEruption() {
 		return untilEruption;
 	}
