@@ -7,9 +7,20 @@ import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
+/**
+ * Its represent a road between two obstacle
+ */
 public class Root extends Drawable {
+    /**
+     * The list of the obstacles
+     */
     private final ArrayList<Obstacle> obstacles;
 
+    /**
+     * The  constructor that set the two obtacle
+     * @param o1 obstacle one
+     * @param o2 obstacle two
+     */
     public Root(Obstacle o1, Obstacle o2) {
         super();
 
@@ -22,6 +33,10 @@ public class Root extends Drawable {
         o2.addNei(o1);
     }
 
+    /**
+     * Draw the road between two obstacle
+     * @param canvas the canvas
+     */
     @Override
     public void draw(Canvas canvas) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -32,14 +47,29 @@ public class Root extends Drawable {
         gc.strokeLine(x1, y1, x2, y2);
     }
 
+    /**
+     * return true if the two given obstacle have a road between each other
+     * @param o1 obstacle one
+     * @param o2 obstacle two
+     * @return true if there is road between o1 and o2
+     */
     public boolean contains(Obstacle o1, Obstacle o2) {
         return obstacles.contains(o1) && obstacles.contains(o2);
     }
 
+    /**
+     * Return two if the given obstacle have a road to another obstacle
+     * @param o
+     * @return
+     */
     public boolean contains (Obstacle o) {
         return obstacles.contains(o);
     }
 
+    /**
+     * Return a distance between the two obstacle
+     * @return
+     */
     public double getDistance() {
         return obstacles.get(0).distance(obstacles.get(1));
     }

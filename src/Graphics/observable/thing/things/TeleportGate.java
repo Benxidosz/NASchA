@@ -162,11 +162,19 @@ public class TeleportGate extends Thing {
 		obstacle.draw(canvas, this);
 	}
 
+	/**
+	 * Move the current teleport gate to an another asteroid that given in parameter
+	 * @param controller The controller, what called this function.
+	 */
 	@Override
 	public void move(BoardViewController controller) {
 		controller.moveMe(this);
 	}
 
+	/**
+	 * Return the pair of this gate
+	 * @return the pair
+	 */
 	@Override
 	public TeleportGate getPair() {
 		return pair;

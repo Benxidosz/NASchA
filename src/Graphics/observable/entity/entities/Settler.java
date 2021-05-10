@@ -229,6 +229,10 @@ public class Settler extends Entity {
 		return gates;
 	}
 
+	/**
+	 * Return the Settler inventory
+	 * @return The inventory
+	 */
 	@Override
 	public Inventory getInventory() {
 		return this.myInventory;
@@ -266,6 +270,11 @@ public class Settler extends Entity {
 		return result.toString();
 	}
 
+	/**
+	 * Call the given obstacle draw method, with this added as second argument.
+	 * @param canvas The canvas what will be given back to the obstacle.
+	 * @param obstacle The obstacle which will be gotten the information.
+	 */
 	@Override
 	public void observe(Canvas canvas, Obstacle obstacle) {
 		obstacle.draw(canvas, this);

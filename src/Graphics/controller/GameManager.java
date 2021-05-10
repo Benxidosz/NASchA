@@ -117,6 +117,10 @@ public class GameManager {
             newTurn();
     }
 
+    /**
+     * Return the turn number
+     * @return the number
+     */
     public int getTurnNum() {
         return turnNum;
     }
@@ -219,6 +223,10 @@ public class GameManager {
         }
     }
 
+    /**
+     * Generate the Asteroids neighbours
+     * @param asteroids list of asteroids
+     */
     protected void generateNeis(ArrayList<Asteroid> asteroids) {
         for(Asteroid a1: asteroids) {
             for (Asteroid a2 : asteroids) {

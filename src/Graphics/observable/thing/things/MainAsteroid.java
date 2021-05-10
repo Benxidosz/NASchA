@@ -31,6 +31,13 @@ public class MainAsteroid extends Asteroid {
 		layer = 0;
 	}
 
+	/**
+	 * The constructor that can make a Main asteroid by name, layer number, core material, near sun position.
+ 	 * @param name given name
+	 * @param layer given layer number, but it will be ignored.
+	 * @param core given core, but it will be ignored.
+	 * @param nearBySun given nearBySun value, but it will be ignored.
+	 */
 	public MainAsteroid(String name, int layer, Material core, boolean nearBySun) {
 		super(name, layer, core, nearBySun);
 
@@ -44,6 +51,7 @@ public class MainAsteroid extends Asteroid {
 		this.core = null;
 		this.layer = 0;
 	}
+
 	/**
 	 * A player build base with a material.
 	 * @param m the material.

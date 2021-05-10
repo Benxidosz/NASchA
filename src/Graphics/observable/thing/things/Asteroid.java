@@ -74,6 +74,13 @@ import javafx.scene.canvas.Canvas;
 			core.setMyAsteroid(this);
 	}
 
+	/**
+	 * The constructor that can make an asteroid by name, layer number, core material and near sun position
+	 * @param name asteroid name
+	 * @param layer layer number
+	 * @param core core material
+	 * @param nearBySun near sun position
+	 */
 	public Asteroid(String name, int layer, Material core, boolean nearBySun) {
 		super(name);
 		this.layer = layer;

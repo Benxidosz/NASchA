@@ -3,6 +3,9 @@ package Graphics.ui.game.drawable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
 
+/**
+ * Abstract class for the drawable items
+ */
 public abstract class Drawable {
     /**
      * The state of draw
@@ -16,6 +19,10 @@ public abstract class Drawable {
         state = DrawState.idle;
     }
 
+    /**
+     * Draw to the canvas
+     * @param canvas
+     */
     public abstract void draw(Canvas canvas);
 
     /**

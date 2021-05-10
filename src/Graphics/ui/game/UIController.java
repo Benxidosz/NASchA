@@ -23,6 +23,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+/**
+ * Controller class for the user interface
+ */
 public class UIController extends GameManager {
     /**
      * The actual UIController's reference.

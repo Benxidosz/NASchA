@@ -4,8 +4,16 @@ package Graphics.controller;
  * Represents the controllers as an interface
  */
 public abstract class Controller {
+
+	/**
+	 * The actual game manager
+	 */
 	protected final GameManager manager;
 
+	/**
+	 * Set own manager
+	 * @param manager
+	 */
 	protected Controller(GameManager manager) {
 		this.manager = manager;
 	}

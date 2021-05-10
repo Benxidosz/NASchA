@@ -151,6 +151,11 @@ public class UfoController extends Controller {
 		ufos.add(u);
 	}
 
+	/**
+	 * Return a Settler by name
+	 * @param name
+	 * @return the name
+	 */
     public Ufo getSettlerByName(String name) {
 		for (Ufo ufo : ufos) {
 			if (ufo.getName().equals(name)) {
