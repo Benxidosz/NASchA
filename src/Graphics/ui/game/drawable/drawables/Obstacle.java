@@ -25,18 +25,37 @@ import java.util.LinkedHashSet;
  * Drawable item that store the item position and drawing mode
  */
 public class Obstacle extends Drawable {
+
+    /**
+     * the x coordinate of the position
+     */
     private int posX;
+    /**
+     * the y coordinate of the position
+     */
     private int posY;
+    /**
+     * The thing data in the obstacle
+     */
     private final Thing thingData;
+    /**
+     * The entity data in the obstacle
+     */
     private final Entity entityData;
+    /**
+     * The neighbours of the obstacle
+     */
     private final LinkedHashSet<Obstacle> neighbours;
+    /**
+     * The rotation of the obstacle
+     */
     private Rotate rotate;
 
     /**
      * The constructor that can me an Obstacle by that position on the board and the thing witch we want to draw
-     * @param posX
-     * @param posY
-     * @param data
+     * @param posX the x coordinate of the position
+     * @param posY the y coordinate of the position
+     * @param data entityData
      */
     public Obstacle(int posX, int posY, Thing data) {
         super();
@@ -50,9 +69,9 @@ public class Obstacle extends Drawable {
 
     /**
      * The constructor that can me an Obstacle by that position on the board and the entity witch we want to draw
-     * @param posX
-     * @param posY
-     * @param data
+     * @param posX the x coordinate of the position
+     * @param posY the y coordinate of the position
+     * @param data entityData
      */
     public Obstacle(int posX, int posY, Entity data) {
         super();
@@ -82,7 +101,7 @@ public class Obstacle extends Drawable {
 
     /**
      * Set the X position
-     * @param posX
+     * @param posX the x coordinate of the position
      */
     public void setPosX(int posX) {
         this.posX = posX;
@@ -90,7 +109,7 @@ public class Obstacle extends Drawable {
 
     /**
      * Set the Y position
-     * @param posY
+     * @param posY the y coordinate of the position
      */
     public void setPosY(int posY) {
         this.posY = posY;
@@ -98,7 +117,7 @@ public class Obstacle extends Drawable {
 
     /**
      * Set the rotation
-     * @param rotate
+     * @param rotate the rotation
      */
     public void setRotate(Rotate rotate) {
         this.rotate = rotate;
@@ -117,8 +136,8 @@ public class Obstacle extends Drawable {
 
     /**
      * Draw an Asteroid to the given canvas
-     * @param canvas
-     * @param asteroid
+     * @param canvas the canvas
+     * @param asteroid the asteroid
      */
     public void draw(Canvas canvas, Asteroid asteroid) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -135,8 +154,8 @@ public class Obstacle extends Drawable {
 
     /**
      * Draw a Teleport gate to the given canvas
-     * @param canvas
-     * @param gate
+     * @param canvas the canvas
+     * @param gatethe teleport gate
      */
     public void draw(Canvas canvas, TeleportGate gate) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -155,8 +174,8 @@ public class Obstacle extends Drawable {
 
     /**
      * Draw the main asteroid to the given canvas
-     * @param canvas
-     * @param main
+     * @param canvas the canvas
+     * @param main the main asteroid
      */
     public void draw(Canvas canvas, MainAsteroid main) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -173,8 +192,8 @@ public class Obstacle extends Drawable {
 
     /**
      * Draw a settler to the given canvas
-     * @param canvas
-     * @param settler
+     * @param canvas the canvas
+     * @param settler the settler
      */
     public void draw(Canvas canvas, Settler settler) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -189,8 +208,8 @@ public class Obstacle extends Drawable {
 
     /**
      * Draw a robot to the given canvas
-     * @param canvas
-     * @param robot
+     * @param canvas the canvas
+     * @param robot the robot
      */
     public void draw(Canvas canvas, Robot robot) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -205,8 +224,8 @@ public class Obstacle extends Drawable {
 
     /**
      * Draw an UFO to the given canvas
-     * @param canvas
-     * @param ufo
+     * @param canvas the canvas
+     * @param ufo the ufo
      */
     public void draw(Canvas canvas, Ufo ufo) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -221,24 +240,24 @@ public class Obstacle extends Drawable {
 
     /**
      * Check the two thing reference to equals each others
-     * @param d
-     * @return
+     * @param d The thing
+     * @return true if the they're equals to each others
      */
     public boolean equalThingData(Thing d) {
         return thingData == d;
     }
 
     /**
-     * Add a nei to the neighbours list
-     * @param o
+     * Add an obstacle to the neighbours list
+     * @param o the obstacle
      */
     public void addNei(Obstacle o) {
         neighbours.add(o);
     }
 
     /**
-     * Remove a neighbours from the neighbours list
-     * @param o
+     * Remove a neighbour from the neighbours list
+     * @param o The neighbour
      */
     public void rmNei(Obstacle o) {
         neighbours.remove(o);
@@ -246,7 +265,7 @@ public class Obstacle extends Drawable {
 
     /**
      * Return the average distance between the neighbours
-     * @return
+     * @return the average distance
      */
     public double getAvgDistance() {
         double sum = 0;
@@ -256,9 +275,9 @@ public class Obstacle extends Drawable {
     }
 
     /**
-     * Return the distance between the given obsticle
-     * @param o
-     * @return
+     * Return the distance between the given obstacle
+     * @param o the obstacle
+     * @return the distance
      */
     public double distance(Obstacle o) {
         return Math.sqrt(Math.pow(posX - o.posX, 2) + Math.pow(posY - o.posY, 2));
@@ -266,17 +285,17 @@ public class Obstacle extends Drawable {
 
     /**
      * Return the distance between the given point on the canvas
-     * @param x
-     * @param y
-     * @return
+     * @param x coordinate of the point
+     * @param y coordinate of the point
+     * @return the distance
      */
     public double distance(int x, int y) {
         return Math.sqrt(Math.pow(posX - x, 2) + Math.pow(posY - y, 2));
     }
 
     /**
-     * Replace a position with on Obsticle witch given in parameter
-     * @param o
+     * Replace a position with on Obstacle witch given in parameter
+     * @param o the Obstacle
      */
     public void swapPos(Obstacle o) {
         int tmpX = posX;
@@ -289,7 +308,7 @@ public class Obstacle extends Drawable {
 
     /**
      * Return the thing data
-     * @return
+     * @return thingData
      */
     public Thing getThingData() {
         return thingData;
@@ -297,7 +316,7 @@ public class Obstacle extends Drawable {
 
     /**
      * Return the neighbours list
-     * @return
+     * @return the neighbours
      */
     public LinkedHashSet<Obstacle> getNeighbours() {
         return neighbours;
@@ -305,7 +324,7 @@ public class Obstacle extends Drawable {
 
     /**
      * return the rotation
-     * @return
+     * @return rotate
      */
     public Rotate getRotate() {
         return rotate;
@@ -313,7 +332,7 @@ public class Obstacle extends Drawable {
 
     /**
      * return the entity data
-     * @return
+     * @return the entityData
      */
     public Entity getEntityData() {
         return entityData;

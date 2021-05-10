@@ -58,9 +58,9 @@ public class Root extends Drawable {
     }
 
     /**
-     * Return two if the given obstacle have a road to another obstacle
-     * @param o
-     * @return
+     * Return true if the given obstacle have a road to another obstacle
+     * @param o the obstacle
+     * @return true if o have road to another obstacle
      */
     public boolean contains (Obstacle o) {
         return obstacles.contains(o);
@@ -68,7 +68,7 @@ public class Root extends Drawable {
 
     /**
      * Return a distance between the two obstacle
-     * @return
+     * @return the distance
      */
     public double getDistance() {
         return obstacles.get(0).distance(obstacles.get(1));
